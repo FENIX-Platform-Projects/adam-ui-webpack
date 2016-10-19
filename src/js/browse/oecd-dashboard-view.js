@@ -15,7 +15,7 @@ define([
     '../../config/submodules/fx-chart/highcharts_template',
     '../common/progress-bar',
     'amplify-pubsub'
-], function (log, $, _, View, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, GeneralConfig, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify) {
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, GeneralConfig, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify) {
 
     'use strict';
 
@@ -103,8 +103,9 @@ define([
 
         this.dashboards = [];
 
-        this.model.on(defaultOptions.events.CHANGE, this.render, this);
+        //this.model.on(defaultOptions.events.CHANGE, this.render, this);
 
+      //  this.template = template(i18nLabels[this.lang]);
         this.template = template(i18nLabels[this.lang]);
 
         this.source = $(this.template).find("[data-topic='" + this.topic + "']");

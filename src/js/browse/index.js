@@ -15,10 +15,11 @@ define([
     '../common/title-view',
     './filter-view',
     './oecd-dashboard-view',
+    '../models/dashboard',
     'amplify-pubsub',
     'bootstrap'
 ], function (log, $, _, template, i18nLabels, Events, GeneralConfig, Errors, BaseBrowseEvents, BrowseIndicatorsConfig, DisplayConfigByFilterSelections, BaseBrowseConfig,
-             TitleSubView, FilterSubView, OECDDashboardSubView, amplify) {
+             TitleSubView, FilterSubView, OECDDashboardSubView, DashboardModel, amplify) {
 
     'use strict';
 

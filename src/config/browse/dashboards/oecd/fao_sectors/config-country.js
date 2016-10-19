@@ -18,7 +18,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                        openOnFocus: false
+                       // openOnFocus: false
                     }
                 },
                 className: "col-sm-3",
@@ -44,7 +44,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                        openOnFocus: false
+                       // openOnFocus: false
                     }
                 },
                 className: "col-sm-3",
@@ -73,7 +73,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                        openOnFocus: false
+                       // openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
                         // mode: 'multi'
@@ -102,7 +102,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                        openOnFocus: false
+                      //  openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
                         // mode: 'multi'
@@ -184,7 +184,7 @@ define(function () {
                     default: [2000],
                     config: { //Selectize configuration
                         maxItems: 1,
-                        openOnFocus: false
+                      //  openOnFocus: false
                     }
                 },
                 className: "col-sm-2",
@@ -205,7 +205,7 @@ define(function () {
                     default: [2014],
                     config: {
                         maxItems: 1,
-                        openOnFocus: false
+                      //  openOnFocus: false
                     }
                 },
                 className: "col-sm-2",
@@ -229,7 +229,7 @@ define(function () {
                     default: ['adam_usd_commitment'],
                     config: { //Selectize configuration
                         maxItems: 1,
-                        openOnFocus: false
+                        //openOnFocus: false
                     }
                 },
                 className: "col-sm-4",
