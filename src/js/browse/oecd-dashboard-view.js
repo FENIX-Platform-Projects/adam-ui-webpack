@@ -76,7 +76,9 @@ define([
 
 
     DashboardView.prototype.modelChanged = function() {
-        alert('model changed');
+        console.log("============= MODEL CHANGED ========");
+       // this.render();
+        //alert('model changed');
     };
 
     DashboardView.prototype._validateInput = function () {
@@ -127,11 +129,13 @@ define([
 
         // this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
 
-        var model = this.model.toJSON();
+        var model = this.model.getProperties();//this.model.toJSON();
 
         var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
-        return this.template(data);
+       // console.log(this.template);
+
+        return template(data);
 
     };
 

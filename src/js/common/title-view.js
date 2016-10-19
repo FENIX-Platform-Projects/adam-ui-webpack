@@ -187,6 +187,43 @@ define([
             return text;
     };
 
+    TitleView.prototype.getTitleAsLabel = function (){
+        this._cleanUpDuplications();
+
+        var arr = this.$titleItemsList.find('li').map(function(i, el) {
+            return $(el).text();
+        }).get();
+
+        return arr.join(' / ');
+    };
+
+    TitleView.prototype._cleanUpDuplications = function(){
+        // Check if there is more than 1 list item that has the same data-module
+        // If the check is true, then there will only be 2 items - 1 visible and 1 hidden item
+        // If true: the first hidden item's text should be stored and then the hidden item removed
+        // The stored text value is used to replace the text of the remaining item in the array
+
+        this.$titleItemsList.find('[data-module]').each(function() {
+            var matchingItemsArr = $('[data-module=' + $(this).attr('data-module') + ']');
+
+            if (matchingItemsArr.length > 1) {
+                var replacementText = "";
+
+                for (var i = 0; i < matchingItemsArr.length; i++) {
+                    if ( $(matchingItemsArr[i]).is(':hidden')) {
+                        replacementText = $(matchingItemsArr[i]).text(); // store hidden item's text value
+                        matchingItemsArr[i].remove(); // remove hidden item
+                        break;
+                    }
+                }
+
+                // Get the first item and set the replacement text
+                $(matchingItemsArr[0]).text(replacementText);
+
+            }
+        });
+    };
+
 /*
     var TitleView = View.extend({
 

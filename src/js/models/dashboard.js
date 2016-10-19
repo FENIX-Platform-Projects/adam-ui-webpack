@@ -8,6 +8,7 @@ define([
 
     function DashboardModel() {
         this.state=0;
+        this.props={};
         this.observers=[]
         this.addObserver = function(observer) {
 
@@ -15,18 +16,42 @@ define([
             this.observers.push(observer);
         }
         this.notifyObservers = function() {
-            for (i = 0; i < this.observers.length; i++) {
+
+            for (var i = 0; i < this.observers.length; i++) {
 
                 // i, the model, have no idea what this does in the observer.
                 this.observers[i].modelChanged();
             }
         }
-        this.doSomethingWithInternalState = function(observer){
+        this.doSomethingWithInternalState = function(key, value){
             this.state+=1
 
+            this.set(key, value);
             // i, the model will notify observers when my state changes.
             // They can decide on their own what to do then.
             this.notifyObservers();
+        }
+
+       // this.doSomethingWithInternalState = function(observer){
+         //   this.state+=1
+
+            // i, the model will notify observers when my state changes.
+            // They can decide on their own what to do then.
+          //  this.notifyObservers();
+       // }
+
+        this.set = function(key, value){
+            this.state+=1
+            this.props[key] = value;
+            this.notifyObservers();
+        }
+
+        this.get = function(key){
+            return this.props[key];
+        }
+
+        this.getProperties  = function(){
+            return this.props;
         }
 
         return this;
