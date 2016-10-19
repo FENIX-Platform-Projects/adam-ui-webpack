@@ -14,8 +14,9 @@ define([
     '../../nls/chart',
     '../../config/submodules/fx-chart/highcharts_template',
     '../common/progress-bar',
-    'amplify-pubsub'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, GeneralConfig, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify) {
+    'amplify-pubsub',
+    'handlebars'
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, GeneralConfig, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify, Handlebars) {
 
     'use strict';
 
@@ -125,7 +126,16 @@ define([
 
     DashboardView.prototype._getTemplateFunction = function () {
 
-        // Update the language related labels in the dashboard template
+
+        this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
+
+        var model = this.model.getProperties();
+
+        var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
+
+        return this.compiledTemplate(data);
+
+      /*  // Update the language related labels in the dashboard template
 
         // this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
 
@@ -135,7 +145,7 @@ define([
 
        // console.log(this.template);
 
-        return template(data);
+        return template(data);*/
 
     };
 
