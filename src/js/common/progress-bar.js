@@ -53,7 +53,7 @@ define([
         $div.css('width', value + '%');
 
         if(value !== 0) {
-            $span.text(' '+ i18nLabels.loading_in_progress + ' ... '+ value + '% '+i18nLabels.completed);
+            $span.text(' '+ i18nLabels[this.lang].loading_in_progress + ' ... '+ value + '% '+i18nLabels[this.lang].completed);
         }
 
     };

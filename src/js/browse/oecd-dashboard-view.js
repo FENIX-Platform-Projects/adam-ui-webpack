@@ -57,6 +57,8 @@ define([
 
             this._unbindEventListeners();
 
+            this._attach();
+
             this._init();
 
             return this;
@@ -103,21 +105,43 @@ define([
 
     DashboardView.prototype._init = function () {
         this._bindEventListeners();
-
         this.template = template;
+
+        var data = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
+
+        this.source = $(this.template(data)).find("[data-topic='" + this.topic + "']");
+
 
         //Initialize Progress Bar
         this.progressBar = new ProgressBar({
-           container: defaultOptions.PROGRESS_BAR_CONTAINER
+           container: defaultOptions.PROGRESS_BAR_CONTAINER,
+           lang: this.lang
         });
 
     };
 
     DashboardView.prototype._attach = function () {
-        this.$el.html(this._getTemplateFunction());
+
+    //    this.$el.html(this._getTemplateFunction());
+      //  console.log(this.source);
+
+        this.$el.html(template);
     };
 
+
     DashboardView.prototype._getTemplateFunction = function () {
+
+       this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
+
+        var model = this.model.getProperties();
+
+        var data = $.extend(true, model);
+
+        return this.compiledTemplate(data);
+
+    };
+
+    DashboardView.prototype._getTemplateFunction1 = function () {
 
         var model = this.model.getProperties();
 
@@ -144,7 +168,7 @@ define([
             this._updateChartExportTitles(this.config.items[it], i18nDashboardLabels[this.lang][item.id], this.model.get('label'));
         }
 
-       this._attach();
+        this.$el.html(this._getTemplateFunction());
     };
 
 
@@ -211,10 +235,15 @@ define([
 
     DashboardView.prototype.updateDashboardTemplate = function (filterdisplayconfig) {
 
+        console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
+
         if (filterdisplayconfig) {
 
             var hide = filterdisplayconfig.hide;
             var show = filterdisplayconfig.show;
+
+            console.log("HIDE: ", hide);
+            console.log("SHOW: ", show);
 
             for (var idx in hide) {
                 this._collapseDashboardItem(hide[idx]); // in the template
@@ -231,6 +260,10 @@ define([
     DashboardView.prototype._collapseDashboardItem = function (itemId) {
         // Hide/collapse Item container
         var itemContainerId = '#' + itemId + defaultOptions.item_container_id;
+
+
+        console.log(itemContainerId);
+        console.log(this.source);
 
         $(this.source).find(itemContainerId).addClass(defaultOptions.css.COLLAPSE);
 
