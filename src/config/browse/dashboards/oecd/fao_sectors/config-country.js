@@ -226,7 +226,7 @@ define(function () {
             oda: {
                 selector: {
                     id: "dropdown",
-                    default: ['adam_usd_commitment'],
+                    default: ['usd_commitment'],
                     config: { //Selectize configuration
                         maxItems: 1,
                         //openOnFocus: false
