@@ -1,5 +1,5 @@
 /*global define*/
-define(function () {
+define(['highcharts'], function (Highcharts) {
 
     'use strict';
 

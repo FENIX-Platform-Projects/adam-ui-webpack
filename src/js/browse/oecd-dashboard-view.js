@@ -104,14 +104,7 @@ define([
     DashboardView.prototype._init = function () {
         this._bindEventListeners();
 
-        this.dashboards = [];
-
-        //this.model.on(defaultOptions.events.CHANGE, this.render, this);
-
-      //  this.template = template(i18nLabels[this.lang]);
-        this.template = template(i18nLabels[this.lang]);
-
-        this.source = $(this.template).find("[data-topic='" + this.topic + "']");
+        this.template = template;
 
         //Initialize Progress Bar
         this.progressBar = new ProgressBar({
@@ -126,27 +119,13 @@ define([
 
     DashboardView.prototype._getTemplateFunction = function () {
 
-
-        this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
-
         var model = this.model.getProperties();
 
         var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
-        return this.compiledTemplate(data);
+        this.source = $(this.template(data)).find("[data-topic='" + this.topic + "']");
 
-      /*  // Update the language related labels in the dashboard template
-
-        // this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
-
-        var model = this.model.getProperties();//this.model.toJSON();
-
-        var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
-
-       // console.log(this.template);
-
-        return template(data);*/
-
+        return this.source;
     };
 
     DashboardView.prototype._bindEventListeners = function () {

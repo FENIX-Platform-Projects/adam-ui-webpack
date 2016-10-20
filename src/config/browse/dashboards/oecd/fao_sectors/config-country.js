@@ -234,7 +234,7 @@ define(function () {
                 },
                 className: "col-sm-4",
                 cl: {
-                    uid: "crs_flow_amounts",
+                    uid: "oda_crs",
                     version: "2016"
                 },
                 template: {
@@ -252,7 +252,7 @@ define(function () {
             uid: "adam_usd_commitment",
 
             items: [
-                {
+               {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -836,7 +836,7 @@ define(function () {
                         } // (3vi) PERCENTAGE CALCULATION: Add Column
                     ]
                 },
-                {
+            /*    {
                     id: "tot-oda-subsector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -968,7 +968,7 @@ define(function () {
                                             "1"
                                         ]
                                     },
-                                    /* "purposecode": { // FAO Related purposecodes
+                                    /!* "purposecode": { // FAO Related purposecodes
                                      "codes": [
                                      {
                                      "uid": "crs_purposes",
@@ -1029,7 +1029,7 @@ define(function () {
                                      ]
                                      }
                                      ]
-                                     },*/
+                                     },*!/
                                     "year": {
                                         "time": [
                                             {
@@ -1360,7 +1360,7 @@ define(function () {
                                             "1"
                                         ]
                                     },
-                                    /* "purposecode": {
+                                    /!* "purposecode": {
                                      "codes": [
                                      {
                                      "uid": "crs_purposes",
@@ -1421,7 +1421,7 @@ define(function () {
                                      ]
                                      }
                                      ]
-                                     },*/
+                                     },*!/
                                     "recipientcode": {
                                         "codes": [
                                             {
@@ -1642,7 +1642,7 @@ define(function () {
                                             "1"
                                         ]
                                     },
-                                    /* "purposecode": { // FAO Related purposecodes
+                                    /!* "purposecode": { // FAO Related purposecodes
                                      "codes": [
                                      {
                                      "uid": "crs_purposes",
@@ -1703,7 +1703,7 @@ define(function () {
                                      ]
                                      }
                                      ]
-                                     },*/
+                                     },*!/
                                     "year": {
                                         "time": [
                                             {
@@ -2665,7 +2665,7 @@ define(function () {
                                             "1"
                                         ]
                                     },
-                                    /*  "purposecode": {
+                                    /!*  "purposecode": {
                                      "codes": [
                                      {
                                      "uid": "crs_purposes",
@@ -2726,7 +2726,7 @@ define(function () {
                                      ]
                                      }
                                      ]
-                                     },*/
+                                     },*!/
                                     "year": {
                                         "time": [
                                             {
@@ -2825,7 +2825,7 @@ define(function () {
                     filterFor: { "filter_region": ['purposecode', 'year', 'oda']},
 
 
-                 /**   filter: { //FX-filter format
+                 /!**   filter: { //FX-filter format
                         purposecode: [
                             "12240",
                             "14030",
@@ -2882,7 +2882,7 @@ define(function () {
                         ],
                         un_region_code: ["034"], // Region = 'Southern Asia'
                         year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
-                    },**/
+                    },**!/
                     postProcess: [
                         {
                             "name": "filter",
@@ -2966,7 +2966,7 @@ define(function () {
                                             }
                                         ]
                                     },
-                                 /*   "fao_region_code": {
+                                 /!*   "fao_region_code": {
                                         "codes": [
                                             {
                                                 "uid": "crs_fao_regions",
@@ -2976,7 +2976,7 @@ define(function () {
                                                 ]
                                             }
                                         ]
-                                    },*/
+                                    },*!/
                                     "un_region_code": {
                                         "codes": [
                                             {
@@ -3023,7 +3023,7 @@ define(function () {
                             }
                         }
                     ]
-                }
+                }*/
             ]
         }
     }
