@@ -185,6 +185,9 @@ define(
             // Filter on Ready: Set some base properties for Recipient and the ODA, then publish Filter Ready Event
             this.filter.on('ready', function (payload) {
 
+              //  console.log("================== FILTERS READY =========== ");
+               // console.log(this._getFilterValues());
+
                 // For the Recipient Country, get and set the GAUL Code and Region Code as attributes to the props object
                 if (this._getFilterValues().values[BaseConfig.SELECTORS.RECIPIENT_COUNTRY]) {
 
@@ -192,6 +195,7 @@ define(
                     this.filterUtils.removeAllOption(this.$el, BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
 
                     var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, this._getFilterValues().values[BaseConfig.SELECTORS.RECIPIENT_COUNTRY]);
+
 
                     Q.all([
                         self._onRecipientChangeGetRegionCode(this._getFilterValues().values[BaseConfig.SELECTORS.RECIPIENT_COUNTRY]),
@@ -215,6 +219,7 @@ define(
                     amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(this._getFilterValues(), {"props": additionalProperties}));
                 }
                 else {
+
                     amplify.publish(BaseEvents.FILTER_ON_READY, this._getFilterValues());
                 }
 
@@ -304,7 +309,7 @@ define(
                                  */
 
                             } else {
-                                console.log("==================== ELSE REGION OTHER  ============== " + payload.id + " - " + additionalProperties);
+                          //      console.log("==================== ELSE REGION OTHER  ============== " + payload.id + " - " + additionalProperties);
 
                                 // Add all Item
                                 this.filterUtils.addAllOption(this.$el, payload.id);
@@ -437,7 +442,7 @@ define(
             var self = this;
 
             if (recipientCodes.length > 0) {
-                //  console.log("IS RECIPIENT value")
+                  console.log("IS RECIPIENT value")
                 return Q.all([
                     self._createRegionPromiseData(s.codeLists.FAO_REGIONS.uid, s.codeLists.FAO_REGIONS.version, s.codeLists.FAO_REGIONS.level, s.codeLists.FAO_REGIONS.direction, recipientCodes[0])
                 ]).then(function (c) {
@@ -461,11 +466,10 @@ define(
             //var filterConfig = this.filterUtils.getFilterConfigById(BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
 
             if (recipientCodes.length > 0) {
-
-                //  console.log("IS RECIPIENT value")
                 return Q.all([
                     self._createGaulPromiseData(s.datasets.USD_COMMITMENT, this.lang.toUpperCase(), s.codeLists.RECIPIENTS.uid, s.codeLists.RECIPIENTS.version, recipientCodes)
                 ]).then(function (c) {
+                    console.log(c)
                     return c;
                 }, function (r) {
                     console.error(r);

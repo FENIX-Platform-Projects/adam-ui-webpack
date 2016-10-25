@@ -228,8 +228,7 @@ define(function () {
                     id: "dropdown",
                     default: ['usd_commitment'],
                     config: { //Selectize configuration
-                        maxItems: 1,
-                        //openOnFocus: false
+                        maxItems: 1
                     }
                 },
                 className: "col-sm-4",
@@ -249,10 +248,10 @@ define(function () {
 
         dashboard: {
             //default dataset id
-            uid: "adam_usd_commitment",
+            uid: "adam_usd_aggregated_table",
 
             items: [
-               {
+        /**       {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -280,7 +279,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -291,8 +290,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "recipientcode": {
@@ -368,7 +373,7 @@ define(function () {
                             }
                         }
                     ]
-                },
+                },*/
                 {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
@@ -413,6 +418,64 @@ define(function () {
                                             this.redraw();
                                         }
 
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
                                     }
                                 }
                             },
@@ -471,7 +534,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -482,10 +545,21 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    /*"oda": {
                                         "enumeration": [
                                             "usd_commitment"
                                         ]
-                                    },
+                                    },*/
                                     "recipientcode": {
                                         "codes": [
                                             {
@@ -564,7 +638,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -575,10 +649,21 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    /*"oda": {
                                         "enumeration": [
                                             "usd_commitment"
                                         ]
-                                    },
+                                    },*/
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
@@ -836,7 +921,7 @@ define(function () {
                         } // (3vi) PERCENTAGE CALCULATION: Add Column
                     ]
                 },
-            /*    {
+              {
                     id: "tot-oda-subsector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -877,6 +962,65 @@ define(function () {
                                             this.options.yAxis[1].title.text= '%';
                                             this.yAxis[1].visible = true;
                                             this.yAxis[1].isDirty = true;
+                                            this.redraw();
+                                        }
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
                                             this.redraw();
                                         }
 
@@ -937,7 +1081,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -948,8 +1092,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "recipientcode": {
@@ -968,68 +1118,6 @@ define(function () {
                                             "1"
                                         ]
                                     },
-                                    /!* "purposecode": { // FAO Related purposecodes
-                                     "codes": [
-                                     {
-                                     "uid": "crs_purposes",
-                                     "version": "2016",
-                                     "codes": [
-                                     "12240",
-                                     "14030",
-                                     "14031",
-                                     "15170",
-                                     "16062",
-                                     "23070",
-                                     "31110",
-                                     "31120",
-                                     "31130",
-                                     "31140",
-                                     "31150",
-                                     "31161",
-                                     "31162",
-                                     "31163",
-                                     "31164",
-                                     "31165",
-                                     "31166",
-                                     "31181",
-                                     "31182",
-                                     "31191",
-                                     "31192",
-                                     "31193",
-                                     "31194",
-                                     "31195",
-                                     "31210",
-                                     "31220",
-                                     "31261",
-                                     "31281",
-                                     "31282",
-                                     "31291",
-                                     "31310",
-                                     "31320",
-                                     "31381",
-                                     "31382",
-                                     "31391",
-                                     "32161",
-                                     "32162",
-                                     "32163",
-                                     "32165",
-                                     "32267",
-                                     "41010",
-                                     "41020",
-                                     "41030",
-                                     "41040",
-                                     "41050",
-                                     "41081",
-                                     "41082",
-                                     "43040",
-                                     "43050",
-                                     "52010",
-                                     "72040",
-                                     "74010"
-                                     ]
-                                     }
-                                     ]
-                                     },*!/
                                     "year": {
                                         "time": [
                                             {
@@ -1096,7 +1184,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -1107,10 +1195,17 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
+
                                     "purposecode": {
                                         "codes": [
                                             {
@@ -1310,7 +1405,8 @@ define(function () {
                             }
                         } // (3vi) PERCENTAGE CALCULATION: Add Column
                     ]
-                },
+                }
+                /*,
                 {
                     id: 'top-partners', // TOP DONORS
                     type: 'chart',

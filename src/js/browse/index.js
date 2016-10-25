@@ -129,13 +129,13 @@ define([
 
     BrowseByView.prototype._bindEventListeners = function () {
         amplify.subscribe(BaseBrowseEvents.FILTER_ON_READY, this, this._filtersLoaded);
-       // amplify.subscribe(BaseBrowseEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
+        amplify.subscribe(BaseBrowseEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
     };
 
     BrowseByView.prototype._unbindEventListeners = function () {
         // Remove listeners
         amplify.unsubscribe(BaseBrowseEvents.FILTER_ON_READY, this._filtersLoaded);
-       // amplify.unsubscribe(BaseBrowseEvents.FILTER_ON_CHANGE, this._filtersChanged);
+        amplify.unsubscribe(BaseBrowseEvents.FILTER_ON_CHANGE, this._filtersChanged);
     };
 
 
@@ -266,8 +266,7 @@ define([
     */
     BrowseByView.prototype._filtersLoaded = function (payload) {
 
-        console.log("FILTERS LOADED =========== ");
-        var selectedFilterItems = payload.labels, displayConfigForFilter, dashboardConfPath;
+         var selectedFilterItems = payload.labels, displayConfigForFilter, dashboardConfPath;
 
         // Set Dashboard 1 (ODA) Properties
         if (payload["props"]) {
@@ -278,23 +277,21 @@ define([
         this.subviews['title'].setLabels(selectedFilterItems);
         this.subviews['title'].build();
 
-        console.log("TITLE BUILT =========== ");
+         // Set ODA Dashboard Model Values
+        //this._setOdaDashboardModelValues();
 
-        // Set ODA Dashboard Model Values
-        this._setOdaDashboardModelValues();
-
-        console.log("Set ODA Model Values =========== ");
 
         var allFilterValues =  this.subviews['filters'].getFilterValues();
 
-
-        console.log("Loaded 4 =========== ");
-
         for (var idx in allFilterValues.values){
+
             displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[idx];
-            var filterValue = allFilterValues.values[idx][0];
+
+             var filterValue = allFilterValues.values[idx][0];
 
             if(displayConfigForFilter) {
+
+
 
                 //   console.log("========================= displayConfigForFilter ");
                 //   console.log(displayConfigForFilter);
@@ -321,7 +318,6 @@ define([
             }
         }
 
-        console.log("Loaded 5 =========== ");
         // console.log("============== PROPS ============== ");
         // console.log(": display config = ", displayConfigForFilter, " dashboard config = ", dashboardConfPath);
 
@@ -336,6 +332,141 @@ define([
            // this._setIndicatorDashboardModelValues();
            // this.subview('indicatorsDashboard').renderDashboard();
        // }
+
+    };
+
+
+    /**
+    * When a filter selection changes the view is updated
+    * @param changedFilter The filter which has changed
+    * @private
+    */
+    BrowseByView.prototype._filtersChanged = function (changedFilter) {
+
+
+        var allFilterValues = this.subviews['filters'].getFilterValues();
+
+        this._updateView(changedFilter, allFilterValues);
+
+    };
+
+    /**
+    * Each Dashboard and Title Sub View is rebuilt/refreshed
+    * @param changedFilter The filter which has changed
+    * @param allFilterValues All (selected) filter values
+    * @private
+    */
+
+    BrowseByView.prototype._updateView = function (changedFilterItems, allFilterValues) {
+
+          var filterValues = allFilterValues;
+
+        // console.log("================= _updateView values =============== ");
+       //  console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
+
+        if (changedFilterItems) {
+
+            if($.isArray(changedFilterItems)){
+
+                this._setItemTitle(changedFilterItems);
+
+                for(var idx in changedFilterItems){
+                    var changedFilter = changedFilterItems[idx];
+
+                    if (changedFilter.values.values.length > 0) {
+                         if (changedFilter.primary) {
+                            this._processSelection(changedFilter, filterValues);
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    BrowseByView.prototype._setItemTitle = function (changedFilterItems){
+        for(var idx in changedFilterItems){
+            var changedFilter = changedFilterItems[idx];
+
+            if (changedFilter.values.values.length > 0) {
+                // All is selected
+                if (changedFilter.values.values[0] === s.values.ALL) {
+                    // Update the TitleView (Remove Item)
+                    amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
+                } else {
+                    // Update the TitleView (Add Item)
+                    amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter));
+                }
+            }
+        }
+    };
+
+    /**
+    * Create the Title Item (from the filterItem's id and label)
+    * @param filterItem
+    * @private
+    */
+
+    BrowseByView.prototype._createTitleItem = function (filterItem) {
+
+        var titleItem = {}, labels = filterItem.values.labels;
+
+        titleItem.id = filterItem.id;
+
+        var key = Object.keys(labels)[0];
+        titleItem.label = labels[key];
+
+
+        return titleItem;
+    };
+
+    BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
+        var dashboardConfPath, displayConfigForFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
+
+
+        if(displayConfig) {
+            displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
+        }
+
+
+        // Re-configure display (if appropriate)
+        if (this.filterSelectionsTypeDisplayConfig) {
+
+            // All is selected
+            if (changedFilter.values.values[0] === s.values.ALL) {
+
+                if(changedFilter.dependencies) {
+                    // get the display configuration for the dependency
+                    // e.g. When All Sub sectors selected, the view rebuilt with Sector (i.e. dependency) display
+                    displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.dependencies[0]];
+                }
+
+            }
+
+
+            if(displayConfig) {
+
+                var item = this._checkConfigForValue(displayConfig, changedFilter.values.values[0]);
+
+                if (item) {
+                    displayConfigForFilter = item;
+
+                    if(item.config)
+                        dashboardConfPath = item.config.path;
+                } else{
+                    var defaultItem = this._getDefaultLayout(displayConfig);
+
+                    if(defaultItem)
+                        displayConfigForFilter = defaultItem;
+                }
+            }
+        }
+
+        // Update dashboard properties
+        if (changedFilter['props']) {
+            this.subviews['oecdDashboard'].setProperties(changedFilter['props']);
+        }
+
+        this._getDashboardConfiguration(dashboardConfPath, filterValues, displayConfigForFilter);
 
     };
 
@@ -383,7 +514,6 @@ define([
     */
 
     BrowseByView.prototype._rebuildDashboard = function (ovalues, displayConfigForSelectedFilter, dashboardConfig) {
-        console.log("================= REBUILD Start =============== ");
 
         // Set Sector Related Dashboard Configuration
         switch (this.subviews['filters'].isFAOSectorsSelected()) {
@@ -399,10 +529,10 @@ define([
 
 
         // Hide/Show Dashboard Items
-        this.subviews['oecdDashboard'].updateDashboardTemplate(displayConfigForSelectedFilter);
+      //  this.subviews['oecdDashboard'].updateDashboardTemplate(displayConfigForSelectedFilter);
 
         // Update Dashboard Items Configuration
-        this.subviews['oecdDashboard'].updateItemsConfig();
+       // this.subviews['oecdDashboard'].updateItemsConfig();
 
         // Update Dashboard Model
         this._setOdaDashboardModelValues();
@@ -421,6 +551,16 @@ define([
           //  this.subview('indicatorsDashboard').rebuildDashboard(ivalues);
        // }
 
+    };
+
+
+
+    BrowseByView.prototype._getDefaultLayout = function (config){
+        return _.find(config, function (item) {
+            if(item.layout){
+                return item.layout === "default";
+            }
+        });
     };
 
     /*  var BrowseByView = View.extend({

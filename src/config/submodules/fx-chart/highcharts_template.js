@@ -9,24 +9,9 @@ define(['highcharts'], function (Highcharts) {
             marginTop: 60,
             //spacing: [10, 10, 27, 10], // better spacing when chart exports
             spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
+
             events: {
-                load: function (event) {
-
-                    Highcharts.setOptions({
-                        lang: {
-                            toggleDataLabels: 'Display/hide values on the chart',
-                            printDownload: 'Print and Download chart options'
-                        }
-                    });
-
-                   // if(this.series.length < 2){
-                       // $.each(this.series, function (i, serie) {
-                             //  serie.update({
-                               //     showInLegend: false
-                               // })
-                       // });
-                        //this.redraw();
-                   // }
+                load: function () {
 
                     if (this.options.chart.forExport) {
                         this.xAxis[0].update({
@@ -34,22 +19,23 @@ define(['highcharts'], function (Highcharts) {
                             labels: {
                                 style: {
                                     width: '50px',
-                                    fontSize: '6px'
+                                    fontSize: '7px'
                                 },
                                 step: 1
                             }
                         }, false);
 
-                        Highcharts.each(this.yAxis, function (y) {
+
+                        $.each(this.yAxis, function (y) {
                             y.update({
                                 title: {
                                     style: {
-                                        fontSize: '6px'
+                                        fontSize: '7px'
                                     }
                                 },
                                 labels: {
                                     style: {
-                                        fontSize: '6px'
+                                        fontSize: '7px'
                                     }
                                 }
                             }, false);
@@ -69,14 +55,14 @@ define(['highcharts'], function (Highcharts) {
                                          dataLabels: {
                                            enabled: true,
                                           style: {
-                                            fontSize: '6px'
+                                            fontSize: '7px'
                                          }
                                          }
                                      })
                                 } else {
                                     serie.update({
                                         marker: {
-                                            radius: 2
+                                            radius: 10
                                         }
                                     })
                                 }
@@ -84,22 +70,6 @@ define(['highcharts'], function (Highcharts) {
                         });
 
 
-                      /**  Highcharts.each(this.series, function (series) {
-                            series.update({
-                                marker : {
-                                    radius: 2
-                                },
-                                dataLabels: {
-                                    enabled: true,
-                                    style: {
-                                        fontSize: '6px',
-                                        color: series.color,
-                                        textShadow: 0
-                                    }
-                                }
-                            }, false);
-
-                        });**/
                         this.redraw();
                     }
 
@@ -184,6 +154,11 @@ define(['highcharts'], function (Highcharts) {
 
         },
 
+        lang: {
+            toggleDataLabels: 'Display/hide values on the chart',
+            printDownload: 'Print and Download chart options'
+        },
+
         credits: {
             enabled: true,
             position: {
@@ -219,6 +194,7 @@ define(['highcharts'], function (Highcharts) {
                 },
                 toggleDataLabelsButton: {
                     text: "Display Values",
+                   // title: 'Hey',
                     _titleKey: "toggleDataLabels",
                     onclick: function (){
 
@@ -263,19 +239,19 @@ define(['highcharts'], function (Highcharts) {
                     labels: {
                         y: 15,
                         style: {
-                            fontSize: '6px'
+                            fontSize: '7px'
                         }
                     }
                 },
                 yAxis: {
                     title: {
                         style: {
-                            fontSize: '7px'
+                            fontSize: '8px'
                         }
                     },
                     labels: {
                         style: {
-                            fontSize: '6px'
+                            fontSize: '7px'
                         }
                     }
                 },
@@ -310,7 +286,7 @@ define(['highcharts'], function (Highcharts) {
                         return '<span style="color:'+this.color+'">'+this.name+'</span>';
                     },
                     itemStyle: {
-                        fontSize: '6px',
+                        fontSize: '8px',
                         fontWeight: 'normal'
                     },
                     enabled: false//, only one series and all info in title and subtitle

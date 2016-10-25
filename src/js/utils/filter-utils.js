@@ -118,8 +118,8 @@ define([
 
         var oda = filter.values[BaseConfig.SELECTORS.ODA];
 
-        var prefix = 'adam_';
-        oda.forEach(function(v,i){ oda[i] = v.slice(prefix.length); });
+       // var prefix = 'adam_';
+        //oda.forEach(function(v,i){ oda[i] = v.slice(prefix.length); });
 
         return filter;
     };

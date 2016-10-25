@@ -57,7 +57,7 @@ define([
 
             this._unbindEventListeners();
 
-            this._attach();
+           // this._attach();
 
             this._init();
 
@@ -79,7 +79,7 @@ define([
 
 
     DashboardView.prototype.modelChanged = function() {
-        console.log("============= MODEL CHANGED ========");
+      //  console.log("============= MODEL CHANGED ========");
        // this.render();
         //alert('model changed');
     };
@@ -106,10 +106,9 @@ define([
     DashboardView.prototype._init = function () {
         this._bindEventListeners();
         this.template = template;
+        //this.labels = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
-        var data = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
-
-        this.source = $(this.template(data)).find("[data-topic='" + this.topic + "']");
+        //this.template = template(this.labels);
 
 
         //Initialize Progress Bar
@@ -129,7 +128,14 @@ define([
     };
 
 
-    DashboardView.prototype._getTemplateFunction = function () {
+    DashboardView.prototype._updateTemplate = function () {
+
+        var model = this.model.getProperties();
+       var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
+
+        return this.template(data);
+
+       /* this.$el.html(template);
 
        this.compiledTemplate = Handlebars.compile(this.source.prop('outerHTML'));
 
@@ -137,11 +143,11 @@ define([
 
         var data = $.extend(true, model);
 
-        return this.compiledTemplate(data);
+        return this.compiledTemplate(data);*/
 
     };
 
-    DashboardView.prototype._getTemplateFunction1 = function () {
+    /*DashboardView.prototype._getTemplateFunction1 = function () {
 
         var model = this.model.getProperties();
 
@@ -151,7 +157,7 @@ define([
 
         return this.source;
     };
-
+*/
     DashboardView.prototype._bindEventListeners = function () {
 
    };
@@ -160,15 +166,34 @@ define([
 
     };
 
-    DashboardView.prototype.render = function () {
+    DashboardView.prototype.render = function (displayConfigForSelectedFilter) {
 
+       // console.log("===== RENDER =========");
         // Update the language related labels in the item configurations (charts)
         for (var it in this.config.items) {
             var item = this.config.items[it];
             this._updateChartExportTitles(this.config.items[it], i18nDashboardLabels[this.lang][item.id], this.model.get('label'));
         }
 
-        this.$el.html(this._getTemplateFunction());
+        var updatedTemplate = this._updateTemplate();
+        this.source = $(updatedTemplate).find("[data-topic='" + this.topic + "']");
+
+
+        // Hide/Show Dashboard Items
+        this.updateDashboardTemplate(displayConfigForSelectedFilter);
+
+
+
+       // $(this.source).find('#tot-oda-sector-container').removeClass(defaultOptions.css.COLLAPSE);
+
+        //this.$el.html(updatedTemplate);
+
+        //this.source = $(this.template(data)).find("[data-topic='" + this.topic + "']");
+
+       // return this.source;
+
+
+        this.$el.html(this.source);
     };
 
 
@@ -202,6 +227,7 @@ define([
                 if (item.type == defaultOptions.itemTypes.CHART) {
                     if (item.config.config) {
                         item.config.config = $.extend(true, {}, HighchartsTemplate, item.config.config);
+
                     } else {
                         item.config.config = $.extend(true, {}, HighchartsTemplate);
                     }
@@ -209,6 +235,9 @@ define([
             }
 
         }, this));
+
+        //console.log("====================== setDAshboardConfig ");
+        //console.log(this.config.items[0].config.config.chart.events.load);
     };
 
     DashboardView.prototype.setProperties = function (props) {
@@ -235,15 +264,15 @@ define([
 
     DashboardView.prototype.updateDashboardTemplate = function (filterdisplayconfig) {
 
-        console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
+      //  console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
 
         if (filterdisplayconfig) {
 
             var hide = filterdisplayconfig.hide;
             var show = filterdisplayconfig.show;
 
-            console.log("HIDE: ", hide);
-            console.log("SHOW: ", show);
+          //  console.log("HIDE: ", hide);
+          //  console.log("SHOW: ", show);
 
             for (var idx in hide) {
                 this._collapseDashboardItem(hide[idx]); // in the template
@@ -262,8 +291,8 @@ define([
         var itemContainerId = '#' + itemId + defaultOptions.item_container_id;
 
 
-        console.log(itemContainerId);
-        console.log(this.source);
+        //console.log(itemContainerId);
+        //console.log(this.source);
 
         $(this.source).find(itemContainerId).addClass(defaultOptions.css.COLLAPSE);
 
@@ -272,6 +301,11 @@ define([
     DashboardView.prototype._expandDashboardItem = function (itemId) {
         // Show Item container
         var itemContainerId = '#' + itemId + defaultOptions.item_container_id;
+
+
+      //  console.log(itemContainerId);
+      //  console.log($(this.source).find(itemContainerId).hasClass(defaultOptions.css.COLLAPSE));
+
         $(this.source).find(itemContainerId).removeClass(defaultOptions.css.COLLAPSE);
     };
 
@@ -307,12 +341,15 @@ define([
         var self = this;
 
 
-        //   console.log("============ REBUILD =======", displayConfigForSelectedFilter);
+    //    console.log("============ REBUILD =======", displayConfigForSelectedFilter);
 
         // Re-render the template
         if (displayConfigForSelectedFilter) {
-            this.render();
+            this.render(displayConfigForSelectedFilter);
         }
+
+        // Update Dashboard Items Configuration
+        this.updateItemsConfig();
 
         this._disposeDashboards();
 

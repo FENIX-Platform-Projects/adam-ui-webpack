@@ -27,8 +27,6 @@ define([
 
         this.options = $.extend({}, defaults, o);
 
-        log.info(this.options);
-
         this._parseInput(o);
 
         var valid = this._validateInput();
@@ -132,11 +130,11 @@ define([
     };
 
     TitleView.prototype._onRemove = function (id) {
-        this.removeItem(id);
+        this._removeItem(id);
     };
 
     TitleView.prototype._removeItem = function (name) {
-        this._findListItem(name).remove();
+         this._findListItem(name).remove();
     };
 
     TitleView.prototype._findListItem = function(name) {
