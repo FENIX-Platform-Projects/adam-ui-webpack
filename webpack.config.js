@@ -21,12 +21,22 @@ module.exports = {
     resolve: {
         root: Path.resolve(__dirname),
         alias: {
+           // 'browse-views': Path.join( __dirname, 'src/js/browse'),
+            'html': Path.join(__dirname, 'src/html'),
+            'config': Path.join(__dirname, 'src/config'),
+            'nls': Path.join(__dirname, 'src/nls'),
+            'common': Path.join(__dirname, 'src/js/common'),
+            'utils': Path.join(__dirname, 'src/js/utils'),
+            'models': Path.join(__dirname, 'src/js/models'),
+            'browse': Path.join(__dirname, 'src/js/browse'),
+            'node_modules': Path.join(__dirname, 'node_modules'),
+            'dist': Path.join(__dirname, 'dist'),
             'bootstrap-table': Path.join(__dirname, 'node_modules/bootstrap-table/dist/bootstrap-table.min.js'),
-            handlebars: Path.join(__dirname, 'node_modules/handlebars/dist/handlebars.js'),
+             handlebars: Path.join(__dirname, 'node_modules/handlebars/dist/handlebars.js'),
             jquery: Path.join(__dirname, 'node_modules/jquery/dist/jquery'),
-            'fenix-ui-filter': Path.join(__dirname, 'node_modules/fenix-ui-filter/src/js/index.js')//,
-           // 'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js'),
-           // 'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
+            'fenix-ui-filter': Path.join(__dirname, 'node_modules/fenix-ui-filter/src/js/index.js'),
+           'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js')
+           //'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
         }
     },
 
@@ -35,7 +45,13 @@ module.exports = {
     module: {
         loaders: [
             {test: /\.css$/, loader: "style-loader!css-loader"},
-            {test: /\.hbs$/, loader: "handlebars-loader"},
+            { test: /\.hbs$/,
+                loader: 'handlebars-loader',
+                query: {
+                    helperDirs: [
+                        Path.join(__dirname, 'src/html/helpers')
+                    ]}},
+          //  {test: /\.hbs$/, loader: "handlebars-loader"},
             {test: /\.json/, loader: "json-loader"},
             {test: /\.png$/, loader: "url-loader?limit=100000"},
             {test: /\.jpg$/, loader: "file-loader?name=[name].[ext]&limit=100000"},
