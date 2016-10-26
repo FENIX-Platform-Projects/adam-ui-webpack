@@ -1,0 +1,9 @@
+{{#if self.length}}
+    <div class="col-sm-{{colIdx}} adam-entry-point-content">
+        <div id="indicatorsPartial" class="row">
+            <div class="col-xs-8 indicator-name"><span class="indicators-icons icojam_{{self.0.css}}"></span><p class="name">{{self.0.name}} ({{self.0.period}})<a href="#" name="{{self.0.footnote}}" class="anchor"><sup>{{self.0.footnote}}</sup></a></p></div>
+            <div class="col-xs-4 indicator-value"><p>{{[../transformers/commaseparator] self.0.value}} <span>{{self.0.unit}}</span></p></div>
+        </div>
+    </div>
+{{/if}}
+

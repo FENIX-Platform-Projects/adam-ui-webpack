@@ -3,23 +3,25 @@ define([
     'loglevel',
     'jquery',
     'underscore',
-    '../../html/browse/browse.hbs',
-    '../../nls/browse',
-    '../../config/events',
-    '../../config/config',
-    '../../config/errors',
-    '../../config/browse/events',
-    '../../config/browse/dashboards/indicators/config-development-indicators',
-    '../../config/browse/display/config-by-filter-selections',
-    '../../config/browse/config-browse',
-    '../common/title-view',
-    './filter-view',
-    './oecd-dashboard-view',
-    '../models/dashboard',
+    'html/browse/browse.hbs',
+    'nls/browse',
+    'config/events',
+    'config/config-base',
+    'config/errors',
+    'config/browse/events',
+    'config/browse/dashboards/indicators/config-development-indicators',
+    'config/browse/display/config-by-filter-selections',
+    'config/browse/config-browse',
+    'common/title-view',
+    'browse/filter-view',
+    'browse/oecd-dashboard-view',
+    'browse/development-indicators-dashboard-view',
+    'models/oecd',
+    'models/indicators',
     'amplify-pubsub',
     'bootstrap'
 ], function (log, $, _, template, i18nLabels, Events, GeneralConfig, Errors, BaseBrowseEvents, BrowseIndicatorsConfig, DisplayConfigByFilterSelections, BaseBrowseConfig,
-             TitleSubView, FilterSubView, OECDDashboardSubView, DashboardModel, amplify) {
+             TitleSubView, FilterSubView, OECDDashboardSubView, DashboardIndicatorsSubView, OecdModel, IndicatorsModel, amplify) {
 
     'use strict';
 
@@ -208,7 +210,7 @@ define([
 
 
         // Set ODA DASHBOARD Model
-        this.odaDashboardModel = new DashboardModel();
+        this.odaDashboardModel = new OecdModel();
         // Set DASHBOARD 1 Sub View: ODA
         var dashboardOecdSubView = new OECDDashboardSubView({
             el: this.$el.find(s.css_classes.DASHBOARD_OECD_HOLDER),
@@ -224,7 +226,7 @@ define([
         this.subviews['oecdDashboard'] = dashboardOecdSubView;
        // this.subview('oecdDashboard', dashboardOecdSubView);
 
-        /*
+
         // Set DASHBOARD 2 Sub View: Development Indicators
         if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
 
@@ -236,27 +238,54 @@ define([
             }
 
             this.indicatorsDashboardConfig = configIndicators;
-            this.indicatorsDashboardModel = new DashboardModel();
+            // Set ODA DASHBOARD Model
+            this.indicatorsDashboardModel = new IndicatorsModel();
 
-            var dashboardIndicatorsSubView = new DashboardIndicatorsSubView({
+
+            // this.indicatorsDashboardModel = new DashboardModel();
+
+           /* var dashboardIndicatorsSubView = new DashboardIndicatorsSubView({
                 autoRender: false,
                 container: this.$el.find(s.css_classes.DASHBOARD_INDICATORS_HOLDER),
                 topic: this.browse_type,
                 model: this.indicatorsDashboardModel
+            });*/
+
+            var dashboardIndicatorsSubView = new DashboardIndicatorsSubView({
+                el: this.$el.find(s.css_classes.DASHBOARD_INDICATORS_HOLDER),
+                lang:  this.lang,
+                topic: this.browse_type,
+                model: this.indicatorsDashboardModel,
+                config: this.indicatorsDashboardConfig
             });
-            dashboardIndicatorsSubView.setDashboardConfig(this.indicatorsDashboardConfig);
 
-            this.subview('indicatorsDashboard', dashboardIndicatorsSubView);
+           // dashboardIndicatorsSubView.setDashboardConfig(this.indicatorsDashboardConfig);
 
-        }*/
+            this.indicatorsDashboardModel.addObserver(dashboardIndicatorsSubView);
+
+            this.subviews['indicatorsDashboard'] = dashboardIndicatorsSubView;
+
+           // this.subview('indicatorsDashboard', dashboardIndicatorsSubView);
+
+        }
 
     };
 
 
     BrowseByView.prototype._setOdaDashboardModelValues = function () {
-        //this.odaDashboardModel.doSomethingWithInternalState();
         this.odaDashboardModel.set(s.dashboardModel.LABEL, this.subviews['title'].getTitleAsLabel());
     };
+
+    BrowseByView.prototype._setIndicatorDashboardModelValues = function () {
+        var country = this.subviews['title'].getItemText(BaseBrowseConfig.filter.RECIPIENT_COUNTRY);
+        var donor = this.subviews['title'].getItemText(BaseBrowseConfig.filter.RESOURCE_PARTNER);
+
+        if (donor.length > 0)
+            country = donor;
+
+        this.indicatorsDashboardModel.set(s.dashboardModel.COUNTRY, country);
+    };
+
 
     /**
     * When the filters have all loaded the TitleView is built using the currently selected filter values
@@ -327,11 +356,12 @@ define([
         // Render Dashboard 1: ODA
         // this.subview('oecdDashboard').renderDashboard();
 
-        // REINSTATE --------- Render Dashboard 2: Development Indicators (if appropriate)
-       // if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
-           // this._setIndicatorDashboardModelValues();
+       // REINSTATE --------- Render Dashboard 2: Development Indicators (if appropriate)
+        if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
+            this._setIndicatorDashboardModelValues();
+             this.subviews['indicatorsDashboard'].renderDashboard();
            // this.subview('indicatorsDashboard').renderDashboard();
-       // }
+        }
 
     };
 
@@ -545,11 +575,11 @@ define([
         this.subviews['oecdDashboard'].rebuildDashboard(ovalues, displayConfigForSelectedFilter);
 
         // REINSTATE ... Rebuild Development Indicators Dashboard
-      //  if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
-        //    this._setIndicatorDashboardModelValues();
-          //  var ivalues = this.subview('filters').getIndicatorsValues();
-          //  this.subview('indicatorsDashboard').rebuildDashboard(ivalues);
-       // }
+        if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
+            this._setIndicatorDashboardModelValues();
+            var ivalues = this.subviews['filters'].getIndicatorsValues();
+            this.subviews['indicatorsDashboard'].rebuildDashboard(ivalues);
+        }
 
     };
 

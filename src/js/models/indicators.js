@@ -6,7 +6,7 @@ define([
 
     'use strict';
 
-    function DashboardModel() {
+    function IndicatorsModel() {
         this.state=0;
         this.props={};
         this.observers=[]
@@ -57,7 +57,7 @@ define([
         return this;
     }
 
-    return DashboardModel;
+    return IndicatorsModel;
 
 });
 

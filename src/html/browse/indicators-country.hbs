@@ -1,0 +1,54 @@
+<!-- Country Related Indicators Template -->
+<div class="row">
+    {{#ifIn 'INCOME.LEVEL' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+
+    {{#ifIn 'POP.TOT' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+
+    {{#ifIn 'NET.ODA.REC' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+
+    {{#ifIn 'SI.POV.GINI' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+</div>
+<div class="row">
+    {{#ifIn 'NY.GNP.ATLS.CD' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx}}
+    {{/ifIn}}
+    {{#ifIn 'RUR.POP.PERC' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+
+    {{#ifIn 'NET.ODA.REC.PC' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+</div>
+<div class="row">
+    {{#ifIn 'NY.GNP.PCAP.CD' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx}}
+    {{/ifIn}}
+
+    {{#ifIn 'AGRI.LAND.PERC' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+
+    {{#ifIn 'DT.ODA.ODAT.GN.ZS' 'code' data.indicators}}
+        {{> ../partials/indicators-partial self=this colIdx=../data.colIdx }}
+    {{/ifIn}}
+</div>
+
+<div class="row">
+    <hr/>
+</div>
+
+<div class="row">
+    {{> ../partials/indicators-footer-partial data=data }}
+</div>
+
+
+

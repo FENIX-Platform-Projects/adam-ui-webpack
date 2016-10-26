@@ -2,8 +2,8 @@ define([
     'loglevel',
     'jquery',
     'underscore',
-    '../config/config',
-    './browse/index'
+    'config/config-base',
+    'browse/index'
 ], function (log, $, _, Config, BrowseByView) {
 
     'use strict';
@@ -47,12 +47,12 @@ define([
 
 
         //dropdown selector
-        require("../../node_modules/selectize/dist/css/selectize.bootstrap3.css");
+        require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
         // fenix-ui-filter
-        require("../../node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
+        require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
 
         // INDEX
-        require("../../dist/css/index.css");
+        require("dist/css/index.css");
 
     };
 

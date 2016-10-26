@@ -1,0 +1,22 @@
+<div class="col-sm-12 current-sel-holder">
+    <ul class="list-unstyled list-inline">
+        <li><b>{{data.source}}:</b></li>
+        {{#each data.footnotes}}
+            <li> <span id="{{this.footnote}}"><b>{{this.footnote}}</b>
+                {{#each this.sourceArray}}
+                    <a
+                        {{#with (lookup ../linkArray @index)}}
+                        href = "{{this}}"
+                        {{/with}}
+                        target="_blank" class="external-link-new-window">{{this}}</a>
+                    {{#unless @last}}{{../../../data.and}}{{/unless}}
+                {{/each}}
+                {{#if this.note.length}}
+                    - {{this.note}}
+                {{/if}}
+                </span>
+            </li>
+        {{/each}}
+    </ul>
+</div>
+

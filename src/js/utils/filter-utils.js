@@ -2,9 +2,9 @@
 define([
     'jquery',
     'underscore',
-    '../utils/lang-utils',
-    '../../config/config',
-    '../../nls/filter'
+    'utils/lang-utils',
+    'config/config-base',
+    'nls/filter'
 ], function ($, _, LangUtils, BaseConfig, i18nLabels) {
 
     'use strict';

@@ -1,0 +1,44 @@
+<!-- Indicators -->
+{{#grouped_each 3 data.indicators}}
+    <div class="row">
+        {{#each this }}
+            <div class="col-sm-4 adam-entry-point-content">
+                <div class="row">
+
+                    <div class="col-xs-8 indicator-name"><span class="indicators-icons icojam_{{this.css}}"></span><p class="name">{{this.name}} ({{this.period}})<a href="#" name="{{this.footnote}}" class="anchor"><sup>{{this.footnote}}</sup></a></p></div>
+                    <div class="col-xs-4 indicator-value"><p>{{commaSeparator this.value}} <span>{{this.unit}}</span></p></div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/grouped_each}}
+
+<div class="row">
+    <hr/>
+</div>
+
+<div class="row">
+    <div class="col-sm-11 current-sel-holder">
+        <ul class="list-unstyled list-inline">
+            <li><b>{{data.source}}:</b></li>
+            {{#each data.footnotes}}
+                <li> <span id="{{this.footnote}}"><b>{{this.footnote}}</b>
+                {{#each this.sourceArray}}
+                    <a
+                    {{#with (lookup ../linkArray @index)}}
+                      href = "{{this}}"
+                    {{/with}}
+                     target="_blank" class="external-link-new-window">{{this}}</a>
+                    {{#unless @last}}{{../../../data.and}}{{/unless}}
+                {{/each}}
+                    {{#if this.note.length}}
+                        - {{this.note}}
+                    {{/if}}
+                </span>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+

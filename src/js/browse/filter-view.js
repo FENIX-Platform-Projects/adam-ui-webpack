@@ -3,15 +3,15 @@ define(
         'loglevel',
         'jquery',
         'underscore',
-        '../../html/browse/filters.hbs',
-        '../../nls/filter',
+        'html/browse/filters.hbs',
+        'nls/filter',
         'fenix-ui-filter',
-        '../common/filter-validator',
-        '../utils/filter-utils',
-        '../../config/config',
-        '../../config/errors',
-        '../../config/browse/config-browse',
-        '../../config/browse/events',
+        'common/filter-validator',
+        'utils/filter-utils',
+        'config/config-base',
+        'config/errors',
+        'config/browse/config-browse',
+        'config/browse/events',
         'q',
         'amplify-pubsub'
     ], function (log, $, _, template, i18nLabels, Filter, FilterValidator, FilterUtils, BaseConfig, Errors, BrowseConfig, BaseEvents, Q, amplify) {
@@ -171,6 +171,7 @@ define(
             this.filter = new Filter({
                 el: this.$el.find(s.css_classes.FILTER_BROWSE),
                 environment: BaseConfig.ENVIRONMENT,
+               // selectors: config,
                 items: config,
                 common: {
                     template: {
@@ -829,6 +830,61 @@ define(
             }
 
             return values;
+        };
+
+
+        /**
+        *  Process and get the filter values relevant to the Indicators Dashboard
+        * @returns {Object} values
+        */
+
+        FilterView.prototype.getIndicatorsValues = function () {
+
+            var filterValues = this._getFilterValues();
+            var values = filterValues.values;
+            var labels = filterValues.labels;
+
+            var cloneObj, cloneLabelObj;
+
+            // console.log("============================= VALUES =================== ");
+            // console.log(values);
+
+            var donorSelected = this._hasSelections(BaseConfig.SELECTORS.RESOURCE_PARTNER, values);
+            var recipientSelected = this._hasSelections(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, values);
+
+
+            if (donorSelected) {
+                cloneObj = this.filterUtils.getObject(BaseConfig.SELECTORS.RESOURCE_PARTNER, values);
+                cloneLabelObj = this.filterUtils.getObject(BaseConfig.SELECTORS.RESOURCE_PARTNER, labels);
+            }
+            if (recipientSelected) {
+                cloneObj = this.filterUtils.getObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, values);
+                cloneLabelObj = this.filterUtils.getObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, labels);
+            }
+
+
+            if (cloneObj) {
+                //======= UPDATE VALUES CONFIG
+                values[BaseConfig.SELECTORS.COUNTRY] = cloneObj;
+                labels[BaseConfig.SELECTORS.COUNTRY] = cloneLabelObj;
+
+                //======= Set everything in the values to be removed except the country
+                for (var filter in values) {
+                    if (filter !== BaseConfig.SELECTORS.COUNTRY) {
+                        values[filter] = [];
+                        labels[filter] = {};
+                    }
+                }
+            } else {
+                // reset all filter values to empty
+                for (var filter in values) {
+                    values[filter] = [];
+                    labels[filter] = {};
+                }
+
+            }
+
+            return filterValues;
         };
 
         /*   var FilterView = View.extend({

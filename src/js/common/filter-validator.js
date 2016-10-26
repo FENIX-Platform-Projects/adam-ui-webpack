@@ -1,8 +1,8 @@
 define([
     'jquery',
     'underscore',
-    '../../nls/filter',
-    '../../html/common/filters-error.hbs'
+    'nls/filter',
+    'html/common/filters-error.hbs'
 ], function ($, _, i18nLabels, template) {
 
     'use strict';

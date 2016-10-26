@@ -25,3 +25,31 @@
     width: auto;
     margin: 0;
 }
+
+
+/* Indicator Icon Definition */
+.indicator-name .name {
+    padding-left: 30px; }
+
+.indicators-icons {
+    font-size: 20px;
+    position: absolute; }
+
+.icojam_coins:before, .icojam_INCOME_LEVEL:before {
+    content: "\e808"; }
+
+.icojam_income_1:before, .icojam_NY_GNP_ATLS_CD:before, .icojam_NY_GNP_PCAP_CD:before {
+    content: "\e814"; }
+
+.icojam_payment_1:before, .icojam_SI_POV_GINI:before {
+    content: "\e820"; }
+
+.icojam_wheat:before, .icojam_AGRI_LAND_PERC:before {
+    content: "\e87f"; }
+
+.icojam_father_son_2:before, .icojam_NODA:before, .icojam_ODA_GNI:before, .icojam_NET_ODA_REC:before, .icojam_NET_ODA_REC_PC:before, .icojam_DT_ODA_ODAT_GN_ZS:before {
+    content: "\eaf0"; }
+
+.icojam_friends:before, .icojam_POP_TOT:before, .icojam_RUR_POP_PERC:before {
+    content: "\ebb4"; }
+
