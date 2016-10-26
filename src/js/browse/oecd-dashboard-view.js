@@ -3,20 +3,19 @@ define([
     'loglevel',
     'jquery',
     'underscore',
-    '../../html/browse/oecd-dashboard.hbs',
-    '../../config/browse/config-browse',
-    '../../config/config',
-    '../../config/errors',
+    'html/browse/oecd-dashboard.hbs',
+    'config/browse/config-browse',
+    'config/config-base',
+    'config/errors',
     'fenix-ui-dashboard',
-    '../../config/config',
-    '../../nls/browse',
-    '../../nls/browse-dashboard',
-    '../../nls/chart',
-    '../../config/submodules/fx-chart/highcharts_template',
-    '../common/progress-bar',
+    'nls/browse',
+    'nls/browse-dashboard',
+    'nls/chart',
+    'config/submodules/fenix-ui-chart-creator/highcharts_template',
+    'common/progress-bar',
     'amplify-pubsub',
     'handlebars'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, GeneralConfig, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify, Handlebars) {
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify, Handlebars) {
 
     'use strict';
 
@@ -56,8 +55,6 @@ define([
         if (valid === true) {
 
             this._unbindEventListeners();
-
-           // this._attach();
 
             this._init();
 
@@ -117,14 +114,6 @@ define([
            lang: this.lang
         });
 
-    };
-
-    DashboardView.prototype._attach = function () {
-
-    //    this.$el.html(this._getTemplateFunction());
-      //  console.log(this.source);
-
-        this.$el.html(template);
     };
 
 
@@ -219,7 +208,7 @@ define([
         this.config = config;
         this.config_type = config.id;
         this.config.baseItems = config.items;
-        this.config.environment = GeneralConfig.ENVIRONMENT;
+        this.config.environment = BaseConfig.ENVIRONMENT;
 
         // Sets Highchart config for each chart
         _.each(this.config.items, _.bind(function (item) {

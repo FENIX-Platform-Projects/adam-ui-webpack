@@ -2,10 +2,10 @@
 define([
     'loglevel',
     'jquery',
-    '../../html/common/title.hbs',
-    '../../config/events',
-    '../../config/errors',
-    '../../config/config',
+    'html/common/title.hbs',
+    'config/events',
+    'config/errors',
+    'config/config-base',
     'amplify-pubsub'
 ], function (log, $, template, Events, Errors, GeneralConfig, amplify) {
 
@@ -193,6 +193,10 @@ define([
         }).get();
 
         return arr.join(' / ');
+    };
+
+    TitleView.prototype.getItemText = function (modulename) {
+        return this._findListItem(modulename).text();
     };
 
     TitleView.prototype._cleanUpDuplications = function(){

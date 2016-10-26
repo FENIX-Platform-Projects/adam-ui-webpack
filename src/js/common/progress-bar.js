@@ -1,11 +1,11 @@
 /*global define, Promise, amplify */
 
 define([
-    "jquery",
-    "loglevel",
+    'jquery',
+    'loglevel',
     'underscore',
-    '../../html/common/progress-bar.hbs',
-    '../../nls/common',
+    'html/common/progress-bar.hbs',
+    'nls/common',
     'amplify-pubsub'
 ], function ($, log, _, template, i18nLabels, amplify) {
 
