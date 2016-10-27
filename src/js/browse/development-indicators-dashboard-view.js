@@ -66,6 +66,7 @@ define([
         this.topic = params.topic;
         this.model = params.model;
         this.config = params.config;
+        this.environment = params.environment ||  BaseConfig.ENVIRONMENT;
     };
 
     DashboardDevelopmentIndicatorsView.prototype.setDashboardConfig = function (config) {
@@ -73,7 +74,7 @@ define([
             this.config = config;
 
         this.config.baseItems = this.config.items;
-        this.config.environment = BaseConfig.ENVIRONMENT;
+        this.config.environment = this.environment;
     };
 
     DashboardDevelopmentIndicatorsView.prototype._validateInput = function () {

@@ -6,7 +6,7 @@ define(function () {
         "filter_parentsector_code": "Sector",
         "filter_donorcode": "Resource Partner",
         "filter_recipientcode": "Recipient Country",
-        "filter_fao_region_code": "Region",
+        "filter_fao_region": "FAO Region",
         "filter_purposecode": "Sub Sector",
         "filter_year": "Year",
         "filter_channelsubcategory_code": "Channel Parent Category",

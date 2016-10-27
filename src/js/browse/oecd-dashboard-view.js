@@ -69,6 +69,7 @@ define([
     DashboardView.prototype._parseInput = function (params) {
         this.$el = $(this.el);
         this.lang = params.lang || BaseConfig.LANG.toLowerCase();
+        this.environment = params.environment || BaseConfig.ENVIRONMENT;
         this.topic = params.topic;
         this.model = params.model;
 
@@ -208,7 +209,7 @@ define([
         this.config = config;
         this.config_type = config.id;
         this.config.baseItems = config.items;
-        this.config.environment = BaseConfig.ENVIRONMENT;
+        this.config.environment = this.environment;
 
         // Sets Highchart config for each chart
         _.each(this.config.items, _.bind(function (item) {

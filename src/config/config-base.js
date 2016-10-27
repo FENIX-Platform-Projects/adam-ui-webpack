@@ -10,9 +10,12 @@ define(function () {
 
     return {
 
+
         LANG: 'en',
+        BROWSE_SECTIONS: ['country', 'country_donor', 'donor', 'sector'],
+        DEFAULT_BROWSE_SECTION: 'country',
         SELECTORS: {
-            REGION: 'fao_region_code',
+            REGION: 'fao_region',
             RECIPIENT_COUNTRY: 'recipientcode',
             RESOURCE_PARTNER: 'donorcode',
             SECTOR: 'parentsector_code',

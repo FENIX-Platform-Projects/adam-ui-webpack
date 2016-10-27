@@ -44,8 +44,7 @@ define([
         paths: {
             OECD_DASHBOARD_FAO_SECTORS_CONFIG: 'config/browse/dashboards/oecd/fao_sectors/config-',
             OECD_DASHBOARD_OTHER_SECTORS_CONFIG: 'config/browse/dashboards/oecd/other_sectors/config-',
-            OECD_DASHBOARD: 'config/browse/dashboards/oecd/',
-            DISPLAY: '../../config/browse/display/',
+            OECD_DASHBOARD: 'config/browse/dashboards/oecd/'
         }
     };
 
@@ -59,13 +58,10 @@ define([
      */
 
     function BrowseByView(o) {
-        log.info("BrowseByView 1");
+        log.info("BrowseByView");
         log.info(o);
 
         $.extend(true, this, o);
-
-        log.info(this);
-
 
         this._parseInput(o);
 
@@ -92,6 +88,7 @@ define([
     BrowseByView.prototype._parseInput = function (params) {
         this.$el = $(this.el);
         this.lang = params.lang.toLowerCase() || GeneralConfig.LANG.toLowerCase();
+        this.environment = params.environment || GeneralConfig.ENVIRONMENT;
         this.browse_type = params.browse_type;
     };
 
@@ -142,7 +139,6 @@ define([
 
 
     BrowseByView.prototype._render = function () {
-        log.info("BrowseByView Render");
         this._loadDashboardConfigurations();
     };
 
@@ -183,7 +179,6 @@ define([
         this.otherSectorsDashboardConfig = ConfigOtherSectors.dashboard;
         this.faoSectorDashboardConfig = ConfigFAOSectors.dashboard;
 
-        log.info(this.otherSectorsDashboardConfig, this.faoSectorDashboardConfig);
 
         //Set default dashboard configuration
         if (ConfigOtherSectors.id === BaseBrowseConfig.dashboard.DEFAULT_CONFIG) {
@@ -203,7 +198,8 @@ define([
         var filtersSubView = new FilterSubView({
             el: this.$el.find(s.css_classes.FILTER_HOLDER),
             config: this.defaultDashboardConfig.filter,
-            lang:  this.lang
+            lang:  this.lang,
+            environment: this.environment
         });
         this.subviews['filters'] = filtersSubView;
         //this.subview('filters', filtersSubView);
@@ -216,7 +212,8 @@ define([
             el: this.$el.find(s.css_classes.DASHBOARD_OECD_HOLDER),
             lang:  this.lang,
             topic: this.browse_type,
-            model: this.odaDashboardModel
+            model: this.odaDashboardModel,
+            environment: this.environment
         });
         dashboardOecdSubView.setDashboardConfig(this.defaultDashboardConfig.dashboard);
 
@@ -256,7 +253,8 @@ define([
                 lang:  this.lang,
                 topic: this.browse_type,
                 model: this.indicatorsDashboardModel,
-                config: this.indicatorsDashboardConfig
+                config: this.indicatorsDashboardConfig,
+                environment: this.environment
             });
 
            // dashboardIndicatorsSubView.setDashboardConfig(this.indicatorsDashboardConfig);
@@ -519,7 +517,7 @@ define([
     */
     BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-         console.log("================= _setDashboardConfiguration Start =============== ");
+       //  console.log("================= _setDashboardConfiguration Start =============== ");
          //console.log(ovalues);
 
         if (dashboardConfPath) {
