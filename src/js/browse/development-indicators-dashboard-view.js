@@ -121,7 +121,7 @@ define([
         var updatedTemplate = this._updateTemplate();
         this.source = $(updatedTemplate).find("[data-topic='" + this.topic + "']");
 
-        //this.$el.hide();
+        this.$el.hide();
 
         this.$el.html(this.source);
     };
@@ -144,13 +144,13 @@ define([
 
         this.dashboard = new Dashboard(this.config);
 
-     /*   this.dashboard.on('indicators_ready', function (payload) {
+        this.dashboard.on('indicators_ready', function (payload) {
 
             if (payload.data.size > 0) {
-                this.$el.show();
+                $(this.el).show();
             }
 
-        });*/
+        });
 
     };
 

@@ -42,11 +42,6 @@ define([
         $.extend(true, this, defaultOptions, o);
         this.$el = $(this.el);
 
-        console.log("-------------------------------- this.model ----------------");
-        console.log(this);
-        console.log("LANG: ", this.lang);
-        console.log("MODEL: ",  this.model);
-
         this._renderTemplate();
 
         this._initVariables();
@@ -133,7 +128,6 @@ define([
             this.indicatortemplate = indicatorsDonorTemplate;
         }
 
-        console.log(this.indicatortemplate);
 
     };
 
@@ -297,7 +291,7 @@ define([
         newdata.footnotes = footnote;
 
         // console.log(newdata);
-          console.log(newdata.indicators);
+         // console.log(newdata.indicators);
         // console.log(newdata.footnotes);
 
         return newdata;
