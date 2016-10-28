@@ -40,6 +40,18 @@ define(function () {
             ]
         },
         "country": {
+           /* fao_region: [
+                {
+                    layout: "default",
+                    show: ['top-recipients', 'top-recipients-others']
+                }
+            ],
+            recipientcode: [
+                {
+                    layout: "default",
+                    hide: ['top-recipients', 'top-recipients-others']
+                }
+            ],*/
             purposecode: [
                 {
                     layout: "default",

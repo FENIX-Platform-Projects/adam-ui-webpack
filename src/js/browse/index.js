@@ -450,6 +450,8 @@ define([
     BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
         var dashboardConfPath, displayConfigForFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
 
+        console.log(" ======================= PROCESS SELECTION ==================");
+        console.log(displayConfig, changedFilter.id );
 
         if(displayConfig) {
             displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.id];

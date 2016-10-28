@@ -162,10 +162,10 @@ define([
 
     };
 
-    DashboardView.prototype.render = function (displayConfigForSelectedFilter) {
+    DashboardView.prototype.render = function () {
         this.modelUpdated = false; // reset the model to false
 
-        console.log("===== RENDER ========= ");
+        console.log("===== RENDER ========= ", this.displayConfigForSelectedFilter);
         // Update the language related labels in the item configurations (charts)
         for (var it in this.config.items) {
             var item = this.config.items[it];
@@ -178,7 +178,8 @@ define([
 
 
         // Hide/Show Dashboard Items
-        this.updateDashboardTemplate(displayConfigForSelectedFilter);
+        if(this.displayConfigForSelectedFilter)
+         this.updateDashboardTemplate(this.displayConfigForSelectedFilter);
 
 
 
@@ -262,7 +263,7 @@ define([
 
     DashboardView.prototype.updateDashboardTemplate = function (filterdisplayconfig) {
 
-      //  console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
+        console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
 
         if (filterdisplayconfig) {
 
@@ -343,7 +344,10 @@ define([
 
         // Re-render the template
         if (displayConfigForSelectedFilter || this.modelUpdated) {
-            this.render(displayConfigForSelectedFilter);
+            if(displayConfigForSelectedFilter){
+              this.displayConfigForSelectedFilter =  displayConfigForSelectedFilter;
+            }
+            this.render();
         }
 
         // Update Dashboard Items Configuration
