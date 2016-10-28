@@ -77,9 +77,10 @@ define([
 
 
     DashboardView.prototype.modelChanged = function() {
-      //  console.log("============= MODEL CHANGED ========");
-       // this.render();
+        console.log("============= MODEL CHANGED ========");
+       //  this.render();
         //alert('model changed');
+        this.modelUpdated = true;
     };
 
     DashboardView.prototype._validateInput = function () {
@@ -104,6 +105,7 @@ define([
     DashboardView.prototype._init = function () {
         this._bindEventListeners();
         this.template = template;
+        this.modelUpdated = false;
         //this.labels = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         //this.template = template(this.labels);
@@ -120,7 +122,11 @@ define([
 
     DashboardView.prototype._updateTemplate = function () {
 
+        console.log(" ===================== updateTemplate ================");
+
         var model = this.model.getProperties();
+
+        console.log(" ===================== updateTemplate: model ================ ", model);
        var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         return this.template(data);
@@ -157,11 +163,13 @@ define([
     };
 
     DashboardView.prototype.render = function (displayConfigForSelectedFilter) {
+        this.modelUpdated = false; // reset the model to false
 
-       // console.log("===== RENDER =========");
+        console.log("===== RENDER ========= ");
         // Update the language related labels in the item configurations (charts)
         for (var it in this.config.items) {
             var item = this.config.items[it];
+            console.log(item.id, i18nDashboardLabels[this.lang][item.id])
             this._updateChartExportTitles(this.config.items[it], i18nDashboardLabels[this.lang][item.id], this.model.get('label'));
         }
 
@@ -331,10 +339,10 @@ define([
         var self = this;
 
 
-    //    console.log("============ REBUILD =======", displayConfigForSelectedFilter);
+        console.log("============ REBUILD =======", displayConfigForSelectedFilter, this.modelUpdated);
 
         // Re-render the template
-        if (displayConfigForSelectedFilter) {
+        if (displayConfigForSelectedFilter || this.modelUpdated) {
             this.render(displayConfigForSelectedFilter);
         }
 

@@ -17,7 +17,7 @@ define(function () {
         "top-sectors-others": "ODA Share between Top Sectors and Others",
         "top-subsectors": "Top Sub-Sectors",
         "top-channels": "Top Channels of Delivery",
-        "top-channels-other": "ODA Share between Top Channels of Delivery and Others",
+        "top-channels-others": "ODA Share between Top Channels of Delivery and Others",
         "top-implementing-channels": "Top Implementing Channels",
         "oda-regional": "ODA Regional Distribution",
         "country-map": "Map on ODA received",

@@ -890,6 +890,7 @@ define(function () {
                                             this.redraw();
                                         }
 
+
                                         if (this.options.chart.forExport) {
                                             this.xAxis[0].update({
                                                 categories: this.xAxis[0].categories,
@@ -1491,8 +1492,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -1502,7 +1503,6 @@ define(function () {
                                         }
                                     }
                                 }
-
                             },
                             tooltip: {
                                 style: {width: '200px', whiteSpace: 'normal'},
@@ -1840,7 +1840,7 @@ define(function () {
                     ]
                 },
                 {
-                    id: 'top-channels-categories', // TOP CHANNELS
+                    id: 'top-channels', // TOP CHANNELS
                     type: 'chart',
                     config: {
                         type: "column",
@@ -2001,8 +2001,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -2507,8 +2507,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -2865,8 +2865,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -2876,7 +2876,6 @@ define(function () {
                                         }
                                     }
                                 }
-
                             },
                             tooltip: {
                                 style: {width: '200px', whiteSpace: 'normal'},
@@ -3017,7 +3016,7 @@ define(function () {
                         }
                     ]
                 },
-               /*  {
+          /*   {
                     id: 'regional-map',
                     type: 'map',
                     config: {

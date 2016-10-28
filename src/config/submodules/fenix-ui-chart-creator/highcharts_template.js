@@ -26,20 +26,6 @@ define(['highcharts'], function (Highcharts) {
                         }, false);
 
 
-                        $.each(this.yAxis, function (y) {
-                            y.update({
-                                title: {
-                                    style: {
-                                        fontSize: '7px'
-                                    }
-                                },
-                                labels: {
-                                    style: {
-                                        fontSize: '7px'
-                                    }
-                                }
-                            }, false);
-                        });
 
                         $.each(this.series, function (i, serie) {
                             if(!serie.visible){
@@ -209,7 +195,10 @@ define(['highcharts'], function (Highcharts) {
                         for(var idx = 0; idx < this.series.length; idx++){
                             var opt = this.series[idx].options;
                             var isShown = !opt.dataLabels.enabled;
-                            this.series[idx].update({dataLabels: {enabled: isShown,  style: {
+                            this.series[idx].update({dataLabels: {enabled: isShown,
+                                crop: false,
+                                overflow: 'none',
+                                style: {
                                // fontSize: '7px',
                                 color: this.series[idx].color,
                                 textShadow: 0
@@ -234,12 +223,18 @@ define(['highcharts'], function (Highcharts) {
 
 
             chartOptions: {
-
+                chart: {
+                    style: {
+                        fontFamily: 'Helvetica',
+                        fontWeight: 'bold'
+                    }
+                },
                 xAxis: {
                     labels: {
                         y: 15,
                         style: {
-                            fontSize: '7px'
+                            fontSize: '7px',
+                            fontWeight: 'bold'
                         }
                     }
                 },
@@ -257,8 +252,7 @@ define(['highcharts'], function (Highcharts) {
                 },
                 title: {
                     style: {
-                        fontSize: '8px',
-                        fontWeight: 'bold'
+                        fontSize: '8px'
                     }
                 },
                 subtitle: {
@@ -269,7 +263,7 @@ define(['highcharts'], function (Highcharts) {
                 },
                 credits: {
                     style: {
-                        fontSize: '6px',
+                        fontSize: '7px',
                         margin: '30px'
                     }
 
@@ -283,11 +277,12 @@ define(['highcharts'], function (Highcharts) {
                     itemMarginBottom: 5,
 
                     labelFormatter: function(){
-                        return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                       // return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                        return '<span>'+this.name+'</span>';
                     },
                     itemStyle: {
                         fontSize: '8px',
-                        fontWeight: 'normal'
+                        fontWeight: 'bold'
                     },
                     enabled: false//, only one series and all info in title and subtitle
                 },
