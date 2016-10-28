@@ -259,7 +259,6 @@ define(
 
                     if (payload.id === BaseConfig.SELECTORS.REGION || payload.id === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
-                        console.log("============= 1 ");
 
                         if ( payload.id === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
@@ -313,7 +312,7 @@ define(
                                  */
 
                             } else {
-                             //         console.log("==================== ELSE REGION OTHER  ============== " + payload.id + " - " + additionalProperties);
+                              //      console.log("==================== ELSE REGION OTHER  ============== " + payload.id + " - " + additionalProperties);
 
                                 // Add all Item
                                 this.filterUtils.addAllOption(this.$el, payload.id);
