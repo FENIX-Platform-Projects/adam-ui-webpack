@@ -602,10 +602,12 @@ define(
             // primary indicates the selection type which takes precedence
             if(recipientpayload.values.values[0] === 'all'){
                 region.primary = true;
+                region.isRecipientRelated = true;
                 recipientpayload.primary = false;
             } else {
                 region.primary = false;
                 recipientpayload.primary = true;
+                recipientpayload.isRecipientRelated = true;
             }
 
             payloads.push(region);
@@ -634,10 +636,13 @@ define(
             // primary indicates the selection type which takes precedence
             if(subsectorpayload.values.values[0] === 'all'){
                 sector.primary = true;
+                sector.isSectorRelated = true;
                 subsectorpayload.primary = false;
+
             } else {
                 sector.primary = false;
                 subsectorpayload.primary = true;
+                subsectorpayload.isSectorRelated = true;
             }
 
             payloads.push(sector);

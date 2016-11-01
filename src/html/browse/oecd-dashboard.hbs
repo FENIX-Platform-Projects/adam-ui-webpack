@@ -81,15 +81,21 @@
         </div>
         </div>
         <div class="row">
-            <div class="col-sm-12" id="top-channel-categories-container"><!-- TOP CHANNEL CATEGORIES -->
+            <div class="col-sm-6" id="top-channels-container"><!-- TOP CHANNEL CATEGORIES -->
                 <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels}}</b>:</span> {{label}}</p></div>
                 <div class="obj-box">
                     <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
-                    <div data-item="top-channel-categories"></div>
+                    <div data-item="top-channels"></div>
+                </div>
+            </div>
+            <div class="col-sm-6" id="top-channels-others-container"><!-- TOP CHANNEL VS OTHER -->
+                <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels-others}}</b>:</span> {{label}}</p></div>
+                <div class="obj-box">
+                    <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                    <div data-item="top-channels-others"></div>
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-sm-12 collapse" id="top-sectors-container"> <!-- TOP SECTORS collapsed (i.e. hidden) by default via collapse class -->
                 <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-sectors}}</b>:</span> {{label}}</p></div>
@@ -334,14 +340,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6" id="top-channel-categories-container"><!-- TOP CHANNEL CATEGORIES -->
+            <div class="col-sm-6" id="top-channels-container"><!-- TOP CHANNEL CATEGORIES -->
                 <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels}}</b>:</span> {{label}}</p></div>
                 <div class="obj-box">
                     <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
-                    <div data-item="top-channel-categories"></div>
+                    <div data-item="top-channels"></div>
                 </div>
             </div>
-            <div class="col-sm-6 collapse" id="top-subsectors-container"><!-- TOP SUB SECTORS -->
+            <div class="col-sm-6" id="top-channels-others-container"><!-- TOP CHANNEL VS OTHER -->
+                <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels-others}}</b>:</span> {{label}}</p></div>
+                <div class="obj-box">
+                    <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                    <div data-item="top-channels-others"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 collapse" id="top-subsectors-container"><!-- TOP SUB SECTORS -->
                 <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-subsectors}}</b>:</span> {{label}}</p></div>
                 <div class="obj-box">
                     <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
@@ -398,11 +413,35 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12" id="top-channels-container"><!-- TOP CHANNELS -->
+            <!-- TOP RECIPIENTS -->
+            <div class="col-sm-6 collapse" id="top-recipients-container">
+                <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-recipients}}</b>:</span> {{label}}</p></div>
+                <div class="obj-box">
+                    <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                    <div data-item="top-recipients"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 collapse" id="top-recipients-others-container"><!-- TOP RECIPIENTS VS OTHERS -->
+                <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-recipients-others}}</b>:</span> {{label}}</p></div>
+                <div class="obj-box">
+                    <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                    <div data-item="top-recipients-others"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6" id="top-channels-container"><!-- TOP CHANNEL CATEGORIES -->
                 <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels}}</b>:</span> {{label}}</p></div>
                 <div class="obj-box">
                     <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
-                    <div data-item="top-channel-categories"></div>
+                    <div data-item="top-channels"></div>
+                </div>
+            </div>
+            <div class="col-sm-6" id="top-channels-others-container"><!-- TOP CHANNEL VS OTHER -->
+                <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels-others}}</b>:</span> {{label}}</p></div>
+                <div class="obj-box">
+                    <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                    <div data-item="top-channels-others"></div>
                 </div>
             </div>
         </div>

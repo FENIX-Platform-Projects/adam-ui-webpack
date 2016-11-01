@@ -176,6 +176,9 @@ define([
         var updatedTemplate = this._updateTemplate();
         this.source = $(updatedTemplate).find("[data-topic='" + this.topic + "']");
 
+        console.log("============ RENDER 1 =======", this.displayConfigForSelectedFilter);
+        console.log("============ RENDER 2 =======", this.source);
+
 
         // Hide/Show Dashboard Items
         if(this.displayConfigForSelectedFilter)
@@ -340,15 +343,21 @@ define([
         var self = this;
 
 
-        console.log("============ REBUILD =======", displayConfigForSelectedFilter, this.modelUpdated);
+       // console.log("============ REBUILD =======", displayConfigForSelectedFilter, this.modelUpdated);
 
         // Re-render the template
         if (displayConfigForSelectedFilter || this.modelUpdated) {
             if(displayConfigForSelectedFilter){
-              this.displayConfigForSelectedFilter =  displayConfigForSelectedFilter;
+
+                this.displayConfigForSelectedFilter =  displayConfigForSelectedFilter;
             }
+
+
             this.render();
         }
+
+
+        console.log("============ REBUILD =======", this.config.items);
 
         // Update Dashboard Items Configuration
         this.updateItemsConfig();

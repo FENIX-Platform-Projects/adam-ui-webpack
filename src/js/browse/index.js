@@ -452,6 +452,7 @@ define([
 
         console.log(" ======================= PROCESS SELECTION ==================");
         console.log(displayConfig, changedFilter.id );
+        console.log(changedFilter);
 
         if(displayConfig) {
             displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
@@ -488,6 +489,158 @@ define([
                     if(defaultItem)
                         displayConfigForFilter = defaultItem;
                 }
+
+
+                if(changedFilter.isRecipientRelated){
+                    // merge in Sector related
+
+                    console.log("======================= ONCHANGE: RECIPIENT RELATED =========");
+                    console.log(filterValues);
+                    console.log(this.filterSelectionsTypeDisplayConfig);
+
+                    if(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.SUB_SECTOR] && this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.SECTOR]){
+
+                        var mergeConfig = this._getMergeConfig(filterValues, GeneralConfig.SELECTORS.SECTOR, GeneralConfig.SELECTORS.SUB_SECTOR);
+
+
+                       /* var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['purposecode']);
+
+                        console.log("purposecode values = ", filterValues.values['purposecode']);
+
+                        if (filterValues.values['purposecode'].length === 0) {
+                            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['parentsector_code']);
+
+                            if(filterValues.values['parentsector_code'].length > 0){
+                                var sectorConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig['parentsector_code'],
+                                    filterValues.values['parentsector_code'][0]);
+
+                                if (sectorConfig) {
+                                    mergeConfig = sectorConfig;
+                                }
+                            }
+
+                        }*/
+
+                        console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
+                        console.log("=============== RECIPIENT: MERGE ", mergeConfig);
+
+
+
+                        displayConfigForFilter = this._mergeDisplayConfigs(displayConfigForFilter, mergeConfig);
+
+
+                        /* if(displayConfigForFilter.hide && mergeConfig.hide) {
+                         displayConfigForFilter.hide.push.apply( displayConfigForFilter.hide, mergeConfig.hide);
+                         }
+
+                         if(displayConfigForFilter.show && mergeConfig.show) {
+                         displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
+                         }
+                         */
+
+                        // if(displayConfigForFilter.show)
+                        // displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
+
+                        //displayConfigForFilter = $.extend(true, {}, displayConfigForFilter, mergeConfig);
+                    }
+
+                 /*   if(this.filterSelectionsTypeDisplayConfig['purposecode'] && this.filterSelectionsTypeDisplayConfig['parentsector_code']){
+                        var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['purposecode']);
+
+                        console.log("purposecode values = ", filterValues.values['purposecode']);
+
+                        if (filterValues.values['purposecode'].length === 0) {
+                            var sectorConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig['parentsector_code'],
+                                filterValues.values['purposecode'][0]);
+
+                            if (sectorConfig) {
+                                mergeConfig = sectorConfig;
+                            } else{
+                                mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['parentsector_code']);
+                            }
+                        }
+
+                        console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
+                        console.log("=============== RECIPIENT: MERGE ", mergeConfig);
+
+
+
+                        displayConfigForFilter = this._mergeDisplayConfigs(displayConfigForFilter, mergeConfig);
+
+
+                       /!* if(displayConfigForFilter.hide && mergeConfig.hide) {
+                            displayConfigForFilter.hide.push.apply( displayConfigForFilter.hide, mergeConfig.hide);
+                        }
+
+                        if(displayConfigForFilter.show && mergeConfig.show) {
+                            displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
+                        }
+*!/
+
+                       // if(displayConfigForFilter.show)
+                       // displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
+
+                        //displayConfigForFilter = $.extend(true, {}, displayConfigForFilter, mergeConfig);
+                    }
+                    //console.log("=============== RECIPIENT: mergeconfig Sector: ", mergeConfig);*/
+                    console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
+
+                }
+
+                if(changedFilter.isSectorRelated){
+                    // merge in RECIPIENT Related
+                    console.log("======================= ONCHANGE: SECTOR RELATED =========");
+
+
+                    if(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY] && this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.REGION]){
+
+                        var mergeConfig = this._getMergeConfig(filterValues, GeneralConfig.SELECTORS.REGION, GeneralConfig.SELECTORS.RECIPIENT_COUNTRY);
+
+
+                       /* var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY]);
+
+                        console.log("recipientcode values = ", filterValues.values[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY]);
+
+                        if (filterValues.values[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY].length === 0) {
+                            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.REGION]);
+
+                            if(filterValues.values[GeneralConfig.SELECTORS.REGION].length > 0){
+                                var sectorConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.REGION],
+                                    filterValues.values[GeneralConfig.SELECTORS.REGION][0]);
+
+                                if (sectorConfig) {
+                                    mergeConfig = sectorConfig;
+                                }
+                            }
+
+                        }*/
+
+                        console.log("=============== SECTOR: displayConfigForFilter ", displayConfigForFilter);
+                        console.log("=============== SECTOR: MERGE ", mergeConfig);
+
+
+
+                        displayConfigForFilter = this._mergeDisplayConfigs(displayConfigForFilter, mergeConfig);
+
+
+                        /* if(displayConfigForFilter.hide && mergeConfig.hide) {
+                         displayConfigForFilter.hide.push.apply( displayConfigForFilter.hide, mergeConfig.hide);
+                         }
+
+                         if(displayConfigForFilter.show && mergeConfig.show) {
+                         displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
+                         }
+                         */
+
+                        // if(displayConfigForFilter.show)
+                        // displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
+
+                        //displayConfigForFilter = $.extend(true, {}, displayConfigForFilter, mergeConfig);
+                    }
+
+                    console.log("=============== SECTOR: FINAL displayConfigForFilter ", displayConfigForFilter);
+                }
+
             }
         }
 
@@ -591,6 +744,50 @@ define([
                 return item.layout === "default";
             }
         });
+    };
+
+    BrowseByView.prototype._mergeDisplayConfigs = function (config, merge){
+
+        this._mergePropArray(config, merge, 'hide');
+        this._mergePropArray(config, merge, 'show');
+
+        return config;
+
+    };
+
+    BrowseByView.prototype._getMergeConfig = function (filterValues, parentId, childId) {
+        var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
+
+        if (filterValues.values[childId].length === 0) {
+            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);
+
+            if (filterValues.values[parentId].length > 0) {
+                var parentConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[parentId],
+                    filterValues.values[parentId][0]);
+
+                if (parentConfig) {
+                    mergeConfig = parentConfig;
+                }
+            }
+
+        }
+        return mergeConfig;
+    };
+
+    BrowseByView.prototype._mergePropArray = function (config, merge, prop){
+
+        var mergeValues = merge[prop];
+
+        if(mergeValues){
+            if(config[prop]){
+                config[prop].push.apply(config[prop], mergeValues);
+                config[prop] = _.uniq(config[prop]); // clean up duplications
+
+            } else {
+                config[prop] = mergeValues;
+            }
+        }
+
     };
 
     /*  var BrowseByView = View.extend({
