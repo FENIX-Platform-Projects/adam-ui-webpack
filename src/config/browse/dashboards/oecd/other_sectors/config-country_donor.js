@@ -7,20 +7,21 @@ define(function () {
     return {
         id: 'OTHER_SECTORS',
         filter: {
-            fao_region_code: {
+            fao_region: {
                 selector: {
                     id: "dropdown",
-                    default: ["all"],
+                    default: ["RAP"],
                     emptyOption : {
                         enabled: true,
                         text: "All",
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1
+                        maxItems: 1,
+                        // openOnFocus: false
                     }
                 },
-                className: "col-sm-3",
+                className: "col-sm-5",
                 cl: {
                     uid: "crs_fao_regions",
                     version: "2016",
@@ -42,7 +43,8 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1
+                        maxItems: 1,
+                        // openOnFocus: false
                     }
                 },
                 className: "col-sm-3",
@@ -50,14 +52,48 @@ define(function () {
                     "uid": "crs_fao_regions",
                     "version": "2016",
                     level: 3,
-                    levels: 3
+                    levels: 3,
+                    "codes": [
+                        "831",
+                        "832",
+                        "836",
+                        "859",
+                        "860",
+                        "845",
+                        "856",
+                        "861",
+                        "862",
+                        "880",
+                        "866",
+                        "870",
+                        "872",
+                        "854",
+                        "625",
+                        "666",
+                        "630",
+                        "728",
+                        "730",
+                        "740",
+                        "645",
+                        "738",
+                        "745",
+                        "751",
+                        "655",
+                        "753",
+                        "635",
+                        "660",
+                        "665",
+                        "755",
+                        "640",
+                        "764"
+                    ],
                 },
                 template: {
                     hideSwitch: true,
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "fao_region_code": {id: "parent", event: "select"}
+                    "fao_region": {id: "parent", event: "select"}
                 }
             },
             donorcode: {
@@ -1826,7 +1862,7 @@ define(function () {
                     ]
                 },
                 {
-                    id: 'top-channel-categories', // TOP CHANNEL OF DELIVERY CATEGORIES
+                    id: 'top-channels', // TOP CHANNEL OF DELIVERY CATEGORIES
                     type: 'chart',
                     config: {
                         type: "column",

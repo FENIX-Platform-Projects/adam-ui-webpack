@@ -2177,7 +2177,7 @@ define(function () {
                     ]
                 },
                 {
-                    id: 'top-channel-categories', // TOP CHANNEL OF DELIVERY CATEGORIES
+                    id: 'top-channels', // TOP CHANNEL OF DELIVERY CATEGORIES
                     type: 'chart',
                     config: {
                         type: "column",

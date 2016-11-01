@@ -40,7 +40,7 @@ define(function () {
             ]
         },
         "country": {
-           /* fao_region: [
+           fao_region: [
                 {
                     layout: "default",
                     show: ['top-recipients', 'top-recipients-others']
@@ -51,7 +51,7 @@ define(function () {
                     layout: "default",
                     hide: ['top-recipients', 'top-recipients-others']
                 }
-            ],*/
+            ],
             purposecode: [
                 {
                     layout: "default",
@@ -117,6 +117,18 @@ define(function () {
 
         },
         "country_donor": {
+            fao_region: [
+                {
+                    layout: "default",
+                    show: ['top-recipients', 'top-recipients-others']
+                }
+            ],
+            recipientcode: [
+                {
+                    layout: "default",
+                    hide: ['top-recipients', 'top-recipients-others']
+                }
+            ],
             purposecode: [
                 {
                     layout: "default",
