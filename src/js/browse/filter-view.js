@@ -216,7 +216,7 @@ define(
                 }
                 // For ODA set its value to the props object
                 else if (this._getFilterValues().values[BaseConfig.SELECTORS.ODA]) {
-                    var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.ODA, this._getFilterValues().values[BaseConfig.SELECTORS.ODA].enumeration[0]);
+                    var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.ODA, this._getFilterValues().values[BaseConfig.SELECTORS.ODA][0]);
 
                     amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(this._getFilterValues(), {"props": additionalProperties}));
                 }
