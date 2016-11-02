@@ -10,7 +10,7 @@ define([
     'use strict';
 
     var s = {
-        url: 'http://www-test.fao.org/adam/browse-data/country_donor/en'
+        url: 'http://www-test.fao.org/adam/browse-data/donor/en'
     };
 
 

@@ -165,19 +165,18 @@ define(function () {
             oda: {
                 selector: {
                     id: "dropdown",
-                    default: ['adam_usd_commitment'],
+                    default: ['usd_commitment'],
                     config: { //Selectize configuration
                         maxItems: 1
                     }
                 },
                 className: "col-sm-4",
                 cl: {
-                    uid: "crs_flow_amounts",
+                    uid: "oda_crs",
                     version: "2016"
                 },
                 template: {
                     hideHeaderIcon: false,
-                    frankie: true,
                     headerIconClassName: 'glyphicon glyphicon-info-sign',
                     hideSwitch: true,
                     hideRemoveButton: true
