@@ -226,6 +226,72 @@ define(['highcharts'],function (Highcharts) {
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
 
                         config: {
+                            chart: {
+                                events: {
+                                    load: function(event) {
+                                        var _that = this;
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
+                                    }
+                                }
+                            },
                             xAxis: {
                                 type: 'datetime'
                             }
@@ -380,6 +446,64 @@ define(['highcharts'],function (Highcharts) {
                                             this.redraw();
                                         }
 
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
                                     }
                                 }
                             },
@@ -1075,6 +1199,64 @@ define(['highcharts'],function (Highcharts) {
                                             this.redraw();
                                         }
 
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
                                     }
                                 }
                             },
@@ -1857,6 +2039,64 @@ define(['highcharts'],function (Highcharts) {
                                             }
                                         }
 
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
                                     }
                                 }
                             },
