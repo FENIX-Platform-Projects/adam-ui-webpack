@@ -71,6 +71,10 @@ define([
         // fenix-ui-filter
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
 
+        // map
+        require("node_modules/fenix-ui-map/dist/fenix-ui-map.min.css");
+        require("node_modules/leaflet/dist/leaflet.css");
+
         // INDEX
         require("dist/css/index.css");
 
