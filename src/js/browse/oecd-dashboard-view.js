@@ -254,8 +254,8 @@ define([
             else
                 this.gaulcode = null;
 
-            if (props["oda"])
-                this.config.uid = props["oda"];
+           // if (props["oda"])
+              //  this.config.uid = props["oda"];
 
 
         } else {
