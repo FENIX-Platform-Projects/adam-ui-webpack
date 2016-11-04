@@ -30,7 +30,7 @@ define(function () {
         },
 
         ENVIRONMENT : 'develop',
-        DEFAULT_UID: 'adam_usd_commitment',
+        DEFAULT_UID: 'adam_usd_aggregated_table', //'adam_usd_commitment',
         SERVER: SERVER,
         CODES_POSTFIX : '/codes/filter',
         HIERARCHY_CODES_POSTFIX : '/codes/hierarchy',

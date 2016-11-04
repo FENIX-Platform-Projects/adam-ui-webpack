@@ -3838,7 +3838,7 @@ define(['highcharts'],function (Highcharts) {
 
 
                     filterFor: {
-                        "filter_channels": ['donorcode', 'year', 'oda']
+                        "filter_channels": ['donorcode', 'purposecode', 'year', 'oda']
                     },
 
 
