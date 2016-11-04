@@ -23,9 +23,9 @@ define(
                 FILTER_BROWSE: "#filter-browse",
                 FILTER_ERRORS_HOLDER: "#filter-browse-errors-holder"
             },
-            datasets: {
-                USD_COMMITMENT: 'adam_usd_commitment'
-            },
+            //datasets: {
+             //   USD_COMMITMENT: 'adam_usd_commitment'
+           // },
             codeLists: {
                 SUB_SECTORS: {uid: 'crs_purposes', version: '2016'},
                 RECIPIENT_DONORS: {uid: 'crs_recipientdonors', version: '2016'},
@@ -470,7 +470,7 @@ define(
 
             if (recipientCodes.length > 0) {
                 return Q.all([
-                    self._createGaulPromiseData(s.datasets.USD_COMMITMENT, this.lang.toUpperCase(), s.codeLists.RECIPIENTS.uid, s.codeLists.RECIPIENTS.version, recipientCodes)
+                    self._createGaulPromiseData(BaseConfig.DEFAULT_UID, this.lang.toUpperCase(), s.codeLists.RECIPIENTS.uid, s.codeLists.RECIPIENTS.version, recipientCodes)
                 ]).then(function (c) {
                     console.log(c)
                     return c;
