@@ -1,6 +1,6 @@
 /*global define*/
 
-define(function () {
+define(['highcharts'],function (Highcharts) {
 
     'use strict';
 
@@ -186,7 +186,7 @@ define(function () {
         },
         dashboard: {
             //default dataset id
-            uid: "adam_usd_commitment",
+            uid: "adam_usd_aggregated_table",
 
             items: [
                 {
@@ -230,6 +230,65 @@ define(function () {
                                             this.options.yAxis[1].title.text= '%';
                                             this.yAxis[1].visible = true;
                                             this.yAxis[1].isDirty = true;
+                                            this.redraw();
+                                        }
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
                                             this.redraw();
                                         }
 
@@ -288,7 +347,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -299,8 +358,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "fao_sector": {
@@ -373,7 +438,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -384,8 +449,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "parentsector_code": {
@@ -669,6 +740,64 @@ define(function () {
                                             this.redraw();
                                         }
 
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
                                     }
                                 }
                             },
@@ -732,7 +861,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -743,8 +872,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "fao_sector": {
@@ -824,7 +959,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -835,8 +970,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "fao_sector": {
@@ -927,7 +1068,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -938,8 +1079,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "parentsector_code": {
@@ -1190,7 +1337,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["donorcode_EN"], //x axis
-                        series: ["flowcategory_code_EN"], // series
+                        series: ["flowcategory_EN"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
@@ -1224,7 +1371,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -1242,9 +1389,15 @@ define(function () {
                                             }
                                         ]
                                     },
-                                    "oda":{
-                                        "enumeration":[
-                                            "usd_commitment"
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     }
                                 }
@@ -1272,7 +1425,7 @@ define(function () {
                                     },
                                     {
                                         "columns": [
-                                            "flowcategory_code"
+                                            "flowcategory"
                                         ],
                                         "rule": "first"
                                     }
@@ -1332,8 +1485,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -1414,7 +1567,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -1425,8 +1578,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "fao_sector": {
@@ -1687,7 +1846,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["recipientcode_EN"], //x axis
-                        series: ["flowcategory_code_EN"], // series
+                        series: ["flowcategory_EN"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
@@ -1720,7 +1879,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -1738,9 +1897,15 @@ define(function () {
                                             }
                                         ]
                                     },
-                                    "oda":{
-                                        "enumeration":[
-                                            "usd_commitment"
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     }
                                 }
@@ -1768,7 +1933,7 @@ define(function () {
                                     },
                                     {
                                         "columns": [
-                                            "flowcategory_code"
+                                            "flowcategory"
                                         ],
                                         "rule": "first"
                                     }
@@ -1827,8 +1992,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -1905,7 +2070,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -1927,8 +2092,14 @@ define(function () {
                                         ]
                                     },
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "fao_sector": {
@@ -2186,18 +2357,17 @@ define(function () {
                     ]
                 },
                 {
-                    id: 'top-channels', // TOP CHANNEL OF DELIVERY CATEGORIES
+                    id: 'top-channels', // TOP CHANNELS
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["channelsubcategory_name"], //x axis
-                        series: ["flowcategory_name"], // series
+                        x: ["channelsubcategory_code_EN"], //x axis
+                        series: ["flowcategory_EN"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
-
                         config: {
-                            colors: ['#56adc3'],
+                            colors: ['#5DA58D'],
                             legend: {
                                 title: {
                                     text: null
@@ -2217,82 +2387,70 @@ define(function () {
 
                     },
 
-                    filterFor: ['purposecode', 'year', 'oda'],
-
-                    filter: { //FX-filter format
-                        purposecode: ["12240",
-                            "14030",
-                            "14031",
-                            "15170",
-                            "16062",
-                            "23070",
-                            "31110",
-                            "31120",
-                            "31130",
-                            "31140",
-                            "31150",
-                            "31161",
-                            "31162",
-                            "31163",
-                            "31164",
-                            "31165",
-                            "31166",
-                            "31181",
-                            "31182",
-                            "31191",
-                            "31192",
-                            "31193",
-                            "31194",
-                            "31195",
-                            "31210",
-                            "31220",
-                            "31261",
-                            "31281",
-                            "31282",
-                            "31291",
-                            "31310",
-                            "31320",
-                            "31381",
-                            "31382",
-                            "31391",
-                            "32161",
-                            "32162",
-                            "32163",
-                            "32165",
-                            "32267",
-                            "41010",
-                            "41020",
-                            "41030",
-                            "41040",
-                            "41050",
-                            "41081",
-                            "41082",
-                            "43040",
-                            "43050",
-                            "52010",
-                            "72040",
-                            "74010"
-                        ],
-                        year: [{value: "2000", parent: 'from'}, {value: "2014", parent:  'to'}]
+                    filterFor: {
+                        "filter_channels": ['year', 'oda', 'purposecode']
                     },
                     postProcess: [
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_usd_aggregated_table"
+                                }
+                            ],
+                            "parameters": {
+                                "rows": {
+                                    "fao_sector": {
+                                        "enumeration": [
+                                            "1"
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": "2000",
+                                                "to": "2014"
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "rid":{"uid":"filter_channels"}
+                        },
                         {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code", "channelsubcategory_name"
+                                    "channelsubcategory_code"
                                 ],
                                 "aggregations": [
                                     {
-                                        "columns": ["value"],
+                                        "columns": [
+                                            "value"
+                                        ],
                                         "rule": "SUM"
                                     },
                                     {
-                                        "columns": ["unitcode"],
+                                        "columns": [
+                                            "unitcode"
+                                        ],
                                         "rule": "first"
                                     },
                                     {
-                                        "columns": ["flowcategory_name"],
+                                        "columns": [
+                                            "flowcategory"
+                                        ],
                                         "rule": "first"
                                     }
                                 ]
@@ -2307,10 +2465,376 @@ define(function () {
                         {
                             "name": "page",
                             "parameters": {
-                                "perPage": 10,  //top 10
+                                "perPage": 10,
                                 "page": 1
                             }
-                        }]
+                        }
+
+                    ]
+                },
+                {
+                    id: 'top-channels-others', // TOP CHANNELS Vs OTHER CHANNELS
+                    type: 'chart',
+                    config: {
+                        type: "pieold",
+                        x: ["indicator"], //x axis and series
+                        series: ["unitname"], // series
+                        y: ["value"],//Y dimension
+                        aggregationFn: {"value": "sum"},
+                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+
+                        config: {
+                            colors: ['#5DA58D'],
+                            legend: {
+                                title: {
+                                    text: null
+                                }
+                            },
+                            plotOptions: {
+                                pie: {
+                                    showInLegend: true
+                                },
+                                series: {
+                                    point: {
+                                        events: {
+                                            legendItemClick: function () {
+                                                return false; // <== returning false will cancel the default action
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            chart: {
+                                events: {
+                                    load: function (event) {
+                                        if (this.options.chart.forExport) {
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
+                                                    dataLabels: {
+                                                        enabled: false
+                                                    }
+                                                }, false);
+                                            });
+                                            this.redraw();
+                                        }
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                style: {width: '200px', whiteSpace: 'normal'},
+                                formatter: function () {
+                                    var val = this.y;
+                                    if (val.toFixed(0) < 1) {
+                                        val = (val * 1000).toFixed(2) + ' K'
+                                    } else {
+                                        val = val.toFixed(2) + ' USD Mil'
+                                    }
+
+                                    return '<b>' + this.percentage.toFixed(2) + '% (' + val + ')</b>';
+                                }
+                            },
+                            exporting: {
+                                buttons: {
+                                    toggleDataLabelsButton: {
+                                        enabled: false
+                                    }
+                                },
+                                chartOptions: {
+                                    legend: {
+                                        title: '',
+                                        enabled: true,
+                                        align: 'center',
+                                        layout: 'vertical',
+                                        useHTML: true,
+                                        labelFormatter: function () {
+                                            var val = this.y;
+                                            if (val.toFixed(0) < 1) {
+                                                val = (val * 1000).toFixed(2) + ' K'
+                                            } else {
+                                                val = val.toFixed(2) + ' USD Mil'
+                                            }
+
+                                            return '<div style="width:200px"><span style="float:left;  font-size:9px">' + this.name.trim() + ': ' + this.percentage.toFixed(2) + '% (' + val + ')</span></div>';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    filterFor: {
+                        "filter_top_10_channels_sum": ['purposecode', 'year', 'oda']
+                    },
+
+                    postProcess: [
+                        {
+                            "name": "union",
+                            "sid": [
+                                {
+                                    "uid": "top_10_channels_sum"
+                                },
+                                {
+                                    "uid":"others"
+                                }
+                            ],
+                            "parameters": {
+                            },
+                            "rid":{"uid":"union_process"}
+                        },
+
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_usd_aggregated_table"
+                                }
+                            ],
+                            "parameters": {
+                                "columns": [
+                                    "channelsubcategory_code",
+                                    "value",
+                                    "unitcode"
+                                ],
+                                "rows": {
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "fao_sector": {
+                                        "enumeration": [
+                                            "1"
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": 2000,
+                                                "to": 2014
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "rid":{"uid":"filter_top_10_channels_sum"}
+                        },
+                        {
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "channelsubcategory_code"
+                                ],
+                                "aggregations": [
+                                    {
+                                        "columns": [
+                                            "value"
+                                        ],
+                                        "rule": "SUM"
+                                    },
+                                    {
+                                        "columns": [
+                                            "unitcode"
+                                        ],
+                                        "rule": "first"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "order",
+                            "parameters": {
+                                "value": "DESC"
+                            },
+                            "rid":{"uid":"filtered_dataset"}
+                        },
+                        {
+                            "name": "page",
+                            "parameters": {
+                                "perPage": 10,
+                                "page": 1
+                            }
+                        },
+                        {
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "unitcode"
+                                ],
+                                "aggregations": [
+                                    {
+                                        "columns": [
+                                            "value"
+                                        ],
+                                        "rule": "SUM"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator",
+                                    "title": {
+                                        "EN": "Indicator"
+                                    },
+                                    "domain": {
+                                        "codes": [
+                                            {
+                                                "extendedName": {
+                                                    "EN": "Adam Processes"
+                                                },
+                                                "idCodeList": "adam_processes"
+                                            }
+                                        ]
+                                    },
+                                    "subject": null
+                                },
+                                "value": "Top Channels of Delivery"
+                            },
+                            "rid": {
+                                "uid": "top_10_channels_sum"
+                            }
+                        },
+                        {
+                            "name": "group",
+                            "sid":[{"uid":"filtered_dataset"}],
+                            "parameters": {
+                                "by": [
+                                    "unitcode"
+                                ],
+                                "aggregations": [
+                                    {
+                                        "columns": [
+                                            "value"
+                                        ],
+                                        "rule": "SUM"
+                                    }
+
+                                ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator",
+                                    "title": {
+                                        "EN": "Indicator"
+                                    },
+                                    "domain": {
+                                        "codes": [
+                                            {
+                                                "extendedName": {
+                                                    "EN": "Adam Processes"
+                                                },
+                                                "idCodeList": "adam_processes"
+                                            }
+                                        ]
+                                    },
+                                    "subject": null
+                                },
+                                "value": "sum of all channels"
+                            },
+                            "rid": {
+                                "uid": "top_all_channels_sum"
+                            }
+                        },
+                        {
+                            "name": "join",
+                            "sid": [
+                                {
+                                    "uid": "top_all_channels_sum"
+                                },
+                                {
+                                    "uid": "top_10_channels_sum"
+                                }
+                            ],
+                            "parameters": {
+                                "joins": [
+                                    [
+
+                                        {
+                                            "type": "id",
+                                            "value": "unitcode"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "type": "id",
+                                            "value": "unitcode"
+                                        }
+
+                                    ]
+                                ],
+                                "values": [
+                                ]
+                            },
+                            "rid":{"uid":"join_process_total_channels"}
+                        },
+                        {
+                            "name": "addcolumn",
+                            "sid":[{"uid":"join_process_total_channels"}],
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "value",
+                                    "title": {
+                                        "EN": "Value"
+                                    },
+                                    "subject": null
+                                },
+                                "value": {
+                                    "keys":  ["1 = 1"],
+                                    "values":["top_all_channels_sum_value - top_10_channels_sum_value"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "filter",
+                            "parameters": {
+                                "columns": [
+                                    "value",
+                                    "unitcode"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator",
+                                    "title": {
+                                        "EN": "Indicator"
+                                    },
+                                    "domain": {
+                                        "codes": [
+                                            {
+                                                "extendedName": {
+                                                    "EN": "Adam Processes"
+                                                },
+                                                "idCodeList": "adam_processes"
+                                            }
+                                        ]
+                                    },
+                                    "subject": null
+                                },
+                                "value": "Other Channels of Delivery"
+                            },
+                            "rid": {
+                                "uid": "others"
+                            }
+                        }
+                    ]
                 },
                 {
                     id: 'top-subsectors', // TOP SUB SECTORS
@@ -2318,7 +2842,7 @@ define(function () {
                     config: {
                         type: "pieold",
                         x: ["purposecode_EN"], //x axis and series
-                        series: ["flowcategory_code_EN"], // series
+                        series: ["flowcategory_EN"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
@@ -2328,8 +2852,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -2392,7 +2916,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -2410,9 +2934,15 @@ define(function () {
                                             }
                                         ]
                                     },
-                                    "oda":{
-                                        "enumeration":[
-                                            "usd_commitment"
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     }
                                 }
@@ -2440,7 +2970,7 @@ define(function () {
                                     },
                                     {
                                         "columns": [
-                                            "flowcategory_code"
+                                            "flowcategory"
                                         ],
                                         "rule": "first"
                                     }
@@ -2470,7 +3000,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["unitcode"], //x axis
-                        series: ["un_continent_code"], // series
+                        series: ["fao_region"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
@@ -2544,71 +3074,53 @@ define(function () {
                             }
                         }
                     },
-                    filterFor: ['purposecode', 'year', 'oda'],
 
-                    filter: { //FX-filter format
-                        purposecode: ["12240",
-                            "14030",
-                            "14031",
-                            "15170",
-                            "16062",
-                            "23070",
-                            "31110",
-                            "31120",
-                            "31130",
-                            "31140",
-                            "31150",
-                            "31161",
-                            "31162",
-                            "31163",
-                            "31164",
-                            "31165",
-                            "31166",
-                            "31181",
-                            "31182",
-                            "31191",
-                            "31192",
-                            "31193",
-                            "31194",
-                            "31195",
-                            "31210",
-                            "31220",
-                            "31261",
-                            "31281",
-                            "31282",
-                            "31291",
-                            "31310",
-                            "31320",
-                            "31381",
-                            "31382",
-                            "31391",
-                            "32161",
-                            "32162",
-                            "32163",
-                            "32165",
-                            "32267",
-                            "41010",
-                            "41020",
-                            "41030",
-                            "41040",
-                            "41050",
-                            "41081",
-                            "41082",
-                            "43040",
-                            "43050",
-                            "52010",
-                            "72040",
-                            "74010"
-                        ],
-                        year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
+                    filterFor: {
+                        "filter_regions": ['year', 'oda', 'purposecode']
                     },
-
                     postProcess: [
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_usd_aggregated_table"
+                                }
+                            ],
+                            "parameters": {
+                                "rows": {
+                                    "fao_sector": {
+                                        "enumeration": [
+                                            "1"
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": "2000",
+                                                "to": "2014"
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "rid":{"uid":"filter_regions"}
+                        },
                         {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "unitcode", "un_continent_code"
+                                    "unitcode", "fao_region"
                                 ],
                                 "aggregations": [
                                     {
@@ -2625,7 +3137,7 @@ define(function () {
                         {
                             "name": "select",
                             "parameters": {
-                                "query": "WHERE un_continent_code<>?",
+                                "query": "WHERE fao_region<>?",
                                 "queryParameters": [{"value": ''}]
                             }
                         },
@@ -2635,6 +3147,7 @@ define(function () {
                                 "value": "DESC"
                             }
                         }
+
                     ]
                 },
                 {
@@ -2672,72 +3185,14 @@ define(function () {
                         }
                     },
 
-                    //filterFor: ['un_region_code', 'purposecode', 'year', 'oda'],
+                    filterFor: { "filter_map": ['parentsector_code', 'purposecode', 'year', 'oda']},
 
-                    filterFor: { "filter_region": ['parentsector_code', 'purposecode', 'year', 'oda']},
-
-                    /**   filter: { //FX-filter format
-                        purposecode: ["12240",
-                            "14030",
-                            "14031",
-                            "15170",
-                            "16062",
-                            "23070",
-                            "31110",
-                            "31120",
-                            "31130",
-                            "31140",
-                            "31150",
-                            "31161",
-                            "31162",
-                            "31163",
-                            "31164",
-                            "31165",
-                            "31166",
-                            "31181",
-                            "31182",
-                            "31191",
-                            "31192",
-                            "31193",
-                            "31194",
-                            "31195",
-                            "31210",
-                            "31220",
-                            "31261",
-                            "31281",
-                            "31282",
-                            "31291",
-                            "31310",
-                            "31320",
-                            "31381",
-                            "31382",
-                            "31391",
-                            "32161",
-                            "32162",
-                            "32163",
-                            "32165",
-                            "32267",
-                            "41010",
-                            "41020",
-                            "41030",
-                            "41040",
-                            "41050",
-                            "41081",
-                            "41082",
-                            "43040",
-                            "43050",
-                            "52010",
-                            "72040",
-                            "74010"
-                        ],
-                        year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
-                    },**/
                     postProcess: [
                         {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_commitment"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -2753,66 +3208,9 @@ define(function () {
                                             }
                                         ]
                                     },
-                                    "purposecode": { // FAO Related purposecodes
-                                        "codes": [
-                                            {
-                                                "uid": "crs_purposes",
-                                                "version": "2016",
-                                                "codes": [
-                                                    "12240",
-                                                    "14030",
-                                                    "14031",
-                                                    "15170",
-                                                    "16062",
-                                                    "23070",
-                                                    "31110",
-                                                    "31120",
-                                                    "31130",
-                                                    "31140",
-                                                    "31150",
-                                                    "31161",
-                                                    "31162",
-                                                    "31163",
-                                                    "31164",
-                                                    "31165",
-                                                    "31166",
-                                                    "31181",
-                                                    "31182",
-                                                    "31191",
-                                                    "31192",
-                                                    "31193",
-                                                    "31194",
-                                                    "31195",
-                                                    "31210",
-                                                    "31220",
-                                                    "31261",
-                                                    "31281",
-                                                    "31282",
-                                                    "31291",
-                                                    "31310",
-                                                    "31320",
-                                                    "31381",
-                                                    "31382",
-                                                    "31391",
-                                                    "32161",
-                                                    "32162",
-                                                    "32163",
-                                                    "32165",
-                                                    "32267",
-                                                    "41010",
-                                                    "41020",
-                                                    "41030",
-                                                    "41040",
-                                                    "41050",
-                                                    "41081",
-                                                    "41082",
-                                                    "43040",
-                                                    "43050",
-                                                    "52010",
-                                                    "72040",
-                                                    "74010"
-                                                ]
-                                            }
+                                    "fao_sector": {
+                                        "enumeration": [
+                                            "1"
                                         ]
                                     },
                                     "year": {
@@ -2825,7 +3223,7 @@ define(function () {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_region"}
+                            "rid":{"uid":"filter_map"}
                         },
                         {
                             "name": "group",
@@ -2848,14 +3246,7 @@ define(function () {
                                     }
                                 ]
                             }
-                        }/*,
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE gaul0<>?",
-                                "queryParameters": [{"value": "NA"}]
-                            }
-                        }*/
+                        }
                     ]
                 }
             ]
