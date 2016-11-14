@@ -3625,7 +3625,7 @@ define(function () {
                         }
                     ]
                 },
-          /*   {
+                {
                     id: 'regional-map',
                     type: 'map',
                     config: {
@@ -3751,7 +3751,7 @@ define(function () {
                             }
                         }
                     ]
-                }*/
+                }
             ]
         }
     }
