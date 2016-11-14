@@ -1,6 +1,6 @@
 /*global define*/
 
-define(function () {
+define(['highcharts'],function (Highcharts) {
 
     'use strict';
 
@@ -132,10 +132,10 @@ define(function () {
         },
         dashboard: {
             //default dataset id
-            uid: "adam_usd_commitment",
+            uid: "adam_usd_aggregated_table",
 
             items: [
-            {
+              {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -147,6 +147,72 @@ define(function () {
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
 
                         config: {
+                            chart: {
+                                events: {
+                                    load: function(event) {
+                                        var _that = this;
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '7px'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+                                            $.each(this.yAxis, function (i, y) {
+                                                y.update({
+                                                    title: {
+                                                        style: {
+                                                            fontSize: '8px'
+                                                        }
+                                                    },
+                                                    labels: {
+                                                        style: {
+                                                            fontSize: '7px'
+                                                        }
+                                                    }
+                                                }, false);
+                                            });
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 2
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+                                            this.redraw();
+                                        }
+                                    }
+                                }
+                            },
                             xAxis: {
                                 type: 'datetime'
                             }
@@ -162,7 +228,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -173,8 +239,14 @@ define(function () {
                                 ],
                                 "rows": {
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -246,7 +318,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["recipientcode"], //x axis
-                        series: ["flowcategory_code"], // series
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
@@ -281,14 +353,14 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
                                 "columns": [
                                     "recipientcode",
                                     "value",
-                                    "flowcategory_code"
+                                    "flowcategory"
                                 ],
                                 "rows": {
                                     "!recipientcode": {
@@ -303,8 +375,14 @@ define(function () {
                                         ]
                                     },
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -323,7 +401,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "recipientcode", "flowcategory_code"
+                                    "recipientcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -334,25 +412,13 @@ define(function () {
                                     },
                                     {
                                         "columns": [
-                                            "flowcategory_code"
+                                            "flowcategory"
                                         ],
                                         "rule": "first"
                                     }
                                 ]
                             }
                         },
-                       /* {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE recipientcode NOT IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
-                                "queryParameters": [
-                                    {"value": '298'}, {"value": '498'}, {"value": '798'}, {"value": '89'},
-                                    {"value": '589'}, {"value": '889'}, {"value": '189'}, {"value": '289'},
-                                    {"value": '389'}, {"value": '380'}, {"value": '489'}, {"value": '789'},
-                                    {"value": '689'}, {"value": '619'}, {"value": '679'}, {"value": 'NA'}
-                                ]
-                            }
-                        },*/
                         {
                             "name": "order",
                             "parameters": {
@@ -399,7 +465,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["donorcode"], //x axis
-                        series: ["flowcategory_code"], // series
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
@@ -434,14 +500,14 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
                                 "columns": [
                                     "donorcode",
                                     "value",
-                                    "flowcategory_code"
+                                    "flowcategory"
                                 ],
                                 "rows": {
                                     "!donorcode": {
@@ -456,8 +522,14 @@ define(function () {
                                         ]
                                     },
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -476,7 +548,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "donorcode", "flowcategory_code"
+                                    "donorcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -490,19 +562,16 @@ define(function () {
                                             "unitcode"
                                         ],
                                         "rule": "first"
+                                    },
+                                    {
+                                        "columns": [
+                                            "flowcategory"
+                                        ],
+                                        "rule": "first"
                                     }
                                 ]
                             }
                         },
-                       /* {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE donorcode NOT IN (?)", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
-                                "queryParameters": [
-                                    {"value": 'NA'}
-                                ]
-                            }
-                        },*/
                         {
                             "name": "order",
                             "parameters": {
@@ -544,15 +613,15 @@ define(function () {
                     ]
                 },
                 {
-                    id: 'top-channels', // TOP CHANNEL OF DELIVERY CATEGORIES
+                    id: 'top-channels-all-sectors', // TOP CHANNEL OF DELIVERY CATEGORIES
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["channelsubcategory_name"], //x axis
-                        series: ["flowcategory_name"], // series
+                        x: ["channelsubcategory_code"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
 
                         config: {
                             colors: ['#56adc3'],
@@ -585,7 +654,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code", "channelsubcategory_name"
+                                    "channelsubcategory_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -597,7 +666,7 @@ define(function () {
                                         "rule": "first"
                                     },
                                     {
-                                        "columns": ["flowcategory_name"],
+                                        "columns": ["flowcategory"],
                                         "rule": "first"
                                     }
                                 ]
@@ -623,7 +692,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["parentsector_code"], //x axis
-                        series: ["flowcategory_code"], // series
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
@@ -658,14 +727,14 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
                                 "columns": [
                                     "parentsector_code",
                                     "value",
-                                    "flowcategory_code"
+                                    "flowcategory"
                                 ],
                                 "rows": {
                                     "!parentsector_code": {
@@ -680,8 +749,14 @@ define(function () {
                                         ]
                                     },
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -700,7 +775,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "parentsector_code", "flowcategory_code"
+                                    "parentsector_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -711,22 +786,19 @@ define(function () {
                                     },
                                     {
                                         "columns": [
-                                            "flowcategory_code"
+                                            "unitcode"
+                                        ],
+                                        "rule": "first"
+                                    },
+                                    {
+                                        "columns": [
+                                            "flowcategory"
                                         ],
                                         "rule": "first"
                                     }
                                 ]
                             }
                         },
-                       /* {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE parentsector_code NOT IN (?)", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
-                                "queryParameters": [
-                                    {"value": 'NA'}
-                                ]
-                            }
-                        },*/
                         {
                             "name": "order",
                             "parameters": {
@@ -773,7 +845,7 @@ define(function () {
                     config: {
                         type: "pieold",
                         x: ["purposecode"], //x axis and series
-                        series: ["flowcategory_code"], // series
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
@@ -783,8 +855,8 @@ define(function () {
                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
-                                            Highcharts.each(this.series, function (series) {
-                                                series.update({
+                                            $.each(this.series, function (i, serie) {
+                                                serie.update({
                                                     dataLabels: {
                                                         enabled: false
                                                     }
@@ -847,14 +919,14 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregation_table"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
                                 "columns": [
                                     "purposecode",
                                     "value",
-                                    "flowcategory_code"
+                                    "flowcategory"
                                 ],
                                 "rows": {
                                     "!purposecode": {
@@ -869,8 +941,14 @@ define(function () {
                                         ]
                                     },
                                     "oda": {
-                                        "enumeration": [
-                                            "usd_commitment"
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -889,7 +967,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "purposecode", "flowcategory_code"
+                                    "purposecode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -900,22 +978,13 @@ define(function () {
                                     },
                                     {
                                         "columns": [
-                                            "flowcategory_code"
+                                            "flowcategory"
                                         ],
                                         "rule": "first"
                                     }
                                 ]
                             }
                         },
-                       /* {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE purposecode NOT IN (?)", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
-                                "queryParameters": [
-                                    {"value": 'NA'}
-                                ]
-                            }
-                        },*/
                         {
                             "name": "order",
                             "parameters": {
@@ -962,7 +1031,7 @@ define(function () {
                     config: {
                         type: "column",
                         x: ["unitcode"], //x axis
-                        series: ["un_continent_code"], // series
+                        series: ["fao_region"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
@@ -1037,18 +1106,48 @@ define(function () {
                         }
                     },
 
-                    filterFor: ['year', 'oda'],
-
-                    filter: { //FX-filter format
-                        year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
+                    filterFor: {
+                        "filter_regions": ['year', 'oda']
                     },
 
                     postProcess: [
                         {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_usd_aggregated_table"
+                                }
+                            ],
+                            "parameters": {
+                                "rows": {
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": "2000",
+                                                "to": "2014"
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "rid":{"uid":"filter_regions"}
+                        },
+                        {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "unitcode", "un_continent_code"
+                                    "unitcode", "fao_region"
                                 ],
                                 "aggregations": [
                                     {
@@ -1065,7 +1164,7 @@ define(function () {
                         {
                             "name": "select",
                             "parameters": {
-                                "query": "WHERE un_continent_code<>?",
+                                "query": "WHERE fao_region<>?",
                                 "queryParameters": [{"value": ''}]
                             }
                         },
@@ -1112,19 +1211,16 @@ define(function () {
                         }
                     },
 
-                   // filterFor: ['year', 'oda'],
 
-                    filterFor: { "filter_region": ['year', 'oda']},
+                    filterFor: { "filter_map": ['year', 'oda']},
 
-                   /* filter: { //FX-filter format
-                        year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
-                    },*/
+
                     postProcess: [
                         {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_commitment"
+                                    "uid": "adam_usd_aggregated_table"
                                 }
                             ],
                             "parameters": {
@@ -1140,6 +1236,17 @@ define(function () {
                                             }
                                         ]
                                     },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -1150,7 +1257,7 @@ define(function () {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_region"}
+                            "rid":{"uid":"filter_map"}
                         },
                         {
                             "name": "group",
@@ -1173,15 +1280,9 @@ define(function () {
                                     }
                                 ]
                             }
-                        }/*,
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE gaul0<>?",
-                                "queryParameters": [{"value": "NA"}]
-                            }
-                        }*/
+                        }
                     ]
+
                 }
             ]
         }

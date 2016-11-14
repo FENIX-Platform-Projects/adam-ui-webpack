@@ -3080,7 +3080,7 @@ define(function () {
                         }
                     ]
                 },
-                    {
+                {
                     id: 'top-sectors-others', // TOP SECTORS Vs OTHER SECTORS
                     type: 'chart',
                     config: {

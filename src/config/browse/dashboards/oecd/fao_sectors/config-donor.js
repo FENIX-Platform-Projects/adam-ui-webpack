@@ -4711,6 +4711,17 @@ define(['highcharts'],function (Highcharts) {
                                             }
                                         ]
                                     },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"

@@ -23,7 +23,7 @@ define(['highcharts'],function (Highcharts) {
                         // mode: 'multi'
                     }
                 },
-                className: "col-md-3",
+                className: "col-sm-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -3229,6 +3229,17 @@ define(['highcharts'],function (Highcharts) {
                                                 "version": "2016",
                                                 "codes": [
                                                     "600"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
                                                 ]
                                             }
                                         ]

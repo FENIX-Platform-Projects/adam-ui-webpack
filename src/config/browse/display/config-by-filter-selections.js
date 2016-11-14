@@ -9,32 +9,32 @@ define(function () {
             purposecode: [
                 {
                     layout: "default",
-                    hide: ['tot-oda', 'top-sectors', 'top-subsectors', 'tot-oda-sector', 'top-recipients-all-sectors', 'top-partners-all-sectors'],
-                    show: ['tot-oda-subsector', 'top-recipients', 'top-partners', 'top-partners-others', 'top-recipients-others']
+                    hide: ['tot-oda', 'top-sectors', 'top-subsectors', 'tot-oda-sector', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors'],
+                    show: ['tot-oda-subsector', 'top-recipients', 'top-partners', 'top-partners-others', 'top-recipients-others', 'top-channels-others']
                 },
                 {
                     value: "all",
-                    hide: ['tot-oda', 'top-sectors', 'tot-oda-subsector', 'top-recipients-all-sectors', 'top-partners-all-sectors'],
-                    show: ['top-subsectors', 'tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners']
+                    hide: ['tot-oda', 'top-sectors', 'tot-oda-subsector', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors'],
+                    show: ['top-subsectors', 'tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners', 'top-channels']
                 }
             ],
             parentsector_code: [
                 {
                     layout: "default",
-                    hide: ['top-sectors', 'top-sectors-others', 'tot-oda-subsector', 'tot-oda', 'top-recipients-all-sectors', 'top-partners-all-sectors'],
-                    show: ['top-subsectors', 'tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners']
+                    hide: ['top-sectors', 'top-sectors-others', 'tot-oda-subsector', 'tot-oda', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors'],
+                    show: ['top-subsectors', 'tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners', 'top-channels']
                 },
                 {
                     value: "all",
                     config: { path: "config-all-sectors"},
-                    hide: ['tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners'],
-                    show: ['tot-oda', 'top-sectors', 'top-recipients-all-sectors', 'top-partners-all-sectors']
+                    hide: ['tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-channels-others', 'top-recipients', 'top-partners', 'top-channels'],
+                    show: ['tot-oda', 'top-sectors', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors']
                 },
                 {
                     value: "9999",
                     config: { path: "fao_sectors/config-sector"},
-                    hide: ['top-sectors', 'top-sectors-others', 'tot-oda-subsector', 'tot-oda', 'top-recipients-all-sectors', 'top-partners-all-sectors'],
-                    show: ['top-subsectors', 'tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners']
+                    hide: ['top-sectors', 'top-sectors-others', 'tot-oda-subsector', 'tot-oda', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors'],
+                    show: ['top-subsectors', 'tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-recipients', 'top-partners', 'top-channels']
 
                 }
             ]
