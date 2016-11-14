@@ -2090,11 +2090,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["channelsubcategory_code_EN"], //x axis
-                        series: ["flowcategory_EN"], // series
+                        x: ["channelsubcategory_code"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             colors: ['#008080'],
                             legend: {
@@ -2634,11 +2634,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["parentsector_code_EN"], //x axis
-                        series: ["flowcategory_EN"], // series
+                        x: ["parentsector_code"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             colors: ['#5DA58D'],
                             legend: {
@@ -3178,11 +3178,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "pieold",
-                        x: ["purposecode_EN"], //x axis and series
-                        series: ["flowcategory_EN"], // series
+                        x: ["purposecode"], //x axis and series
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             chart: {
                                 events: {
