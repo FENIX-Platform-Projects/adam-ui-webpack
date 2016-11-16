@@ -228,7 +228,7 @@ define(function () {
             uid: "adam_usd_aggregated_table",
 
             items: [
-              {
+                {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -1426,7 +1426,7 @@ define(function () {
 
                     },
                     filterFor: {
-                         "filter_donor": ['fao_region', 'recipientcode', 'parentsector_code', 'purposecode', 'year', 'oda']
+                        "filter_donor": ['fao_region', 'recipientcode', 'parentsector_code', 'purposecode', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -3654,16 +3654,16 @@ define(function () {
                                 }
                             },
                             labels: true,
-                            boundaries: true,
+                            boundaries: true//,
 
-                            zoomToCountry: [1]
+                           // zoomToCountry: [1] // Issue when no country selected
 
                             //highlight service NOT WORK FOR NOW
                             //highlightCountry : [1], // GAUL Afghanistan
                         }
                     },
 
-                    filterFor: { "filter_region": ['parentsector_code', 'purposecode', 'year', 'oda']},
+                    filterFor: { "filter_region": ['fao_region', 'parentsector_code', 'purposecode', 'year', 'oda']},
 
                     postProcess: [
                         {

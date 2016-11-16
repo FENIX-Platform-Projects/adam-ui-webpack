@@ -18,7 +18,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                       // openOnFocus: false
+                        // openOnFocus: false
                     }
                 },
                 className: "col-sm-5",
@@ -44,7 +44,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                       // openOnFocus: false
+                        // openOnFocus: false
                     }
                 },
                 className: "col-sm-3",
@@ -107,7 +107,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                       // openOnFocus: false
+                        // openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
                         // mode: 'multi'
@@ -136,7 +136,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1,
-                      //  openOnFocus: false
+                        //  openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
                         // mode: 'multi'
@@ -218,7 +218,7 @@ define(function () {
                     default: [2000],
                     config: { //Selectize configuration
                         maxItems: 1,
-                      //  openOnFocus: false
+                        //  openOnFocus: false
                     }
                 },
                 className: "col-sm-2",
@@ -239,7 +239,7 @@ define(function () {
                     default: [2014],
                     config: {
                         maxItems: 1,
-                      //  openOnFocus: false
+                        //  openOnFocus: false
                     }
                 },
                 className: "col-sm-2",
@@ -285,7 +285,7 @@ define(function () {
             uid: "adam_usd_aggregated_table",
 
             items: [
-            {
+                {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -370,7 +370,7 @@ define(function () {
                     },
 
                     filterFor: {
-                         "filter_total_ODA": ['fao_region', 'recipientcode', 'year', 'oda']
+                        "filter_total_ODA": ['fao_region', 'recipientcode', 'year', 'oda']
                     },
 
                     postProcess: [
@@ -473,7 +473,7 @@ define(function () {
                         }
                     ]
                 },
-             {
+                {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -946,7 +946,7 @@ define(function () {
                         } // (3vi) PERCENTAGE CALCULATION: Add Column
                     ]
                 },
-              {
+                {
                     id: "tot-oda-subsector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -3171,7 +3171,7 @@ define(function () {
                         }
                     },
                     filterFor: {
-                         "filter_top_10_sectors_sum": ['fao_region', 'recipientcode', 'year', 'oda'],
+                        "filter_top_10_sectors_sum": ['fao_region', 'recipientcode', 'year', 'oda'],
                         "filter_top_all_sectors_sum": ['fao_region', 'recipientcode', 'year', 'oda']
                     },
 
@@ -3657,16 +3657,16 @@ define(function () {
                                 }
                             },
                             labels: true,
-                            boundaries: true,
+                            boundaries: true//,
 
-                            zoomToCountry: [1]
+                           // zoomToCountry: [1] // Issue when no country selected
 
                             //highlight service NOT WORK FOR NOW
                             //highlightCountry : [1], // GAUL Afghanistan
                         }
                     },
 
-                    filterFor: { "filter_region": ['purposecode', 'year', 'oda']},
+                    filterFor: { "filter_region": ['fao_region', 'purposecode', 'year', 'oda']},
 
                     postProcess: [
                         {
@@ -3705,7 +3705,7 @@ define(function () {
                                             "1"
                                         ]
                                     },
-                                   "fao_region": {
+                                    "fao_region": {
                                         "codes": [
                                             {
                                                 "uid": "crs_fao_regions",
