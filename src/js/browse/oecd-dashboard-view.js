@@ -13,9 +13,10 @@ define([
     'nls/chart',
     'config/submodules/fenix-ui-chart-creator/highcharts_template',
     'common/progress-bar',
+    'common/data-exporter',
     'amplify-pubsub',
     'handlebars'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, amplify, Handlebars) {
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, amplify, Handlebars) {
 
     'use strict';
 
@@ -104,8 +105,13 @@ define([
 
     DashboardView.prototype._init = function () {
         this._bindEventListeners();
+
         this.template = template;
         this.modelUpdated = false;
+        this.models = {};
+
+
+
         //this.labels = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         //this.template = template(this.labels);
@@ -117,16 +123,28 @@ define([
            lang: this.lang
         });
 
+
+
     };
 
 
-    DashboardView.prototype._updateTemplate = function () {
+    DashboardView.prototype._onDownloadClick = function (event) {
+        var model = this.models[$(event.target).attr('data-model-id')];
 
-        console.log(" ===================== updateTemplate ================");
+         var dataExporter = new DataExporter({
+            lang: this.lang,
+            environmnet:  this.environment,
+            model: model
+        });
+
+        return dataExporter.downloadData();
+
+    };
+
+    DashboardView.prototype._updateTemplate = function () {
 
         var model = this.model.getProperties();
 
-        console.log(" ===================== updateTemplate: model ================ ", model);
        var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         return this.template(data);
@@ -163,9 +181,10 @@ define([
     };
 
     DashboardView.prototype.render = function () {
+        var self = this;
         this.modelUpdated = false; // reset the model to false
 
-        console.log("===== RENDER ========= ", this.displayConfigForSelectedFilter);
+
         // Update the language related labels in the item configurations (charts)
         for (var it in this.config.items) {
             var item = this.config.items[it];
@@ -175,9 +194,6 @@ define([
 
         var updatedTemplate = this._updateTemplate();
         this.source = $(updatedTemplate).find("[data-topic='" + this.topic + "']");
-
-        console.log("============ RENDER 1 =======", this.displayConfigForSelectedFilter);
-        console.log("============ RENDER 2 =======", this.source);
 
 
         // Hide/Show Dashboard Items
@@ -196,6 +212,12 @@ define([
 
 
         this.$el.html(this.source);
+
+        // initialize Download buttons
+        $.each(this.config.items, function( index, item ) {
+            var $download = self.$el.find('#'+item.id+'-download');
+            $download.on('click', _.bind(self._onDownloadClick, self));
+        });
     };
 
 
@@ -329,10 +351,13 @@ define([
                     map.filter.un_region_code.push(regioncode)
             }
 
+            // Commented out for now as an issue when when no country selected i.e. Country = All, the zoom remains
             if (map.config && map.config.fenix_ui_map) {
                 if (gaulcode) {
                     map.config.fenix_ui_map.zoomToCountry = [];
                     map.config.fenix_ui_map.zoomToCountry.push(gaulcode);
+                } else {
+                    map.config.fenix_ui_map.zoomToCountry = [];
                 }
             }
         }
@@ -395,7 +420,11 @@ define([
         });
 
 
-        this.dashboard.on('ready.item', function () {
+        this.dashboard.on('ready.item', function (item) {
+            self.models[item.id] = {};
+            self.models[item.id].data = item.model.data;
+            self.models[item.id].metadata = item.model.metadata;
+
             increment = increment + percent;
             self.progressBar.update(increment);
         });
