@@ -21,6 +21,7 @@ define(function () {
         "top-implementing-channels": "Top Implementing Channels",
         "oda-regional": "ODA Regional Distribution",
         "country-map": "Map on ODA received",
-        "regional-map": "Regional Map on ODA received"
+        "regional-map": "Regional Map on ODA received",
+        "download-data": "Download Data"
     }
 });
