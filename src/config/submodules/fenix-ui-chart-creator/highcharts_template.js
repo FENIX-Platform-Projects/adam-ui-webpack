@@ -206,7 +206,17 @@ define(['highcharts'], function (Highcharts) {
                         }
 
                     }
-                }//,
+                }/*,
+                exportDataButton: {
+                    text: "Export Data",
+                    // title: 'Hey',
+                    _titleKey: "toggleDataLabels",
+                    onclick: function (){
+
+                       console.log(this.renderTo.id);
+
+                    }
+                }//,*/
                // customPrintButton: {
                  //    text: "Print",
                     // symbol: "url(/demo/gfx/sun.png)",

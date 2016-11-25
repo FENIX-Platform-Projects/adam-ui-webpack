@@ -135,7 +135,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_usd_aggregated_table",
 
             items: [
-              {
+            /*  {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -369,7 +369,8 @@ define(['highcharts'],function (Highcharts) {
                                                 "uid": "crs_recipients", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
                                                 "version": "2016",
                                                 "codes": [
-                                                    "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679", "NA"
+                                                    "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679",
+                                                    "NA"
                                                 ]
                                             }
                                         ]
@@ -611,7 +612,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                },
+                },*/
                 {
                     id: 'top-channels-all-sectors', // TOP CHANNEL OF DELIVERY CATEGORIES
                     type: 'chart',
@@ -644,48 +645,123 @@ define(['highcharts'],function (Highcharts) {
 
                     },
 
-                    filterFor: ['year', 'oda'],
-
-                    filter: { //FX-filter format
-                        year: [{value: "2000", parent: 'from'}, {value: "2014", parent:  'to'}]
+                    filterFor: {
+                        "filter_top_10_channels_sum": ['year', 'oda']
                     },
+
                     postProcess: [
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_usd_aggregated_table"
+                                }
+                            ],
+                            "parameters": {
+                                "columns": [
+                                    "channelsubcategory_code",
+                                    "value",
+                                    "flowcategory"
+                                ],
+                                "rows": {
+                                    "!flowcategory": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_flow_types",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "NA"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_oda",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": 2000,
+                                                "to": 2014
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "rid":{"uid":"filter_top_10_channels_sum"}
+                        },
                         {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code", "flowcategory"
+                                    "channelsubcategory_code","flowcategory"
                                 ],
                                 "aggregations": [
                                     {
-                                        "columns": ["value"],
+                                        "columns": [
+                                            "value"
+                                        ],
                                         "rule": "SUM"
                                     },
                                     {
-                                        "columns": ["unitcode"],
-                                        "rule": "first"
-                                    },
-                                    {
-                                        "columns": ["flowcategory"],
-                                        "rule": "first"
+                                        "columns": [
+                                            "unitcode"
+                                        ],
+                                        "rule": "max"
                                     }
+
                                 ]
                             }
                         },
+
                         {
                             "name": "order",
                             "parameters": {
                                 "value": "DESC"
-                            }
+                            },
+                            "rid":{"uid":"filtered_dataset"}
                         },
                         {
                             "name": "page",
                             "parameters": {
-                                "perPage": 10,  //top 10
+                                "perPage": 10,
                                 "page": 1
                             }
-                        }]
-                },
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator",
+                                    "title": {
+                                        "EN": "Indicator"
+                                    },
+                                    "domain": {
+                                        "codes": [
+                                            {
+                                                "extendedName": {
+                                                    "EN": "Adam Processes"
+                                                },
+                                                "idCodeList": "adam_processes"
+                                            }
+                                        ]
+                                    },
+                                    "subject": null
+                                },
+                                "value": "ODA"
+                            }
+                        }
+                    ]
+                }/*,
                 {
                     id: "top-sectors", //ref [data-item=':id']
                     type: 'chart',
@@ -1283,7 +1359,7 @@ define(['highcharts'],function (Highcharts) {
                         }
                     ]
 
-                }
+                }*/
             ]
         }
     }

@@ -189,7 +189,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_usd_aggregated_table",
 
             items: [
-                {
+           /*     {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -2141,7 +2141,7 @@ define(['highcharts'],function (Highcharts) {
                                 ]
                             }
                         },
-                       /** {
+                       /!** {
                             "name": "select",
                             "parameters": {
                                 "query": "WHERE recipientcode NOT IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
@@ -2152,7 +2152,7 @@ define(['highcharts'],function (Highcharts) {
                                     {"value": '689'}, {"value": '619'}, {"value": '679'}
                                 ]
                             }
-                        },**/
+                        },**!/
                         {
                             "name": "order",
                             "parameters": {
@@ -2993,13 +2993,13 @@ define(['highcharts'],function (Highcharts) {
 
                     ]
 
-                },
+                },*/
                 {
                     id: 'oda-regional', // REGIONAL DISTRIBUTION
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["unitcode"], //x axis
+                        x: ["indicator"], //x axis
                         series: ["fao_region"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
@@ -3117,10 +3117,39 @@ define(['highcharts'],function (Highcharts) {
                             "rid":{"uid":"filter_regions"}
                         },
                         {
+                            "name": "select",
+                            "parameters": {
+                                "query": "WHERE fao_region IS NOT NULL",
+                                "queryParameters": []
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "code",
+                                    "id": "indicator",
+                                    "title": {
+                                        "EN": "Indicator"
+                                    },
+                                    "domain": {
+                                        "codes": [
+                                            {
+                                                "idCodeList": "crs_dac",
+                                                "version": "2016"
+                                            }
+                                        ]
+                                    },
+                                    "subject": null
+                                },
+                                "value": "9999" // PART 1 FINAL INDICATOR NAME
+                            }
+                        },
+                        {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "unitcode", "fao_region"
+                                    "indicator", "fao_region"
                                 ],
                                 "aggregations": [
                                     {
@@ -3129,18 +3158,12 @@ define(['highcharts'],function (Highcharts) {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
                         },
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE fao_region<>?",
-                                "queryParameters": [{"value": ''}]
-                            }
-                        },
+
                         {
                             "name": "order",
                             "parameters": {

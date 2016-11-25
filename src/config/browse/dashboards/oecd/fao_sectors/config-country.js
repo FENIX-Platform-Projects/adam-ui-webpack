@@ -21,12 +21,21 @@ define(function () {
                         // openOnFocus: false
                     }
                 },
-                className: "col-sm-5",
+                classNames: "col-sm-5",
                 cl: {
                     uid: "crs_fao_regions",
                     version: "2016",
                     level: 1,
                     levels: 1
+                },
+                id: "parent",
+                event: "select",
+                args: {
+                    body: {
+                        level: 3,
+                        levels: 3
+                    },
+                    exclude: ["all"]
                 },
                 template: {
                     hideSwitch: true,
@@ -47,7 +56,7 @@ define(function () {
                         // openOnFocus: false
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     "uid": "crs_fao_regions",
                     "version": "2016",
@@ -113,7 +122,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -142,7 +151,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     "codes": [
                         "12240",
@@ -221,7 +230,7 @@ define(function () {
                         //  openOnFocus: false
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -242,7 +251,7 @@ define(function () {
                         //  openOnFocus: false
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -265,7 +274,7 @@ define(function () {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
@@ -285,7 +294,7 @@ define(function () {
             uid: "adam_usd_aggregated_table",
 
             items: [
-                {
+               {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -914,7 +923,7 @@ define(function () {
                                     "dataType": "code",
                                     "subject": "um"
                                 },
-                                "value": "% SECTOR/TOTAL"
+                                "value": "percentage"
                             }
                         }, // (3iv) PERCENTAGE CALCULATION: Add Column (Measurement Unit Code)
                         {
