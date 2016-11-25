@@ -21,7 +21,7 @@ define([
     'amplify-pubsub',
     'bootstrap'
 ], function (log, $, _, template, i18nLabels, Events, GeneralConfig, Errors, BaseBrowseEvents, BrowseIndicatorsConfig, DisplayConfigByFilterSelections, BaseBrowseConfig,
-             TitleSubView, FilterSubView, OECDDashboardSubView, DashboardIndicatorsSubView, OecdModel, IndicatorsModel, amplify) {
+             TitleSubView, FilterSubView, OECDDashboardSubView, DashboardIndicatorsSubView, OecdModel, IndicatorsModel, amplify, bootstrap) {
 
     'use strict';
 
@@ -58,8 +58,8 @@ define([
      */
 
     function BrowseByView(o) {
-        log.info("BrowseByView");
-        log.info(o);
+       // log.info("BrowseByView");
+      //  log.info(o);
 
         $.extend(true, this, o);
 
@@ -295,6 +295,7 @@ define([
 
          var selectedFilterItems = payload.labels, displayConfigForFilter, dashboardConfPath;
 
+
         // Set Dashboard 1 (ODA) Properties
         if (payload["props"]) {
             this.subviews['oecdDashboard'].setProperties(payload["props"]);
@@ -309,6 +310,9 @@ define([
 
 
         var allFilterValues =  this.subviews['filters'].getFilterValues();
+
+        console.log(" =================== filters LOADED =============== allFilterValues ", allFilterValues);
+
 
         for (var idx in allFilterValues.values){
 
@@ -371,7 +375,6 @@ define([
     */
     BrowseByView.prototype._filtersChanged = function (changedFilter) {
 
-
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
         this._updateView(changedFilter, allFilterValues);
@@ -389,19 +392,20 @@ define([
 
           var filterValues = allFilterValues;
 
-        // console.log("================= _updateView values =============== ");
-       //  console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
+         console.log("================= _updateView values =============== ");
+        console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
 
         if (changedFilterItems) {
 
             if($.isArray(changedFilterItems)){
 
-                this._setItemTitle(changedFilterItems);
+                this._setItemTitle(changedFilterItems, filterValues.labels);
+
 
                 for(var idx in changedFilterItems){
                     var changedFilter = changedFilterItems[idx];
 
-                    if (changedFilter.values.values.length > 0) {
+                    if (changedFilter.values.length > 0) {
                          if (changedFilter.primary) {
                             this._processSelection(changedFilter, filterValues);
                         }
@@ -411,18 +415,28 @@ define([
         }
     };
 
-    BrowseByView.prototype._setItemTitle = function (changedFilterItems){
+    BrowseByView.prototype._setItemTitle = function (changedFilterItems, labels){
         for(var idx in changedFilterItems){
             var changedFilter = changedFilterItems[idx];
 
-            if (changedFilter.values.values.length > 0) {
+            if (changedFilter.values.length > 0) {
                 // All is selected
-                if (changedFilter.values.values[0] === s.values.ALL) {
+
+                var val = changedFilter.values[0],
+                    label = labels[changedFilter.id][val];
+
+                if(changedFilter.id === GeneralConfig.SELECTORS.YEAR){
+                    label = labels[changedFilter.id]["range"];
+                }
+
+                if (val === s.values.ALL) {
                     // Update the TitleView (Remove Item)
                     amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
                 } else {
                     // Update the TitleView (Add Item)
-                    amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter));
+                    console.log("::::: _updateView:::: =============== _setItemTitle ============ "+changedFilter.id, labels);
+
+                    amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter.id, label));
                 }
             }
         }
@@ -434,14 +448,18 @@ define([
     * @private
     */
 
-    BrowseByView.prototype._createTitleItem = function (filterItem) {
+    BrowseByView.prototype._createTitleItem = function (filterItemId, filterItemLabel) {
 
-        var titleItem = {}, labels = filterItem.values.labels;
+        var titleItem = {};//, //labels = filterItem.labels;
 
-        titleItem.id = filterItem.id;
+        //console.log("=================  _createTitleItem 1 =============== ", filterItemId, filterItemLabel);
 
-        var key = Object.keys(labels)[0];
-        titleItem.label = labels[key];
+        titleItem.id = filterItemId;
+
+       // var key = Object.keys(labels)[0];
+        titleItem.label = filterItemLabel;
+
+       // console.log("================= _createTitleItem 2 =============== ", titleItem);
 
 
         return titleItem;
@@ -463,7 +481,7 @@ define([
         if (this.filterSelectionsTypeDisplayConfig) {
 
             // All is selected
-            if (changedFilter.values.values[0] === s.values.ALL) {
+            if (changedFilter.values[0] === s.values.ALL) {
 
                 if(changedFilter.dependencies) {
                     // get the display configuration for the dependency
@@ -476,7 +494,7 @@ define([
 
             if(displayConfig) {
 
-                var item = this._checkConfigForValue(displayConfig, changedFilter.values.values[0]);
+                var item = this._checkConfigForValue(displayConfig, changedFilter.values[0]);
 
                 if (item) {
                     displayConfigForFilter = item;
@@ -698,6 +716,9 @@ define([
 
     BrowseByView.prototype._rebuildDashboard = function (ovalues, displayConfigForSelectedFilter, dashboardConfig) {
 
+        console.log("============= _rebuildDashboard START  ======== IS FAO SELECTED ", this.subviews['filters'].isFAOSectorsSelected());
+
+
         // Set Sector Related Dashboard Configuration
         switch (this.subviews['filters'].isFAOSectorsSelected()) {
             case true:
@@ -724,13 +745,24 @@ define([
         // console.log("================= _rebuildDashboard oecdDashboard CALLED  =============== ");
         // console.log(ovalues);
 
+        console.log("============= REBUILD DASHBOARD INDICATORS  OECD ========");
         // Rebuild OECD Dashboard
         this.subviews['oecdDashboard'].rebuildDashboard(ovalues, displayConfigForSelectedFilter);
 
+
+        console.log("============= REBUILD DASHBOARD INDICATORS  INDICATORS BEFORE  ======== ", this.browse_type);
+
         // REINSTATE ... Rebuild Development Indicators Dashboard
         if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
+            console.log("============= REBUILD DASHBOARD INDICATORS  1 ========");
+
             this._setIndicatorDashboardModelValues();
+
+              console.log("============= REBUILD DASHBOARD INDICATORS 2  ========");
             var ivalues = this.subviews['filters'].getIndicatorsValues();
+
+            console.log("============= REBUILD DASHBOARD INDICATORS  ivalues 3 ======== ", ivalues);
+
             this.subviews['indicatorsDashboard'].rebuildDashboard(ivalues);
         }
 
@@ -757,6 +789,8 @@ define([
 
     BrowseByView.prototype._getMergeConfig = function (filterValues, parentId, childId) {
         var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
+
+        console.log("_getMergeConfig ================= ", filterValues);
 
         if (filterValues.values[childId].length === 0) {
             mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);

@@ -22,8 +22,8 @@ define([
     };
 
     function TitleView(o) {
-        log.info("TitleView");
-        log.info(o);
+       // log.info("TitleView");
+       // log.info(o);
 
         this.options = $.extend({}, defaults, o);
 
@@ -90,7 +90,7 @@ define([
     TitleView.prototype.build = function () {
         var self = this, range = '', containsExclusion;
 
-        var optionLabels = self.options.labels;
+        var optionLabels = this.options.labels;
 
         $.each( optionLabels, function( id, item ) {
             for(var exclusion in s.exclusions){
@@ -126,6 +126,9 @@ define([
     };
 
     TitleView.prototype._addItem = function (item) {
+
+        console.log(" XXXXXXXXXXXXXXXXXXXXXXXX ============ TITLE VIEW _addItem ========== ", item );
+
        this._updateList(item);
     };
 
@@ -145,7 +148,10 @@ define([
 
         var hiddenItem = this._findHiddenItem(item.id);
 
+        console.log(" XXXXXXXXXXXXXXXXX =============== hiddenItem ", item.id, hiddenItem);
+
         if(hiddenItem) {
+            console.log(" YYYYYYYYYYYYYYY  =============== _replaceListItem ", item.id, hiddenItem);
             this._replaceListItem(hiddenItem, item);
         }
         else
@@ -162,6 +168,8 @@ define([
     };
 
     TitleView.prototype._replaceListItem = function (find, item) {
+        console.log(" XXXXXXXXXXXXXX ======== TitleView _replaceListItem ", find, item);
+
         this._replaceListItemText(find, item);
     };
 
@@ -175,6 +183,7 @@ define([
 
 
     TitleView.prototype._createListItem = function (item) {
+        console.log(" XXXXXXXXXXXXXX ======== TitleView _createListItem ", item.id, item.label);
         return $('<li data-module="' + item.id + '" style="display:none">'+ this._formatText(item.label) +'</li>');
     };
 

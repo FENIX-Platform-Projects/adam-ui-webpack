@@ -37,6 +37,8 @@ define([
 
     DataExporter.prototype.downloadData = function () {
 
+        console.log(" ================== downloadData: model =================== ", this.model);
+
         var payload = {
             resource: this.model,
             input: {

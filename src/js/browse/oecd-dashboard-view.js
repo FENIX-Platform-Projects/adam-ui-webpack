@@ -15,8 +15,9 @@ define([
     'common/progress-bar',
     'common/data-exporter',
     'amplify-pubsub',
-    'handlebars'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, amplify, Handlebars) {
+    'handlebars',
+    'highcharts'
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, amplify, Handlebars, Highcharts) {
 
     'use strict';
 
@@ -78,7 +79,7 @@ define([
 
 
     DashboardView.prototype.modelChanged = function() {
-        console.log("============= MODEL CHANGED ========");
+     //   console.log("============= MODEL CHANGED ========");
        //  this.render();
         //alert('model changed');
         this.modelUpdated = true;
@@ -129,11 +130,16 @@ define([
 
 
     DashboardView.prototype._onDownloadClick = function (event) {
+
+       // console.log($(event.target));
+
         var model = this.models[$(event.target).attr('data-model-id')];
+
+       // console.log(model);
 
          var dataExporter = new DataExporter({
             lang: this.lang,
-            environmnet:  this.environment,
+            environment:  this.environment,
             model: model
         });
 
@@ -188,7 +194,7 @@ define([
         // Update the language related labels in the item configurations (charts)
         for (var it in this.config.items) {
             var item = this.config.items[it];
-            console.log(item.id, i18nDashboardLabels[this.lang][item.id])
+           // console.log(item.id, i18nDashboardLabels[this.lang][item.id])
             this._updateChartExportTitles(this.config.items[it], i18nDashboardLabels[this.lang][item.id], this.model.get('label'));
         }
 
@@ -288,7 +294,7 @@ define([
 
     DashboardView.prototype.updateDashboardTemplate = function (filterdisplayconfig) {
 
-        console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
+     //   console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
 
         if (filterdisplayconfig) {
 
@@ -368,7 +374,7 @@ define([
         var self = this;
 
 
-       // console.log("============ REBUILD =======", displayConfigForSelectedFilter, this.modelUpdated);
+        console.log("============ REBUILD =======", displayConfigForSelectedFilter, this.modelUpdated);
 
         // Re-render the template
         if (displayConfigForSelectedFilter || this.modelUpdated) {
@@ -382,7 +388,7 @@ define([
         }
 
 
-        console.log("============ REBUILD =======", this.config.items);
+      //  console.log("============ REBUILD =======", this.config.items);
 
         // Update Dashboard Items Configuration
         this.updateItemsConfig();
@@ -417,13 +423,85 @@ define([
 
         this.dashboard.on('ready', function () {
             self.progressBar.finish();
+
+
+
+/*
+            // Programmatically-defined buttons
+            $(".chart-export").each(function() {
+                console.log("HERE ================");
+                var jThis = $(this);
+                console.log("HERE 2 ============== jThis ", jThis[0]);
+                var    chartSelector = jThis.data("chartSelector");
+
+                console.log("HERE 3 ============== chartSelector ", chartSelector);
+                 var   chart = $(chartSelector).highcharts();
+
+
+
+                console.log("HERE 3 ============== chart ", chart);
+
+                $('#button-pdf').click(function() {
+                    alert("HERE ", chart);
+                    chart.exportChart({
+                        type: 'application/pdf',
+                        filename: 'my-pdf'
+                    });
+
+                    //chart.exportChartLocal({ type: type });
+                });
+
+
+
+
+
+
+
+            /!*    jThis['data-type'].(function() {
+
+                    console.log("data type ============== chart ", this);
+
+                  /!*  var jThis = $(this),
+                        type = jThis.data("type");
+                    if(Highcharts.exporting.supports(type)) {
+                        jThis.click(function() {
+                            chart.exportChartLocal({ type: type });
+                        });
+                    }
+                    else {
+                        jThis.attr("disabled", "disabled");
+                    }*!/
+                });*!/
+            });*/
         });
 
 
         this.dashboard.on('ready.item', function (item) {
+         //   console.log(" ================== item READY: =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
+
             self.models[item.id] = {};
             self.models[item.id].data = item.model.data;
-            self.models[item.id].metadata = item.model.metadata;
+            self.models[item.id].metadata = {};
+            self.models[item.id].metadata.rid = item.model.metadata.rid;
+            self.models[item.id].metadata.uid = item.model.metadata.uid;
+            self.models[item.id].metadata.dsd = item.model.metadata.dsd;
+
+
+
+            /* $('#button-pdf').click(function() {
+                 alert("HERE ");
+
+                 var chart = $('#tot-oda-sector').highcharts();
+
+                 console.log(chart);
+
+                 // chart.exportChart({
+                 //   type: 'application/pdf',
+                 // filename: 'my-pdf'
+                 // });
+
+                 //chart.exportChartLocal({ type: type });
+             });*/
 
             increment = increment + percent;
             self.progressBar.update(increment);

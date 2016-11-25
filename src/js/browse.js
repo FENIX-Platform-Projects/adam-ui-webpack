@@ -19,27 +19,27 @@ define([
 
         this._importThirdPartyCss();
 
-        log.setLevel('trace');
+       // log.setLevel('trace');
 
         this.start();
     }
 
     Browse.prototype.start = function () {
 
-        log.trace("Start");
+      //  log.trace("Start");
 
         // client parameters
         var params =  this.getRequestParameters();
         var lang = Config.LANG,  browse_type =  Config.DEFAULT_BROWSE_SECTION;
 
-        log.info("Request Params ", params);
+      //  log.info("Request Params ", params);
         // validate parameters
         if(params) {
             lang = params.lang || lang;
             browse_type = $.inArray(params.browse_type, Config.BROWSE_SECTIONS) > -1 ? params.browse_type : browse_type;
         }
         var params = {lang: lang, browse_type: browse_type};
-        log.info("Validated Request Params ", params);
+       // log.info("Validated Request Params ", params);
 
         var browseByView = this._createBrowseByView(params);
     };
@@ -76,7 +76,8 @@ define([
         require("node_modules/leaflet/dist/leaflet.css");
 
         // INDEX
-        require("dist/css/index.css");
+        //require("dist/css/index.css");
+        require("css/index.css");
 
     };
 
