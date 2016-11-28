@@ -37,8 +37,6 @@ define([
 
     DataExporter.prototype.downloadData = function () {
 
-        console.log(" ================== downloadData: model =================== ", this.model);
-
         var payload = {
             resource: this.model,
             input: {
@@ -51,9 +49,6 @@ define([
             }
         };
 
-        log.info("Configure FENIX export: table");
-
-        log.info(payload);
 
         this.report.export({
             format: "table",
