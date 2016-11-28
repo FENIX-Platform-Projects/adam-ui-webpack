@@ -1,0 +1,20 @@
+<div class="btn-group pull-right">
+{{#if chart}}
+    <button type="button" id="{{id}}-print" data-type="print"  data-model-id="{{id}}" class="btn btn-primary">{{print}}</button>
+{{/if}}
+    <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{download}}
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="#" id="{{id}}-excel" data-type="excel" data-model-id="{{id}}">{{data}}</a></li>
+            {{#if chart}}
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="{{id}}-png" data-type="image/png"  data-model-id="{{id}}">{{png}}</a></li>
+                <li><a href="#" id="{{id}}-jpeg"data-type="image/jpeg"  data-model-id="{{id}}">{{jpeg}}</a></li>
+                <li><a href="#" id="{{id}}-svg" data-type="image/svg+xml" data-model-id="{{id}}">{{svg}}</a></li>
+                <li><a href="#" id="{{id}}-pdf" data-type="application/pdf"  data-model-id="{{id}}">{{pdf}}</a></li>
+            {{/if}}
+        </ul>
+    </div>
+</div>
+
