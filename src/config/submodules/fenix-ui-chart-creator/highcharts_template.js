@@ -61,7 +61,8 @@ define(['highcharts'], function (Highcharts) {
 
                 },
                 beforePrint: function (event) {
-                    var $chart = $(this.renderTo);
+
+                     var $chart = $(this.renderTo);
 
                     var parent = $(this.renderTo).parent().prev();
                     var title = parent.find("p").text();
@@ -162,7 +163,8 @@ define(['highcharts'], function (Highcharts) {
 
                     text: "Print/Download",
                     _titleKey: "printDownload",
-                    symbol: null
+                    symbol: null,
+                    enabled: false
 
                     //, menuItems: [{
                     //    textKey: 'downloadPNG',
@@ -179,18 +181,22 @@ define(['highcharts'], function (Highcharts) {
                     // }]
                 },
                 toggleDataLabelsButton: {
-                    text: "Display Values",
+                    text: "Display/Hide Values",
                    // title: 'Hey',
                     _titleKey: "toggleDataLabels",
                     onclick: function (){
 
-                        var button = this.exportSVGElements[2],
+                        var button = this.exportSVGElements[2], //2
                             $button = $(button.element.lastChild),
                         text = $button.text() == "Display Values" ? "Hide Values" : "Display Values";
 
+
+                       // $button[0].innerHTML = text;
                         button.attr({
-                          text: text
+                          text:  text
                         });
+
+
 
                         for(var idx = 0; idx < this.series.length; idx++){
                             var opt = this.series[idx].options;
@@ -204,6 +210,7 @@ define(['highcharts'], function (Highcharts) {
                                 textShadow: 0
                             }}});
                         }
+
 
                     }
                 }/*,

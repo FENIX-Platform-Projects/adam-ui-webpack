@@ -28,6 +28,17 @@ define(function () {
             YEAR_TO: 'year-to',
             COUNTRY: 'countrycode'
         },
+        DOWNLOAD: {
+            PDF: 'pdf',
+            EXCEL: 'excel',
+            SVG: 'svg',
+            PNG: 'png',
+            JPEG: 'jpeg',
+            MSEXCEL: 'msexcel',
+            CSV: 'csv'
+        },
+
+        PRINT: 'print',
 
         ENVIRONMENT : 'develop',
         CACHE: false,
