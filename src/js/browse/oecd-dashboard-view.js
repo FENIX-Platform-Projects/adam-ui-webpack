@@ -9,15 +9,16 @@ define([
     'config/errors',
     'fenix-ui-dashboard',
     'nls/browse',
+    'nls/common',
     'nls/browse-dashboard',
     'nls/chart',
     'config/submodules/fenix-ui-chart-creator/highcharts_template',
     'common/progress-bar',
     'common/data-exporter',
+    'common/chart-exporter',
     'amplify-pubsub',
-    'handlebars',
-    'highcharts'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, amplify, Handlebars, Highcharts) {
+    'handlebars'
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nCommonLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, ChartExporter, amplify, Handlebars) {
 
     'use strict';
 
@@ -55,8 +56,6 @@ define([
         var valid = this._validateInput();
 
         if (valid === true) {
-
-            this._unbindEventListeners();
 
             this._init();
 
@@ -105,12 +104,13 @@ define([
     };
 
     DashboardView.prototype._init = function () {
-        this._bindEventListeners();
 
         this.template = template;
         this.modelUpdated = false;
         this.models = {};
 
+
+        this.chartExporter = new ChartExporter();
 
 
         //this.labels = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
@@ -129,29 +129,58 @@ define([
     };
 
 
-    DashboardView.prototype._onDownloadClick = function (event) {
+    DashboardView.prototype._downloadExcel = function (model) {
 
-       // console.log($(event.target));
 
-        var model = this.models[$(event.target).attr('data-model-id')];
+        var model = this.models[model];
 
-       // console.log(model);
+     var dataExporter = new DataExporter({
+     lang: this.lang,
+     environment:  this.environment,
+     model: model
+     });
 
-         var dataExporter = new DataExporter({
-            lang: this.lang,
-            environment:  this.environment,
-            model: model
-        });
+     return dataExporter.downloadData();
 
-        return dataExporter.downloadData();
+     };
+
+    DashboardView.prototype.onDownloadMenuClick = function (event) {
+        event.preventDefault();// prevent the default anchor functionality
+
+        var model = $(event.target).attr('data-model-id');
+        var type = $(event.target).attr('data-type');
+
+        console.log(model, type);
+
+        switch(type) {
+            case BaseConfig.DOWNLOAD.EXCEL:
+                this._downloadExcel(model);
+                break;
+            default:
+                this.chartExporter.download(model, type, model);
+
+        }
 
     };
+
+    DashboardView.prototype.onPrintMenuClick = function (event) {
+
+        console.log(" ============ onPrintMenuClick");
+
+        var model = $(event.target).attr('data-model-id');
+        var type = $(event.target).attr('data-type');
+
+        this.chartExporter.print(model);
+
+    };
+
+
 
     DashboardView.prototype._updateTemplate = function () {
 
         var model = this.model.getProperties();
 
-       var data = $.extend(true, model, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
+       var data = $.extend(true, model, i18nLabels[this.lang], i18nCommonLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         return this.template(data);
 
@@ -180,15 +209,56 @@ define([
 */
     DashboardView.prototype._bindEventListeners = function () {
 
-   };
+        var self = this;
+        console.log("BIND ===================== ", this.config.items);
+
+        // initialize Download buttons
+        $.each(this.config.items, function( index, item ) {
+            /* var $download = self.$el.find('#'+item.id+'-download');
+             $download.on('click', _.bind(self._onDownloadClick, self));
+
+             var $downloadPdf = self.$el.find('#'+item.id+'-pdf');
+             $downloadPdf.on('click', _.bind(self._onDownloadChartClick, self));
+             */
+            var identifier = '#'+item.id;
+
+            console.log(" ================= IDENTIFIER ", identifier);
+
+            for (var key in BaseConfig.DOWNLOAD) {
+                $(identifier+"-"+BaseConfig.DOWNLOAD[key]).click(_.bind(self.onDownloadMenuClick, self));
+            }
+
+            $(identifier+"-"+BaseConfig.PRINT).on('click', _.bind(self.onPrintMenuClick, self));
+
+        });
+
+
+    };
 
     DashboardView.prototype._unbindEventListeners = function () {
+        var self = this;
+        console.log("UNBIND ===================== ", this.config.items);
+
+        // initialize Download buttons
+        $.each(this.config.items, function( index, item ) {
+
+            var identifier = '#'+item.id;
+
+            for (var key in BaseConfig.DOWNLOAD) {
+                $(identifier+"-"+BaseConfig.DOWNLOAD[key]).unbind('click', _.bind(self.onDownloadMenuClick, self));
+            }
+
+            $(identifier+"-"+BaseConfig.PRINT).off('click', _.bind(self.onPrintMenuClick, self));
+
+        });
 
     };
 
     DashboardView.prototype.render = function () {
         var self = this;
         this.modelUpdated = false; // reset the model to false
+
+        this._unbindEventListeners();
 
 
         // Update the language related labels in the item configurations (charts)
@@ -219,11 +289,8 @@ define([
 
         this.$el.html(this.source);
 
-        // initialize Download buttons
-        $.each(this.config.items, function( index, item ) {
-            var $download = self.$el.find('#'+item.id+'-download');
-            $download.on('click', _.bind(self._onDownloadClick, self));
-        });
+        this._bindEventListeners();
+
     };
 
 
@@ -425,7 +492,6 @@ define([
             self.progressBar.finish();
 
 
-
 /*
             // Programmatically-defined buttons
             $(".chart-export").each(function() {
@@ -485,6 +551,8 @@ define([
             self.models[item.id].metadata.rid = item.model.metadata.rid;
             self.models[item.id].metadata.uid = item.model.metadata.uid;
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
+
+
 
 
 
