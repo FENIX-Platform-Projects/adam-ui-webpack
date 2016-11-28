@@ -311,7 +311,7 @@ define([
 
         var allFilterValues =  this.subviews['filters'].getFilterValues();
 
-        console.log(" =================== filters LOADED =============== allFilterValues ", allFilterValues);
+      //  console.log(" =================== filters LOADED =============== allFilterValues ", allFilterValues);
 
 
         for (var idx in allFilterValues.values){
@@ -392,8 +392,8 @@ define([
 
           var filterValues = allFilterValues;
 
-         console.log("================= _updateView values =============== ");
-        console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
+        // console.log("================= _updateView values =============== ");
+       // console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
 
         if (changedFilterItems) {
 
@@ -434,7 +434,7 @@ define([
                     amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
                 } else {
                     // Update the TitleView (Add Item)
-                    console.log("::::: _updateView:::: =============== _setItemTitle ============ "+changedFilter.id, labels);
+                  //  console.log("::::: _updateView:::: =============== _setItemTitle ============ "+changedFilter.id, labels);
 
                     amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter.id, label));
                 }
@@ -468,9 +468,9 @@ define([
     BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
         var dashboardConfPath, displayConfigForFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
 
-        console.log(" ======================= PROCESS SELECTION ==================");
-        console.log(displayConfig, changedFilter.id );
-        console.log(changedFilter);
+       // console.log(" ======================= PROCESS SELECTION ==================");
+       // console.log(displayConfig, changedFilter.id );
+       // console.log(changedFilter);
 
         if(displayConfig) {
             displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.id];

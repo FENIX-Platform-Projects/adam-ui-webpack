@@ -30,7 +30,7 @@ define(
                 SUB_SECTORS: {uid: 'crs_purposes', version: '2016'},
                 RECIPIENT_DONORS: {uid: 'crs_recipientdonors', version: '2016'},
                 REGIONS: {uid: 'crs_un_regions_recipients', version: '2016', level: "2", direction: "up"},
-                FAO_REGIONS: {uid: 'crs_fao_regions', version: '2016', level: "3", direction: "up"},
+                FAO_REGIONS: {uid: 'crs_fao_regions', version: '2016', level: "2", direction: "up"},
                 RECIPIENTS: {uid: 'crs_recipients', version: '2016'}
             },
             range: {

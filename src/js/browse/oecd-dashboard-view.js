@@ -12,7 +12,7 @@ define([
     'nls/common',
     'nls/browse-dashboard',
     'nls/chart',
-    'config/submodules/fenix-ui-chart-creator/highcharts_template',
+    'config/nodemodules/fenix-ui-chart-creator/highcharts_template',
     'common/progress-bar',
     'common/data-exporter',
     'common/chart-exporter',

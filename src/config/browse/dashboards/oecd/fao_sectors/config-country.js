@@ -17,7 +17,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
+                        maxItems: 1
                         // openOnFocus: false
                     }
                 },
@@ -32,8 +32,8 @@ define(function () {
                 event: "select",
                 args: {
                     body: {
-                        level: 3,
-                        levels: 3
+                        level: 2,
+                        levels: 2,
                     },
                     exclude: ["all"]
                 },
@@ -60,41 +60,45 @@ define(function () {
                 cl: {
                     "uid": "crs_fao_regions",
                     "version": "2016",
-                    level: 3,
-                    levels: 3,
+                    level: 2,
+                    levels: 2,
                     "codes": [
-                        "831",
-                        "832",
-                        "836",
-                        "859",
-                        "860",
-                        "845",
-                        "856",
-                        "861",
-                        "862",
-                        "880",
-                        "866",
-                        "870",
-                        "872",
-                        "854",
                         "625",
                         "666",
                         "630",
                         "728",
                         "730",
+                        "831",
                         "740",
+                        "832",
                         "645",
                         "738",
+                        "836",
                         "745",
                         "751",
                         "655",
+                        "859",
+                        "860",
                         "753",
                         "635",
+                        "845",
                         "660",
+                        "856",
                         "665",
+                        "861",
+                        "862",
                         "755",
+                        "880",
+                        "866",
                         "640",
-                        "764"
+                        "764",
+                        "765",
+                        "868",
+                        "870",
+                        "872",
+                        "854",
+                        "769",
+                        "876"
                     ],
                 },
                 template: {
@@ -115,7 +119,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
+                        maxItems: 1
                         // openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
@@ -144,7 +148,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
+                        maxItems: 1
                         //  openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
@@ -226,7 +230,7 @@ define(function () {
                     to: 2014,
                     default: [2000],
                     config: { //Selectize configuration
-                        maxItems: 1,
+                        maxItems: 1
                         //  openOnFocus: false
                     }
                 },
@@ -247,7 +251,7 @@ define(function () {
                     to: 2014,
                     default: [2014],
                     config: {
-                        maxItems: 1,
+                        maxItems: 1
                         //  openOnFocus: false
                     }
                 },
@@ -448,7 +452,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -701,7 +705,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -807,7 +811,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1181,7 +1185,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1291,7 +1295,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1444,11 +1448,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["donorcode_EN"], //x axis
-                        series: ["flowcategory_EN"], // series
+                        x: ["donorcode"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             colors: ['#008080'],
                             legend: {
@@ -1525,7 +1529,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "donorcode"
+                                    "donorcode",  "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -1538,13 +1542,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1747,7 +1751,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1953,11 +1957,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["recipientcode_EN"], //x axis
-                        series: ["flowcategory_EN"], // series
+                        x: ["recipientcode"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             colors: ['#008080'],
                             legend: {
@@ -2034,7 +2038,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "recipientcode"
+                                    "recipientcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -2047,13 +2051,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2256,7 +2260,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2462,11 +2466,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["channelsubcategory_code_EN"], //x axis
-                        series: ["flowcategory_EN"], // series
+                        x: ["channelsubcategory_code"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             colors: ['#008080'],
                             legend: {
@@ -2543,7 +2547,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code"
+                                    "channelsubcategory_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -2556,13 +2560,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2766,7 +2770,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2972,11 +2976,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "column",
-                        x: ["parentsector_code_EN"], //x axis
-                        series: ["flowcategory_EN"], // series
+                        x: ["parentsector_code"], //x axis
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             colors: ['#008080'],
                             legend: {
@@ -3050,7 +3054,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "parentsector_code"
+                                    "parentsector_code",  "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -3063,13 +3067,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3267,7 +3271,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3473,11 +3477,11 @@ define(function () {
                     type: 'chart',
                     config: {
                         type: "pieold",
-                        x: ["purposecode_EN"], //x axis and series
-                        series: ["flowcategory_EN"], // series
+                        x: ["purposecode"], //x axis and series
+                        series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
-                        useDimensionLabelsIfExist: false,// || default raw else fenixtool
+                        useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
                             chart: {
                                 events: {
@@ -3595,7 +3599,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "purposecode"
+                                    "purposecode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -3608,13 +3612,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3750,11 +3754,7 @@ define(function () {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
-                                    },
-                                    {
-                                        "columns": ["unitname"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }

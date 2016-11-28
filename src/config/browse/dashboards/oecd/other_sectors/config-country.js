@@ -17,11 +17,11 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
+                        maxItems: 1
                         // openOnFocus: false
                     }
                 },
-                className: "col-sm-5",
+                classNames: "col-sm-5",
                 cl: {
                     uid: "crs_fao_regions",
                     version: "2016",
@@ -47,45 +47,49 @@ define(function () {
                         // openOnFocus: false
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     "uid": "crs_fao_regions",
                     "version": "2016",
-                    level: 3,
-                    levels: 3,
+                    level: 2,
+                    levels: 2,
                     "codes": [
-                        "831",
-                        "832",
-                        "836",
-                        "859",
-                        "860",
-                        "845",
-                        "856",
-                        "861",
-                        "862",
-                        "880",
-                        "866",
-                        "870",
-                        "872",
-                        "854",
                         "625",
                         "666",
                         "630",
                         "728",
                         "730",
+                        "831",
                         "740",
+                        "832",
                         "645",
                         "738",
+                        "836",
                         "745",
                         "751",
                         "655",
+                        "859",
+                        "860",
                         "753",
                         "635",
+                        "845",
                         "660",
+                        "856",
                         "665",
+                        "861",
+                        "862",
                         "755",
+                        "880",
+                        "866",
                         "640",
-                        "764"
+                        "764",
+                        "765",
+                        "868",
+                        "870",
+                        "872",
+                        "854",
+                        "769",
+                        "876"
                     ],
                 },
                 template: {
@@ -112,7 +116,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -140,7 +144,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     // codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
                     "uid": "crs_dac",
@@ -165,7 +169,7 @@ define(function () {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -185,7 +189,7 @@ define(function () {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -208,7 +212,7 @@ define(function () {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
@@ -382,7 +386,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -635,7 +639,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -747,7 +751,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -863,7 +867,7 @@ define(function () {
                                     "dataType": "code",
                                     "subject": "um"
                                 },
-                                "value": "% SECTOR/TOTAL"
+                                "value": "percentage"
                             }
                         }, // (3iv) PERCENTAGE CALCULATION: Add Column (Measurement Unit Code)
                         {
@@ -1127,7 +1131,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1247,7 +1251,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1476,7 +1480,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "donorcode"
+                                    "donorcode",  "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -1489,13 +1493,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1704,7 +1708,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1997,7 +2001,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "recipientcode"
+                                    "recipientcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -2010,13 +2014,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2225,7 +2229,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2518,7 +2522,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code"
+                                    "channelsubcategory_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -2531,13 +2535,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2747,7 +2751,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3032,7 +3036,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "parentsector_code"
+                                    "parentsector_code",  "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -3045,13 +3049,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3249,7 +3253,7 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3583,7 +3587,7 @@ define(function () {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "purposecode"
+                                    "purposecode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -3596,13 +3600,13 @@ define(function () {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3733,11 +3737,7 @@ define(function () {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
-                                    },
-                                    {
-                                        "columns": ["unitname"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }

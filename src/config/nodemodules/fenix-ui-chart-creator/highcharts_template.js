@@ -157,8 +157,8 @@ define(['highcharts'], function (Highcharts) {
         },
 
         exporting: {
-            sourceWidth: 700,
-            buttons: {
+           // sourceWidth: 700,
+          buttons: {
                 contextButton: {
 
                     text: "Print/Download",
@@ -186,7 +186,7 @@ define(['highcharts'], function (Highcharts) {
                     _titleKey: "toggleDataLabels",
                     onclick: function (){
 
-                        var button = this.exportSVGElements[2], //2
+                       /* var button = this.exportSVGElements[2], //2
                             $button = $(button.element.lastChild),
                         text = $button.text() == "Display Values" ? "Hide Values" : "Display Values";
 
@@ -194,7 +194,7 @@ define(['highcharts'], function (Highcharts) {
                        // $button[0].innerHTML = text;
                         button.attr({
                           text:  text
-                        });
+                        });*/
 
 
 
