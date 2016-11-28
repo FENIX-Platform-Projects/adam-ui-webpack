@@ -698,7 +698,7 @@ define([
            var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';
 
             require(['../../'+pth1], function (NewDashboardConfig) {
-                self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
+               self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
             });
         } else {
             self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, this.otherSectorsDashboardConfig);

@@ -9,10 +9,12 @@ define([
     'config/errors',
     'fenix-ui-dashboard',
     'nls/browse',
+    'nls/common',
     'browse/development-indicators-item',
+    'common/data-exporter',
     'amplify-pubsub',
     'handlebars'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, IndicatorsItem, amplify, Handlebars) {
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nCommonLabels, IndicatorsItem, DataExporter, amplify, Handlebars) {
 
         'use strict';
 
@@ -36,7 +38,6 @@ define([
 
         $.extend(true, this, o);
 
-
         this._parseInput(o);
 
         var valid = this._validateInput();
@@ -44,8 +45,8 @@ define([
         if (valid === true) {
 
             this._unbindEventListeners();
-
             this._init();
+          //  this._bindEventListeners();
 
             return this;
 
@@ -97,22 +98,75 @@ define([
     };
 
     DashboardDevelopmentIndicatorsView.prototype._init = function () {
-        this._bindEventListeners();
         this.template = template;
+        this.models = {};
         this.setDashboardConfig();
+
     };
 
+
+
     DashboardDevelopmentIndicatorsView.prototype._bindEventListeners = function () {
+
+        var self = this;
+
+        // initialize Download buttons
+        $.each(this.config.items, function( index, item ) {
+            var identifier = '#'+item.id;
+
+
+            for (var key in BaseConfig.DOWNLOAD) {
+
+                $(identifier+"-"+BaseConfig.DOWNLOAD[key]).click(_.bind(self.onDownloadMenuClick, self));
+            }
+
+          //  $(identifier+"-"+BaseConfig.PRINT).on('click', _.bind(self.onPrintMenuClick, self));
+
+        });
+
 
     };
 
     DashboardDevelopmentIndicatorsView.prototype._unbindEventListeners = function () {
+        var self = this;
+
+
+        // initialize Download buttons
+        $.each(this.config.items, function( index, item ) {
+
+            var identifier = '#'+item.id;
+
+            for (var key in BaseConfig.DOWNLOAD) {
+                $(identifier+"-"+BaseConfig.DOWNLOAD[key]).unbind('click', _.bind(self.onDownloadMenuClick, self));
+            }
+
+            //$(identifier+"-"+BaseConfig.PRINT).off('click', _.bind(self.onPrintMenuClick, self));
+
+        });
+
+    };
+
+    DashboardDevelopmentIndicatorsView.prototype.onDownloadMenuClick = function (event) {
+        event.preventDefault();// prevent the default anchor functionality
+
+        var model = $(event.target).attr('data-model-id');
+        var type = $(event.target).attr('data-type');
+
+        var modelItem = this.models[model];
+
+        var dataExporter = new DataExporter({
+            lang: this.lang,
+            environment:  this.environment,
+            model: modelItem
+        });
+
+        return dataExporter.downloadData();
 
     };
 
     DashboardDevelopmentIndicatorsView.prototype._updateTemplate = function () {
         var model = this.model.getProperties();
-        var data = $.extend(true, model, i18nLabels[this.lang]);
+        var data = $.extend(true, model, i18nLabels[this.lang], i18nCommonLabels[this.lang]);
 
         return this.template(data);
     };
@@ -133,6 +187,7 @@ define([
         this.config.el = this.$el;
         this.config.items[0].topic = this.topic;
         this.config.items[0].lang = this.lang;
+        var self = this;
 
         // the path to the custom item is registered
         this.config.itemsRegistry = {
@@ -144,15 +199,27 @@ define([
 
         this.dashboard = new Dashboard(this.config);
 
-        this.dashboard.on('indicators_ready', function (payload) {
+        this.dashboard.on('indicators_ready', function (item) {
 
-            if (payload.data.size > 0) {
+            self._bindEventListeners();
+
+            var id =  self.config.items[0].id;
+
+            if (item.data.size > 0) {
+                self.models[id] = {};
+                self.models[id].data = item.model.data;
+                self.models[id].metadata = {};
+                self.models[id].metadata.rid = item.model.metadata.rid;
+                self.models[id].metadata.uid = item.model.metadata.uid;
+                self.models[id].metadata.dsd = item.model.metadata.dsd;
+
                 $(this.el).show();
             }
 
         });
 
-    };
+
+        };
 
     DashboardDevelopmentIndicatorsView.prototype.rebuildDashboard = function (filter) {
 

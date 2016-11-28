@@ -40,6 +40,7 @@ define([
         var self = this;
 
         $.extend(true, this, defaultOptions, o);
+        this.id = this.el;
         this.$el = $(this.el);
 
         this._renderTemplate();
@@ -144,8 +145,7 @@ define([
 
     DevelopmentIndicatorsItem.prototype._render = function () {
 
-
-        this.controller._trigger('indicators_ready', {data: {size: this.model.size}});
+        this.controller._trigger('indicators_ready', {model: this.model, data: {size: this.model.size}});
 
         if (this.model.size > 0) {
             var metadata = this.model.metadata.dsd.columns;
