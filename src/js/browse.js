@@ -64,10 +64,14 @@ define([
 
     Browse.prototype._importThirdPartyCss = function () {
         //Bootstrap
-        require("bootstrap-loader");
+        // require("bootstrap-loader");
 
         //dropdown selector
-        require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
+         require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
+
+        //bootstrap
+        require("node_modules/bootstrap/dist/css/bootstrap.min.css");
+
         // fenix-ui-filter
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
 
