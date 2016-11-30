@@ -97,7 +97,12 @@ define(function () {
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "fao_region": {id: "parent", event: "select"}
+                    "fao_region": {id: "parent", event: "select", args: {
+                        body: {
+                            levels: 2
+                        },
+                        exclude: ["all"]
+                    }}
                 }
             },
             parentsector_code: {
