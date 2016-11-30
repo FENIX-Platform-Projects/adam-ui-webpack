@@ -61,10 +61,9 @@ define(['highcharts'], function (Highcharts) {
 
                 },
                 beforePrint: function (event) {
-
-                     var $chart = $(this.renderTo);
-
+                    var $chart = $(this.renderTo);
                     var parent = $(this.renderTo).parent().prev();
+
                     var title = parent.find("p").text();
 
                     //Set chart title and set subtitle to empty string

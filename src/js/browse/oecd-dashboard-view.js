@@ -16,9 +16,10 @@ define([
     'common/progress-bar',
     'common/data-exporter',
     'common/chart-exporter',
+    'common/exporter',
     'amplify-pubsub',
     'handlebars'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nCommonLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, ChartExporter, amplify, Handlebars) {
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nCommonLabels, i18nDashboardLabels, i18nChartLabels, HighchartsTemplate, ProgressBar, DataExporter, ChartExporter, Exporter, amplify, Handlebars) {
 
     'use strict';
 
@@ -33,6 +34,9 @@ define([
         },
         css: {
             COLLAPSE: 'collapse'
+        },
+        fields: {
+            fao_region : 'fao_region'
         }
     };
 
@@ -113,6 +117,7 @@ define([
         this.chartExporter = new ChartExporter();
 
 
+
         //this.labels = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         //this.template = template(this.labels);
@@ -157,24 +162,25 @@ define([
                 this._downloadExcel(model);
                 break;
             default:
-                this.chartExporter.download(model, type, model);
+                this.chartExporter.download("div[data-item='"+model+"']", type, model);
 
         }
 
     };
 
     DashboardView.prototype.onPrintMenuClick = function (event) {
-
-        console.log(" ============ onPrintMenuClick");
-
         var model = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
 
-        this.chartExporter.print(model);
+        if(type) {
+            this.chartExporter.print("div[data-item='"+model+"']");
+        }else {
+            Exporter.print("div[data-item='"+model+"']");
+        }
+
+
 
     };
-
-
 
     DashboardView.prototype._updateTemplate = function () {
 
@@ -210,7 +216,7 @@ define([
     DashboardView.prototype._bindEventListeners = function () {
 
         var self = this;
-        console.log("BIND ===================== ", this.config.items);
+       // console.log(" =============BIND ===================== ", this.$el);
 
         // initialize Download buttons
         $.each(this.config.items, function( index, item ) {
@@ -222,9 +228,17 @@ define([
              */
             var identifier = '#'+item.id;
 
-            console.log(" ================= IDENTIFIER ", identifier);
+           // console.log(" ================= IDENTIFIER ", identifier);
+           // console.log(" ================= IDENTIFIER this.$el: ", self.$el);
+
+
+
+
+           // console.log(" ================= IDENTIFIER item print  ", $(identifier+"-"+BaseConfig.PRINT));
 
             for (var key in BaseConfig.DOWNLOAD) {
+              //  console.log(" ================= IDENTIFIER item download ", $(identifier+"-"+BaseConfig.DOWNLOAD[key]));
+
                 $(identifier+"-"+BaseConfig.DOWNLOAD[key]).click(_.bind(self.onDownloadMenuClick, self));
             }
 
@@ -237,7 +251,7 @@ define([
 
     DashboardView.prototype._unbindEventListeners = function () {
         var self = this;
-        console.log("UNBIND ===================== ", this.config.items);
+      //  console.log(" =====================UNBIND ===================== ", this.config.items);
 
         // initialize Download buttons
         $.each(this.config.items, function( index, item ) {
@@ -289,6 +303,7 @@ define([
 
         this.$el.html(this.source);
 
+        //console.log(" ============== before BIND ===========");
         this._bindEventListeners();
 
     };
@@ -414,16 +429,13 @@ define([
         var map = _.filter(this.config.items, {id: 'regional-map'})[0];
         var regioncode = this.regioncode;
         var gaulcode = this.gaulcode;
+        var regionField = defaultOptions.fields.fao_region;
 
-        if (map && regioncode) {
+        console.log(" ================= _updateDashboardRegionalMapConfiguration regionField: ", regionField);
+        console.log(regioncode, gaulcode, map);
 
-            if (map.filter && map.filter.un_region_code) {
-                map.filter.un_region_code = [];
-
-                if (regioncode)
-                    map.filter.un_region_code.push(regioncode)
-            }
-
+        // region, is no added to the filter values
+        if (map) {
             // Commented out for now as an issue when when no country selected i.e. Country = All, the zoom remains
             if (map.config && map.config.fenix_ui_map) {
                 if (gaulcode) {

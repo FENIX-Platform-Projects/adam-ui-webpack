@@ -207,7 +207,7 @@ define(
             // Filter on Change: Set some base properties for Recipient and the ODA, then publish Filter On Change Event
             this.filter.on('click', function (payload) {
 
-               // console.log("================== FILTERS CHANGE 1 PAYLOAD: =========== ", payload);
+               console.log("================== FILTERS CLICK 1: =========== ", payload.id);
                // console.log(this._getSelectedValues());
 
                 // validate filter
@@ -252,6 +252,8 @@ define(
                     // ============= REGION AND RECIPIENT
                     if (payloadId === BaseConfig.SELECTORS.REGION || payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
+                        console.log("================== FILTERS CLICK 2: =========== ", payload.id);
+
                       //  console.log("================== FILTERS CHANGE 5 payloadId =========== ", payloadId);
 
 
@@ -259,7 +261,7 @@ define(
 
                         if (payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
-                          //  console.log("================== FILTERS CHANGE 222 payloadId =========== ", payloadId);
+                            console.log("================== FILTERS =========== ", payloadId);
 
 
                             var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, this._getPayloadValues(payload));
@@ -289,7 +291,19 @@ define(
 
                                   //  console.log("================== FILTERS CHANGE 3333 payloadId =========== ", payloadId);
 
+                                    console.log(" =================== BEFORE ===== : _publishRegionGaulProperties ");
+
                                     this._publishRegionGaulProperties(payload, additionalProperties, payloads);
+
+                                   // $.extend(payload, {"props": additionalProperties});
+                                   // var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+
+
+                                   // console.log(" =================== payloadsUpdated =====  ", payloadsUpdated);
+
+
+                                  //  amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
+
 
                                    /* Q.all([
                                         self._onRecipientChangeGetRegionCode(self._getPayloadValues(payload)),
@@ -347,38 +361,41 @@ define(
 
                                  //   console.log("==================== ELSE REGION OTHER  3============== " + payloadId + " - " + additionalProperties);
 
+                                    console.log(" ===============  ###### FILTER_ON_CHANGE PUBLISH REGION NOT ALL: RECIPIENT == ALL == VALUE ======================");
+
                                     amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
 
                                 } else {
 
-                                    this.getGAUL(this._getPayloadValues(payload), this._processRecipient);
-
+                                    this.getGAUL(this._getPayloadValues(payload), _.bind(this._processRecipient, this, additionalProperties));
                                     this._publishGaulProperties(payload, additionalProperties, payloads);
 
 
-                                   /* Q.all([
-                                        // self._onRecipientChangeGetRegionCode(payload.values.values),
-                                        self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
-                                    ]).then(function (result) {
-                                        if (result) {
-                                            var gaul = result[0], region = self._getSelectorValues(BaseConfig.SELECTORS.REGION);
-                                            // var region = result[0], gaul = result[1];
-                                            // self._setRecipientProperties(region, gaul, additionalProperties);
-                                            self._setRecipientProperties(region, gaul, additionalProperties);
+                                    //console.log(" ===============  ###### FILTER_ON_CHANGE PUBLISH REGION NOT ALL: RECIPIENT == HAS == VALUE ======================");
 
-                                        }
-                                    }).catch(function (error) {
-                                        // console.log("====================  ELSE REGION OTHER: ERROR ======== ", additionalProperties);
-                                        self._processRegionCodeError(error, additionalProperties)
-                                    }).done(function () {
-                                        $.extend(payload, {"props": additionalProperties});
-                                        var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+                                    /* Q.all([
+                                         // self._onRecipientChangeGetRegionCode(payload.values.values),
+                                         self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
+                                     ]).then(function (result) {
+                                         if (result) {
+                                             var gaul = result[0], region = self._getSelectorValues(BaseConfig.SELECTORS.REGION);
+                                             // var region = result[0], gaul = result[1];
+                                             // self._setRecipientProperties(region, gaul, additionalProperties);
+                                             self._setRecipientProperties(region, gaul, additionalProperties);
 
-                                        console.log("====================== TEXT  2 ======", payload);
+                                         }
+                                     }).catch(function (error) {
+                                         // console.log("====================  ELSE REGION OTHER: ERROR ======== ", additionalProperties);
+                                         self._processRegionCodeError(error, additionalProperties)
+                                     }).done(function () {
+                                         $.extend(payload, {"props": additionalProperties});
+                                         var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
 
-                                        amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
-                                    });
-*/
+                                         console.log("====================== TEXT  2 ======", payload);
+
+                                         amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
+                                     });
+ */
                                 }
 
                             }
@@ -440,6 +457,7 @@ define(
                         amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
                     }
                     else {
+                        console.log(" ===============  ###### DEFAULT PUBLISH ======================");
                         payloads.push(payload);
                         amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
                     }
@@ -500,11 +518,19 @@ define(
             };
 
 
-        FilterView.prototype._processRecipient = function (data) {
-            if (data) {
-                var gaul = data[0], region = this._getSelectorValues(BaseConfig.SELECTORS.REGION);
+        FilterView.prototype._processRecipient = function (data, additionalProperties) {
 
-              //  this._setRecipientProperties(region, gaul, additionalProperties);
+            console.log(" ============ _processRecipient ", data, additionalProperties);
+
+            if (data) {
+
+                var gaul = data[0], region;
+
+                if(this._getSelectorValues(BaseConfig.SELECTORS.REGION)){
+                    region = this._getSelectorValues(BaseConfig.SELECTORS.REGION);
+                }
+
+               this._setRecipientProperties(region, gaul, additionalProperties);
 
               //  $.extend(payload, {"props": additionalProperties});
 
@@ -522,7 +548,7 @@ define(
          */
 
         FilterView.prototype._getSelectedValues = function () {
-
+             console.log(" ================ FILTERVIEW:::: _getSelectedValues ", this._getFormattedFilterValues());
             return this._getFormattedFilterValues().values;
         };
 
@@ -627,12 +653,17 @@ define(
 
             if(region) {
                 var regionCodeResult = region[0];
+
+                console.log(" =================== _setRecipientProperties: regionCodeResult: ", regionCodeResult);
                 self._setRegionCode(props, regionCodeResult);
                 //self._setRegionCode(props, regionCodeResult.parents[0].parents[0].code);
             }
 
             if(gaul){
                 var gaulCodeResult = gaul[0];
+
+                console.log(" ===================== _setRecipientProperties: gaulCodeResult: ", gaulCodeResult);
+
                 self._setGaulCode(props, gaulCodeResult.data[0][0]);
             }
         };
@@ -874,6 +905,10 @@ define(
             values[BaseConfig.SELECTORS.YEAR_FROM] = [];
             values[BaseConfig.SELECTORS.YEAR_TO] = [];
 
+            // if all values selected clear
+            if(this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) && this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) === s.exclusions.ALL) {
+                values[BaseConfig.SELECTORS.REGION] = [];
+            }
 
             // if all values selected clear
             if(this._getFirstSelectorValue(BaseConfig.SELECTORS.RECIPIENT_COUNTRY) && this._getFirstSelectorValue(BaseConfig.SELECTORS.RECIPIENT_COUNTRY) === s.exclusions.ALL) {
@@ -982,23 +1017,47 @@ define(
                 self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
             ]).then(function (result) {
                 if (result) {
-                    var regionResult, region = result[0], gaul = result[1];
+                    var regionArray = [], region = result[0], gaul = result[1];
 
                     if (region) {
-                        regionResult = region.parents[0].parents[0].code;
+                        regionArray.push(region[0].parents[0].code);
                     }
-                    self._setRecipientProperties(regionResult, gaul, additionalProperties);
+
+                    self._setRecipientProperties(regionArray, gaul, additionalProperties);
                 }
             }).catch(function (error) {
                 self._processRegionCodeError(error, additionalProperties)
             }).done(function () {
                 $.extend(payload, {"props": additionalProperties});
+
                 var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+
+               //  console.log("================= XXXXXXXXXXXXXXXXXXXX ================", additionalProperties);
+             //  console.log("================= XXXXXXXXXXXXXXXXXXXX ================", payload.id);
+
+
+                if(additionalProperties.regioncode){
+
+                    var getFilterValues
+                    //var regionValue = self._getFirstSelectorValue(BaseConfig.SELECTORS.REGION);
+
+
+                   // self.config[BaseConfig.SELECTORS.RECIPIENT_COUNTRY].selector.default = [additionalProperties.recipientcode];
+                    // Set Value
+                    //self.filterUtils.setValue(self.$el, BaseConfig.SELECTORS.REGION, additionalProperties.regioncode);
+                    //self.filterUtils.setValue(self.$el, BaseConfig.SELECTORS.REGION, additionalProperties.recipientcode);
+                }
+                //console.log(additionalProperties);
+
+
+
                 amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
             });
         };
 
         FilterView.prototype.getGAUL = function (codes, callback) {
+
+            console.log(" =========================== getGAUL ===================== ");
 
             var dataset = BaseConfig.DEFAULT_UID,
                 lang = this.lang.toUpperCase(),
@@ -1091,6 +1150,8 @@ define(
         FilterView.prototype._publishGaulProperties = function (payload, additionalProperties, payloads) {
             var self = this;
 
+            console.log(" =================== BEFFORE 3: _publishGaulProperties ");
+
             Q.all([
                 self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
             ]).then(function (result) {
@@ -1107,6 +1168,8 @@ define(
             }).done(function () {
                 $.extend(payload, {"props": additionalProperties});
                 var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+
+                console.log(" XXXXXX =================== PUBLISH : _publishGaulProperties ");
 
                 amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
             });

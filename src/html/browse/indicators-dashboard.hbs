@@ -1,26 +1,26 @@
 <div>
-    <section data-topic="country">
+    <section data-topic="country" id="country-indicators-section">
             <div class="row">
                 <div class="col-sm-12">
                     <div>
-                        {{> ../partials/download-menu-partial type='indicators' id='indicators-1'}}
+                        {{> ../partials/download-menu-partial type='indicators' id='recipient-indicators'}}
                     </div>
                     <div class="obj-box-header"><p><span class="display-box-header"><b>{{development_indicators}}</b>:</span> {{selected_country}}</p></div>
                     <div class="obj-box">
-                        <div data-item="indicators-1"></div>
+                        <div data-item="recipient-indicators"></div>
                     </div>
                 </div>
             </div>
      </section>
-      <section data-topic="donor">
+      <section data-topic="donor" id="donor-indicators-section">
                  <div class="row">
                      <div>
-                         {{> ../partials/download-menu-partial type='indicators' id='indicators-1'}}
+                         {{> ../partials/download-menu-partial type='indicators' id='partner-indicators'}}
                      </div>
                      <div class="col-sm-12">
                          <div class="obj-box-header"><p><span class="display-box-header"><b>{{development_indicators}}</b>:</span> {{selected_country}}</p></div>
                          <div class="obj-box">
-                             <div data-item="indicators-1"></div>
+                             <div data-item="partner-indicators"></div>
                          </div>
                      </div>
                  </div>

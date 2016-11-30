@@ -392,8 +392,8 @@ define([
 
           var filterValues = allFilterValues;
 
-        // console.log("================= _updateView values =============== ");
-       // console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
+         console.log("================= _updateView values =============== ");
+         console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
 
         if (changedFilterItems) {
 
@@ -468,9 +468,18 @@ define([
     BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
         var dashboardConfPath, displayConfigForFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
 
-       // console.log(" ======================= PROCESS SELECTION ==================");
-       // console.log(displayConfig, changedFilter.id );
-       // console.log(changedFilter);
+        //console.log(" ======================= PROCESS SELECTION ==================");
+        //console.log(displayConfig, changedFilter.id );
+        //console.log(changedFilter);
+        //console.log(filterValues);
+
+
+        // Update filter with region code
+        if(changedFilter.props && changedFilter.props.regioncode && filterValues.values[GeneralConfig.SELECTORS.REGION]){
+            filterValues.values[GeneralConfig.SELECTORS.REGION] = [];
+            filterValues.values[GeneralConfig.SELECTORS.REGION].push(changedFilter.props.regioncode)
+        }
+
 
         if(displayConfig) {
             displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
@@ -512,9 +521,9 @@ define([
                 if(changedFilter.isRecipientRelated){
                     // merge in Sector related
 
-                    console.log("======================= ONCHANGE: RECIPIENT RELATED =========");
-                    console.log(filterValues);
-                    console.log(this.filterSelectionsTypeDisplayConfig);
+                //    console.log("======================= ONCHANGE: RECIPIENT RELATED =========");
+                  //  console.log(filterValues);
+                   // console.log(this.filterSelectionsTypeDisplayConfig);
 
                     if(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.SUB_SECTOR] && this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.SECTOR]){
 
@@ -539,8 +548,8 @@ define([
 
                         }*/
 
-                        console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
-                        console.log("=============== RECIPIENT: MERGE ", mergeConfig);
+                       // console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
+                    //    console.log("=============== RECIPIENT: MERGE ", mergeConfig);
 
 
 

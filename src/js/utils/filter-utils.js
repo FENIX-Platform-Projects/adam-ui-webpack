@@ -150,6 +150,16 @@ define([
 
     };
 
+    FilterUtils.prototype.setValue = function (el, id, value) {
+        var selectize = this._getSelectize(el, id);
+
+       // selectize.setValue(selectize.search(value).items[0].id);
+
+        selectize.setValue(value);
+
+    };
+
+
     FilterUtils.prototype.addAllOption = function (el, id) {
         var selectize = this._getSelectize(el, id);
 
