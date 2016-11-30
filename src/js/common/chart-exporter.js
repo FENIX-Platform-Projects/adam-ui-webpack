@@ -14,15 +14,16 @@ define([
        return this;
     }
 
+
     ChartExporter.prototype.print = function (id) {
-        var $chartCont =  $("div[data-item='"+id+"']");
+        var $chartCont =  $(id);
         var chart = Highcharts.charts[$chartCont.data('highchartsChart')];
 
         chart.print();
     };
 
     ChartExporter.prototype.download = function (id, type, name) {
-        var $chartCont =  $("div[data-item='"+id+"']");
+        var $chartCont =  $(id);
         var chart = Highcharts.charts[$chartCont.data('highchartsChart')];
 
         chart.exportChart({

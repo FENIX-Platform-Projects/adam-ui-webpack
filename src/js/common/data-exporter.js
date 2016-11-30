@@ -18,7 +18,6 @@ define([
         return this;
     }
 
-
     DataExporter.prototype._init = function () {
         this.report = new Report({
             environment: this.environment,

@@ -12,7 +12,7 @@ define(function () {
 
             items: [
                 {
-                    id: 'indicators-1',
+                    id: 'recipient-indicators',
                     type: 'custom',
 
                     filter: { //FX-filter format
@@ -22,7 +22,8 @@ define(function () {
                         {
                             "name": "filter",
                             "parameters": {
-                                "columns": ["period", "value", "indicatorcode", "source", "note", "link", "itemcode", "unitcode"]
+                                "columns": ["period", "value", "indicatorcode", "source", "note", "link", "itemcode", "unitcode", "countrycode"]
+
                             }
                         },{
                             "name": "order",
@@ -39,7 +40,7 @@ define(function () {
 
             items: [
                 {
-                    id: 'indicators-1',
+                    id: 'partner-indicators',
                     type: 'custom',
 
                     filter: { //FX-filter format
@@ -49,7 +50,7 @@ define(function () {
                         {
                             "name": "filter",
                             "parameters": {
-                                "columns": ["period", "value", "indicatorcode", "source", "note", "link", "itemcode", "unitcode"]
+                                "columns": ["period", "value", "indicatorcode", "source", "note", "link", "itemcode", "unitcode", "countrycode"]
                             }
                         },{
                             "name": "order",

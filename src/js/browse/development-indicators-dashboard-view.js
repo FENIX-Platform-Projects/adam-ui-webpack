@@ -12,15 +12,20 @@ define([
     'nls/common',
     'browse/development-indicators-item',
     'common/data-exporter',
+    'common/exporter',
     'amplify-pubsub',
     'handlebars'
-], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nCommonLabels, IndicatorsItem, DataExporter, amplify, Handlebars) {
+], function (log, $, _, template, BaseBrowseConfig, BaseConfig, Errors, Dashboard, i18nLabels, i18nCommonLabels, IndicatorsItem, DataExporter, Exporter, amplify, Handlebars) {
 
         'use strict';
 
     var s = {
         css_classes: {
             INDICATORS_DASHBOARD_BROWSE_CONTAINER: '#dashboard-indicators-container'
+        },
+        id_prefixes: {
+            DOWNLOAD_OPTIONS: '-download-options',
+            INDICATORS_SECTION: '-indicators-section'
         }
     };
 
@@ -46,7 +51,6 @@ define([
 
             this._unbindEventListeners();
             this._init();
-          //  this._bindEventListeners();
 
             return this;
 
@@ -104,8 +108,6 @@ define([
 
     };
 
-
-
     DashboardDevelopmentIndicatorsView.prototype._bindEventListeners = function () {
 
         var self = this;
@@ -114,13 +116,11 @@ define([
         $.each(this.config.items, function( index, item ) {
             var identifier = '#'+item.id;
 
-
             for (var key in BaseConfig.DOWNLOAD) {
-
                 $(identifier+"-"+BaseConfig.DOWNLOAD[key]).click(_.bind(self.onDownloadMenuClick, self));
             }
 
-          //  $(identifier+"-"+BaseConfig.PRINT).on('click', _.bind(self.onPrintMenuClick, self));
+           $(identifier+"-"+BaseConfig.PRINT).on('click', _.bind(self.onPrintMenuClick, self));
 
         });
 
@@ -130,20 +130,30 @@ define([
     DashboardDevelopmentIndicatorsView.prototype._unbindEventListeners = function () {
         var self = this;
 
-
         // initialize Download buttons
         $.each(this.config.items, function( index, item ) {
-
             var identifier = '#'+item.id;
 
             for (var key in BaseConfig.DOWNLOAD) {
                 $(identifier+"-"+BaseConfig.DOWNLOAD[key]).unbind('click', _.bind(self.onDownloadMenuClick, self));
             }
 
-            //$(identifier+"-"+BaseConfig.PRINT).off('click', _.bind(self.onPrintMenuClick, self));
+            $(identifier+"-"+BaseConfig.PRINT).off('click', _.bind(self.onPrintMenuClick, self));
 
         });
 
+    };
+
+    DashboardDevelopmentIndicatorsView.prototype.onPrintMenuClick = function (event) {
+
+        var model = $(event.target).attr('data-model-id');
+
+        var container = $("#"+model+ s.id_prefixes.DOWNLOAD_OPTIONS);
+        var sectionId = "#"+this.topic+ s.id_prefixes.INDICATORS_SECTION;
+
+        $(container).hide();
+        Exporter.print(sectionId);
+        $(container).show();
     };
 
     DashboardDevelopmentIndicatorsView.prototype.onDownloadMenuClick = function (event) {
@@ -151,7 +161,21 @@ define([
 
         var model = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
+        var type_id = type.split("/").pop();
 
+        var container = $("#"+model+ s.id_prefixes.DOWNLOAD_OPTIONS);
+
+        switch(type_id) {
+            case BaseConfig.DOWNLOAD.EXCEL:
+                this._downloadData(model);
+                break;
+            default:
+                this._downloadImage(container, type, type_id, model);
+        }
+
+    };
+
+    DashboardDevelopmentIndicatorsView.prototype._downloadData = function (model) {
         var modelItem = this.models[model];
 
         var dataExporter = new DataExporter({
@@ -161,7 +185,14 @@ define([
         });
 
         return dataExporter.downloadData();
+    };
 
+    DashboardDevelopmentIndicatorsView.prototype._downloadImage = function (container, type, type_id, model) {
+        var sectionId = "#"+this.topic+ s.id_prefixes.INDICATORS_SECTION;
+
+        $(container).hide();
+        Exporter.download(sectionId, type, type_id, model);
+        $(container).show();
     };
 
     DashboardDevelopmentIndicatorsView.prototype._updateTemplate = function () {
