@@ -23,7 +23,7 @@ define(['highcharts'],function (Highcharts) {
                         // mode: 'multi'
                     }
                 },
-                className: "col-md-3",
+                classNames: "col-sm-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -51,7 +51,7 @@ define(['highcharts'],function (Highcharts) {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     "codes": [
                         "12240",
@@ -129,7 +129,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -149,7 +149,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -170,7 +170,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
@@ -189,7 +189,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_usd_aggregated_table",
 
             items: [
-           /*     {
+               {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -402,7 +402,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -535,7 +535,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -919,7 +919,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1028,7 +1028,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1165,7 +1165,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1408,7 +1408,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "donorcode"
+                                    "donorcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -1421,13 +1421,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1625,7 +1625,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1916,7 +1916,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "recipientcode"
+                                    "recipientcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -1929,13 +1929,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2136,12 +2136,12 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
                         },
-                       /!** {
+                       /** {
                             "name": "select",
                             "parameters": {
                                 "query": "WHERE recipientcode NOT IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
@@ -2152,7 +2152,7 @@ define(['highcharts'],function (Highcharts) {
                                     {"value": '689'}, {"value": '619'}, {"value": '679'}
                                 ]
                             }
-                        },**!/
+                        },**/
                         {
                             "name": "order",
                             "parameters": {
@@ -2432,7 +2432,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code"
+                                    "channelsubcategory_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -2445,13 +2445,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2641,7 +2641,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2953,7 +2953,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "purposecode"
+                                    "purposecode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -2966,13 +2966,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2993,7 +2993,7 @@ define(['highcharts'],function (Highcharts) {
 
                     ]
 
-                },*/
+                },
                 {
                     id: 'oda-regional', // REGIONAL DISTRIBUTION
                     type: 'chart',
@@ -3272,11 +3272,7 @@ define(['highcharts'],function (Highcharts) {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
-                                    },
-                                    {
-                                        "columns": ["unitname"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
