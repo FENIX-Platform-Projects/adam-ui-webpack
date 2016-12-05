@@ -23,6 +23,7 @@ module.exports = {
         alias: {
            // 'browse-views': Path.join( __dirname, 'src/js/browse'),
             'html': Path.join(__dirname, 'src/html'),
+            'css': Path.join(__dirname, 'src/css'),
             'config': Path.join(__dirname, 'src/config'),
             'nls': Path.join(__dirname, 'src/nls'),
             'common': Path.join(__dirname, 'src/js/common'),
@@ -33,9 +34,19 @@ module.exports = {
             'dist': Path.join(__dirname, 'dist'),
             'bootstrap-table': Path.join(__dirname, 'node_modules/bootstrap-table/dist/bootstrap-table.min.js'),
              handlebars: Path.join(__dirname, 'node_modules/handlebars/dist/handlebars.js'),
-            jquery: Path.join(__dirname, 'node_modules/jquery/dist/jquery'),
-            'fenix-ui-filter': Path.join(__dirname, 'node_modules/fenix-ui-filter/src/js/index.js'),
-           'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js')
+             jquery: Path.join(__dirname, 'node_modules/jquery/dist/jquery'),
+             'jQuery.print': Path.join(__dirname, 'node_modules/jQuery.print/jQuery.print.js'),
+             'html2canvas': Path.join(__dirname, 'node_modules/html2canvas/dist/html2canvas.js')//,
+            // 'fenix-ui-filter': Path.join(__dirname, 'node_modules/fenix-ui-filter/src/js/index.js'),
+           //  'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js')//,
+             //'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
+           // 'fenix-ui-converter': Path.join(__dirname, 'node_modules/fenix-ui-converter/src/js/index.js'),
+            ///MAY STILL NEED: 'fenix-ui-filter-utils': Path.join(__dirname, 'node_modules/fenix-ui-filter-utils/src/js/index.js'),
+           // 'fenix-ui-map-creator': Path.join(__dirname, 'node_modules/fenix-ui-map-creator/src/js/index.js')
+           // 'fenix-ui-reports': Path.join(__dirname, 'node_modules/fenix-ui-reports/src/js/index.js'),
+           // 'fenix-ui-bridge': Path.join(__dirname, 'node_modules/fenix-ui-bridge/src/js/index.js')//,
+
+           // 'fenix-ui-map-creator': Path.join(__dirname, 'node_modules/fenix-ui-map-creator/src/js/index.js')
            //'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
         }
     },
