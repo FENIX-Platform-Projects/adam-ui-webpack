@@ -43,8 +43,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
-                        // openOnFocus: false
+                        maxItems: 1
                     }
                 },
                 classNames: "col-sm-3",
@@ -227,8 +226,7 @@ define(function () {
                     default: [2000],
                     config: { //Selectize configuration
                         maxItems: 1
-                        //  openOnFocus: false
-                    }
+                     }
                 },
                 classNames: "col-sm-2",
                 format: {
@@ -248,7 +246,6 @@ define(function () {
                     default: [2014],
                     config: {
                         maxItems: 1
-                        //  openOnFocus: false
                     }
                 },
                 classNames: "col-sm-2",

@@ -43,8 +43,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
-                        // openOnFocus: false
+                        maxItems: 1
                     }
                 },
                 classNames: "col-sm-3",
@@ -116,6 +115,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
+                        // openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
                         // mode: 'multi'
@@ -144,6 +144,7 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
+                        //  openOnFocus: false
                         // placeholder: "All",
                         // plugins: ['remove_button'],
                         // mode: 'multi'
@@ -172,7 +173,7 @@ define(function () {
                     default: [2000],
                     config: { //Selectize configuration
                         maxItems: 1
-                    }
+                     }
                 },
                 classNames: "col-sm-2",
                 format: {
@@ -2989,8 +2990,7 @@ define(function () {
                     },
 
                     filterFor: {
-                        // "filter_sectors": [ 'fao_region_code', 'recipientcode', 'year', 'oda']
-                        "filter_sectors": ['fao_region', 'recipientcode', 'year', 'oda']
+                         "filter_sectors": ['fao_region', 'recipientcode', 'year', 'oda']
                     },
 
                     postProcess: [

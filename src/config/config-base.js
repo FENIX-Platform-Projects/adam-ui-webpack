@@ -14,6 +14,10 @@ define(function () {
         LANG: 'en',
         BROWSE_SECTIONS: ['country', 'country_donor', 'donor', 'sector'],
         DEFAULT_BROWSE_SECTION: 'country',
+        DASHBOARD_ITEMS: {
+            MAP: 'map',
+            CHART: 'chart'
+        },
         SELECTORS: {
             REGION: 'fao_region',
             RECIPIENT_COUNTRY: 'recipientcode',
