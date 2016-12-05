@@ -207,21 +207,19 @@ define(
             // Filter on Change: Set some base properties for Recipient and the ODA, then publish Filter On Change Event
             this.filter.on('click', function (payload) {
 
-               console.log("================== FILTERS CLICK 1: =========== ", payload.id);
+              // console.log("================== FILTERS CLICK 1: =========== ", payload.id);
                // console.log(this._getSelectedValues());
 
                 // validate filter
                 var valid = this.filterValidator.validateValues(this._getSelectedValues(), this.lang);
 
-               // console.log("================== FILTERS CHANGE 2 SELECTED VALUES =========== VALID ", valid);
-              //  console.log(this._getSelectedValues());
+               // console.log("================== FILTERS CHANGE 2 SELECTED VALUES =========== VALID ", valid, payload.id);
+                //console.log(this._getFirstPayloadValue(payload));
 
 
                // console.log("================== FILTERS CHANGE 3 SELECTED VALUES =========== ", this._getFirstPayloadValue(payload));
 
                 if (valid === true && this._getFirstPayloadValue(payload)) {
-
-                  //  console.log("================== FILTERS CHANGE 4 VALIDATED =========== ");
 
 
                     //Initialize Variables
@@ -252,26 +250,18 @@ define(
                     // ============= REGION AND RECIPIENT
                     if (payloadId === BaseConfig.SELECTORS.REGION || payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
-                        console.log("================== FILTERS CLICK 2: =========== ", payload.id);
-
-                      //  console.log("================== FILTERS CHANGE 5 payloadId =========== ", payloadId);
-
-
-                        //    console.log("================== FILTERS CHANGE 3 payloadId =========== ", payloadId);
+                        if (payloadId === BaseConfig.SELECTORS.REGION) {
+                            // Hide all Item from Recipient Country
+                            this.filterUtils.removeAllOption(this.$el, BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
+                        }
 
                         if (payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
-
-                            console.log("================== FILTERS =========== ", payloadId);
-
 
                             var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, this._getPayloadValues(payload));
 
                             //Get Selected Values
                             var payloadRecipientValue = this._getFirstPayloadValue(payload);
                             var regionValue = this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION);
-
-
-                         //   console.log("================== FILTERS CHANGE RRRR payloadRecipientValue: ", payloadRecipientValue, " : regionValue ", regionValue);
 
 
                             // ALL regions selected
@@ -288,10 +278,6 @@ define(
                                         this.filterUtils.setDefaultValue(this.$el, payloadId, defaultValue);
 
                                 } else {
-
-                                  //  console.log("================== FILTERS CHANGE 3333 payloadId =========== ", payloadId);
-
-                                    console.log(" =================== BEFORE ===== : _publishRegionGaulProperties ");
 
                                     this._publishRegionGaulProperties(payload, additionalProperties, payloads);
 
@@ -412,9 +398,12 @@ define(
 
                         //  console.log("FILTER VIEW: ON CHANGE id: ", payload.id, " value: ", payload.values[0]);
 
+
                         if (payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
                             // Payload contains subsector and sector information
                             var payloadsUpdated = this._processSectorSubSectorPayload(payloads, payload);
+                            console.log("================== FILTERS CHANGE 5 payloadsUpdated =========== ", payloadsUpdated, " payload.id ", payload.id);
+
                             amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
                         }
 
@@ -744,8 +733,7 @@ define(
 
             var region = {};
             region.id = BaseConfig.SELECTORS.REGION;
-            region.values = {};
-            region.values.labels =  labels[BaseConfig.SELECTORS.REGION];
+            region.labels =  labels[BaseConfig.SELECTORS.REGION];
             region.values =  values[BaseConfig.SELECTORS.REGION];
             region.props = recipientpayload.props;
 
@@ -774,14 +762,14 @@ define(
          * @returns Array filters
          */
         FilterView.prototype._processSectorSubSectorPayload = function (payloads, subsectorpayload) {
+
             var values = this._getSelectedValues();
             var labels = this._getSelectedLabels();
 
             var sector = {};
             sector.id = BaseConfig.SELECTORS.SECTOR;
-            sector.values = {};
-            sector.values.labels =  labels[BaseConfig.SELECTORS.SECTOR];
-            sector.values.values =  values[BaseConfig.SELECTORS.SECTOR];
+            sector.labels =  labels[BaseConfig.SELECTORS.SECTOR];
+            sector.values =  values[BaseConfig.SELECTORS.SECTOR];
 
 
             // primary indicates the selection type which takes precedence
@@ -798,6 +786,7 @@ define(
 
             payloads.push(sector);
             payloads.push(subsectorpayload);
+
 
             return payloads;
         };

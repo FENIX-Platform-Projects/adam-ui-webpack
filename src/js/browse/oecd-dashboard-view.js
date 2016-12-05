@@ -364,6 +364,11 @@ define([
             else
                 this.gaulcode = null;
 
+            if (props["recipientcode"] && props["recipientcode"].length > 0)
+                this.recipientcode = props["recipientcode"][0];
+            else
+                this.recipientcode = null;
+
            // if (props["oda"])
               //  this.config.uid = props["oda"];
 
@@ -423,6 +428,9 @@ define([
 
     DashboardView.prototype.updateItemsConfig = function () {
         this._updateDashboardRegionalMapConfiguration();
+
+        if(this.topic === BaseBrowseConfig.topic.BY_COUNTRY)
+            this._updateAddColumnValues();
     };
 
     DashboardView.prototype._updateDashboardRegionalMapConfiguration = function () {
@@ -446,6 +454,36 @@ define([
                 }
             }
         }
+
+    };
+
+    DashboardView.prototype._updateAddColumnValues = function () {
+
+        //var context = this.displayConfigForSelectedFilter.context, lang = this.lang;
+
+        var lang = this.lang, context = BaseConfig.SELECTORS.RECIPIENT_COUNTRY;
+
+        if(this.recipientcode === 'all' || !this.recipientcode){
+            context = BaseConfig.SELECTORS.REGION;
+        }
+
+       // console.log(" =========================== this.regioncode ", this.regioncode, this.gaulcode, this.recipientcode, context);
+
+        _.filter(this.config.items, function (a) {
+            if (a.type === BaseConfig.DASHBOARD_ITEMS.CHART) {
+                _.filter(a.postProcess, function (b) {
+                    if(b.name === 'addcolumn' && b.rid){
+                        var uid = b.rid.uid;
+                        var new_value = i18nLabels[lang][uid+"_"+context];
+                        console.log(b.parameters.value + " - "+uid+"_"+context);
+                        //Update labels
+                        if(new_value) {
+                            b.parameters.value = new_value;
+                        }
+                    }
+                });
+             }
+          });
 
     };
 

@@ -122,7 +122,7 @@ define([
         this.subviews = {};
 
         // Display can be configured based on the current Browse Type filter selections: i.e. Hide/Show dashboard items based on the current Browse type and/or selected filter values
-        this.filterSelectionsTypeDisplayConfig = DisplayConfigByFilterSelections[this.browse_type];
+        this.filterSelectionsTypeDisplayConfig = $.extend( true, {}, DisplayConfigByFilterSelections[this.browse_type]);
 
     };
 
@@ -217,11 +217,9 @@ define([
         });
         dashboardOecdSubView.setDashboardConfig(this.defaultDashboardConfig.dashboard);
 
-
         this.odaDashboardModel.addObserver(dashboardOecdSubView);
 
         this.subviews['oecdDashboard'] = dashboardOecdSubView;
-       // this.subview('oecdDashboard', dashboardOecdSubView);
 
 
         // Set DASHBOARD 2 Sub View: Development Indicators
@@ -238,16 +236,6 @@ define([
             // Set ODA DASHBOARD Model
             this.indicatorsDashboardModel = new IndicatorsModel();
 
-
-            // this.indicatorsDashboardModel = new DashboardModel();
-
-           /* var dashboardIndicatorsSubView = new DashboardIndicatorsSubView({
-                autoRender: false,
-                container: this.$el.find(s.css_classes.DASHBOARD_INDICATORS_HOLDER),
-                topic: this.browse_type,
-                model: this.indicatorsDashboardModel
-            });*/
-
             var dashboardIndicatorsSubView = new DashboardIndicatorsSubView({
                 el: this.$el.find(s.css_classes.DASHBOARD_INDICATORS_HOLDER),
                 lang:  this.lang,
@@ -257,14 +245,9 @@ define([
                 environment: this.environment
             });
 
-           // dashboardIndicatorsSubView.setDashboardConfig(this.indicatorsDashboardConfig);
-
             this.indicatorsDashboardModel.addObserver(dashboardIndicatorsSubView);
 
             this.subviews['indicatorsDashboard'] = dashboardIndicatorsSubView;
-
-           // this.subview('indicatorsDashboard', dashboardIndicatorsSubView);
-
         }
 
     };
@@ -295,7 +278,6 @@ define([
 
          var selectedFilterItems = payload.labels, displayConfigForFilter, dashboardConfPath;
 
-
         // Set Dashboard 1 (ODA) Properties
         if (payload["props"]) {
             this.subviews['oecdDashboard'].setProperties(payload["props"]);
@@ -305,37 +287,15 @@ define([
         this.subviews['title'].setLabels(selectedFilterItems);
         this.subviews['title'].build();
 
-         // Set ODA Dashboard Model Values
-        //this._setOdaDashboardModelValues();
-
-
         var allFilterValues =  this.subviews['filters'].getFilterValues();
-
-      //  console.log(" =================== filters LOADED =============== allFilterValues ", allFilterValues);
-
 
         for (var idx in allFilterValues.values){
 
             displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[idx];
 
-             var filterValue = allFilterValues.values[idx][0];
-
             if(displayConfigForFilter) {
-
-
-
-                //   console.log("========================= displayConfigForFilter ");
-                //   console.log(displayConfigForFilter);
-
+                var filterValue = allFilterValues.values[idx][0];
                 var item = this._checkConfigForValue(displayConfigForFilter, filterValue);
-
-            /*var item = _.find(displayConfigForFilter, function (item) {
-                    if(item.value){
-                        return item.value === filterValue ? item : item.value === null;
-                    }
-                });*/
-
-
 
                 if (item) {
                     displayConfigForFilter = item;
@@ -349,20 +309,12 @@ define([
             }
         }
 
-        // console.log("============== PROPS ============== ");
-        // console.log(": display config = ", displayConfigForFilter, " dashboard config = ", dashboardConfPath);
-
-
         this._getDashboardConfiguration(dashboardConfPath, allFilterValues, displayConfigForFilter);
 
-        // Render Dashboard 1: ODA
-        // this.subview('oecdDashboard').renderDashboard();
-
-       // REINSTATE --------- Render Dashboard 2: Development Indicators (if appropriate)
+       // Render Dashboard : Development Indicators (if appropriate)
         if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
             this._setIndicatorDashboardModelValues();
-             this.subviews['indicatorsDashboard'].renderDashboard();
-           // this.subview('indicatorsDashboard').renderDashboard();
+            this.subviews['indicatorsDashboard'].renderDashboard();
         }
 
     };
@@ -374,7 +326,11 @@ define([
     * @private
     */
     BrowseByView.prototype._filtersChanged = function (changedFilter) {
+      
+        //Reset the display configuration
+        this.filterSelectionsTypeDisplayConfig = $.extend( true, {}, DisplayConfigByFilterSelections[this.browse_type]);
 
+      
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
         this._updateView(changedFilter, allFilterValues);
@@ -391,9 +347,6 @@ define([
     BrowseByView.prototype._updateView = function (changedFilterItems, allFilterValues) {
 
           var filterValues = allFilterValues;
-
-         console.log("================= _updateView values =============== ");
-         console.log(" filter values: ", filterValues, " changedfilter values: ", changedFilterItems);
 
         if (changedFilterItems) {
 
@@ -450,41 +403,48 @@ define([
 
     BrowseByView.prototype._createTitleItem = function (filterItemId, filterItemLabel) {
 
-        var titleItem = {};//, //labels = filterItem.labels;
-
-        //console.log("=================  _createTitleItem 1 =============== ", filterItemId, filterItemLabel);
-
+        var titleItem = {};
         titleItem.id = filterItemId;
-
-       // var key = Object.keys(labels)[0];
         titleItem.label = filterItemLabel;
-
-       // console.log("================= _createTitleItem 2 =============== ", titleItem);
-
 
         return titleItem;
     };
 
     BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
-        var dashboardConfPath, displayConfigForFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
+        //console.log("================== _processSelection  =========== 1 ");
 
-        //console.log(" ======================= PROCESS SELECTION ==================");
-        //console.log(displayConfig, changedFilter.id );
-        //console.log(changedFilter);
-        //console.log(filterValues);
+        var dashboardConfPath, displayConfigBasedOnFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
 
 
         // Update filter with region code
-        if(changedFilter.props && changedFilter.props.regioncode && filterValues.values[GeneralConfig.SELECTORS.REGION]){
-            filterValues.values[GeneralConfig.SELECTORS.REGION] = [];
-            filterValues.values[GeneralConfig.SELECTORS.REGION].push(changedFilter.props.regioncode)
+        if(changedFilter.props){
+
+            if(changedFilter.props.regioncode && filterValues.values[GeneralConfig.SELECTORS.REGION]) {
+                filterValues.values[GeneralConfig.SELECTORS.REGION] = [];
+                filterValues.values[GeneralConfig.SELECTORS.REGION].push(changedFilter.props.regioncode)
+            }
         }
 
-
+        // Get dashboard display configuration, based on filter selections
         if(displayConfig) {
-            displayConfigForFilter = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
+            displayConfigBasedOnFilter = this._getDashboardDisplayConfiguration(displayConfig, changedFilter, filterValues);
+            if(displayConfigBasedOnFilter.config){
+                dashboardConfPath = displayConfigBasedOnFilter.config.path;
+            }
         }
 
+        // Update dashboard properties
+        if (changedFilter['props']) {
+            this.subviews['oecdDashboard'].setProperties(changedFilter['props']);
+        }
+
+        this._getDashboardConfiguration(dashboardConfPath, filterValues, displayConfigBasedOnFilter);
+
+    };
+
+    BrowseByView.prototype._getDashboardDisplayConfiguration = function (displayConfig, changedFilter, filterValues){
+
+        var displayConfigForFilter = displayConfig;
 
         // Re-configure display (if appropriate)
         if (this.filterSelectionsTypeDisplayConfig) {
@@ -500,185 +460,45 @@ define([
 
             }
 
-
             if(displayConfig) {
-
                 var item = this._checkConfigForValue(displayConfig, changedFilter.values[0]);
 
                 if (item) {
                     displayConfigForFilter = item;
-
-                    if(item.config)
-                        dashboardConfPath = item.config.path;
                 } else{
                     var defaultItem = this._getDefaultLayout(displayConfig);
-
                     if(defaultItem)
                         displayConfigForFilter = defaultItem;
                 }
 
-
                 if(changedFilter.isRecipientRelated){
                     // merge in Sector related
-
-                //    console.log("======================= ONCHANGE: RECIPIENT RELATED =========");
-                  //  console.log(filterValues);
-                   // console.log(this.filterSelectionsTypeDisplayConfig);
 
                     if(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.SUB_SECTOR] && this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.SECTOR]){
 
                         var mergeConfig = this._getMergeConfig(filterValues, GeneralConfig.SELECTORS.SECTOR, GeneralConfig.SELECTORS.SUB_SECTOR);
-
-
-                       /* var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['purposecode']);
-
-                        console.log("purposecode values = ", filterValues.values['purposecode']);
-
-                        if (filterValues.values['purposecode'].length === 0) {
-                            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['parentsector_code']);
-
-                            if(filterValues.values['parentsector_code'].length > 0){
-                                var sectorConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig['parentsector_code'],
-                                    filterValues.values['parentsector_code'][0]);
-
-                                if (sectorConfig) {
-                                    mergeConfig = sectorConfig;
-                                }
-                            }
-
-                        }*/
-
-                       // console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
-                    //    console.log("=============== RECIPIENT: MERGE ", mergeConfig);
-
-
-
                         displayConfigForFilter = this._mergeDisplayConfigs(displayConfigForFilter, mergeConfig);
 
-
-                        /* if(displayConfigForFilter.hide && mergeConfig.hide) {
-                         displayConfigForFilter.hide.push.apply( displayConfigForFilter.hide, mergeConfig.hide);
-                         }
-
-                         if(displayConfigForFilter.show && mergeConfig.show) {
-                         displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
-                         }
-                         */
-
-                        // if(displayConfigForFilter.show)
-                        // displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
-
-                        //displayConfigForFilter = $.extend(true, {}, displayConfigForFilter, mergeConfig);
                     }
-
-                 /*   if(this.filterSelectionsTypeDisplayConfig['purposecode'] && this.filterSelectionsTypeDisplayConfig['parentsector_code']){
-                        var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['purposecode']);
-
-                        console.log("purposecode values = ", filterValues.values['purposecode']);
-
-                        if (filterValues.values['purposecode'].length === 0) {
-                            var sectorConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig['parentsector_code'],
-                                filterValues.values['purposecode'][0]);
-
-                            if (sectorConfig) {
-                                mergeConfig = sectorConfig;
-                            } else{
-                                mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig['parentsector_code']);
-                            }
-                        }
-
-                        console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
-                        console.log("=============== RECIPIENT: MERGE ", mergeConfig);
-
-
-
-                        displayConfigForFilter = this._mergeDisplayConfigs(displayConfigForFilter, mergeConfig);
-
-
-                       /!* if(displayConfigForFilter.hide && mergeConfig.hide) {
-                            displayConfigForFilter.hide.push.apply( displayConfigForFilter.hide, mergeConfig.hide);
-                        }
-
-                        if(displayConfigForFilter.show && mergeConfig.show) {
-                            displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
-                        }
-*!/
-
-                       // if(displayConfigForFilter.show)
-                       // displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
-
-                        //displayConfigForFilter = $.extend(true, {}, displayConfigForFilter, mergeConfig);
-                    }
-                    //console.log("=============== RECIPIENT: mergeconfig Sector: ", mergeConfig);*/
-                    console.log("=============== RECIPIENT: displayConfigForFilter ", displayConfigForFilter);
-
                 }
 
                 if(changedFilter.isSectorRelated){
                     // merge in RECIPIENT Related
-                    console.log("======================= ONCHANGE: SECTOR RELATED =========");
-
-
                     if(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY] && this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.REGION]){
 
                         var mergeConfig = this._getMergeConfig(filterValues, GeneralConfig.SELECTORS.REGION, GeneralConfig.SELECTORS.RECIPIENT_COUNTRY);
-
-
-                       /* var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY]);
-
-                        console.log("recipientcode values = ", filterValues.values[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY]);
-
-                        if (filterValues.values[GeneralConfig.SELECTORS.RECIPIENT_COUNTRY].length === 0) {
-                            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.REGION]);
-
-                            if(filterValues.values[GeneralConfig.SELECTORS.REGION].length > 0){
-                                var sectorConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[GeneralConfig.SELECTORS.REGION],
-                                    filterValues.values[GeneralConfig.SELECTORS.REGION][0]);
-
-                                if (sectorConfig) {
-                                    mergeConfig = sectorConfig;
-                                }
-                            }
-
-                        }*/
-
-                        console.log("=============== SECTOR: displayConfigForFilter ", displayConfigForFilter);
-                        console.log("=============== SECTOR: MERGE ", mergeConfig);
-
-
-
                         displayConfigForFilter = this._mergeDisplayConfigs(displayConfigForFilter, mergeConfig);
 
-
-                        /* if(displayConfigForFilter.hide && mergeConfig.hide) {
-                         displayConfigForFilter.hide.push.apply( displayConfigForFilter.hide, mergeConfig.hide);
-                         }
-
-                         if(displayConfigForFilter.show && mergeConfig.show) {
-                         displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
-                         }
-                         */
-
-                        // if(displayConfigForFilter.show)
-                        // displayConfigForFilter.show.push.apply( displayConfigForFilter.show, mergeConfig.show);
-
-                        //displayConfigForFilter = $.extend(true, {}, displayConfigForFilter, mergeConfig);
                     }
-
-                    console.log("=============== SECTOR: FINAL displayConfigForFilter ", displayConfigForFilter);
                 }
 
             }
+
         }
 
-        // Update dashboard properties
-        if (changedFilter['props']) {
-            this.subviews['oecdDashboard'].setProperties(changedFilter['props']);
-        }
-
-        this._getDashboardConfiguration(dashboardConfPath, filterValues, displayConfigForFilter);
-
+        return displayConfigForFilter;
     };
+
 
     BrowseByView.prototype._checkConfigForValue = function (config, filterValue){
         return _.find(config, function (item) {
@@ -699,8 +519,8 @@ define([
     */
     BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-       //  console.log("================= _setDashboardConfiguration Start =============== ");
-         //console.log(ovalues);
+      //   console.log("================= _setDashboardConfiguration Start =============== ");
+       //  console.log(dashboardConfPath);
 
         if (dashboardConfPath) {
 
@@ -725,7 +545,7 @@ define([
 
     BrowseByView.prototype._rebuildDashboard = function (ovalues, displayConfigForSelectedFilter, dashboardConfig) {
 
-        console.log("============= _rebuildDashboard START  ======== IS FAO SELECTED ", this.subviews['filters'].isFAOSectorsSelected());
+      //  console.log("============= _rebuildDashboard START  ======== IS FAO SELECTED ", this.subviews['filters'].isFAOSectorsSelected());
 
 
         // Set Sector Related Dashboard Configuration
@@ -741,37 +561,16 @@ define([
         }
 
 
-        // Hide/Show Dashboard Items
-      //  this.subviews['oecdDashboard'].updateDashboardTemplate(displayConfigForSelectedFilter);
-
-        // Update Dashboard Items Configuration
-       // this.subviews['oecdDashboard'].updateItemsConfig();
-
         // Update Dashboard Model
         this._setOdaDashboardModelValues();
 
-
-        // console.log("================= _rebuildDashboard oecdDashboard CALLED  =============== ");
-        // console.log(ovalues);
-
-        console.log("============= REBUILD DASHBOARD INDICATORS  OECD ========");
         // Rebuild OECD Dashboard
         this.subviews['oecdDashboard'].rebuildDashboard(ovalues, displayConfigForSelectedFilter);
 
-
-        console.log("============= REBUILD DASHBOARD INDICATORS  INDICATORS BEFORE  ======== ", this.browse_type);
-
         // REINSTATE ... Rebuild Development Indicators Dashboard
         if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
-            console.log("============= REBUILD DASHBOARD INDICATORS  1 ========");
-
             this._setIndicatorDashboardModelValues();
-
-              console.log("============= REBUILD DASHBOARD INDICATORS 2  ========");
             var ivalues = this.subviews['filters'].getIndicatorsValues();
-
-            console.log("============= REBUILD DASHBOARD INDICATORS  ivalues 3 ======== ", ivalues);
-
             this.subviews['indicatorsDashboard'].rebuildDashboard(ivalues);
         }
 
@@ -797,9 +596,7 @@ define([
     };
 
     BrowseByView.prototype._getMergeConfig = function (filterValues, parentId, childId) {
-        var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
-
-        console.log("_getMergeConfig ================= ", filterValues);
+         var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
 
         if (filterValues.values[childId].length === 0) {
             mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);
@@ -814,6 +611,8 @@ define([
             }
 
         }
+
+
         return mergeConfig;
     };
 

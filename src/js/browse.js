@@ -80,8 +80,7 @@ define([
         require("node_modules/leaflet/dist/leaflet.css");
 
         // INDEX
-        //require("dist/css/index.css");
-        require("css/index.css");
+        require("css/adam.css");
 
     };
 
