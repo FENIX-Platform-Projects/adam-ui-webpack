@@ -15,7 +15,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     uid: "crs_donors",
                     version: "2016",
@@ -43,7 +43,7 @@ define(['highcharts'],function (Highcharts) {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -71,7 +71,7 @@ define(['highcharts'],function (Highcharts) {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     "uid": "crs_dac",
                     "version": "2016",
@@ -96,7 +96,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -117,7 +117,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -140,7 +140,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
@@ -152,6 +152,7 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 }
             }
+
         },
 
 
@@ -314,7 +315,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -588,7 +589,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -696,7 +697,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -916,7 +917,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -1403,7 +1404,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1525,7 +1526,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -1761,7 +1762,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -2249,7 +2250,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -2340,7 +2341,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -2614,7 +2615,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -3503,7 +3504,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "recipientcode"
+                                    "recipientcode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -3516,13 +3517,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -3542,7 +3543,6 @@ define(['highcharts'],function (Highcharts) {
                         }
 
                     ]
-
                 },
                 {
                     id: 'top-recipients-others', // TOP RECIPIENTS Vs OTHER RECIPIENTS
@@ -3730,7 +3730,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -4034,7 +4034,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "parentsector_code"
+                                    "parentsector_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -4047,13 +4047,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -4073,6 +4073,7 @@ define(['highcharts'],function (Highcharts) {
                         }
 
                     ]
+
                 },
                 {
                     id: 'top-sectors-others', // TOP SECTORS Vs OTHER SECTORS
@@ -4252,7 +4253,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -4549,7 +4550,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "channelsubcategory_code"
+                                    "channelsubcategory_code", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -4562,13 +4563,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -4775,7 +4776,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -5096,7 +5097,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "purposecode"
+                                    "purposecode", "flowcategory"
                                 ],
                                 "aggregations": [
                                     {
@@ -5109,13 +5110,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -5217,14 +5218,58 @@ define(['highcharts'],function (Highcharts) {
                         }
                     },
 
-                    filterFor: ['donorcode', 'year', 'parentsector_code', 'purposecode', 'oda'],
-
-                    filter: { //FX-filter format
-                        donorcode: ["1"],
-                        year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
+                    filterFor: {
+                        "filter_fao_region": ['donorcode', 'year', 'parentsector_code', 'purposecode', 'oda']
                     },
 
-                    postProcess: [
+                postProcess: [
+        {
+            "name": "filter",
+            "sid": [
+                {
+                    "uid": "adam_usd_aggregated_table"
+                }
+            ],
+
+
+            "parameters": {
+                "rows": {
+                    "donorcode": {
+                        "codes": [
+                            {
+                                "uid": "crs_donors",
+                                "version": "2016",
+                                "codes": [
+                                    "1"
+                                ]
+                            }
+                        ]
+                    },
+                    "year": {
+                        "time": [
+                            {
+                                "from": "2000",
+                                "to": "2014"
+                            }
+                        ]
+                    },
+                    "oda": {
+                        "codes": [
+                            {
+                                "uid": "crs_oda",
+                                "version": "2016",
+                                "codes": [
+                                    "usd_commitment"
+                                ]
+                            }
+                        ]
+                    }
+                }
+
+
+            },
+            "rid":{"uid":"filter_fao_region"}
+        },
                         {
                             "name": "group",
                             "parameters": {
@@ -5238,18 +5283,18 @@ define(['highcharts'],function (Highcharts) {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
                         },
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE fao_region<>?",
-                                "queryParameters": [{"value": ''}]
-                            }
-                        },
+                    {
+                        "name": "select",
+                        "parameters": {
+                            "query": "WHERE fao_region IS NOT NULL",
+                            "queryParameters": []
+                        }
+                    },
                         {
                             "name": "order",
                             "parameters": {
@@ -5293,12 +5338,8 @@ define(['highcharts'],function (Highcharts) {
                         }
                     },
 
-                    filterFor: { "filter_region": ['donorcode', 'parentsector_code', 'purposecode', 'year', 'oda']},
+                    filterFor: { "filter_map_region": ['donorcode', 'parentsector_code', 'purposecode', 'year', 'oda']},
 
-                   /* filter: { //FX-filter format
-                        donorcode: ["1"],
-                        year: [{value: 2000, parent: 'from'}, {value: 2014, parent:  'to'}]
-                    },*/
                     postProcess: [
                         {
                             "name": "filter",
@@ -5352,7 +5393,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_region"}
+                            "rid":{"uid":"filter_map_region"}
                         },
                         {
                             "name": "group",
@@ -5367,22 +5408,11 @@ define(['highcharts'],function (Highcharts) {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
-                                    },
-                                    {
-                                        "columns": ["unitname"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
-                        }/*,
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE gaul0<>?",
-                                "queryParameters": [{"value": "NA"}]
-                            }
-                        }*/
+                        }
                     ]
                 }
             ]
