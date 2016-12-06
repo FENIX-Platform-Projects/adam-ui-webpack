@@ -23,7 +23,7 @@ define(['highcharts'],function (Highcharts) {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-sm-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -75,7 +75,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -95,7 +95,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-sm-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -116,7 +116,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
@@ -135,7 +135,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_usd_aggregated_table",
 
             items: [
-            /*  {
+              {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -278,7 +278,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             },
@@ -415,7 +415,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -562,13 +562,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -612,7 +612,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                },*/
+                },
                 {
                     id: 'top-channels-all-sectors', // TOP CHANNEL OF DELIVERY CATEGORIES
                     type: 'chart',
@@ -761,7 +761,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                }/*,
+                },
                 {
                     id: "top-sectors", //ref [data-item=':id']
                     type: 'chart',
@@ -864,13 +864,13 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "unitcode"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     },
                                     {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1056,7 +1056,7 @@ define(['highcharts'],function (Highcharts) {
                                         "columns": [
                                             "flowcategory"
                                         ],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1232,7 +1232,7 @@ define(['highcharts'],function (Highcharts) {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
@@ -1240,8 +1240,8 @@ define(['highcharts'],function (Highcharts) {
                         {
                             "name": "select",
                             "parameters": {
-                                "query": "WHERE fao_region<>?",
-                                "queryParameters": [{"value": ''}]
+                                "query": "WHERE fao_region IS NOT NULL",
+                                "queryParameters": []
                             }
                         },
                         {
@@ -1348,18 +1348,14 @@ define(['highcharts'],function (Highcharts) {
                                     },
                                     {
                                         "columns": ["unitcode"],
-                                        "rule": "first"
-                                    },
-                                    {
-                                        "columns": ["unitname"],
-                                        "rule": "first"
+                                        "rule": "max"
                                     }
                                 ]
                             }
                         }
                     ]
 
-                }*/
+                }
             ]
         }
     }
