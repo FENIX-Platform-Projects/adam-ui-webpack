@@ -1,19 +1,19 @@
 <div class="btn-group pull-right" id="{{id}}-download-options" role="group">
     <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <button id="btnGroupDrop1" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
             <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> {{download}} <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li><a href="#" id="{{id}}-excel" data-type="excel" data-model-id="{{id}}">{{data}}</a></li>
+            <li class="dropdown-header">{{download_data}}</li>
+            <li><a href="#" id="{{id}}-excel" data-type="excel" data-model-id="{{id}}">{{excel}}</a></li>
 
             {{#ifCond this.type 'indicators'}}
-                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">{{download_indicators}}</li>
                 <li><a href="#" id="{{id}}-png" data-type="image/png"  data-model-id="{{id}}">{{png}}</a></li>
                 <li><a href="#" id="{{id}}-jpeg" data-type="image/jpeg"  data-model-id="{{id}}">{{jpeg}}</a></li>
             {{/ifCond}}
 
-
             {{#ifCond this.type 'chart'}}
-                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">{{download_chart}}</li>
                 <li><a href="#" id="{{id}}-png" data-type="image/png"  data-model-id="{{id}}">{{png}}</a></li>
                 <li><a href="#" id="{{id}}-jpeg" data-type="image/jpeg"  data-model-id="{{id}}">{{jpeg}}</a></li>
                 <li><a href="#" id="{{id}}-svg" data-type="image/svg+xml" data-model-id="{{id}}">{{svg}}</a></li>
@@ -23,7 +23,7 @@
     </div>
 
     {{#ifNot this.type 'map'}}
-        <button type="button" title="{{print}}" class="btn btn-primary">
+        <button type="button" title="{{print}}" class="btn btn-default">
             <span class="glyphicon glyphicon-print" id="{{id}}-print" data-type="print" data-model-id="{{id}}" aria-hidden="true"></span>
         </button>
     {{/ifNot}}

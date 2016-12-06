@@ -16,12 +16,14 @@ define(function () {
         "completed" : "Completed",
         "print": "Print",
         "download": "Download",
-        "data": "Download data as Excel file",
-        "csv": "Download data as CSV file",
-        "msexcel": "Download data as MS Excel file",
-        "png": "Download PNG image",
-        "jpeg": "Download JPEG image",
-        "svg": "Download SVG vector image",
-        "pdf": "Download PDF Document"
+        "download_data": "DOWNLOAD DATA",
+        "download_indicators": "DOWNLOAD INDICATORS",
+        "download_chart": "DOWNLOAD CHART",
+        "excel": "Excel file",
+        "csv": "CSV file",
+        "png": "PNG image",
+        "jpeg": "JPEG image",
+        "svg": "SVG vector image",
+        "pdf": "PDF Document"
     }
 });
