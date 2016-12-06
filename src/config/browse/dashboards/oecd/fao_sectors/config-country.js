@@ -288,7 +288,7 @@ define(function () {
 
         dashboard: {
             //default dataset id
-            uid: "adam_usd_aggregated_table",
+            uid: "adam_browse_recipient_oda",
 
             items: [
                {
@@ -384,7 +384,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -397,7 +397,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -637,7 +637,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -650,7 +650,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -736,7 +736,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -749,7 +749,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1111,7 +1111,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -1124,7 +1124,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1214,7 +1214,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -1227,7 +1227,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1474,7 +1474,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_donor"
                                 }
                             ],
                             "parameters": {
@@ -1506,7 +1506,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1676,7 +1676,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_donor"
                                 }
                             ],
                             "parameters": {
@@ -1689,7 +1689,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1983,7 +1983,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -2015,7 +2015,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -2185,7 +2185,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -2198,7 +2198,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -2492,7 +2492,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_subcategory"
                                 }
                             ],
                             "parameters": {
@@ -2524,7 +2524,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -2695,7 +2695,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_subcategory"
                                 }
                             ],
                             "parameters": {
@@ -2708,7 +2708,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -3004,7 +3004,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -3031,7 +3031,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -3201,7 +3201,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -3214,7 +3214,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -3544,7 +3544,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -3563,7 +3563,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -3679,7 +3679,7 @@ define(function () {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_recipient_oda"
                                 }
                             ],
                             "parameters": {
@@ -3698,7 +3698,7 @@ define(function () {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
