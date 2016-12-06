@@ -10,7 +10,8 @@ define([
     'use strict';
 
     var s = {
-        url: 'http://www-test.fao.org/adam/browse-data/country/en'
+        url: 'http://www-test.fao.org/adam/browse-data/sector/en',
+        CONTAINER: '#browse'
     };
 
 
@@ -19,44 +20,40 @@ define([
 
         this._importThirdPartyCss();
 
-       // log.setLevel('trace');
-
         this.start();
     }
 
+
     Browse.prototype.start = function () {
 
-      //  log.trace("Start");
+        var url = s.url; //window.location.href;
 
         // client parameters
-        var params =  this.getRequestParameters();
-        var lang = Config.LANG,  browse_type =  Config.DEFAULT_BROWSE_SECTION;
+        var params = this.getRequestParameters(url),
+            lang = $("html").attr("lang") || Config.LANG,
+            browse_type = Config.DEFAULT_BROWSE_SECTION;
 
-      //  log.info("Request Params ", params);
-        // validate parameters
-        if(params) {
-            lang = params.lang || lang;
-            browse_type = $.inArray(params.browse_type, Config.BROWSE_SECTIONS) > -1 ? params.browse_type : browse_type;
+
+        if(params && params.domain) {
+            browse_type = $.inArray(params.domain, Config.BROWSE_SECTIONS) > -1 ? params.domain : Config.DEFAULT_BROWSE_SECTION;
         }
-        var params = {lang: lang, browse_type: browse_type};
-       // log.info("Validated Request Params ", params);
 
-        var browseByView = this._createBrowseByView(params);
+        var browseParams = {lang: lang, browse_type: browse_type, el: s.CONTAINER};
+
+        this._createBrowseByView(browseParams);
     };
 
 
-    Browse.prototype.getRequestParameters = function () {
+    Browse.prototype.getRequestParameters = function (url) {
         var parser = new Parser();
-        //var url = window.location.href;
-         return parser.parseURL(s.url);
+        return parser.parseURL(url);
     };
 
     Browse.prototype._createBrowseByView = function (params) {
 
         var view = new BrowseByView(
             $.extend(true, params, {
-                environment: Config.ENVIRONMENT,
-                el : '#browse'
+                environment: Config.ENVIRONMENT
             }));
 
         return view;
