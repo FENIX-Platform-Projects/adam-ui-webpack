@@ -135,7 +135,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_usd_aggregated_table",
 
             items: [
-              {
+            /*  {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -1100,7 +1100,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                },
+                },*/
                 {
                     id: 'oda-regional', // REGIONAL DISTRIBUTION
                     type: 'chart',
@@ -1251,7 +1251,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                },
+                }/*,
                 {
                     id: 'country-map',
                     type: 'map',
@@ -1355,7 +1355,7 @@ define(['highcharts'],function (Highcharts) {
                         }
                     ]
 
-                }
+                }*/
             ]
         }
     }

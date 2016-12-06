@@ -24,7 +24,7 @@ define(function ( ) {
             BY_COUNTRY: 'country',
             BY_SECTOR: 'sector',
             BY_RESOURCE_PARTNER: 'donor',
-            BY_COUNTRY_RESOURCE_PARTNER: 'country_donor'
+            BY_COUNTRY_RESOURCE_PARTNER: 'country-donor'
         }
     };
 });

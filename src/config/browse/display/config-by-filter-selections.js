@@ -116,7 +116,7 @@ define(function () {
             ]
 
         },
-        "country_donor": {
+        "country-donor": {
             fao_region: [
                 {
                     layout: "default",
@@ -154,7 +154,7 @@ define(function () {
                 },
                 {
                     value: "9999",
-                    config: { path: "fao_sectors/config-country_donor"},
+                    config: { path: "fao_sectors/config-country-donor"},
                     hide: ['top-sectors', 'top-sectors-others', 'tot-oda-subsector', 'tot-oda'],
                     show: ['top-subsectors', 'tot-oda-sector']
                 }

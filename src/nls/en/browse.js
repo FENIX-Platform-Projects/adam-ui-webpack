@@ -15,7 +15,7 @@ define(function () {
         "sector": "By Sector",
         "country": "By Recipient Country",
         "donor": "By Resource Partner",
-        "country_donor": "By Recipient Country & Resource Partner",
+        "country-donor": "By Recipient Country & Resource Partner",
         "total_country_oda_recipientcode": "Total ODA in the Country",
         "total_country_oda_fao_region": "Total ODA in the Region",
         "total_sector_country_oda_recipientcode": "ODA in the Sector for the Country",
