@@ -132,10 +132,10 @@ define(['highcharts'],function (Highcharts) {
         },
         dashboard: {
             //default dataset id
-            uid: "adam_usd_aggregated_table",
+            uid: "adam_browse_sector_oda",
 
             items: [
-            /*  {
+           {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -228,7 +228,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_oda"
                                 }
                             ],
                             "parameters": {
@@ -241,7 +241,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -353,7 +353,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_recipient"
                                 }
                             ],
                             "parameters": {
@@ -378,7 +378,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -501,7 +501,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_oda"
                                 }
                             ],
                             "parameters": {
@@ -525,7 +525,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -654,7 +654,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_subcategory"
                                 }
                             ],
                             "parameters": {
@@ -678,7 +678,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -803,7 +803,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_oda"
                                 }
                             ],
                             "parameters": {
@@ -827,7 +827,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -995,7 +995,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_oda"
                                 }
                             ],
                             "parameters": {
@@ -1019,7 +1019,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1100,7 +1100,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                },*/
+                },
                 {
                     id: 'oda-regional', // REGIONAL DISTRIBUTION
                     type: 'chart',
@@ -1191,11 +1191,22 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_recipient"
                                 }
                             ],
                             "parameters": {
                                 "rows": {
+                                    "!fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "NA"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -1207,7 +1218,7 @@ define(['highcharts'],function (Highcharts) {
                                     "oda": {
                                         "codes": [
                                             {
-                                                "uid": "crs_oda",
+                                                "uid": "oda_crs",
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
@@ -1218,6 +1229,13 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             },
                             "rid":{"uid":"filter_regions"}
+                        },
+                        {
+                            "name": "select",
+                            "parameters": {
+                                "query": "WHERE fao_region IS NOT NULL",
+                                "queryParameters": []
+                            }
                         },
                         {
                             "name": "group",
@@ -1237,13 +1255,7 @@ define(['highcharts'],function (Highcharts) {
                                 ]
                             }
                         },
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE fao_region IS NOT NULL",
-                                "queryParameters": []
-                            }
-                        },
+
                         {
                             "name": "order",
                             "parameters": {
@@ -1251,7 +1263,7 @@ define(['highcharts'],function (Highcharts) {
                             }
                         }
                     ]
-                }/*,
+                },
                 {
                     id: 'country-map',
                     type: 'map',
@@ -1296,10 +1308,11 @@ define(['highcharts'],function (Highcharts) {
                             "name": "filter",
                             "sid": [
                                 {
-                                    "uid": "adam_usd_aggregated_table"
+                                    "uid": "adam_browse_sector_recipient"
                                 }
                             ],
                             "parameters": {
+                                "columns": [ "gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [
@@ -1355,7 +1368,7 @@ define(['highcharts'],function (Highcharts) {
                         }
                     ]
 
-                }*/
+                }
             ]
         }
     }

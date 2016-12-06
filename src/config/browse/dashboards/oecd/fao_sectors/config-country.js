@@ -3683,6 +3683,7 @@ define(function () {
                                 }
                             ],
                             "parameters": {
+                                "columns": [ "gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [

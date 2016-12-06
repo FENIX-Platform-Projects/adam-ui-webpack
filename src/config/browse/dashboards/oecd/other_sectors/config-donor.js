@@ -4520,6 +4520,13 @@ define(['highcharts'],function (Highcharts) {
             },
             "rid":{"uid":"filter_fao_region"}
         },
+                    {
+                        "name": "select",
+                        "parameters": {
+                            "query": "WHERE fao_region IS NOT NULL",
+                            "queryParameters": []
+                        }
+                    },
                         {
                             "name": "group",
                             "parameters": {
@@ -4538,13 +4545,6 @@ define(['highcharts'],function (Highcharts) {
                                 ]
                             }
                         },
-                    {
-                        "name": "select",
-                        "parameters": {
-                            "query": "WHERE fao_region IS NOT NULL",
-                            "queryParameters": []
-                        }
-                    },
                         {
                             "name": "order",
                             "parameters": {
@@ -4599,6 +4599,7 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             ],
                             "parameters": {
+                                "columns": [ "gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [
