@@ -17,14 +17,11 @@ define([
         var name = parser.pathname;
         var arry = name.split('/');
 
-        var topic = arry[arry.length - 2];
-        var lang = arry[arry.length - 1];
-
+        var domain = arry[arry.length - 2];
 
         var parsedParams = {
             context: parser.pathname,
-            lang: lang,
-            browse_type: topic
+            domain: domain
         };
 
         return parsedParams;
