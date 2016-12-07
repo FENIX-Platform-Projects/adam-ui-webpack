@@ -251,8 +251,12 @@ define(
                     if (payloadId === BaseConfig.SELECTORS.REGION || payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
                         if (payloadId === BaseConfig.SELECTORS.REGION) {
-                            // Hide all Item from Recipient Country
-                            this.filterUtils.removeAllOption(this.$el, BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
+                            var payloadRegionValue = this._getFirstPayloadValue(payload);
+
+                            if (payloadRegionValue === s.exclusions.ALL) {
+                                // Hide all Item from Recipient Country
+                                this.filterUtils.removeAllOption(this.$el, BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
+                            }
                         }
 
                         if (payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
