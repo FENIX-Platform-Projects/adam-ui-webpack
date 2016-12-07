@@ -18,7 +18,6 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // openOnFocus: false
                     }
                 },
                 classNames: "col-sm-5",
