@@ -136,8 +136,9 @@ define([
 
     DashboardView.prototype._downloadExcel = function (model) {
 
+     var model = this.models[model];
 
-        var model = this.models[model];
+     console.log(" =========== MODEL ", model);
 
      var dataExporter = new DataExporter({
      lang: this.lang,
@@ -155,6 +156,7 @@ define([
         var model = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
 
+        console.log("============ model, type ");
         console.log(model, type);
 
         switch(type) {
@@ -429,7 +431,7 @@ define([
     DashboardView.prototype.updateItemsConfig = function () {
         this._updateDashboardRegionalMapConfiguration();
 
-        if(this.topic === BaseBrowseConfig.topic.BY_COUNTRY)
+        if(this.topic === BaseBrowseConfig.topic.BY_COUNTRY || this.topic === BaseBrowseConfig.topic.BY_COUNTRY_RESOURCE_PARTNER)
             this._updateAddColumnValues();
     };
 
