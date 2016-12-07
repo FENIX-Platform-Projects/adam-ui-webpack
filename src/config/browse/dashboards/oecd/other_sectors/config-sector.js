@@ -134,7 +134,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_browse_sector_oda",
 
             items: [
-               {
+                {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -1305,7 +1305,7 @@ define(['highcharts'],function (Highcharts) {
                     },
 
                     filterFor: {
-                        "filter_donors": ['parentsector_code', 'year', 'oda']
+                        "filter_donors": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -1825,7 +1825,7 @@ define(['highcharts'],function (Highcharts) {
                     },
 
                     filterFor: {
-                        "filter_recipients": ['parentsector_code', 'year', 'oda']
+                        "filter_recipients": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -3034,7 +3034,7 @@ define(['highcharts'],function (Highcharts) {
                     },
 
                     filterFor: {
-                        "filter_regions": ['year', 'oda', 'purposecode']
+                        "filter_regions": ['year', 'oda', 'parentsector_code', 'purposecode']
                     },
                     postProcess: [
                         {
@@ -3245,7 +3245,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                   "gaul0"
+                                    "gaul0"
                                 ],
                                 "aggregations": [
                                     {

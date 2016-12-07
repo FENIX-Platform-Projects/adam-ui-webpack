@@ -1240,50 +1240,6 @@ define(['highcharts'],function (Highcharts) {
                             }
 
                         }
-                        /* config: {
-                         xAxis: {
-                         type: 'datetime'
-                         },
-                         yAxis: [{ //Primary Axis in default template
-                         }, { // Secondary Axis
-                         gridLineWidth: 0,
-                         title: {
-                         text: '%'
-                         },
-                         opposite: true
-                         }],
-
-                         series: [{
-                         name: '% Sub Sector/Total',
-                         yAxis: 1,
-                         dashStyle: 'shortdot',
-                         marker: {
-                         radius: 3
-                         }
-                         }//,
-
-                         //   {
-                         //     name: 'ODA from Resource Partner in Sector'//,
-                         // type: 'column'
-                         // },
-                         // {
-                         // name: 'Total ODA from Resource Partner'//,
-                         //   // type: 'column'
-                         //},
-                         // {
-                         //name: 'OECD Average of ODA in that Sector'//,
-                         // type: 'column'
-                         //}
-                         ],
-                         exporting: {
-                         chartOptions: {
-                         legend: {
-                         enabled: true
-                         }
-                         }
-                         }
-
-                         }*/
                     },
 
                     filterFor: {
@@ -4465,61 +4421,61 @@ define(['highcharts'],function (Highcharts) {
                         "filter_fao_region": ['donorcode', 'year', 'parentsector_code', 'purposecode', 'oda']
                     },
 
-                postProcess: [
-        {
-            "name": "filter",
-            "sid": [
-                {
-                    "uid": "adam_browse_donor_faoregion"
-                }
-            ],
+                    postProcess: [
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_browse_donor_faoregion"
+                                }
+                            ],
 
 
-            "parameters": {
-                "rows": {
-                    "donorcode": {
-                        "codes": [
-                            {
-                                "uid": "crs_donors",
-                                "version": "2016",
-                                "codes": [
-                                    "1"
-                                ]
+                            "parameters": {
+                                "rows": {
+                                    "donorcode": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_donors",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "1"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": "2000",
+                                                "to": "2014"
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "oda_crs",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+
+
+                            },
+                            "rid":{"uid":"filter_fao_region"}
+                        },
+                        {
+                            "name": "select",
+                            "parameters": {
+                                "query": "WHERE fao_region IS NOT NULL",
+                                "queryParameters": []
                             }
-                        ]
-                    },
-                    "year": {
-                        "time": [
-                            {
-                                "from": "2000",
-                                "to": "2014"
-                            }
-                        ]
-                    },
-                    "oda": {
-                        "codes": [
-                            {
-                                "uid": "oda_crs",
-                                "version": "2016",
-                                "codes": [
-                                    "usd_commitment"
-                                ]
-                            }
-                        ]
-                    }
-                }
-
-
-            },
-            "rid":{"uid":"filter_fao_region"}
-        },
-                    {
-                        "name": "select",
-                        "parameters": {
-                            "query": "WHERE fao_region IS NOT NULL",
-                            "queryParameters": []
-                        }
-                    },
+                        },
                         {
                             "name": "group",
                             "parameters": {

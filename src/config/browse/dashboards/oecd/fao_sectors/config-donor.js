@@ -1275,50 +1275,6 @@ define(['highcharts'],function (Highcharts) {
                             }
 
                         }
-                        /* config: {
-                         xAxis: {
-                         type: 'datetime'
-                         },
-                         yAxis: [{ //Primary Axis in default template
-                         }, { // Secondary Axis
-                         gridLineWidth: 0,
-                         title: {
-                         text: '%'
-                         },
-                         opposite: true
-                         }],
-
-                         series: [{
-                         name: '% Sub Sector/Total',
-                         yAxis: 1,
-                         dashStyle: 'shortdot',
-                         marker: {
-                         radius: 3
-                         }
-                         }//,
-
-                         //   {
-                         //     name: 'ODA from Resource Partner in Sector'//,
-                         // type: 'column'
-                         // },
-                         // {
-                         // name: 'Total ODA from Resource Partner'//,
-                         //   // type: 'column'
-                         //},
-                         // {
-                         //name: 'OECD Average of ODA in that Sector'//,
-                         // type: 'column'
-                         //}
-                         ],
-                         exporting: {
-                         chartOptions: {
-                         legend: {
-                         enabled: true
-                         }
-                         }
-                         }
-
-                         }*/
                     },
 
                     filterFor: {
@@ -1969,7 +1925,7 @@ define(['highcharts'],function (Highcharts) {
                         } // (4x): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Add Column
                     ]
                 },
-                  {
+                {
                     id: "tot-oda-gni", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -4494,44 +4450,44 @@ define(['highcharts'],function (Highcharts) {
                             ],
 
 
-                                    "parameters": {
-                                        "rows": {
-                                            "fao_sector": {
-                                                "enumeration": [
+                            "parameters": {
+                                "rows": {
+                                    "fao_sector": {
+                                        "enumeration": [
+                                            "1"
+                                        ]
+                                    },
+                                    "donorcode": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_donors",
+                                                "version": "2016",
+                                                "codes": [
                                                     "1"
                                                 ]
-                                            },
-                                            "donorcode": {
+                                            }
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": "2000",
+                                                "to": "2014"
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "oda_crs",
+                                                "version": "2016",
                                                 "codes": [
-                                                    {
-                                                        "uid": "crs_donors",
-                                                        "version": "2016",
-                                                        "codes": [
-                                                            "1"
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            "year": {
-                                                "time": [
-                                                    {
-                                                        "from": "2000",
-                                                        "to": "2014"
-                                                    }
-                                                ]
-                                            },
-                                            "oda": {
-                                                "codes": [
-                                                    {
-                                                        "uid": "oda_crs",
-                                                        "version": "2016",
-                                                        "codes": [
-                                                            "usd_commitment"
-                                                        ]
-                                                    }
+                                                    "usd_commitment"
                                                 ]
                                             }
-                                        }
+                                        ]
+                                    }
+                                }
 
 
                             },

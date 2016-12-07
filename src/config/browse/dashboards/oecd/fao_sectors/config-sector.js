@@ -187,7 +187,7 @@ define(['highcharts'],function (Highcharts) {
             uid: "adam_browse_sector_oda",
 
             items: [
-               {
+             {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
