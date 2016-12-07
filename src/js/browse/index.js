@@ -335,6 +335,9 @@ define([
         //Reset the display configuration
         this.filterSelectionsTypeDisplayConfig = $.extend( true, {}, DisplayConfigByFilterSelections[this.browse_type]);
 
+       // console.log(" ============ FILTERS CHANGED =========== ");
+       // console.log(this.filterSelectionsTypeDisplayConfig );
+
       
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
@@ -524,7 +527,7 @@ define([
     */
     BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-         console.log("================= _setDashboardConfiguration Start =============== ", filterValues);
+        // console.log("================= _setDashboardConfiguration Start =============== ", filterValues);
        //  console.log(dashboardConfPath);
 
         if (dashboardConfPath) {
@@ -532,10 +535,10 @@ define([
            var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';
 
             require(['../../'+pth1], function (NewDashboardConfig) {
-              // self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
+               self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
             });
         } else {
-           // self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, this.otherSectorsDashboardConfig);
+            self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, this.otherSectorsDashboardConfig);
         }
     };
 
