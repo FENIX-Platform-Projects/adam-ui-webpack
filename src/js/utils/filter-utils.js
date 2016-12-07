@@ -199,9 +199,7 @@ define([
 
     FilterUtils.prototype.getFilterConfigById = function (config, id) {
         var filter;
-        console.log(config, id);
         $.each(config, function (key, obj) {
-            console.log(key, id);
             if (key === id) {
                 return filter = obj;
             }
