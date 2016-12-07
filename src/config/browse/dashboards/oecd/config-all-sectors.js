@@ -18,9 +18,6 @@ define(['highcharts'],function (Highcharts) {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-3",
@@ -46,12 +43,9 @@ define(['highcharts'],function (Highcharts) {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-sm-4",
                 cl: {
                     "uid": "crs_dac",
                     "version": "2016",
@@ -62,7 +56,12 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "parentsector_code": {id: "parent", event: "select"}
+                    "parentsector_code": {id: "parent", event: "select", args: {
+                        body: {
+                            levels: 3
+                        },
+                        exclude: ["all"]
+                    }}
                 }
             },
             "year-from": {
@@ -128,7 +127,6 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 }
             }
-
         },
         dashboard: {
             //default dataset id

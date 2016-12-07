@@ -17,8 +17,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
-                        // openOnFocus: false
+                        maxItems: 1
                     }
                 },
                 classNames: "col-sm-5",
@@ -43,8 +42,7 @@ define(function () {
                         value: "all"
                     },
                     config: { //Selectize configuration
-                        maxItems: 1,
-                        // openOnFocus: false
+                        maxItems: 1
                     }
                 },
                 classNames: "col-sm-3",
@@ -86,7 +84,7 @@ define(function () {
                         "755",
                         "640",
                         "764"
-                    ],
+                    ]
                 },
                 template: {
                     hideSwitch: true,
@@ -127,9 +125,6 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-3",
@@ -155,14 +150,10 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-4",
                 cl: {
-                    // codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
                     "uid": "crs_dac",
                     "version": "2016",
                     "levels": 3
@@ -172,7 +163,12 @@ define(function () {
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "parentsector_code": {id: "parent", event: "select"} //obj or array of obj
+                    "parentsector_code": {id: "parent", event: "select", args: {
+                        body: {
+                            levels: 3
+                        },
+                        exclude: ["all"]
+                    }}
                 }
             },
             "year-from": {
@@ -196,7 +192,6 @@ define(function () {
                 }
             },
             "year-to": {
-
                 selector: {
                     id: "dropdown",
                     from: 2000,
@@ -211,11 +206,9 @@ define(function () {
                     type: "static",
                     output: "time"
                 },
-
                 dependencies: {
                     "year-from": {id: "min", event: "select"}
                 },
-
                 template: {
                     hideSwitch: true,
                     hideRemoveButton: true
@@ -242,14 +235,12 @@ define(function () {
                 }
             }
         },
-
-
         dashboard: {
             //default dataset id
             uid: "adam_usd_aggregated_table",
 
             items: [
-                {
+            {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {

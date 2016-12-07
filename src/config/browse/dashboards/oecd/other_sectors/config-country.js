@@ -89,7 +89,7 @@ define(function () {
                         "854",
                         "769",
                         "876"
-                    ],
+                    ]
                 },
                 template: {
                     hideSwitch: true,
@@ -115,10 +115,6 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // openOnFocus: false
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-3",
@@ -144,15 +140,10 @@ define(function () {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        //  openOnFocus: false
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-4",
                 cl: {
-                    // codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
                     "uid": "crs_dac",
                     "version": "2016",
                     "levels": 3
@@ -162,7 +153,12 @@ define(function () {
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "parentsector_code": {id: "parent", event: "select"} //obj or array of obj
+                    "parentsector_code": {id: "parent", event: "select", args: {
+                        body: {
+                            levels: 3
+                        },
+                        exclude: ["all"]
+                    }}
                 }
             },
             "year-from": {
@@ -173,7 +169,7 @@ define(function () {
                     default: [2000],
                     config: { //Selectize configuration
                         maxItems: 1
-                     }
+                    }
                 },
                 classNames: "col-sm-2",
                 format: {
@@ -200,11 +196,9 @@ define(function () {
                     type: "static",
                     output: "time"
                 },
-
                 dependencies: {
                     "year-from": {id: "min", event: "select"}
                 },
-
                 template: {
                     hideSwitch: true,
                     hideRemoveButton: true
@@ -231,14 +225,12 @@ define(function () {
                 }
             }
         },
-
-
         dashboard: {
             //default dataset id
             uid: "adam_browse_recipient_oda",
 
             items: [
-                {
+               {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {

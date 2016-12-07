@@ -18,9 +18,6 @@ define(['highcharts'],function (Highcharts) {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-3",
@@ -46,24 +43,26 @@ define(['highcharts'],function (Highcharts) {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-4",
                 cl: {
-                    codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
                     "uid": "crs_dac",
                     "version": "2016",
-                    "levels": 3
+                    "levels": 3,
+                    codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
                 },
                 template: {
                     hideSwitch: true,
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "parentsector_code": {id: "parent", event: "select"}
+                    "parentsector_code": {id: "parent", event: "select", args: {
+                        body: {
+                            levels: 3
+                        },
+                        exclude: ["all"]
+                    }}
                 }
             },
             "year-from": {
@@ -129,14 +128,13 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 }
             }
-
         },
         dashboard: {
             //default dataset id
             uid: "adam_browse_sector_oda",
 
             items: [
-                {
+               {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -3048,6 +3046,17 @@ define(['highcharts'],function (Highcharts) {
                             ],
                             "parameters": {
                                 "rows": {
+                                    "!fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "NA"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "parentsector_code": {
                                         "codes": [
                                             {
@@ -3236,7 +3245,7 @@ define(['highcharts'],function (Highcharts) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                    "gaul0"
+                                   "gaul0"
                                 ],
                                 "aggregations": [
                                     {

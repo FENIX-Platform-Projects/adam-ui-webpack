@@ -38,9 +38,6 @@ define(['highcharts'],function (Highcharts) {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-3",
@@ -66,16 +63,13 @@ define(['highcharts'],function (Highcharts) {
                     },
                     config: { //Selectize configuration
                         maxItems: 1
-                        // placeholder: "All",
-                        // plugins: ['remove_button'],
-                        // mode: 'multi'
                     }
                 },
                 classNames: "col-sm-4",
                 cl: {
                     "uid": "crs_dac",
                     "version": "2016",
-                    "level": 2,
+                    //"level": 2,
                     "levels": 3
                 },
                 template: {
@@ -83,7 +77,12 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "parentsector_code": {id: "parent", event: "select"} //obj or array of obj
+                    "parentsector_code": {id: "parent", event: "select", args: {
+                        body: {
+                            levels: 3
+                        },
+                        exclude: ["all"]
+                    }}
                 }
             },
             "year-from": {
@@ -107,7 +106,6 @@ define(['highcharts'],function (Highcharts) {
                 }
             },
             "year-to": {
-
                 selector: {
                     id: "dropdown",
                     from: 2000,
@@ -122,11 +120,9 @@ define(['highcharts'],function (Highcharts) {
                     type: "static",
                     output: "time"
                 },
-
                 dependencies: {
                     "year-from": {id: "min", event: "select"}
                 },
-
                 template: {
                     hideSwitch: true,
                     hideRemoveButton: true
@@ -152,10 +148,7 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 }
             }
-
         },
-
-
         dashboard: {
             //default dataset id
             uid: "adam_browse_sector_oda",
