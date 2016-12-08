@@ -40,6 +40,7 @@ module.exports = sections.map(function (section) {
                 'utils': Path.join(__dirname, 'src/js/utils'),
                 'models': Path.join(__dirname, 'src/js/models'),
                 'browse': Path.join(__dirname, 'src/js/browse'),
+                'compare': Path.join(__dirname, 'src/js/compare'),
                 'node_modules': Path.join(__dirname, 'node_modules')
               }
         },

@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=develop webpack-dev-server --display-error-details --progress --color --content-base dev  --inline --hot",
     "dev:browse": "cross-env SECTIONS=browse NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
-    "build": "cross-env SECTIONS=browse NODE_ENV=production webpack --display-error-details",
-    "w-build": "cross-env SET SECTIONS=browse&&SET NODE_ENV=production&&webpack --display-error-details "
+    "dev:compare": "cross-env SECTIONS=compare NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
+    "build": "cross-env SECTIONS=browse,compare NODE_ENV=production webpack --display-error-details",
+    "w-build": "cross-env SET SECTIONS=browse,compare&&SET NODE_ENV=production&&webpack --display-error-details "
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "dependencies": {
     "amplify-pubsub": "^0.0.1",
     "bootstrap": "^3.3.7",
+    "fenix-ui-analysis": "^3.0.0-beta.47",
     "fenix-ui-dashboard": "^3.0.0-beta.9",
     "fenix-ui-filter": "^3.0.0-beta.51",
+    "fenix-ui-filter-utils": "^1.0.0-beta.14",
     "fenix-ui-reports": "^2.0.0-beta.1",
     "handlebars-loader": "^1.4.0",
     "html2canvas": "^0.5.0-beta4",
