@@ -1,5 +1,5 @@
 define([
-    'loglevel',
+   'loglevel',
     'jquery',
     'underscore',
     'config/config-base',
@@ -10,7 +10,7 @@ define([
     'use strict';
 
     var s = {
-        url: 'http://www-test.fao.org/adam/browse-data/sector/en',
+        url: 'http://www-test.fao.org/adam/browse-data/donor/en',
         CONTAINER: '#browse'
     };
 
@@ -26,7 +26,8 @@ define([
 
     Browse.prototype.start = function () {
 
-        var url = s.url; //window.location.href;
+      //var url = window.location.href;
+       var url = s.url;
 
         // client parameters
         var params = this.getRequestParameters(url),
@@ -60,8 +61,6 @@ define([
     };
 
     Browse.prototype._importThirdPartyCss = function () {
-        //Bootstrap
-        // require("bootstrap-loader");
 
         //dropdown selector
          require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
