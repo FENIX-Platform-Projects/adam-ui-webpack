@@ -26,7 +26,7 @@ define([
 
     Browse.prototype.start = function () {
 
-      //var url = window.location.href;
+       //var url = window.location.href;
        var url = s.url;
 
         // client parameters
@@ -62,11 +62,13 @@ define([
 
     Browse.prototype._importThirdPartyCss = function () {
 
+        //SANDBOXED BOOTSTRAP
+        require("css/sandboxed-bootstrap.css");
+
+
         //dropdown selector
          require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
 
-        //bootstrap
-        require("node_modules/bootstrap/dist/css/bootstrap.min.css");
 
         // fenix-ui-filter
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
