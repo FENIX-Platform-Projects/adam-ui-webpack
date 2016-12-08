@@ -16,6 +16,7 @@ define(function () {
         "completed" : "Completed",
         "print": "Print",
         "download": "Download",
+        "download_options": "Download Options (e.g. Excel, Images)",
         "download_data": "DOWNLOAD DATA",
         "download_indicators": "DOWNLOAD INDICATORS",
         "download_chart": "DOWNLOAD CHART",

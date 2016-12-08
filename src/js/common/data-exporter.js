@@ -19,6 +19,11 @@ define([
     }
 
     DataExporter.prototype._init = function () {
+
+        if (this.report && $.isFunction(this.report.dispose)) {
+            this.report.dispose();
+        }
+
         this.report = new Report({
             environment: this.environment,
             cache: this.cache
