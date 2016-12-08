@@ -1,0 +1,272 @@
+// Standard Fenix Theme
+
+
+.fx-text-primary-color{
+  color: $fx-cool-blue;
+}
+
+.fx-background-color-primary-color{
+  background-color: $fx-cool-blue;
+}
+
+
+.fx-button-primary-color {
+  color: white;
+  border-color: darken($fx-cool-blue, 10%);
+  background-color: $fx-cool-blue;
+
+
+
+  &:hover {
+    color: white;
+    border-color: darken($fx-cool-blue, 10%);
+    background-color: darken($fx-cool-blue, 5%);
+  }
+
+  &:focus {
+    color: white;
+    border-color: darken($fx-cool-blue, 20%);
+    background-color: darken($fx-cool-blue, 15%);
+  }
+
+}
+
+
+//// Filter
+
+
+/* Radio Buttons */
+
+input[type="radio"] + label  {
+
+
+  &:before {
+    border-color:$fx-cool-blue;
+  }
+}
+
+input[type="radio"]:checked + label {
+  color: $fx-cool-blue;
+}
+
+
+
+
+/* Checkbox Buttons */
+
+
+input[type="checkbox"] + label  {
+
+
+
+  &:before {
+    border-color:$fx-cool-blue;
+  }
+}
+
+input[type="checkbox"]:checked + label {
+  color: $fx-cool-blue;
+}
+
+
+//jsTree
+
+.jstree-default .jstree-wholerow-clicked{
+  background: none;
+  background-color: lighten( $fx-cool-blue, 40%);
+
+}
+
+.jstree-default .jstree-wholerow-hovered{
+  background: none;
+  background-color: lighten( $fx-cool-blue, 45%);
+}
+
+.jstree-default .jstree-disabled.jstree-clicked{
+  background: none;
+  background-color: lighten( $fx-cool-blue, 40%);
+}
+
+
+
+
+// Range Slider
+.irs-bar {
+  border-top: 1px solid $fx-cool-blue;
+  border-bottom: 1px solid $fx-cool-blue;
+}
+
+
+.irs-bar-edge{
+  border: 1px solid $fx-cool-blue;
+}
+
+
+.irs-bar, .irs-bar-edge{
+  background: $fx-cool-blue;
+}
+
+.irs-from, .irs-to, .irs-single {
+  color: $fx-cool-blue;
+}
+
+// Time
+
+[data-selector-time]{
+
+  .day{
+
+    &.active{
+      background-color: $fx-cool-blue;
+
+      &:hover{
+        background-color: desaturate( $fx-cool-blue, 50% );
+      }
+
+    }
+
+    &.today{
+      &:before{
+        border-bottom-color: $fx-cool-blue;
+      }
+    }
+
+  }
+
+
+  .month{
+
+    &.active{
+      background-color: $fx-cool-blue;
+    }
+
+  }
+
+  .year{
+
+    &.active{
+      background-color: $fx-cool-blue;
+    }
+
+
+
+  }
+
+
+  .fx-time-addon {
+    color: $fx-cool-blue;
+  }
+
+
+
+  [data-action="incrementHours"], [data-action="decrementHours"],[data-action="incrementMinutes"],[data-action="decrementMinutes"]{
+    color:$fx-cool-blue;
+  }
+
+
+  [data-action="togglePicker"]{
+
+
+    span{
+
+      color:$fx-cool-blue;
+
+
+    }
+
+  }
+
+
+}
+
+
+// Catalogue
+.cat-toolbar {
+
+  button {
+
+    &:hover {
+      color: $fx-cool-blue;
+
+    }
+
+  }
+
+}
+
+.bootstrap-table{
+
+  .pagination > li > a, .pagination > li > span {
+    color: $fx-cool-blue;
+  }
+
+  .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    color: white;
+    background-color: $fx-cool-blue;
+    border-color: $fx-cool-blue;
+  }
+
+
+}
+
+
+
+// Visualization Box
+.vb-toolbar {
+
+  button {
+
+
+    &:hover {
+
+      color: $fx-cool-blue;
+
+    }
+
+  }
+
+}
+
+.dropdown-menu{
+  a{
+    color: inherit;
+  }
+}
+
+
+
+.swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'#{$fx-cool-blue}'%2F%3E%3C%2Fsvg%3E");
+}
+
+.swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'#{$fx-cool-blue}'%2F%3E%3C%2Fsvg%3E");
+}
+
+.swiper-pagination-bullet-active{
+  background: $fx-cool-blue;
+}
+
+.gt-row-over td {
+  border-bottom-color: $fx-cool-blue;
+}
+
+.fm-controller-box-item{
+
+  .ui-widget-header{
+    background-color: $fx-cool-blue;
+  }
+
+}
+
+
+// Analysis
+
+.pulse-button {
+  box-shadow: 0 0 0 0 rgba($fx-cool-blue, 0.7);
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba($fx-cool-blue, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba($fx-cool-blue, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba($fx-cool-blue, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba($fx-cool-blue, 0);}}

@@ -10,5 +10,92 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+a{
+  color: $fx-cool-blue;
+
+}
+a:focus, a:hover{
+  text-decoration: none;
+}
 
 
+// Fenix Fixes into Typo 3
+
+
+.tree-holder{
+  height: 150px;
+  overflow: auto;
+}
+
+.fx-catalog {
+
+
+ .btn-fx-catalog-filters {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  [data-content] {
+    display: none;
+    height: 100%;
+  }
+
+  //show only the status only correspondent tab content
+  $statuses: "ready" "error" "loading" "empty" "intro" "huge";
+
+  @each $status in $statuses {
+
+    [data-status="#{$status}"] {
+
+      [data-content="#{$status}"] {
+        display: block;
+      }
+    }
+  }
+
+}
+
+[data-page="readyToUse"]{
+  .fx-catalog{
+    border:1px solid $fenix-light-gray;
+  }
+}
+
+
+
+.cat-toolbar{
+  padding: 0;
+
+  .cat-title{
+    margin: 5px 15px;
+    margin-bottom: 5px !important;
+  }
+}
+
+.modal-body{
+  padding: 0 15px;
+}
+
+
+#fx-data-management-content, #fx-data-upload-content{
+
+  .catalog-modal .modal-lg{
+    width: 100% !important;
+  }
+
+}
+
+#fx-data-management-menu{
+
+  .container{
+    width: 100% !important;
+  }
+
+}
+
+.filter-container{
+
+  .fx-selector-title{
+    margin-right: 0;
+  }
+}
