@@ -1,6 +1,6 @@
 /*global define, requirejs*/
-define([
-], function () {
+define(['underscore'
+], function (_) {
 
     'use strict';
 
@@ -15,7 +15,8 @@ define([
         parser.href = url;
 
         var name = parser.pathname;
-        var arry = name.split('/');
+        var pArry = name.split('/');
+        var arry = _.filter(pArry, Boolean); /// remove the empty strings
 
         var domain = arry[arry.length - 2];
 

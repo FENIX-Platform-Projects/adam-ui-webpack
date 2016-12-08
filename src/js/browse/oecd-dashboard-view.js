@@ -135,10 +135,10 @@ define([
 
 
     DashboardView.prototype._downloadExcel = function (model) {
-
      var model = this.models[model];
 
-     console.log(" =========== MODEL ", model);
+     console.log(" =========== _downloadExcel: MODEL ", model);
+
 
      var dataExporter = new DataExporter({
      lang: this.lang,
@@ -156,8 +156,11 @@ define([
         var model = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
 
-        console.log("============ model, type ");
-        console.log(model, type);
+        console.log("============ model ID  ", model);
+        console.log("============ model DATA-TYPE ", type);
+
+        console.log("============ model DATA-TYPE ", type);
+
 
         switch(type) {
             case BaseConfig.DOWNLOAD.EXCEL:
@@ -605,6 +608,7 @@ define([
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
 
 
+            console.log(" ================ ", self.models);
 
 
 
