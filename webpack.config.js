@@ -54,10 +54,10 @@ module.exports = sections.map(function (section) {
                     {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
                     {test: /\.css$/, loader: "style-loader!css-loader"}
                 ),
-                {
+               /* {
                     test: /\.scss$/,
                     loaders: ["style-loader", "css-loader", "sass-loader?config=otherSassLoaderConfig"]
-                },
+                },*/
                 { test: /\.hbs$/,
                     loader: 'handlebars-loader',
                     query: {
