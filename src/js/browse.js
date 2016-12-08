@@ -26,8 +26,8 @@ define([
 
     Browse.prototype.start = function () {
 
-       //var url = window.location.href;
-       var url = s.url;
+       var url = window.location.href;
+       //var url = s.url;
 
         // client parameters
         var params = this.getRequestParameters(url),

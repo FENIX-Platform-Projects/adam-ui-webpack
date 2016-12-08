@@ -15,7 +15,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-sm-3",
+                classNames: "col-xs-3",
                 cl: {
                     uid: "crs_donors",
                     version: "2016",
@@ -40,7 +40,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-sm-3",
+                classNames: "col-xs-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -65,7 +65,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-sm-4",
+                classNames: "col-xs-4",
                 cl: {
                     "uid": "crs_dac",
                     "version": "2016",
@@ -95,7 +95,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-sm-2",
+                classNames: "col-xs-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -115,7 +115,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-sm-2",
+                classNames: "col-xs-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -136,7 +136,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-sm-4",
+                classNames: "col-xs-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
