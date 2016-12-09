@@ -266,7 +266,7 @@ define([
             },
 
             filter: {
-                items: {
+                selectors: {
                     recipientcode: {
                         selector: {
                             id: "tree",
@@ -396,7 +396,7 @@ define([
                                 maxItems: 1
                             }
                         },
-                        className: "col-sm-4",
+                        classNames: "col-xs-4",
                         cl: {
                             uid: "crs_flow_amounts",
                             version: "2016"

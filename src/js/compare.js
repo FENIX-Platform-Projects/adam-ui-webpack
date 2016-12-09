@@ -71,9 +71,23 @@ define([
         // fenix-ui-filter
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
 
-        // map
-        require("node_modules/fenix-ui-map/dist/fenix-ui-map.min.css");
-        require("node_modules/leaflet/dist/leaflet.css");
+        // fenix-ui-analysis
+        require("node_modules/fenix-ui-analysis/dist/fenix-ui-analysis.min.css");
+
+        //tree selector
+        require("node_modules/jstree/dist/themes/default/style.min.css");
+
+        // fenix-ui-visualization-box
+        require("node_modules/fenix-ui-visualization-box/dist/fenix-ui-visualization-box.min.css");
+
+        // fenix-ui-table-creator
+        require("node_modules/fenix-ui-table-creator/dist/fenix-ui-table-creator.min.css");
+
+        // jquery-grid for fenix-ui-metadata-viewer
+        require("node_modules/jquery-treegrid-webpack/css/jquery.treegrid.css");
+
+        // iDangerous swiper
+        require("node_modules/swiper/dist/css/swiper.min.css");
 
         // INDEX
         require("css/adam.css");
