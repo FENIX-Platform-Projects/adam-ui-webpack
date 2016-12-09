@@ -45,7 +45,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-xs-4",
+                classNames: "col-xs-5",
                 cl: {
                     "uid": "crs_dac",
                     "version": "2016",

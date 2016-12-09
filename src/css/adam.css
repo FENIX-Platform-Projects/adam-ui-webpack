@@ -9124,6 +9124,10 @@ button_new_2:before {
   .fx-sandbox.fao-holder .filter-container .fx-selector-title {
     margin-right: 0; }
 
+.main-container {
+  padding-left: 0;
+  padding-right: 0; }
+
 .fade {
   opacity: 0;
   -webkit-transition: opacity .15s linear;

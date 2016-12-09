@@ -169,7 +169,7 @@ define(['highcharts'],function (Highcharts) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-xs-4",
+                classNames: "col-xs-5",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
