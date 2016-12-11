@@ -8,7 +8,6 @@ var distFolderPath = "dist",
     Path = require('path'),
     sections = getSections();
 
-
 module.exports = sections.map(function (section) {
 
     var entry = {};
@@ -41,7 +40,11 @@ module.exports = sections.map(function (section) {
                 'models': Path.join(__dirname, 'src/js/models'),
                 'browse': Path.join(__dirname, 'src/js/browse'),
                 'compare': Path.join(__dirname, 'src/js/compare'),
-                'node_modules': Path.join(__dirname, 'node_modules')
+                'priority': Path.join(__dirname, 'src/js/priority'),
+                'node_modules': Path.join(__dirname, 'node_modules')//,
+                //'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js'),
+                //'fenix-ui-table-creator': Path.join(__dirname, 'node_modules/fenix-ui-table-creator/src/js/index.js'),
+                //'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
               }
         },
 
