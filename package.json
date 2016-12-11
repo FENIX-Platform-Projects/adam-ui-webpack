@@ -8,8 +8,11 @@
     "dev": "cross-env NODE_ENV=develop webpack-dev-server --display-error-details --progress --color --content-base dev  --inline --hot",
     "dev:browse": "cross-env SECTIONS=browse NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:compare": "cross-env SECTIONS=compare NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
-    "build": "cross-env SECTIONS=browse,compare NODE_ENV=production webpack --display-error-details",
-    "w-build": "cross-env SET SECTIONS=browse,compare&&SET NODE_ENV=production&&webpack --display-error-details "
+    "dev:priority": "cross-env SECTIONS=priority NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
+    "dev:base": "cross-env SECTIONS=base NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
+    "build": "cross-env SECTIONS=browse,compare,priority,base NODE_ENV=production webpack --display-error-details",
+    "build:base": "cross-env SECTIONS=base NODE_ENV=production webpack --display-error-details",
+    "w-build": "cross-env SET SECTIONS=browse,compare,priority,base&&SET NODE_ENV=production&&webpack --display-error-details "
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
   "dependencies": {
     "amplify-pubsub": "^0.0.1",
     "bootstrap": "^3.3.7",
+    "canvas2svg": "^1.0.16",
     "fenix-ui-analysis": "^3.0.0-beta.47",
     "fenix-ui-dashboard": "^3.0.0-beta.9",
     "fenix-ui-filter": "^3.0.0-beta.51",
