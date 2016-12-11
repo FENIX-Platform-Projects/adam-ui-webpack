@@ -116,20 +116,11 @@ define([
 
         this.chartExporter = new ChartExporter();
 
-
-
-        //this.labels = $.extend(true, i18nLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
-
-        //this.template = template(this.labels);
-
-
-        //Initialize Progress Bar
+     //Initialize Progress Bar
         this.progressBar = new ProgressBar({
            container: defaultOptions.PROGRESS_BAR_CONTAINER,
            lang: this.lang
         });
-
-
 
     };
 
