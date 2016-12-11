@@ -4,7 +4,7 @@ define([
     'underscore',
     'config/config-base',
     'utils/parser',
-    'browse/index'
+    'browse/browse-view'
 ], function (log, $, _, Config, Parser, BrowseByView) {
 
     'use strict';
