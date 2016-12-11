@@ -27,8 +27,12 @@ define([
      * @returns {Object} updatedConf
      * @private
      */
-    FilterUtils.prototype.getUpdatedFilterConfig = function (config, lang) {
+    FilterUtils.prototype.getUpdatedFilterConfig = function (config, lang, key) {
+        var keyId = "filter_";
 
+        if(key){
+            keyId = key;
+        }
         var conf = $.extend(true, {}, config),
             values = {},
             updatedConf = this._mergeConfigurations(conf, values);
@@ -39,8 +43,10 @@ define([
                 obj.template = {};
             }
             //Add i18n label
-            obj.template.title = this.langUtils.getI18nLabel(key, i18nLabels[lang], "filter_");
-            obj.template.headerIconTooltip = this.langUtils.getI18nLabel(key, i18nLabels[lang], "filter_tooltip_");
+            obj.template.title = this.langUtils.getI18nLabel(key, i18nLabels[lang], keyId);
+            var tooltip = this.langUtils.getI18nLabel(key, i18nLabels[lang], "filter_tooltip_");
+            if(tooltip)
+              obj.template.headerIconTooltip = this.langUtils.getI18nLabel(key, i18nLabels[lang], "filter_tooltip_");
 
         }, this));
 

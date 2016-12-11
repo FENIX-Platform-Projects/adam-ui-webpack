@@ -9312,4 +9312,22 @@ button_new_2:before {
 .adam-entry-point p.text-justify {
   color: #999999; }
 
+element.style {
+  position: absolute;
+  left: 120px;
+  top: 100px;
+  font-size: 11px;
+  font-family: Arial;
+  opacity: 1; }
+
+.number-empty {
+  font-weight: normal;
+  font-size: 12px; }
+
+.number-black {
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
+  font-size: 12px; }
+
 /*# sourceMappingURL=adam.css.map */
