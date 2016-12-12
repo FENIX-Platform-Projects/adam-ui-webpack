@@ -11,7 +11,6 @@ define([
     'models/dashboard',
     'models/table',
     'html/priority/priority.hbs',
-    'nls/analyse',
     'config/config-base',
     'config/events',
     'config/errors',
@@ -23,7 +22,7 @@ define([
     'config/priority/config-filter',
     'utils/utils',
     'amplify-pubsub'
-], function (log, $, $UI, _, TitleSubView, FilterSubView, DashboardChartsSubView, DashboardTableVennSubView, DashboardModel, TableModel, template, i18nLabels, BaseConfig, Events, Errors, GeneralConfig, BasePriorityAnalysisEvents, TableConfig, ChartsConfig, BasePriorityAnalysisConfig, BaseFilterConfig, Utils, amplify) {
+], function (log, $, $UI, _, TitleSubView, FilterSubView, DashboardChartsSubView, DashboardTableVennSubView, DashboardModel, TableModel, template, BaseConfig, Events, Errors, GeneralConfig, BasePriorityAnalysisEvents, TableConfig, ChartsConfig, BasePriorityAnalysisConfig, BaseFilterConfig, Utils, amplify) {
 
     'use strict';
 
@@ -106,7 +105,7 @@ define([
     };
 
     PriorityAnalysisView.prototype._attach = function () {
-        this.template = template(i18nLabels[this.lang]);
+        this.template = template;
         this.$el.append(this.template);
     };
 
@@ -116,17 +115,17 @@ define([
 
     PriorityAnalysisView.prototype._bindEventListeners = function () {
        amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_READY, this, this._filtersLoaded);
-      // amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
-      // amplify.subscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this, this._renderChartsDashboards);
-       //amplify.subscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this, this._clearChartsDashboards);
+        amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
+        amplify.subscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this, this._renderChartsDashboards);
+       amplify.subscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this, this._clearChartsDashboards);
     };
 
     PriorityAnalysisView.prototype._unbindEventListeners = function () {
         // Remove listeners
         amplify.unsubscribe(BasePriorityAnalysisEvents.FILTER_ON_READY, this._filtersLoaded);
-       // amplify.unsubscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this._filtersChanged);
-       // amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this._renderChartsDashboards);
-       // amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this._clearChartsDashboards);
+        amplify.unsubscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this._filtersChanged);
+        amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this._renderChartsDashboards);
+        amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this._clearChartsDashboards);
     };
 
 
@@ -153,8 +152,6 @@ define([
     */
 
     PriorityAnalysisView.prototype._initSubViews = function (VennConfig) {
-
-        console.log(" =================== VENN CONFIG ================= ", VennConfig);
 
         // Filter Configuration
         if (!BaseFilterConfig || !BaseFilterConfig.filter) {
@@ -196,16 +193,11 @@ define([
         this.prioritiesConfig.dashboard.items.push(VennConfig.dashboard.items[0]);
 
 
-        console.log(" =================== this.prioritiesConfig ================= ", this.prioritiesConfig);
-
-
-
-
         // Set TITLE Sub View
         var titleSubView = new TitleSubView({
            // autoRender: true,
-            el: this.$el.find(s.css_classes.TITLE_BAR_ITEMS),
-            title: i18nLabels[this.lang].selections
+            el: this.$el.find(s.css_classes.TITLE_BAR_ITEMS)//,
+            //title: i18nLabels[this.lang].selections
         });
         this.subviews['title'] = titleSubView;
 

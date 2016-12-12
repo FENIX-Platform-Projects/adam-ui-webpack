@@ -8,7 +8,6 @@ define([
     'utils/utils',
     'config/config-base',
     'config/errors',
-    'nls/analyse',
     'nls/priority',
     'priority/table-item',
     'config/priority/events',
@@ -16,10 +15,8 @@ define([
     'config/priority/config-priority-analysis',
     'common/progress-bar',
     'handlebars',
-    'amplify-pubsub',
-    'canvas2svg',
-    'jvenn'
-], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nLabels, i18nDashboardLabels, TableItem, BaseEvents,  JVennTemplate, BasePriorityAnalysisConfig, ProgressBar, amplify) {
+    'amplify-pubsub'
+], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, TableItem, BaseEvents,  JVennTemplate, BasePriorityAnalysisConfig, ProgressBar, Handlebars, amplify) {
 
     'use strict';
 
@@ -128,7 +125,7 @@ define([
     TableVennDashboardView.prototype._updateTemplate = function () {
 
         var model = this.model.getProperties();
-        var data = $.extend(true, model, i18nLabels, i18nDashboardLabels);
+        var data = $.extend(true, model, i18nDashboardLabels[this.lang]);
 
         return this.template(data);
 
@@ -150,6 +147,8 @@ define([
            // $(identifier+"-"+BaseConfig.PRINT).on('click', _.bind(self.onPrintMenuClick, self));
 
         });
+
+
 
 
     };
@@ -274,8 +273,7 @@ define([
         });*/
 
         this._bindEventListeners();
-
-        //this._loadProgressBar();
+        this._loadProgressBar();
 
 
     };
@@ -315,6 +313,103 @@ define([
 
             increment = increment + percent;
             self.progressBar.update(increment);
+        });
+
+
+        this.dashboard.on('click.item', function (values) {
+
+            console.log(" ======================== click.item ", values);
+
+            // reset others
+            $("div[id^='resultC']").css('color', 'black');
+
+            //set selected
+            $(values.selected).css('color', 'red');
+
+            var listnames = values.listnames;
+            var list = values.list;
+            var series = values.series;
+
+            var title = "";
+            if (listnames.length == 1) {
+                title += i18nDashboardLabels[self.lang].prioritiesOnlyIn + " ";
+            } else {
+                title += i18nDashboardLabels[self.lang].commonPrioritiesIn + " ";
+            }
+
+            // get first list
+            var firstList = listnames[0];
+
+            // find associated series code/label list
+            var seriesCodeLabels= _.find(series,function(rw){
+                return rw.name == firstList;
+            });
+
+            // title
+            var count = 0;
+            for (var name in listnames) {
+                title += listnames[name];
+
+                if(count < listnames.length-2){
+                    title += ", ";
+                }
+
+                if(count == listnames.length - 2){
+                    title += " "+i18nDashboardLabels[self.lang].and + " ";
+                }
+
+                count++;
+            }
+
+            console.log(" =================== title ", title);
+
+            $('#'+values.id+'-title').html(title);
+
+            // priorities list
+            var value = "";
+            var codes = [];
+            var codeGroups = [];
+            if (seriesCodeLabels) {
+                for (var val in list) {
+                    var label = list[val];
+                    var id = seriesCodeLabels.codelist.find(function(o){
+                        if (o.title=== label) {
+                            return o;
+                        }
+                    }).id;
+
+
+                    codes.push(id);
+
+                    var codeGrp = id.substring(0, 2);
+
+                    if($.inArray(codeGrp, codeGroups) === -1) {
+                        codeGroups.push(codeGrp);
+                        if(codeGroups.length > 1){
+                            value += "\n";
+                        }
+                    }
+
+                    //value += label + " - " + id+ "\n";
+                    value += label + "\n";
+
+                }
+            }
+
+            // No priorities
+            if(value.length === 0){
+                value = i18nDashboardLabels[self.lang].none;
+            }
+
+
+            $('#'+values.id+'-info').val(value);
+
+            if(codes.length > 0) {
+               // amplify.publish(BaseEvents.VENN_ON_CHANGE,{values: {purposecode: codes}});
+            } else {
+               // amplify.publish(BaseEvents.VENN_NO_VALUES);
+            }
+
         });
 
     };

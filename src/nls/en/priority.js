@@ -2,8 +2,6 @@ define(function () {
     'use strict';
 
     return {
-
-        text: "Change me in 118n/root/modules.js",
         "priorities-table": "Country (UNDAF) and FAO Agreed (CPF) Priorities in Agriculture and Food Security",
         "venn-diagram": "Venn Diagram: Common Priorities between the Countries, FAO and the Resource Partners",
         "venn-diagram-info": "Click on the Venn Diagram intersections to view the priorities and the associated funding allocation charts.",

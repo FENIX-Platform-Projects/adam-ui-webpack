@@ -8,7 +8,6 @@ define([
     'utils/utils',
     'config/config-base',
     'config/errors',
-    'nls/analyse',
     'nls/priority',
     'nls/chart',
     'config/priority/events',
@@ -20,7 +19,7 @@ define([
     'common/chart-exporter',
     'common/exporter',
     'amplify-pubsub'
-], function (log, $, _, template, Dashboard, Utils,  BaseConfig, Errors, i18nLabels, i18nDashboardLabels, i18nChartLabels, BaseEvents, Handlebars,  HighchartsTemplate, JVennTemplate, ProgressBar, DataExporter, ChartExporter, Exporter, amplify) {
+], function (log, $, _, template, Dashboard, Utils,  BaseConfig, Errors, i18nDashboardLabels, i18nChartLabels, BaseEvents, Handlebars,  HighchartsTemplate, JVennTemplate, ProgressBar, DataExporter, ChartExporter, Exporter, amplify) {
 
     'use strict';
 
@@ -167,7 +166,7 @@ define([
     ChartsDashboardView.prototype._updateTemplate = function () {
 
         var model = this.model.getProperties();
-        var data = $.extend(true, model, i18nLabels, i18nDashboardLabels, i18nChartLabels);
+        var data = $.extend(true, model, i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         return this.template(data);
 

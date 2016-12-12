@@ -9330,4 +9330,11 @@ element.style {
   text-decoration: none;
   font-size: 12px; }
 
+/** Venn Text Area */
+#venn-diagram-info-box textarea {
+  width: 100%;
+  height: 500px;
+  padding: 10px;
+  resize: none; }
+
 /*# sourceMappingURL=adam.css.map */
