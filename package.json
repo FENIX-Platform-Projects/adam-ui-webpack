@@ -29,7 +29,7 @@
     "bootstrap": "^3.3.7",
     "canvas2svg": "^1.0.16",
     "fenix-ui-analysis": "^3.0.0-beta.47",
-    "fenix-ui-dashboard": "^3.0.0-beta.9",
+    "fenix-ui-dashboard": "^3.0.0-beta.10",
     "fenix-ui-filter": "^3.0.0-beta.51",
     "fenix-ui-filter-utils": "^1.0.0-beta.14",
     "fenix-ui-reports": "^2.0.0-beta.1",
