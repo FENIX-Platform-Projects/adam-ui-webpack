@@ -109,8 +109,7 @@ define([
         this.modelUpdated = false;
         this.models = {};
 
-
-         this.chartExporter = new ChartExporter();
+        this.chartExporter = new ChartExporter();
 
         //Initialize Progress Bar
         this.progressBar = new ProgressBar({
@@ -168,7 +167,7 @@ define([
         var model = this.model.getProperties();
         var data = $.extend(true, model, i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
-        return this.template(data);
+        return template(data);
 
 
     };
@@ -322,7 +321,7 @@ define([
         $(this.source).find(itemContainerId).removeClass(defaultOptions.css.COLLAPSE);
     };
 
-    ChartsDashboardView.prototype.rebuildDashboard = function (filter, displayConfigForSelectedFilter) {
+   /* ChartsDashboardView.prototype.rebuildDashboard = function (filter, displayConfigForSelectedFilter) {
         var self = this;
 
 
@@ -354,6 +353,23 @@ define([
         this._loadProgressBar();
 
     };
+*/
+
+    ChartsDashboardView.prototype.renderDashboard = function () {
+        this.render();
+
+        this.config.el = this.$el;
+        this.dashboard = new Dashboard(this.config);
+
+        this._bindEventListeners();
+        this._loadProgressBar();
+    };
+
+
+    ChartsDashboardView.prototype.clear = function () {
+        this.$el.empty();
+    };
+
 
     ChartsDashboardView.prototype._disposeDashboards = function () {
         if (this.dashboard && $.isFunction(this.dashboard.dispose)) {
@@ -376,9 +392,9 @@ define([
 
 
         this.dashboard.on('ready.item', function (item) {
-            //   console.log(" ================== item READY: =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
+               console.log(" ================== item READY: =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
 
-            self.models[item.id] = {};
+          self.models[item.id] = {};
             self.models[item.id].data = item.model.data;
             self.models[item.id].metadata = {};
             self.models[item.id].metadata.rid = item.model.metadata.rid;

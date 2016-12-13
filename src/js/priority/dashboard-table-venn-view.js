@@ -178,17 +178,19 @@ define([
 
         this._unbindEventListeners();
 
+        console.log(" ============== before BIND ===========");
+
         var updatedTemplate = this._updateTemplate();
         this.source = $(updatedTemplate).prop('outerHTML');
 
         // Hide/Show Dashboard Items
-        if(this.displayConfigForSelectedFilter)
-            this.updateDashboardTemplate(this.displayConfigForSelectedFilter);
+        //if(this.displayConfigForSelectedFilter)
+            //this.updateDashboardTemplate(this.displayConfigForSelectedFilter);
 
 
         this.$el.html(this.source);
 
-        //console.log(" ============== before BIND ===========");
+        console.log(" ============== before BIND ===========");
         this._bindEventListeners();
 
     };
@@ -284,6 +286,156 @@ define([
         }
     };
 
+    TableVennDashboardView.prototype.getDashboardConfig = function () {
+        return this.config;
+    };
+
+    TableVennDashboardView.prototype.rebuildDashboard = function (filter, topic, props) {
+             var self = this;
+
+            this._disposeDashboards();
+            this.config.filter = filter;
+
+        this.config.el = this.$el;
+        this.config.items[0].topic = this.topic;
+        this.config.items[0].lang = this.lang;
+        this.config.environment = this.environment;
+        this.config.baseItems = this.config.items;
+
+
+             console.log("REBUILD 1 =========", props);
+
+
+            if(props)
+                this._updateItems(props);
+
+
+
+            console.log("REBUILD 2 =========", topic);
+
+
+            // Re-Render the source template
+            if (topic) {
+                this.topic = topic;
+                this.source = $(this.template).prop('outerHTML');
+                this.render();
+            }
+
+
+        console.log("REBUILD 3 =========");
+
+            if(this.config.items.length > 0)
+                this.config.items[0].config.topic = this.topic;
+
+
+        console.log("REBUILD 4 =========");
+
+            // the path to the custom item is registered
+            this.config.itemsRegistry = {
+                custom: {
+                    item: TableItem,
+                    path: 'priority/table-item'
+                }
+            };
+
+        console.log("REBUILD 5 =========");
+
+            // Build new dashboard
+            this.dashboard = new Dashboard(this.config);
+
+        console.log("REBUILD 6 =========");
+
+
+            // Bind the events
+            this._bindEventListeners();
+
+        console.log("REBUILD 7 =========");
+
+            // Load Progress bar
+            this._loadProgressBar();
+
+        console.log("REBUILD 8 =========");
+
+
+    };
+
+
+
+    TableVennDashboardView.prototype._updateItems = function(props){
+
+        console.log("_updateItems ============ props ", props);
+
+        var selectionsObj = _.find(props, function(obj){
+            if(obj['selections'])
+                return obj;
+        });
+
+        console.log("_updateItems ============ selectionsObj ", selectionsObj);
+        if (selectionsObj) {
+            var selections = selectionsObj['selections'];
+            var keys;
+            // find item
+            for (var idx in selections) {
+                var item = selections[idx];
+
+                console.log("ITEM ", item);
+
+                if(_.contains(Object.keys(item), BasePriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED)){
+                    keys = item;
+                }
+
+                console.log("KEYS ", keys);
+
+                this._updateDashboardItem(BasePriorityAnalysisConfig.items.VENN_DIAGRAM, item);
+            }
+
+            if(keys) {
+                var fao = {fao: keys[BasePriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED]};
+                this._updateDashboardItem(BasePriorityAnalysisConfig.items.VENN_DIAGRAM, fao);
+
+                // set recipient selection info on table config, to understand selection status
+                this.config.items[0].config.selections = keys;
+            }
+        }
+    };
+
+
+    TableVennDashboardView.prototype._updateDashboardItem = function(itemid, props){
+
+        for(var idx in props){
+            var type = idx;
+            var value = props[idx];
+
+            console.log(" props[idx] ", props[idx]);
+
+
+            // find item
+
+            var item =  _.find(this.config.items, function(o){
+                return o.id === itemid;
+            });
+
+            console.log(" ================== _updateDashboardItem: item ", item);
+
+            // update the process
+            if(item) {
+                var process = _.filter(item.postProcess, function(obj){
+                    return obj.rid && obj.rid.uid === type;
+                });
+
+                // update the indicator value
+                if(process && process.length === 1)
+                    var label = value;
+                if(i18nDashboardLabels[this.lang][value])
+                    label = i18nDashboardLabels[this.lang][value];
+
+                console.log(" label ", label);
+
+                process[0].parameters.value = i18nDashboardLabels[this.lang][type] + ' ('+ label +')';
+            }
+
+        }
+    };
 
     TableVennDashboardView.prototype._loadProgressBar = function () {
         var self = this, increment = 0, percent = Math.round(100 / this.config.items.length);
@@ -293,6 +445,8 @@ define([
 
 
         this.dashboard.on('ready', function () {
+            console.log(" ======================= DASHBOARD READY =============");
+
             self.progressBar.finish();
 
         });
@@ -405,9 +559,9 @@ define([
             $('#'+values.id+'-info').val(value);
 
             if(codes.length > 0) {
-               // amplify.publish(BaseEvents.VENN_ON_CHANGE,{values: {purposecode: codes}});
+                amplify.publish(BaseEvents.VENN_ON_CHANGE,{values: {purposecode: codes}});
             } else {
-               // amplify.publish(BaseEvents.VENN_NO_VALUES);
+                amplify.publish(BaseEvents.VENN_NO_VALUES);
             }
 
         });
@@ -415,7 +569,7 @@ define([
     };
 
     TableVennDashboardView.prototype.setDashboardConfig = function (config) {
-        console.log(" ================================== setDashboardConfig ");
+        console.log(" ================================== setDashboardConfig ", config);
 
         this.config = config;
         this.config.baseItems = config.items;

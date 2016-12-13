@@ -5,7 +5,7 @@ define(function () {
 
     return {
        displayMode: 'classic',  //default = 'classic' or 'edwards'
-       displayStat: 'true', // default = true
+       displayStat: false, // default = true
        xAxis: {
            categories: []
        },

@@ -205,7 +205,7 @@ define(
 
 
             // Filter on Change: Set some base properties for Recipient and the ODA, then publish Filter On Change Event
-            this.filter.on('click', function (payload) {
+            this.filter.on('select', function (payload) {
 
               // console.log("================== FILTERS CLICK 1: =========== ", payload.id);
                // console.log(this._getSelectedValues());
