@@ -34,12 +34,12 @@ define(
         /**
          * Creates a new Filter View.
          * Instantiates the FENIX filter submodule and responsible for all filter related functionality.
-         * @class FilterView
+         * @class PriorityFilterView
          * @extends View
          */
 
 
-        function FilterView(o) {
+        function PriorityFilterView(o) {
             //  log.info("FilterView");
             // log.info(o);
 
@@ -66,7 +66,7 @@ define(
             }
         }
 
-        FilterView.prototype._parseInput = function (params) {
+        PriorityFilterView.prototype._parseInput = function (params) {
             this.$el = $(this.el);
             this.lang = params.lang || BaseConfig.LANG.toLowerCase();
             this.environment = params.environment  || BaseConfig.ENVIRONMENT;
@@ -74,7 +74,7 @@ define(
 
         };
 
-        FilterView.prototype._validateInput = function () {
+        PriorityFilterView.prototype._validateInput = function () {
 
             var valid = true,
                 errors = [];
@@ -88,11 +88,11 @@ define(
             return errors.length > 0 ? errors : valid;
         };
 
-        FilterView.prototype._attach = function () {
+        PriorityFilterView.prototype._attach = function () {
             this.$el.append(template);
         };
 
-        FilterView.prototype._init = function () {
+        PriorityFilterView.prototype._init = function () {
             this.filterUtils = new FilterUtils();
 
             this.$titleItemsList = this.$el.find(s.css_classes.TITLE_ITEMS_LIST);
@@ -102,7 +102,7 @@ define(
          * Updates filter configuration and renders the filter.
          * @private
          */
-        FilterView.prototype._buildFilters = function () {
+        PriorityFilterView.prototype._buildFilters = function () {
             var self = this;
 
             var filterConfig = this.filterUtils.getUpdatedFilterConfig(this.config, this.lang);
@@ -121,7 +121,7 @@ define(
          * @param config
          * @private
          */
-        FilterView.prototype._renderFilter = function (config) {
+        PriorityFilterView.prototype._renderFilter = function (config) {
             var self = this;
 
 
@@ -180,7 +180,7 @@ define(
                         else {
                             // --> 1 partner + All recipients
                             topic = PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED;
-                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER_SELECTED)));
+                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER_SELECTED, partnerValue)));
                             selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, s.exclusions.ALL));
                         }
                     }
@@ -193,14 +193,14 @@ define(
                             // --> All partner + 1 recipient
                             topic = PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED;
                             selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, s.exclusions.ALL));
-                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY)));
+                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, recipientValue)));
                         }
                         // 1 resource partners selected
                         else {
                             // --> 1 partner + 1 recipient
                             topic = PriorityAnalysisConfig.topic.RECIPIENT_AND_PARTNER_SELECTED;
-                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER)));
-                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY)));
+                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER, partnerValue)));
+                            selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, recipientValue)));
                         }
                     }
 
@@ -213,13 +213,16 @@ define(
 
 
             // Filter on Change: Set some base properties for Recipient and the ODA, then publish Filter On Change Event
-            this.filter.on('click', function (payload) {
+            this.filter.on('select', function (payload) {
 
-                //console.log("FILTER ALL ==========");
-                //console.log(payload.values.values);
+                console.log("FILTER CLICK 1==========");
+                console.log(payload);
 
                 // validate filter
                 var valid = this.filterValidator.validateValues(this._getSelectedValues(), this.lang);
+
+                console.log("FILTER CLICK 2 ==========");
+                console.log(valid);
 
                 if (valid === true && this._getFirstPayloadValue(payload)) {
                     this.filterValidator.hideErrorSection();
@@ -262,7 +265,7 @@ define(
                                 else {
                                     // --> 1 recipient + All partners
                                     topic = PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED;
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, payloadRecipientValue)));
                                     selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  s.exclusions.ALL));
                                 }
                             }
@@ -275,15 +278,15 @@ define(
                                     // --> All recipient + 1 partner
                                     topic = PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED;
                                     selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, s.exclusions.ALL));
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER, partnerValue)));
 
                                 }
                                 // FROM PAYLOAD: 1 recipient selected
                                 else {
                                     // --> 1 recipient + 1 partner
                                     topic = PriorityAnalysisConfig.topic.RECIPIENT_AND_PARTNER_SELECTED;
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY)));
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, payloadRecipientValue)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER, partnerValue)));
                                 }
                             }
 
@@ -319,7 +322,7 @@ define(
                                 else {
                                     // --> 1 partner + All recipients
                                     topic = PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED;
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED, this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER, payloadPartnerValue)));
                                     selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, s.exclusions.ALL));
                                 }
                             }
@@ -332,14 +335,14 @@ define(
                                     // --> All partner + 1 recipient
                                     topic = PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED;
                                     selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  s.exclusions.ALL));
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, recipientValue)));
                                 }
                                 // 1 resource partners selected
                                 else {
                                     // --> 1 partner + 1 recipient
                                     topic = PriorityAnalysisConfig.topic.RECIPIENT_AND_PARTNER_SELECTED;
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER)));
-                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RESOURCE_PARTNER_SELECTED,  this._getLabel(BaseConfig.SELECTORS.RESOURCE_PARTNER, payloadPartnerValue)));
+                                    selections.push(this.filterUtils.getPropertiesObject(PriorityAnalysisConfig.topic.RECIPIENT_COUNTRY_SELECTED, this._getLabel(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, recipientValue)));
                                 }
                             }
 
@@ -388,23 +391,43 @@ define(
 
 
         /**
+         * Get the selected filter values
+         * @returns {Object} values
+         * @private
+         */
+
+        PriorityFilterView.prototype._getSelectedValues = function () {
+            return this._getFormattedFilterValues().values;
+        };
+
+
+        /**
          *  Get the selected filter labels
          * @returns {Object} labels
          * @private
          */
-        FilterView.prototype._getSelectedLabels = function () {
+        PriorityFilterView.prototype._getSelectedLabels = function () {
             return this._getFormattedFilterValues().labels;
         };
 
-        FilterView.prototype._getLabel = function (id) {
-            return this._getFormattedFilterValues().labels[id];
+        /**
+         *  Get the selected filter labels
+         * @returns {Object} labels
+         * @private
+         */
+        PriorityFilterView.prototype._getSelectedLabels = function () {
+            return this._getFormattedFilterValues().labels;
         };
 
-        FilterView.prototype._getSelectorValues = function (id) {
+        PriorityFilterView.prototype._getLabel = function (id, code) {
+            return this._getFormattedFilterValues().labels[id][code];
+        };
+
+        PriorityFilterView.prototype._getSelectorValues = function (id) {
             return  this._getFormattedFilterValues().values[id];
         };
 
-        FilterView.prototype._getFirstSelectorValue = function (id) {
+        PriorityFilterView.prototype._getFirstSelectorValue = function (id) {
             if(this._getSelectorValues(id)){
                 return this._getFormattedFilterValues().values[id][0]
             }
@@ -416,14 +439,14 @@ define(
          *  Get the full filter values object (consists of labels and values)
          * @returns {Object} filterValues
          */
-        FilterView.prototype.getFilterValues = function () {
+        PriorityFilterView.prototype.getFilterValues = function () {
             var filteredValues = this._resetSelections();
 
             return filteredValues;
         };
 
 
-        FilterView.prototype._resetSelections = function () {
+        PriorityFilterView.prototype._resetSelections = function () {
 
             var filteredValues = this._getFormattedFilterValues();
 
@@ -455,7 +478,7 @@ define(
         };
 
 
-        FilterView.prototype._getFormattedFilterValues = function () {
+        PriorityFilterView.prototype._getFormattedFilterValues = function () {
             var filterValues = this.filter.getValues();
             return this._formatFilterValues(filterValues);
         };
@@ -468,7 +491,7 @@ define(
          */
 
 
-        FilterView.prototype._formatFilterValues = function (filterValues) {
+        PriorityFilterView.prototype._formatFilterValues = function (filterValues) {
             var timerange = {
                 values: {year: [{value: '', parent: s.range.FROM}, {value: '', parent: s.range.TO}]},
                 labels: {year: {range: ''}}
@@ -483,6 +506,15 @@ define(
             return updatedValuesWithODA;
 
         };
+
+        PriorityFilterView.prototype._getPayloadValues = function (payload) {
+            return  payload.values;//payload.values.values;
+        };
+
+        PriorityFilterView.prototype._getFirstPayloadValue = function (payload) {
+            return  this._getPayloadValues(payload)[0];
+        };
+
 
         //////////////////////////////////////////////////////////////////=======================
 
@@ -915,5 +947,5 @@ define(
 
         });*/
 
-        return FilterView;
+        return PriorityFilterView;
     });

@@ -178,6 +178,7 @@ define([
             return;
         }
 
+        this.chartsConfig = ChartsConfig;
         this.prioritiesConfig = TableConfig;
 
         //Check if Venn item is in the config, if so remove it
@@ -268,7 +269,7 @@ define([
         this._setTableDashboardModelValues();
 
         // Render each Dashboard
-       this.subviews['tableVennDashboard'].renderDashboard();
+      this.subviews['tableVennDashboard'].renderDashboard();
 
     };
 
@@ -284,9 +285,74 @@ define([
             this.subviews['chartsDashboard'] = null;
         }
 
+        console.log(" =============================== _filtersChanged changedFilter ");
+        console.log(changedFilter);
+
+
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
+
+        console.log(" =============================== _filtersChanged allFilterValues ");
+        console.log(allFilterValues);
+
         this._updateView(changedFilter, allFilterValues);
+
+    };
+
+
+    /**
+    * Each Dashboard and Title Sub View is rebuilt/refreshed
+    * @param changedFilter The filter which has changed
+    * @param allFilterValues All (selected) filter values
+    * @private
+    */
+
+    PriorityAnalysisView.prototype._updateView = function (changedFilter, allFilterValues) {
+
+        var filterValues = allFilterValues;
+
+        // console.log("================= filter values =============== ");
+        // console.log(filterValues);
+
+        //console.log("================= selectedfilter =============== ");
+        //console.log(changedFilter);
+
+        if (changedFilter) {
+
+            var topic = this.topic, selections;
+
+            // If the changed filter has a value
+            if (changedFilter.values.length > 0) {
+
+                // Get topic
+                if (changedFilter['props']) {
+
+                    var selectedTopicObj = _.find(changedFilter['props'], function(obj){
+                        if(obj['selected_topic'])
+                            return obj;
+                    });
+
+                    if (selectedTopicObj) {
+                        topic = selectedTopicObj["selected_topic"];
+                    }
+
+                }
+
+                // All is selected
+                if (changedFilter.values[0] === s.values.ALL) {
+
+                    // Update the TitleView (Remove Item)
+                    amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
+
+                } else {
+                    // Update the TitleView (Add Item)
+                    amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter));
+                }
+
+                this._getDashboardConfiguration(topic, filterValues, changedFilter['props']);
+            }
+
+        }
 
     };
 
@@ -307,21 +373,23 @@ define([
 
         var extendedFilterValues = $.extend(true, filterValues, newValues);
 
-        // console.log("======================================= filterValues ");
-        // console.log(filterValues);
-        // console.log("======================================= extendedFilterValues");
-        //console.log(extendedFilterValues);
+         console.log("======================================= filterValues ");
+         console.log(filterValues);
+         console.log("======================================= extendedFilterValues");
+         console.log(extendedFilterValues);
 
 
         // Set CHARTS DASHBOARD Sub View
         this.chartsConfig.dashboard.filter = extendedFilterValues;
 
 
+        // Set DASHBOARD Charts Sub View
         var dashboardChartsSubView = new DashboardChartsSubView({
-            autoRender: false,
-            container: this.$el.find(s.css_classes.DASHBOARD_CHARTS_HOLDER),
+            el: this.$el.find(s.css_classes.DASHBOARD_CHARTS_HOLDER),
+            lang:  this.lang,
             topic: this.topic,
-            model: this.dashboardModel
+            model: this.dashboardModel,
+            environment: this.environment
         });
 
         this.dashboardModel.addObserver(dashboardChartsSubView);
@@ -332,9 +400,6 @@ define([
         this._setDashboardModelValues();
         this.subviews['chartsDashboard'].renderDashboard();
 
-
-        // this.subview('chartsDashboard').setDashboardConfig(this.chartsConfig.dashboard);
-        //this.subview('chartsDashboard').renderDashboard(this.topic);
 
 
         //console.log("================= selectedfilter =============== ");
@@ -351,8 +416,9 @@ define([
     */
     PriorityAnalysisView.prototype._getDashboardConfiguration = function (topic, filterValues, props) {
         var self = this;
-        // console.log("================= _getDashboardConfiguration Start =============== ");
-        //console.log(filtervalues);
+
+         console.log("================= _getDashboardConfiguration Start =============== ");
+         console.log(topic, this.topic);
 
         // If the topic has changed, rebuild dashboards with new configuration
         if (topic !== this.topic) {
@@ -381,6 +447,8 @@ define([
             });
         }
         else {
+            console.log("================= _getDashboardConfiguration Start 2 =============== ");
+
             // Rebuild dashboards with existing configurations
             self._rebuildDashboards(filterValues, self.subviews['tableVennDashboard'].getDashboardConfig(), props);
         }
@@ -395,8 +463,8 @@ define([
 
     PriorityAnalysisView.prototype._rebuildDashboards = function (filterValues, prioritiesDashboardConfig, props) {
 
-        //console.log("================= _rebuildDashboards 1 =============== ");
-        //console.log(dashboardConfig);
+        console.log("================= _rebuildDashboards 1 =============== ");
+        console.log(filterValues, prioritiesDashboardConfig, props);
 
         // Set Dashboard Configuration
         // this.subview('chartsDashboard').setDashboardConfig(chartsDashboardConfig);
@@ -428,7 +496,7 @@ define([
 
     PriorityAnalysisView.prototype._createTitleItem = function (filterItem) {
 
-        var titleItem = {}, labels = filterItem.values.labels;
+        var titleItem = {}, labels = filterItem.labels;
 
         titleItem.id = filterItem.id;
 
