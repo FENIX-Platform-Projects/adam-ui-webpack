@@ -27,10 +27,10 @@ define(function () {
                             pageSize: 150,
                             autoSelectFirstRow: false,
                             columns: [
-                                {id: "recipientcode_EN", fieldIndex: 0, width: 150},
-                                {id: "purposecode_EN", fieldIndex: 1, width: 200},
-                                {id: "undaf_stated_priority", fieldIndex: 2, width: 300},
-                                {id: "cpf_stated_priority", fieldIndex: 3, width: 300}
+                                {id: "recipientcode_EN", width: 150},
+                                {id: "purposecode_EN", width: 200},
+                                {id: "undaf_stated_priority", width: 300},
+                                {id: "cpf_stated_priority",width: 300}
                             ]
                         }
                     },

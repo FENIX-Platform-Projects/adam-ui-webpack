@@ -247,12 +247,43 @@
 .gt-pagesize-select {
   width: 48px; }
 
-.fa-caret-down:before, .gt-hd-icon.gt-hd-desc:before {
-  content: ""; }
+.gt-hd-icon:before{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  content: "\f0dc";
+}
 
-.fa-caret-up:before, .gt-hd-icon.gt-hd-asc:before {
-  content: ""; }
+
+
+
+.gt-hd-icon.gt-hd-desc:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  content: "\F0D7";
+}
+
+ .gt-hd-icon.gt-hd-asc:before {
+   display: inline-block;
+   font: normal normal normal 14px/1 FontAwesome;
+   font-size: inherit;
+   text-rendering: auto;
+   -webkit-font-smoothing: antialiased;
+   content: "\f0d8";
+ }
+
+
 
 .gt-row-even{
   background-color: white !important;
+}
+
+#label1, #label2, #label3 {
+ font-size: 12px;
+  font-weight: bold;
 }
