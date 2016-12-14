@@ -15,7 +15,9 @@ define([
     'fenix-ui-filter',
     'fenix-ui-analysis',
     'amplify-pubsub'
-], function ($, log, _, FxUtils, template, errorTemplate, i18nLabels, i18nErrors, i18nFilter, E, GC, AC, Filter, Analysis, amplify) {
+], function ($, log, _, FxUtils, template, errorTemplate, 
+    i18nLabels, i18nErrors, i18nFilter,
+    E, GC, AC, Filter, Analysis, amplify) {
 
     'use strict';
 
@@ -141,7 +143,9 @@ define([
 
         config.uid = "adam_usd_aggregation_table";
 
-        config.title = createTitle(values);
+        config.title = createTitle(values, this.lang);
+
+//        $("div[data-role='front-content'] button[data-action='toolbar']").append(i18nLabels[this.lang]['sel_heading_compare_by']);
 
         process["year"] = {
             time: [{
@@ -184,7 +188,7 @@ define([
                     ]
                 }
             }];
-
+console.log(config)
         return config;
 
         function addToProcess(values, dimension) {
@@ -198,9 +202,10 @@ define([
             }
         }
 
-        function createTitle(values) {
+        function createTitle(values, lang) {
 
             var labels = [];
+            
             labels.push(getLabels("recipientcode", values));
             labels.push(getLabels("donorcode", values));
             labels.push(getLabels("parentsector_code", values));
@@ -210,8 +215,11 @@ define([
 
             labels = cleanArray(labels);
 
-            return labels.join(" / ");
+            var tit = i18nLabels[lang]['sel_heading_compare_by'].toUpperCase() +' '+ labels.join(" / ");
+            
+            //console.log('createTitle',values)
 
+            return tit;
         }
 
         function getLabels(field, values) {
