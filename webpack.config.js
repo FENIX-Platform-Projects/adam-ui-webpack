@@ -41,7 +41,8 @@ module.exports = sections.map(function (section) {
                 'browse': Path.join(__dirname, 'src/js/browse'),
                 'compare': Path.join(__dirname, 'src/js/compare'),
                 'priority': Path.join(__dirname, 'src/js/priority'),
-                'node_modules': Path.join(__dirname, 'node_modules')//,
+                'node_modules': Path.join(__dirname, 'node_modules'),
+                'fenix-ui-table-creator': Path.join(__dirname, 'node_modules/fenix-ui-table-creator/src/js/index.js')
                 //'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js'),
                //'fenix-ui-table-creator': Path.join(__dirname, 'node_modules/fenix-ui-table-creator/src/js/index.js')
                 //'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
