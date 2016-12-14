@@ -175,16 +175,15 @@ define([
 
     };
 
-    DashboardDevelopmentIndicatorsView.prototype._downloadData = function (model) {
-        var modelItem = this.models[model];
+    DashboardDevelopmentIndicatorsView.prototype._downloadData = function (modelId) {
+        var modelItem = this.models[modelId];
 
         var dataExporter = new DataExporter({
             lang: this.lang,
             environment:  this.environment,
-            model: modelItem
         });
 
-        return dataExporter.downloadData();
+        return dataExporter.downloadData(modelItem);
     };
 
     DashboardDevelopmentIndicatorsView.prototype._downloadImage = function (container, type, type_id, model) {

@@ -119,16 +119,15 @@ define([
 
     };
 
-    ChartsDashboardView.prototype._downloadExcel = function (model) {
-        var model = this.models[model];
+    ChartsDashboardView.prototype._downloadExcel = function (modelId) {
+        var model = this.models[modelId];
 
         var dataExporter = new DataExporter({
             lang: this.lang,
-            environment:  this.environment,
-            model: model
+            environment:  this.environment
         });
 
-        return dataExporter.downloadData();
+        return dataExporter.downloadData(model);
 
     };
 
