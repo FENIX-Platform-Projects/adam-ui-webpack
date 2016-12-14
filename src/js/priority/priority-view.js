@@ -179,7 +179,14 @@ define([
         }
 
         this.chartsConfig = ChartsConfig;
+        this.prioritiesConfig = {};
         this.prioritiesConfig = TableConfig;
+
+
+        console.log(" ======================= PRIORITY VIEW ==================== TableConfig: ", TableConfig.dashboard.items);
+        console.log(" ======================= PRIORITY VIEW ==================== VennConfig: ", VennConfig.dashboard.items);
+        console.log(" ======================= PRIORITY VIEW ==================== this.prioritiesConfig: ", this.prioritiesConfig);
+
 
         //Check if Venn item is in the config, if so remove it
         var venn  =  _.find(this.prioritiesConfig.dashboard.items, function(o){
@@ -225,12 +232,13 @@ define([
             lang:  this.lang,
             topic: this.topic,
             model: this.tableModel,
-            environment: this.environment
+            environment: this.environment,
+            config: this.prioritiesConfig.dashboard
         });
 
         this.tableModel.addObserver(dashboardTableVennSubView);
 
-        dashboardTableVennSubView.setDashboardConfig(this.prioritiesConfig.dashboard);
+       // dashboardTableVennSubView.setDashboardConfig(this.prioritiesConfig.dashboard);
         this.subviews['tableVennDashboard'] = dashboardTableVennSubView;
 
     };

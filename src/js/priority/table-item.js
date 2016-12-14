@@ -17,7 +17,7 @@ define([
     'nls/filter',
     'fenix-ui-filter-utils',
     'amplify-pubsub'
-], function ($, log, _, ERR, EVT,/* C,*/ Template, OlapCreator, Filter, /*FenixTool,*/ FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils) {
+], function ($, log, _, ERR, EVT,/* C,*/ Template, OlapCreator, Filter, /*FenixTool,*/ FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
 
     'use strict';
 
@@ -51,7 +51,7 @@ define([
         this.model = {};
 
         $.extend(true, this, defaultOptions, o);
-        this.id = this.el;
+       // this.id = this.el;
         this.$el = $(this.el);
 
         this._renderTemplate();
@@ -65,7 +65,7 @@ define([
         //force async execution
         window.setTimeout(function () {
             self.status.ready = true;
-            //amplify.publish(self._getEventName(EVT.SELECTOR_READY), self);
+            amplify.publish(self._getEventName(EVT.SELECTOR_READY), self);
             self._trigger("ready");
         }, 0);
 
@@ -133,8 +133,6 @@ define([
         var html = this.indicatortemplate(data);
 
         $(this.el).html(html);
-
-
     };
 
     TableItem.prototype._initVariables = function () {
@@ -155,7 +153,7 @@ define([
 
        // this.controller._trigger('table_ready', {data: {size: this.model.size}});
 
-        //this.controller._trigger('table_ready', {model: this.model, data: {size: this.model.size}});
+        this.controller._trigger('table_ready', {model: this.model, data: {size: this.model.size}});
 
         console.log(" ================= RENDER ============== ", this.model);
 
@@ -185,12 +183,19 @@ define([
 
         this.config.model = this.model;
         this.config.el = s.ids.TABLE;
+        var self = this;
 
         for (var d in this.config.derived) {
             this.config.aggregations.push(d);
         }
 
         this.olap = new OlapCreator(this.config);
+
+        this.olap.on('ready', function () {
+            console.log(" ============= THIS OLAP READY 2 ==========");
+            var rowSize = self.olap.model.rows.length;
+            $(self.el).find(s.ids.TABLE_SIZE).html(rowSize);
+        });
 
         //console.log("============ ROWS =============");
         //console.log(this.olap);
@@ -332,6 +337,7 @@ define([
         var self = this;
 
        this.olap.on('ready', function () {
+           console.log(" ============= THIS OLAP READY 1 ==========");
             var rowSize = this.olap.model.rows.length;
             $(self.el).find(s.ids.TABLE_SIZE).html(rowSize);
        });

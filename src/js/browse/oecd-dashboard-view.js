@@ -125,19 +125,18 @@ define([
     };
 
 
-    DashboardView.prototype._downloadExcel = function (model) {
-     var model = this.models[model];
+    DashboardView.prototype._downloadExcel = function (modelId) {
+     var model = this.models[modelId];
 
      console.log(" =========== _downloadExcel: MODEL ", model);
 
 
      var dataExporter = new DataExporter({
      lang: this.lang,
-     environment:  this.environment,
-     model: model
+     environment:  this.environment
      });
 
-     return dataExporter.downloadData();
+     return dataExporter.downloadData(model);
 
      };
 
@@ -592,6 +591,7 @@ define([
          //   console.log(" ================== item READY: =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
 
             self.models[item.id] = {};
+            self.models[item.id].data = {};
             self.models[item.id].data = item.model.data;
             self.models[item.id].metadata = {};
             self.models[item.id].metadata.rid = item.model.metadata.rid;

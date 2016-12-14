@@ -172,7 +172,7 @@ define([
 
     };
 
-    ChartsDashboardView.prototype._bindEventListeners = function () {
+   /* ChartsDashboardView.prototype._bindEventListeners = function () {
 
         var self = this;
         // console.log(" =============BIND ===================== ", this.$el);
@@ -207,13 +207,13 @@ define([
 
         });
 
-    };
+    };*/
 
     ChartsDashboardView.prototype.render = function () {
         var self = this;
         this.modelUpdated = false; // reset the model to false
 
-        this._unbindEventListeners();
+       // this._unbindEventListeners();
 
 
         // Update the language related labels in the item configurations (charts)
@@ -234,7 +234,7 @@ define([
         this.$el.html(this.source);
 
         //console.log(" ============== before BIND ===========");
-        this._bindEventListeners();
+        //this._bindEventListeners();
 
     };
 
@@ -361,7 +361,7 @@ define([
         this.config.el = this.$el;
         this.dashboard = new Dashboard(this.config);
 
-        this._bindEventListeners();
+       // this._bindEventListeners();
         this._loadProgressBar();
     };
 
@@ -394,7 +394,7 @@ define([
         this.dashboard.on('ready.item', function (item) {
                console.log(" ================== item READY: =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
 
-          self.models[item.id] = {};
+            self.models[item.id] = {};
             self.models[item.id].data = item.model.data;
             self.models[item.id].metadata = {};
             self.models[item.id].metadata.rid = item.model.metadata.rid;

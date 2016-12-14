@@ -35,14 +35,13 @@ define([
         this.environment = this.initial.environment;
         this.cache = typeof this.initial.cache === "boolean" ? this.initial.cache : C.cache;
         this.lang = this.initial.lang;
-        this.model = this.initial.model;
 
     };
 
-    DataExporter.prototype.downloadData = function () {
+    DataExporter.prototype.downloadData = function (model) {
 
         var payload = {
-            resource: this.model,
+            resource: model,
             input: {
                 config: {}
             },
