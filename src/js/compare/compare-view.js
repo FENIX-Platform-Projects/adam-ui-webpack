@@ -15,7 +15,10 @@ define([
     'fenix-ui-filter',
     'fenix-ui-analysis',
     'amplify-pubsub'
-], function ($, log, _, FxUtils, template, errorTemplate, i18nLabels, i18nErrors, i18nFilter, E, GC, AC, Filter, Analysis, amplify) {
+], function ($, log, _, FxUtils, template, errorTemplate, 
+    i18nLabels, i18nErrors, i18nFilter,
+    E, GC, AC,
+    Filter, Analysis, amplify) {
 
     'use strict';
 
