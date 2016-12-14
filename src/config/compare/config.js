@@ -13,8 +13,8 @@ define([
             analysis: {
                 box: {
                     tab: "chart",
-                    hideFlipButton: true,
-                    faces: ["front"],
+                    hideFlipButton: false,
+                    faces: ["front","back"],
                     hideMetadataButton: true,
                     nls: {
                         tooltip_toolbar_button: "Compare by",
