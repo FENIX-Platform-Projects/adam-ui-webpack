@@ -12,6 +12,7 @@
     "dev:base": "cross-env SECTIONS=base NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "build": "cross-env SECTIONS=browse,compare,priority,base NODE_ENV=production webpack --display-error-details",
     "build:base": "cross-env SECTIONS=base NODE_ENV=production webpack --display-error-details",
+    "build:compare": "cross-env SECTIONS=compare NODE_ENV=production webpack --display-error-details",
     "w-build": "cross-env SET SECTIONS=browse,compare,priority,base&&SET NODE_ENV=production&&webpack --display-error-details "
   },
   "repository": {
