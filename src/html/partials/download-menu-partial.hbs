@@ -12,19 +12,18 @@
                 <li><a href="#" id="{{id}}-jpeg" data-type="image/jpeg"  data-model-id="{{id}}">{{jpeg}}</a></li>
             {{/ifCond}}
 
-            {{#ifCond this.type 'chart'}}
+
+            {{#ifCond this.type 'venn'}}
                 <li class="dropdown-header">{{download_chart}}</li>
                 <li><a href="#" id="{{id}}-png" data-type="image/png"  data-model-id="{{id}}">{{png}}</a></li>
                 <li><a href="#" id="{{id}}-jpeg" data-type="image/jpeg"  data-model-id="{{id}}">{{jpeg}}</a></li>
-                <li><a href="#" id="{{id}}-svg" data-type="image/svg+xml" data-model-id="{{id}}">{{svg}}</a></li>
-                <li><a href="#" id="{{id}}-pdf" data-type="application/pdf"  data-model-id="{{id}}">{{pdf}}</a></li>
             {{/ifCond}}
         </ul>
     </div>
 
-    {{#ifNot this.type 'map'}}
+    {{#ifNot this.type 'map,table'}}
         <button type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-print" id="{{id}}-print" data-type="print" data-model-id="{{id}}"></span>
+            <span class="glyphicon glyphicon-print" id="{{id}}-print" data-type="print" data-model-type="{{this.type}}" data-model-id="{{id}}"></span>
         </button>
     {{/ifNot}}
 

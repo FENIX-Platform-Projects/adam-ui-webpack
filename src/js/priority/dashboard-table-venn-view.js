@@ -39,6 +39,10 @@ define([
         },
         css: {
             COLLAPSE: 'collapse'
+        },
+        id_prefixes: {
+            DOWNLOAD_OPTIONS: '-download-options',
+            VENN_SECTION: 'frame'
         }
     };
 
@@ -139,13 +143,8 @@ define([
     };
 
     TableVennDashboardView.prototype._downloadExcel = function (modelId) {
-        console.log(" =========== _downloadExcel: MODELS ");
-        console.log(this.models);
 
         var model = this.models[modelId];
-
-        console.log(" =========== _downloadExcel: MODEL ", model, modelId);
-
 
         var dataExporter = new DataExporter({
             lang: this.lang,
@@ -160,35 +159,39 @@ define([
     TableVennDashboardView.prototype.onDownloadMenuClick = function (event) {
         event.preventDefault();// prevent the default anchor functionality
 
-        console.log(" ========= onDownloadMenuClick =========")
         var model = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
+        var type_id = type.split("/").pop();
 
-        console.log("============ model ID  ", model);
-        console.log("============ model DATA-TYPE ", type);
-
-        console.log("============ model DATA-TYPE ", type);
+        var container = $("#"+model+ defaultOptions.id_prefixes.DOWNLOAD_OPTIONS);
 
 
         switch(type) {
             case BaseConfig.DOWNLOAD.EXCEL:
                 this._downloadExcel(model);
                 break;
-            //default:
-            // this.chartExporter.download("div[data-item='"+model+"']", type, model);
+            default:
+             this._downloadVennImage(container, type, type_id, model);
 
         }
 
     };
 
+    TableVennDashboardView.prototype._downloadVennImage = function (container, type, type_id, model) {
+        var sectionId = "#"+defaultOptions.id_prefixes.VENN_SECTION;
+
+        $(container).hide();
+        Exporter.download(sectionId, type, type_id, model);
+        $(container).show();
+    };
 
     TableVennDashboardView.prototype.onPrintMenuClick = function (event) {
-        console.log(" ==================== onPrintMenuClick =================");
 
         var model = $(event.target).attr('data-model-id');
-        var type = $(event.target).attr('data-type');
+        var type = $(event.target).attr('data-model-type');
 
-        if(type) {
+
+        if(type === 'chart') {
             this.chartExporter.print("div[data-item='"+model+"']");
         }else {
             Exporter.print("div[data-item='"+model+"']");
@@ -198,14 +201,10 @@ define([
     TableVennDashboardView.prototype._bindEventListeners = function () {
 
         var self = this;
-         console.log(" =============BIND ===================== ", this.config.items);
 
         // initialize Download buttons
         $.each(this.config.items, function( index, item ) {
             var identifier = '#'+item.id;
-
-             console.log(" ================= IDENTIFIER ", identifier);
-             console.log(" ================= IDENTIFIER this.$el: ", self.$el);
 
 
             for (var key in BaseConfig.DOWNLOAD) {

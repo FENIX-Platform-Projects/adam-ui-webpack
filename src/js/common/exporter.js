@@ -39,7 +39,7 @@ define([
         link.id = 'temp-download-link-'+name;
         link.download = name;
         link.href = uri;
-       // link.click();
+        link.click();
         //after creating link delete dynamic link
         $('#'+link.id).remove();
 
