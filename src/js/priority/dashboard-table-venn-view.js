@@ -376,6 +376,7 @@ define([
             console.log(" ================== item READY 1 : =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
 
             self.models[item.id] = {};
+            self.models[item.id].data ={};
             self.models[item.id].data = item.model.data;
             self.models[item.id].metadata = {};
             self.models[item.id].metadata.rid = item.model.metadata.rid;
