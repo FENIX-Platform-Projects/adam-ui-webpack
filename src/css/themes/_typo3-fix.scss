@@ -14,14 +14,14 @@ h1, h2, h3, h4, h5, h6 {
 
   @media screen and (min-width: 768px) {
     .fx-box:hover .front-toolbar .box-title {
-      margin-left: 35px;
+      margin-left: 45px;
       margin-right: 150px;
     }
 
   }
 
   .btn-fx-toolbar-confirm{
-    left: 0;
+    left: 120px;
   }
 
 
@@ -138,4 +138,8 @@ a:focus, a:hover{
   .fx-selector-title{
     margin-right: 0;
   }
+}
+
+.btn-fx-toolbar, .btn-fx-toolbar-confirm {
+  position: absolute;
 }

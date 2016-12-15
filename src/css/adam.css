@@ -9081,10 +9081,10 @@ button_new_2:before {
     left: 0; }
   @media screen and (min-width: 768px) {
     .fx-sandbox.fao-holder #compare .fx-box:hover .front-toolbar .box-title {
-      margin-left: 35px;
+      margin-left: 45px;
       margin-right: 150px; } }
   .fx-sandbox.fao-holder #compare .btn-fx-toolbar-confirm {
-    left: 0; }
+    left: 120px; }
   .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"] {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -9135,6 +9135,8 @@ button_new_2:before {
     width: 100% !important; }
   .fx-sandbox.fao-holder .filter-container .fx-selector-title {
     margin-right: 0; }
+  .fx-sandbox.fao-holder .btn-fx-toolbar, .fx-sandbox.fao-holder .btn-fx-toolbar-confirm {
+    position: absolute; }
 
 .main-container {
   padding-left: 0;
