@@ -21,7 +21,7 @@ module.exports = sections.map(function (section) {
 
         entry: entry,
 
-        output: getOutput(),
+        output: getOutput(section),
 
         resolve: {
             root: Path.resolve(__dirname),
@@ -103,7 +103,7 @@ module.exports = sections.map(function (section) {
     }
 });
 
-function getOutput() {
+function getOutput(section) {
 
     var output;
 
@@ -116,13 +116,14 @@ function getOutput() {
                 path: Path.join(__dirname, distFolderPath),
                 publicPath: 'http://fenixrepo.fao.org/adam/',
                 filename: "[name]/" + packageJson.name + '.[name].min.js',
-                chunkFilename: "[name]/" + 'chunk-[id].' + packageJson.name + '.[name].min.js'
+                chunkFilename: "[name]/" + section+'-chunk-[id].' + packageJson.name + '.[name].min.js'
             };
             break;
         case "develop" :
             output = {
                 path: Path.join(__dirname, devFolderPath),
-                filename: "[name].js"
+                filename: "[name].js",
+                chunkFilename: "[name]/" + section+'-chunk-[id].' + packageJson.name + '.[name].min.js'
             };
             break;
         default :
