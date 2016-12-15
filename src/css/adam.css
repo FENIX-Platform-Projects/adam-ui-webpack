@@ -9372,4 +9372,11 @@ button_new_2:before {
   font-size: 12px;
   font-weight: bold; }
 
+.venn-diagram-export {
+  width: 650px;
+  height: 500px; }
+
+.venn-diagram-title-export {
+  padding: 20px; }
+
 /*# sourceMappingURL=adam.css.map */

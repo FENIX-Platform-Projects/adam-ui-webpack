@@ -256,9 +256,6 @@
   content: "\f0dc";
 }
 
-
-
-
 .gt-hd-icon.gt-hd-desc:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
@@ -277,8 +274,6 @@
    content: "\f0d8";
  }
 
-
-
 .gt-row-even{
   background-color: white !important;
 }
@@ -286,4 +281,12 @@
 #label1, #label2, #label3 {
  font-size: 12px;
   font-weight: bold;
+}
+
+.venn-diagram-export {
+  width: 650px;
+  height: 500px;
+}
+.venn-diagram-title-export {
+  padding: 20px;
 }

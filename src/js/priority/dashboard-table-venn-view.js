@@ -41,8 +41,7 @@ define([
             COLLAPSE: 'collapse'
         },
         id_prefixes: {
-            DOWNLOAD_OPTIONS: '-download-options',
-            VENN_SECTION: 'frame'
+            DOWNLOAD_OPTIONS: '-download-options'
         }
     };
 
@@ -178,11 +177,26 @@ define([
     };
 
     TableVennDashboardView.prototype._downloadVennImage = function (container, type, type_id, model) {
-        var sectionId = "#"+defaultOptions.id_prefixes.VENN_SECTION;
+        var divId = "div[data-item='"+model+"']";
+        var parentContainer = "#"+model+ "-container";
+
+        //Retrieve Title of Venn
+        var title =  $(parentContainer).find('.display-box-header b').html();
+        var oStyle = $(divId).attr("style");
+
+        //Append title to DIV for export purposes
+        $(divId).removeAttr("style");
+        $(divId).addClass(model+"-export");
+        $(divId).prepend("<div class='"+model+"-title-export'>"+title+"</div>");
 
         $(container).hide();
-        Exporter.download(sectionId, type, type_id, model);
+        Exporter.download(divId, type, type_id, model);
         $(container).show();
+
+        //Re-instate original set-up
+        $(divId).attr("style", oStyle ); // add original style
+        $(divId).removeClass(model+"-export"); // remove added css
+        $("."+model+"-title-export").remove();// remove title div
     };
 
     TableVennDashboardView.prototype.onPrintMenuClick = function (event) {
