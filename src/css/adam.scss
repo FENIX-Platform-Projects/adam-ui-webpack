@@ -225,9 +225,17 @@
 
 
 /** Table Cell Alignment */
+
+
 .gt-inner {
    text-align: left !important;
  }
+
+
+.datagrid td.gt-cell-actived{
+  background-color: #eef6ff;
+}
+
 
 .gt-head-wrap td {
   background-color: #f4f4f4 !important; }

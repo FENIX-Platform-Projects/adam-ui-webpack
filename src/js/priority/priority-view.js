@@ -140,7 +140,6 @@ define([
     */
     PriorityAnalysisView.prototype._loadConfigurations = function () {
         var pth1 = s.paths.VENN_CONFIG + this.topic + '.js';
-
         require(['../../'+pth1], _.bind(this._initSubViews, this));
     };
 
@@ -277,7 +276,7 @@ define([
         this._setTableDashboardModelValues();
 
         // Render each Dashboard
-      this.subviews['tableVennDashboard'].renderDashboard();
+      //this.subviews['tableVennDashboard'].renderDashboard();
 
     };
 
@@ -432,9 +431,10 @@ define([
         if (topic !== this.topic) {
             // Re set the current topic
             this.topic = topic;
+            var pthVC = s.paths.VENN_CONFIG + topic + '.js';
 
             //Load new configuration files
-            require([s.paths.VENN_CONFIG + topic], function (TopicVennConfig) {
+            require(['../../'+pthVC], function (TopicVennConfig) {
 
                 self.chartsConfig = ChartsConfig;
 

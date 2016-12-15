@@ -183,6 +183,7 @@ define([
 
         this.config.model = this.model;
         this.config.el = s.ids.TABLE;
+
         var self = this;
 
         for (var d in this.config.derived) {
