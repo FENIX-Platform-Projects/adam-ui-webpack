@@ -18,14 +18,14 @@ define([
          }
     };
 
-    function Downloader(params) {
+    function TableVennDownloader(params) {
         this.lang = params.lang;
         this.environment =  params.environment;
 
         return this;
     }
 
-    Downloader.prototype.onDownloadMenuClick = function (modelObj, modelId, type) {
+    TableVennDownloader.prototype.onDownloadMenuClick = function (modelObj, modelId, type) {
 
         var type_id = type.split("/").pop();
         var containerId =  "#"+modelId+ s.prefix.DOWNLOAD_OPTIONS;
@@ -41,7 +41,7 @@ define([
         }
     };
 
-    Downloader.prototype._downloadVennImage = function (container, type, type_id, model) {
+    TableVennDownloader.prototype._downloadVennImage = function (container, type, type_id, model) {
 
         var divId = "div[data-item='"+model+"']",
             containerId =  "#"+model+ s.prefix.CONTAINER,
@@ -71,7 +71,7 @@ define([
         $("."+exportVennTitleCssClass).remove();// remove title div
     };
 
-    Downloader.prototype.onPrintMenuClick = function (event) {
+    TableVennDownloader.prototype.onPrintMenuClick = function (event) {
 
         var model = $(event.target).attr('data-model-id');
 
@@ -102,7 +102,7 @@ define([
 
     };
 
-    Downloader.prototype._downloadExcel = function (model) {
+    TableVennDownloader.prototype._downloadExcel = function (model) {
 
         var dataExporter = new DataExporter({
             lang: this.lang,
@@ -114,5 +114,5 @@ define([
     };
 
 
-    return Downloader;
+    return TableVennDownloader;
 });

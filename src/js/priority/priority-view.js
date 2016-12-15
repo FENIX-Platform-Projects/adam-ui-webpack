@@ -117,7 +117,7 @@ define([
        amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_READY, this, this._filtersLoaded);
         amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
         amplify.subscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this, this._renderChartsDashboards);
-       amplify.subscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this, this._clearChartsDashboards);
+       amplify.subscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this, this._clearChartsDashboard);
     };
 
     PriorityAnalysisView.prototype._unbindEventListeners = function () {
@@ -125,7 +125,7 @@ define([
         amplify.unsubscribe(BasePriorityAnalysisEvents.FILTER_ON_READY, this._filtersLoaded);
         amplify.unsubscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this._filtersChanged);
         amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this._renderChartsDashboards);
-        amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this._clearChartsDashboards);
+        amplify.unsubscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this._clearChartsDashboard);
     };
 
 
@@ -288,9 +288,8 @@ define([
     */
     PriorityAnalysisView.prototype._filtersChanged = function (changedFilter) {
 
-        if(this.subviews['chartsDashboard']) {
-            this.subviews['chartsDashboard'] = null;
-        }
+        this._clearChartsDashboard();
+
 
         console.log(" =============================== _filtersChanged changedFilter ");
         console.log(changedFilter);
@@ -364,9 +363,10 @@ define([
     };
 
 
-    PriorityAnalysisView.prototype._clearChartsDashboards = function () {
+    PriorityAnalysisView.prototype._clearChartsDashboard = function () {
+
         if(this.subviews['chartsDashboard']) {
-            this.subviews['chartsDashboard'] = null;
+            this.subviews['chartsDashboard'].clear();
         }
     };
 
@@ -376,18 +376,7 @@ define([
         //console.log("================= _renderChartsDashboards =============== ");
 
         var filterValues =  this.subviews['filters'].getFilterValues(), filterDerivedTopic;
-
-
         var extendedFilterValues = $.extend(true, filterValues, newValues);
-
-         console.log("======================================= filterValues ");
-         console.log(filterValues);
-         console.log("======================================= extendedFilterValues");
-         console.log(extendedFilterValues);
-
-
-        // Set CHARTS DASHBOARD Sub View
-        this.chartsConfig.dashboard.filter = extendedFilterValues;
 
 
         // Set DASHBOARD Charts Sub View
@@ -396,21 +385,15 @@ define([
             lang:  this.lang,
             topic: this.topic,
             model: this.dashboardModel,
-            environment: this.environment
+            environment: this.environment,
+            config: this.chartsConfig.dashboard
         });
 
         this.dashboardModel.addObserver(dashboardChartsSubView);
-
-        dashboardChartsSubView.setDashboardConfig(this.chartsConfig.dashboard);
         this.subviews['chartsDashboard'] = dashboardChartsSubView;
 
         this._setDashboardModelValues();
-        this.subviews['chartsDashboard'].renderDashboard();
-
-
-
-        //console.log("================= selectedfilter =============== ");
-        // console.log(selectedfilter);
+        this.subviews['chartsDashboard'].render(extendedFilterValues);
 
 
     };

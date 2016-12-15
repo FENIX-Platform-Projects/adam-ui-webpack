@@ -15,7 +15,7 @@ define([
     'config/nodemodules/fenix-ui-chart-creator/jvenn_template',
     'config/priority/config-priority-analysis',
     'common/progress-bar',
-    'priority/downloader',
+    'priority/table-venn-downloader',
     'amplify-pubsub'
 ], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nCommonLabels, TableItem, BaseEvents,  JVennTemplate, BasePriorityAnalysisConfig, ProgressBar, Downloader, amplify) {
 
@@ -27,8 +27,7 @@ define([
             TABLE_ITEM: 'priority/table-item'
         },
         itemTypes: {
-            CHART: 'chart',
-            VENN: 'venn'
+            CHART: 'chart'
         }
     };
 
