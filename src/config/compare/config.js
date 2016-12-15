@@ -15,6 +15,7 @@ define([
                     tab: "chart",
                     hideFlipButton: false,
                     faces: ["front","back"],
+                    hideMinimizeButton: true,
                     hideMetadataButton: true,
                     nls: {
                         tooltip_toolbar_button: "Compare by",

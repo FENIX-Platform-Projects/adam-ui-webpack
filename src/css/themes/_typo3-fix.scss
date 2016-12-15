@@ -1,13 +1,53 @@
 h1, h2, h3, h4, h5, h6 {
-  border-top: 0 !important;
-  padding-top: 0  !important;
-  margin-bottom: 0  !important;
+  //border-top: 0 !important;
+  //padding-top: 0  !important;
+  //margin-bottom: 0  !important;
 }
 
  ul li {
   margin-bottom: 0;
   left: 0;
 }
+
+
+#compare {
+
+  @media screen and (min-width: 768px) {
+    .fx-box:hover .front-toolbar .box-title {
+      margin-left: 35px;
+      margin-right: 150px;
+    }
+
+  }
+
+  .btn-fx-toolbar-confirm{
+    left: 0;
+  }
+
+
+  .front-content{
+    [data-action="toolbar"]{
+      @include fx-border-radius(4px);
+      width: 100px;
+
+
+      &:before {
+        content:'Compare by';
+
+      }
+
+
+
+      span{
+        display: none;
+      }
+
+    }
+  }
+
+
+}
+
 
 
 a{
