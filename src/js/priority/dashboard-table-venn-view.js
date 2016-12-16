@@ -110,7 +110,7 @@ define([
                 $(identifier+"-"+BaseConfig.DOWNLOAD[key]).click( _.bind(self.onDownloadMenuClick, self));
             }
 
-            $(identifier+"-"+BaseConfig.PRINT).on('click', self.downloader.onPrintMenuClick);
+            $(identifier+"-"+BaseConfig.PRINT).on('click', _.bind(self.onPrintMenuClick, self));
 
         });
     };
@@ -128,7 +128,7 @@ define([
             }
 
             if($(identifier+"-"+BaseConfig.PRINT))
-                $(identifier+"-"+BaseConfig.PRINT).off('click', self.downloader.onPrintMenuClick);
+                $(identifier+"-"+BaseConfig.PRINT).off('click', _.bind(self.onPrintMenuClick, self));
 
         });
 
@@ -141,6 +141,15 @@ define([
         var type = $(event.target).attr('data-type');
 
         this.downloader.onDownloadMenuClick(this.models[modelId], modelId, type);
+
+    };
+
+    TableVennDashboardView.prototype.onPrintMenuClick = function (event) {
+        event.preventDefault();// prevent the default functionality
+
+        var model = $(event.target).attr('data-model-id');
+
+        this.downloader.onPrintMenuClick(model);
 
     };
 

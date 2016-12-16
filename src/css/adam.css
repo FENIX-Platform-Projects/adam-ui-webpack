@@ -9312,12 +9312,22 @@ button_new_2:before {
 .adam-entry-point p.text-justify {
   color: #999999; }
 
-/** Venn Text Area */
+/** Venn*/
+.align-center {
+  text-align: center;
+  font-weight: bold; }
+
 #venn-diagram-info-box textarea {
   width: 100%;
-  height: 500px;
   padding: 10px;
   resize: none; }
+
+.venn-diagram-export {
+  width: 650px;
+  height: 500px; }
+
+.venn-diagram-title-export {
+  padding: 20px; }
 
 /** Table CSS **/
 /** Table Cell Alignment */
@@ -9381,12 +9391,5 @@ button_new_2:before {
 #label1, #label2, #label3 {
   font-size: 12px;
   font-weight: bold; }
-
-.venn-diagram-export {
-  width: 650px;
-  height: 500px; }
-
-.venn-diagram-title-export {
-  padding: 20px; }
 
 /*# sourceMappingURL=adam.css.map */
