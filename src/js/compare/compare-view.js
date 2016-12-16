@@ -205,19 +205,24 @@ console.log(config)
         function createTitle(values, lang) {
 
             var labels = [];
-            
-            labels.push(getLabels("recipientcode", values));
-            labels.push(getLabels("donorcode", values));
-            labels.push(getLabels("parentsector_code", values));
-            labels.push(getLabels("purposecode", values));
-            labels.push(getLabels("year-from", values));
-            labels.push(getLabels("year-to", values));
 
-            labels = cleanArray(labels);
+            if(!values) return;
 
-            var tit = i18nLabels[lang]['sel_heading_compare_by'].toUpperCase() +' '+ labels.join(" / ");
+            if(values.labels['donorcode'] && values.values['donorcode'].length)
+                labels.push(i18nFilter[lang]["filter_donorcode"]);
             
-            //console.log('createTitle',values)
+            if(values.labels['recipientcode'] && values.values['recipientcode'].length)
+                labels.push(i18nFilter[lang]["filter_recipientcode"]);
+            
+            if(values.labels['parentsector_code'] && values.values['parentsector_code'].length)
+                labels.push(i18nFilter[lang]["filter_parentsector_code"]);
+
+            if(values.labels['purposecode'] && values.values['purposecode'].length)
+                labels.push(i18nFilter[lang]["filter_purposecode"]);
+
+            var tit = i18nFilter[lang]['filter_compared_by'].toUpperCase()+ ': ';
+
+            tit += labels.join(" / ");
 
             return tit;
         }

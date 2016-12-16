@@ -3,6 +3,7 @@ define(function () {
     'use strict';
 
     return {
+        "filter_compared_by": "Compared by",        
         "filter_parentsector_code": "Sector",
         "filter_donorcode": "Resource Partner",
         "filter_recipientcode": "Recipient Country",
