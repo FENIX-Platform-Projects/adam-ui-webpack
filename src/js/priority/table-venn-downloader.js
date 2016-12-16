@@ -71,9 +71,7 @@ define([
         $("."+exportVennTitleCssClass).remove();// remove title div
     };
 
-    TableVennDownloader.prototype.onPrintMenuClick = function (event) {
-
-        var model = $(event.target).attr('data-model-id');
+    TableVennDownloader.prototype.onPrintMenuClick = function (model) {
 
         var divId = "div[data-item='"+model+"']",
             containerId =  "#"+model+ s.prefix.CONTAINER,
