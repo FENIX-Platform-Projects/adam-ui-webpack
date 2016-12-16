@@ -111,8 +111,22 @@ define([
         var config = this._getBoxModelFromFilter();
 
         log.info(config);
+        
+        console.log('CONFIG', config);
 
         this.analysis.add(config);
+
+      /*  _.each(this.analysis.gridItems, function(item) {
+            var box = item.model,
+                chart = box.tabs.chart;
+
+            console.log('CHART ITEM',chart)
+
+            chart.config.config.exporting.chartOptions.title = {};
+            //exporting.chartOptions.title = {};
+
+        });*/
+        
     };
 
     CompareView.prototype._getBoxModelFromFilter = function () {
@@ -144,8 +158,6 @@ define([
         config.uid = "adam_usd_aggregation_table";
 
         config.title = createTitle(values, this.lang);
-
-//        $("div[data-role='front-content'] button[data-action='toolbar']").append(i18nLabels[this.lang]['sel_heading_compare_by']);
 
         process["year"] = {
             time: [{
@@ -188,7 +200,7 @@ define([
                     ]
                 }
             }];
-console.log(config)
+
         return config;
 
         function addToProcess(values, dimension) {
