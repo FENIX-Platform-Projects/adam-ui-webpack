@@ -9317,6 +9317,9 @@ button_new_2:before {
   text-align: center;
   font-weight: bold; }
 
+#venn-diagram-title {
+  font-weight: bold; }
+
 #venn-diagram-info-box textarea {
   width: 100%;
   padding: 10px;
