@@ -9319,12 +9319,16 @@ button_new_2:before {
   padding: 10px;
   resize: none; }
 
+/** Table CSS **/
 /** Table Cell Alignment */
 .gt-inner {
   text-align: left !important; }
 
 .datagrid td.gt-cell-actived {
   background-color: #eef6ff; }
+
+.gt-head-table {
+  margin-right: 0 !important; }
 
 .gt-head-wrap td {
   background-color: #f4f4f4 !important; }

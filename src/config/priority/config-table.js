@@ -17,20 +17,19 @@ define(function () {
                         "groupedRow": false,
                         "formatter": "localstring",
                         "showRowHeaders": true,
-                        // "values":["projectshortdescription"],
-                        //  "rows":[ "purposecode",  "projecttitle"],
                         "rows": ["recipientcode", "purposecode", "undaf_stated_priority", "cpf_stated_priority"],
                         "aggregations": [],
                         inputFormat: "fenixtool",
 
+                        // 878 total width
                         config: {
                             pageSize: 150,
                             autoSelectFirstRow: false,
                             columns: [
                                 {id: "recipientcode_EN", fieldIndex: "0", width: 150},
                                 {id: "purposecode_EN", fieldIndex: "1", width: 200},
-                                {id: "undaf_stated_priority", fieldIndex: "2", width: 300},
-                                {id: "cpf_stated_priority",fieldIndex: "3",  width: 300}
+                                {id: "undaf_stated_priority", fieldIndex: "2", width: 220},
+                                {id: "cpf_stated_priority",fieldIndex: "3",  width: 220}
                             ]
                         }
                     },
