@@ -15,7 +15,7 @@ define([
     'nls/filter',
     'fenix-ui-filter-utils',
     'amplify-pubsub'
-], function ($, log, _, ERR, EVT,/* C,*/ Template, OlapCreator, Filter, /*FenixTool,*/ FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
+], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
 
     'use strict';
 
@@ -160,11 +160,13 @@ define([
 
         this.config.model = this.model;
         this.config.el = s.TABLE;
+        this.config.id = this.id;
+        this.config.lang = this.lang;
 
 
-        for (var d in this.config.derived) {
-            this.config.aggregations.push(d);
-        }
+       // for (var d in this.config.derived) {
+         //   this.config.aggregations.push(d);
+        //}
 
         this.olap = new OlapCreator(this.config);
     };

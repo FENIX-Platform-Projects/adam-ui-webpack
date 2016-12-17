@@ -5,48 +5,45 @@ define(function () {
     'use strict';
 
     return {
-            dashboard: {
+        dashboard: {
+            //default dataset id
+            uid: "adam_resource_matrix_oda",
 
-                //default dataset id
-                uid: "adam_resource_matrix_oda",
+            items: [
+                {
+                    id: "partner-matrix",
+                    type: 'custom',
+                    config: {
+                        "groupedRow": false,
+                        "formatter": "localstring",
+                        "showRowHeaders": true,
+                        "columns": ["indicator"],
+                        "rows": ["recipientcode_EN", "donorcode_EN"],
+                        "values":["value"],
+                        "aggregations": [],
+                        inputFormat: "fenixtool",
 
-                items: [
-                    {
-                        id: "partner-matrix",
-                        type: 'custom',
+                        // 878 total width
                         config: {
-                            "groupedRow":false,
-                            "aggregationFn":{"value":"sum"},
-                            "formatter":"localstring",
-                            "decimals":2,
-                            "pageSize": "150",
-                            "showRowHeaders":true,
-                            "columns":["indicator"],
-                            "rows":["recipientcode_EN", "donorcode_EN"],
-                            "aggregations":[],
-                            "values":["value"],
-                            inputFormat : "fenixtool",
-
-                            config: {
-                                pageSize: 150,
-                                autoSelectFirstRow: false,
-                                columns: [
-                                    {id: "recipientcode_EN", width: 200},
+                            pageSize: 150,
+                            autoSelectFirstRow: false,
+                           columns: [
+                                    {id: "recipientcode_EN", width: 150},
                                     {id: "donorcode_EN", width: 150},
                                     {id: "indicator", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 200, getSortValue : function(value , record){
+                                    {id: "indicator", width: 100, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 200, getSortValue : function(value , record){
+                                    {id: "indicator", width: 100, getSortValue : function(value , record){
                                         return Number(value);
                                     }}
                                 ]
-                            }
-                        },
+                        }
+                    },
 
-                        filterFor: {
+                      filterFor: {
                             "filter_all_subsectors": ['year', 'oda', 'recipientcode'],
                             "filter_faosubsectors": ['year', 'oda', 'recipientcode']
                         },

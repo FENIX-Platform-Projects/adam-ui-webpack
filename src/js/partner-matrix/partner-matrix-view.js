@@ -225,11 +225,6 @@ define([
 
         var selectedFilterItems = payload.labels;
 
-        // Set Dashboard Properties
-        if (payload["props"]) {
-            this.subviews['chartsDashboard'].setProperties(payload["props"]);
-            this.subviews['tableDashboard'].setProperties(payload["props"]);
-        }
 
         // Build Title View
         this.subviews['title'].setLabels(selectedFilterItems);
@@ -239,9 +234,7 @@ define([
         this._updateChartsDashboardModelValues();
         this._updateTableDashboardModelValues();
 
-        // Render each Dashboard
-        this.subviews['chartsDashboard'].renderDashboard();
-        this.subviews['tableDashboard'].renderDashboard();
+      
 
     };
 
@@ -353,7 +346,7 @@ define([
         // console.log(ovalues);
 
         // Rebuild Dashboards
-       // this.subviews['chartsDashboard'].rebuildDashboard(filterValues, this.topic);
+        this.subviews['chartsDashboard'].rebuildDashboard(filterValues, this.topic);
         this.subviews['tableDashboard'].rebuildDashboard(filterValues, this.topic);
     };
 
