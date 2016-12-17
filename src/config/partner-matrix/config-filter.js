@@ -103,6 +103,26 @@ define(function () {
                     hideSwitch: true,
                     hideRemoveButton: true
                 }
+            },
+            oda: {
+                selector: {
+                    id: "dropdown",
+                    default: ['usd_commitment'],
+                    config: { //Selectize configuration
+                        maxItems: 1
+                    }
+                },
+                classNames: "col-xs-5",
+                cl: {
+                    uid: "oda_crs",
+                    version: "2016"
+                },
+                template: {
+                    hideHeaderIcon: false,
+                    headerIconClassName: 'glyphicon glyphicon-info-sign',
+                    hideSwitch: true,
+                    hideRemoveButton: true
+                }
             }
         }
     }

@@ -57,9 +57,6 @@ define([
         // log.info("PriorityAnalysisView");
         //  log.info(o);
 
-        console.log("PriorityAnalysisView =================");
-        console.log(o);
-
         $.extend(true, this, o);
 
         this._parseInput(o);
@@ -70,24 +67,13 @@ define([
 
             this._unbindEventListeners();
 
-            console.log("PriorityAnalysisView ================= 1");
-
             this._attach();
-
-            console.log("PriorityAnalysisView ================= 2");
 
             this._bindEventListeners();
 
-
-            console.log("PriorityAnalysisView ================= 3");
-
             this._init();
 
-            console.log("PriorityAnalysisView ================= 4");
-
             this._render();
-
-            console.log("PriorityAnalysisView ================= 5");
 
             return this;
 
@@ -211,15 +197,12 @@ define([
 
         // Set TITLE Sub View
         var titleSubView = new TitleSubView({
-           // autoRender: true,
-            el: this.$el.find(s.css_classes.TITLE_BAR_ITEMS)//,
-            //title: i18nLabels[this.lang].selections
+            el: this.$el.find(s.css_classes.TITLE_BAR_ITEMS)
         });
         this.subviews['title'] = titleSubView;
 
         // Set FILTER Sub View
         var filtersSubView = new FilterSubView({
-           // autoRender: true,
             el: this.$el.find(s.css_classes.FILTER_HOLDER),
             config: BaseFilterConfig.filter,
             lang:  this.lang,

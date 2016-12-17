@@ -6,11 +6,9 @@ define([
     'underscore',
     'config/errors',
     'config/events',
-    /*'fx-dashboard/config/config',*/
     'html/priority/table-item.hbs',
     'fenix-ui-table-creator',
     'fenix-ui-filter',
-    //'fx-common/pivotator/fenixtool',
     'utils/filter-utils',
     'utils/utils',
     'nls/table',
@@ -51,7 +49,6 @@ define([
         this.model = {};
 
         $.extend(true, this, defaultOptions, o);
-       // this.id = this.el;
         this.$el = $(this.el);
 
         this._renderTemplate();

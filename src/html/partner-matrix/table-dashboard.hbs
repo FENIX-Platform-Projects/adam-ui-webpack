@@ -1,7 +1,9 @@
-<div>
 <section data-topic="country">
     <div class="row">
-        <div class="col-sm-12" id="partner-matrix-container">
+        <div class="col-xs-12" id="partner-matrix-container">
+            <div>
+                {{> ../partials/download-menu-partial type='table' id='partner-matrix'}}
+            </div>
             <div class="obj-box-header"><p  title="{{label}}"><span class="display-box-header"><b>{{partner-matrix}} / {{by-recipient}}</b>:</span> {{label}}</p></div>
             <div class="obj-box">
 
@@ -12,7 +14,10 @@
 </section>
     <section data-topic="donor">
         <div class="row">
-            <div class="col-sm-12" id="partner-matrix-container">
+            <div class="col-xs-12" id="partner-matrix-container">
+                <div>
+                    {{> ../partials/download-menu-partial type='table' id='partner-matrix'}}
+                </div>
                 <div class="obj-box-header"><p  title="{{label}}"><span class="display-box-header"><b>{{partner-matrix}} / {{by-partner}}</b>:</span> {{label}}</p></div>
                 <div class="obj-box">
 
@@ -24,7 +29,10 @@
 
     <section data-topic="country-donor">
         <div class="row">
-            <div class="col-sm-12" id="partner-matrix-container">
+            <div class="col-xs-12" id="partner-matrix-container">
+                <div>
+                    {{> ../partials/download-menu-partial type='table' id='partner-matrix'}}
+                </div>
                 <div class="obj-box-header"><p  title="{{label}}"><span class="display-box-header"><b>{{partner-matrix}}</b>:</span> {{label}}</p></div>
                 <div class="obj-box">
 
@@ -33,4 +41,3 @@
             </div>
         </div>
     </section>
-</div>
