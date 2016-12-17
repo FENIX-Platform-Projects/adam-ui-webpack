@@ -5,7 +5,7 @@ define([
     'config/config-base',
     'utils/parser',
     'partner-matrix/partner-matrix-view'
-], function (log, $, _, Config, Parser, PartnerMatrix) {
+], function (log, $, _, Config, Parser, PartnerMatrixView) {
 
     'use strict';
 
@@ -14,7 +14,7 @@ define([
     };
 
 
-    function PartnerMatrixView() {
+    function PartnerMatrix() {
         console.clear();
 
         this._importThirdPartyCss();
@@ -23,7 +23,7 @@ define([
     }
 
 
-    PartnerMatrixView.prototype.start = function () {
+    PartnerMatrix.prototype.start = function () {
 
         // client parameters
         var lang = $("html").attr("lang") || Config.LANG;
@@ -34,14 +34,14 @@ define([
     };
 
 
-    PartnerMatrixView.prototype.getRequestParameters = function (url) {
+    PartnerMatrix.prototype.getRequestParameters = function (url) {
         var parser = new Parser();
         return parser.parseURL(url);
     };
 
-    PartnerMatrixView.prototype._createPartnerMatrixView = function (params) {
+    PartnerMatrix.prototype._createPartnerMatrixView = function (params) {
 
-        var view = new PartnerMatrix(
+        var view = new PartnerMatrixView(
             $.extend(true, params, {
                 environment: Config.ENVIRONMENT
             }));
@@ -49,7 +49,7 @@ define([
         return view;
     };
 
-    PartnerMatrixView.prototype._importThirdPartyCss = function () {
+    PartnerMatrix.prototype._importThirdPartyCss = function () {
 
         //SANDBOXED BOOTSTRAP
         require("css/sandboxed-bootstrap.css");
@@ -68,6 +68,6 @@ define([
 
     };
 
-    return new PartnerMatrixView();
+    return new PartnerMatrix();
 
 });
