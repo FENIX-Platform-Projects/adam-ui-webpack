@@ -281,9 +281,10 @@ define([
 
     };
 
-    PriorityMatrixChartsDashboardView.prototype.rebuildDashboard = function (filter) {
+    PriorityMatrixChartsDashboardView.prototype.rebuildDashboard = function (filter, topic) {
 
         this.models = {};
+        this.topic = topic;
 
         this._disposeDashboards();
 
