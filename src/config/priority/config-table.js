@@ -17,7 +17,7 @@ define(function () {
                         "groupedRow": false,
                         "formatter": "localstring",
                         "showRowHeaders": true,
-                        "rows": ["recipientcode", "purposecode", "undaf_stated_priority", "cpf_stated_priority"],
+                        "rows": ["recipientcode_EN", "purposecode_EN", "undaf_stated_priority", "cpf_stated_priority"],
                         "aggregations": [],
                         inputFormat: "fenixtool",
 

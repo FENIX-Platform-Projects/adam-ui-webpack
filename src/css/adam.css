@@ -9332,6 +9332,9 @@ button_new_2:before {
 .venn-diagram-title-export {
   padding: 20px; }
 
+div[data-item="venn-diagram"] {
+  margin: 0 auto; }
+
 /** Table CSS **/
 /** Table Cell Alignment */
 .gt-inner {

@@ -60,6 +60,9 @@ define([
         // fenix-ui-filter
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
 
+        // fenix-ui-table-creator
+        require("node_modules/fenix-ui-table-creator/dist/fenix-ui-table-creator.min.css");
+
         // INDEX
         require("css/adam.css");
 
