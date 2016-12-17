@@ -16,10 +16,10 @@ define(function () {
                         type: 'custom',
                         config: {
                             "groupedRow":false,
-                            "aggregationFn":{"value":"sum"},
+                           // "aggregationFn":{"value":"sum"},
                             "formatter":"localstring",
-                            "decimals":2,
-                            "pageSize": "150",
+                            //"decimals":2,
+                            //"pageSize": "150",
                             "showRowHeaders":true,
                             "columns":["indicator"],
                             "rows":["donorcode_EN", "recipientcode_EN"],
@@ -32,14 +32,14 @@ define(function () {
                                 autoSelectFirstRow: false,
                                 columns: [
                                     {id: "donorcode_EN", width: 150},
-                                    {id: "recipientcode_EN", width: 200},
+                                    {id: "recipientcode_EN", width: 150},
                                     {id: "indicator", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 200, getSortValue : function(value , record){
+                                    {id: "indicator", width: 100, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 200, getSortValue : function(value , record){
+                                    {id: "indicator", width: 100, getSortValue : function(value , record){
                                         return Number(value);
                                     }}
                                 ]

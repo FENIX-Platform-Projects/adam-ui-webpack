@@ -7,7 +7,6 @@ define(function () {
     return {
 
         dashboard: {
-
             //default dataset id
             uid: "adam_resource_matrix_oda",
 
@@ -24,6 +23,7 @@ define(function () {
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
 
                         config: {
+                            colors: ["#c6dbef","#9ecae1", "#3182bd"],
                             chart: {
                                 marginTop: 50,
                                 events: {
@@ -32,11 +32,17 @@ define(function () {
                                         var hasSubSector = false;
 
                                         var isVisible = $.each(_that.series, function (i, serie) {
+
+                                            if(serie.name == 'Total ODA'){
+                                                serie.update({
+                                                    index:0 // reset the order of series ... Total ODA first
+                                                })
+                                            }
+
                                             if(serie.name == '% FAO Sectors/Total'){
                                                 serie.update({
                                                     yAxis: 'fao-axis',
-                                                    type: 'spline',
-                                                    dashStyle: 'shortdot',
+                                                    index:2, // reset the order of series ... % last
                                                     tooltip: {
                                                         valueSuffix: ' %'
                                                     },

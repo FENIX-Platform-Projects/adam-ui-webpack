@@ -6,7 +6,6 @@ define(function () {
 
     return {
 
-
         dashboard: {
             //default dataset id
             uid: "adam_resource_matrix_oda",
@@ -71,7 +70,6 @@ define(function () {
                                     }
                                 }
                             },
-
                           //  xAxis: {
                            //     type: 'datetime'
                           //  },
