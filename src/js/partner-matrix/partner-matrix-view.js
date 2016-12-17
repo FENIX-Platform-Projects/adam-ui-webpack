@@ -227,8 +227,8 @@ define([
 
         // Set Dashboard Properties
         if (payload["props"]) {
-            this.subviews('chartsDashboard').setProperties(payload["props"]);
-            this.subviews('tableDashboard').setProperties(payload["props"]);
+            this.subviews['chartsDashboard'].setProperties(payload["props"]);
+            this.subviews['tableDashboard'].setProperties(payload["props"]);
         }
 
         // Build Title View
@@ -353,7 +353,7 @@ define([
         // console.log(ovalues);
 
         // Rebuild Dashboards
-        this.subviews['chartsDashboard'].rebuildDashboard(filterValues, this.topic);
+       // this.subviews['chartsDashboard'].rebuildDashboard(filterValues, this.topic);
         this.subviews['tableDashboard'].rebuildDashboard(filterValues, this.topic);
     };
 

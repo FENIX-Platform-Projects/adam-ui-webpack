@@ -190,7 +190,7 @@ define(
                     var additionalProperties = this.filterUtils.getPropertiesObject(PartnerMatrixConfig.topic.SELECTED_TOPIC, topic);
 
 
-                    amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(this._getFilterValues(), {"props": additionalProperties}));
+                    amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(this._getFormattedFilterValues(), {"props": additionalProperties}));
 
                 }
 
@@ -200,10 +200,10 @@ define(
                     //self._getFilterValues().values[BaseConfig.SELECTORS.ODA].enumeration[0]
                     var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.ODA, this._getFirstSelectorValue(BaseConfig.SELECTORS.ODA) );
 
-                    amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(this._getFilterValues(), {"props": additionalProperties}));
+                    amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(this._getFormattedFilterValues(), {"props": additionalProperties}));
                 }
                 else {
-                    amplify.publish(BaseEvents.FILTER_ON_READY, this._getFilterValues());
+                    amplify.publish(BaseEvents.FILTER_ON_READY, this._getFormattedFilterValues());
                 }
 
             }, this);
