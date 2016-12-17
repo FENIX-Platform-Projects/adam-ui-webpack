@@ -9,12 +9,14 @@
     "dev:browse": "cross-env SECTIONS=browse NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:compare": "cross-env SECTIONS=compare NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:priority": "cross-env SECTIONS=priority NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
+    "dev:partner-matrix": "cross-env SECTIONS=partner-matrix NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:base": "cross-env SECTIONS=base NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
-    "build": "cross-env SECTIONS=browse,compare,priority,base NODE_ENV=production webpack --display-error-details",
+    "build": "cross-env SECTIONS=browse,compare,priority,partner-matrix,base NODE_ENV=production webpack --display-error-details",
     "build:base": "cross-env SECTIONS=base NODE_ENV=production webpack --display-error-details",
     "build:compare": "cross-env SECTIONS=compare NODE_ENV=production webpack --display-error-details",
     "build:priority": "cross-env SECTIONS=priority NODE_ENV=production webpack --display-error-details",
-    "w-build": "cross-env SET SECTIONS=browse,compare,priority,base&&SET NODE_ENV=production&&webpack --display-error-details "
+    "build:partner-matrix": "cross-env SECTIONS=partner-matrix NODE_ENV=production webpack --display-error-details",
+    "w-build": "cross-env SET SECTIONS=browse,compare,priority,partner-matrix,base&&SET NODE_ENV=production&&webpack --display-error-details "
   },
   "repository": {
     "type": "git",
