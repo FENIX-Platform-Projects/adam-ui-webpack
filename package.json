@@ -37,6 +37,7 @@
     "fenix-ui-filter": "^3.0.0-beta.68",
     "fenix-ui-filter-utils": "^1.0.0-beta.14",
     "fenix-ui-reports": "^2.0.0-beta.1",
+    "fenix-ui-table-creator": "^3.0.0-beta.8",
     "handlebars-loader": "^1.4.0",
     "html2canvas": "^0.5.0-beta4",
     "jQuery.print": "^1.4.1",
