@@ -245,6 +245,9 @@ define([
             //this._attach();
        // }
 
+        this.modelUpdated = false;
+        this._attach();
+
 
         this._renderDashboard(filter);
 

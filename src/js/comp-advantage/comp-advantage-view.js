@@ -192,7 +192,7 @@ define([
         this._updateTableDashboardModelValues();
 
         // Render each Dashboard
-        this.subviews['tableDashboard'].renderDashboard();
+        this.subviews['tableDashboard'].rebuildDashboard();
 
     };
 
@@ -296,8 +296,9 @@ define([
         return titleItem;
     };
 
-
     ComparativeAdvantageView.prototype._updateTableDashboardModelValues = function () {
+        console.log(" ======================= ", this.subviews['title'].getTitleAsLabel());
+
         this.tableModel.set(s.dashboardModel.LABEL,  this.subviews['title'].getTitleAsLabel());
     };
 
