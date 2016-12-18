@@ -5,28 +5,28 @@ define([
     'jquery-ui',
     'underscore',
     'common/title-view',
-    'comp-advantage/comp-advantage-filter-view',
-    'comp-advantage/dashboard-table-view',
+    'projects/projects-filter-view',
+    'projects/dashboard-table-view',
     'models/table',
-    'html/comp-advantage/comp-advantage.hbs',
+    'html/projects/projects.hbs',
     'config/errors',
     'config/events',
     'config/config-base',
-    'config/comp-advantage/events',
-    'config/comp-advantage/config-comp-advantage',
-    'config/comp-advantage/config-filter',
-    'config/comp-advantage/config-table',
+    'config/projects/events',
+    'config/projects/config-projects',
+    'config/projects/config-filter',
+    'config/projects/config-table-other-sectors',
+    'config/projects/config-table-fao-sectors',
     'amplify-pubsub'
-], function (log, $, $UI, _, TitleSubView, FilterSubView, DashboardTableSubView, TableModel, template, Errors, Events, GeneralConfig, BaseMatrixEvents, BasePartnerMatrixConfig, BaseFilterConfig, TableConfig, amplify) {
+], function (log, $, $UI, _, TitleSubView, FilterSubView, DashboardTableSubView, TableModel, template, Errors, Events, GeneralConfig, BaseProjectsEvents, BaseProjectsConfig, BaseFilterConfig, TableConfigOtherSectors, TableConfigFAOSectors, amplify) {
 
     'use strict';
 
     var s = {
         css_classes: {
-            TITLE_BAR_ITEMS: "#comp-advantage-fx-title-items",
-            FILTER_HOLDER: "#comp-advantage-filter-holder",
-            DASHBOARD_CHARTS_HOLDER: "#comp-advantage-charts-content",
-            DASHBOARD_TABLE_HOLDER: "#comp-advantage-table-content"
+            TITLE_BAR_ITEMS: "#projects-fx-title-items",
+            FILTER_HOLDER: "#projects-filter-holder",
+            DASHBOARD_TABLE_HOLDER: "#projects-table-content"
         },
         dashboardModel: {
             LABEL: 'label'
@@ -110,14 +110,14 @@ define([
 
 
     ProjectsView.prototype._bindEventListeners = function () {
-        amplify.subscribe(BaseMatrixEvents.FILTER_ON_READY, this, this._filtersLoaded);
-        amplify.subscribe(BaseMatrixEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
+        amplify.subscribe(BaseProjectsEvents.FILTER_ON_READY, this, this._filtersLoaded);
+        amplify.subscribe(BaseProjectsEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
     };
 
     ProjectsView.prototype._unbindEventListeners = function () {
         // Remove listeners
-        amplify.unsubscribe(BaseMatrixEvents.FILTER_ON_READY, this._filtersLoaded);
-        amplify.unsubscribe(BaseMatrixEvents.FILTER_ON_CHANGE, this._filtersChanged);
+        amplify.unsubscribe(BaseProjectsEvents.FILTER_ON_READY, this._filtersLoaded);
+        amplify.unsubscribe(BaseProjectsEvents.FILTER_ON_CHANGE, this._filtersChanged);
     };
 
 
@@ -129,13 +129,26 @@ define([
             return;
         }
 
-        // Table Dashboard Configuration
-        if (!TableConfig || !TableConfig.dashboard) {
-            alert("Impossible to find TABLE dashboard configuration " );
+        // Table Dashboard Configuration for Other Sectors
+        if (!TableConfigOtherSectors || !TableConfigOtherSectors.dashboard) {
+            alert("Impossible to find Other Sectors TABLE dashboard configuration" );
             return;
         }
 
-        this.tableConfig = TableConfig;
+        // Table Dashboard Configuration for FAO Sectors
+        if (!TableConfigFAOSectors || !TableConfigFAOSectors.dashboard) {
+            alert("Impossible to find FAO Sectors TABLE dashboard configuration" );
+            return;
+        }
+
+
+        //Set default dashboard configuration
+        if (TableConfigOtherSectors.id === BaseProjectsConfig.dashboard.DEFAULT_CONFIG) {
+            this.tableConfig = TableConfigOtherSectors;
+        } else if (TableConfigFAOSectors.id === BaseProjectsConfig.dashboard.DEFAULT_CONFIG) {
+            this.tableConfig = TableConfigFAOSectors;
+        }
+
 
         // Set TITLE Sub View
         var titleSubView = new TitleSubView({
@@ -216,29 +229,44 @@ define([
      * @private
      */
 
-    ProjectsView.prototype._updateView = function (changedFilter, allFilterValues) {
+    ProjectsView.prototype._updateView = function (changedFilterItems, allFilterValues) {
 
         var filterValues = allFilterValues;
 
-        if (changedFilter) {
+        if (changedFilterItems) {
 
-            // If the changed filter has a value
-            if (changedFilter.values.length > 0) {
+            if($.isArray(changedFilterItems)){
 
-                // All is selected
-                if (changedFilter.values[0] === s.values.ALL) {
+                 this._setItemTitle(changedFilterItems, filterValues.labels);
 
-                    // Update the TitleView (Remove Item)
-                    amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
 
-                } else {
-                    // Update the TitleView (Add Item)
-                    amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter));
+                var dashboardConfig = this.subviews['tableDashboard'].getDashboardConfig();
+                var config = this.tableConfig;
+
+                // check filter values contains 9999
+                for(var idx in changedFilterItems){
+                    var changedFilter = changedFilterItems[idx];
+                    if (changedFilter.values.length > 0) {
+                        if (changedFilter.id === GeneralConfig.SELECTORS.SECTOR) {
+                            if(changedFilter.values[0] === '9999'){
+                                //console.log("============== FAO ", config);
+                                config = TableConfigFAOSectors;
+                                dashboardConfig = TableConfigFAOSectors.dashboard;
+                            } else {
+                                //console.log("============== OTHER ", config);
+                                config = TableConfigOtherSectors;
+                                dashboardConfig = TableConfigOtherSectors.dashboard;
+                            }
+                            break;
+                        }
+                    }
                 }
 
-                this._getDashboardConfiguration(filterValues);
-            }
 
+                // console.log("============== CONFIG ", dashboardConfig.items[0]);
+
+                this._getDashboardConfiguration(filterValues, dashboardConfig);
+            }
         }
 
     };
@@ -250,8 +278,8 @@ define([
      * @param filterValues
      * @private
      */
-    ProjectsView.prototype._getDashboardConfiguration = function (topic, filterValues, props) {
-        this._rebuildDashboards(filterValues, this.subviews['tableDashboard'].getDashboardConfig());
+    ProjectsView.prototype._getDashboardConfiguration = function (filterValues, tableConfig) {
+        this._rebuildDashboards(filterValues, tableConfig);
     };
 
 
@@ -284,21 +312,47 @@ define([
      * @private
      */
 
-    ProjectsView.prototype._createTitleItem = function (filterItem) {
+    ProjectsView.prototype._createTitleItem = function (filterItemId, filterItemLabel) {
 
-        var titleItem = {}, labels = filterItem.labels;
-
-        titleItem.id = filterItem.id;
-
-        var key = Object.keys(labels)[0];
-        titleItem.label = labels[key];
+        var titleItem = {};
+        titleItem.id = filterItemId;
+        titleItem.label = filterItemLabel;
 
         return titleItem;
     };
 
+
     ProjectsView.prototype._updateTableDashboardModelValues = function () {
 
         this.tableModel.set(s.dashboardModel.LABEL,  this.subviews['title'].getTitleAsLabel());
+    };
+
+
+    ProjectsView.prototype._setItemTitle = function (changedFilterItems, labels){
+        for(var idx in changedFilterItems){
+            var changedFilter = changedFilterItems[idx];
+
+            if (changedFilter.values.length > 0) {
+                // All is selected
+
+                var val = changedFilter.values[0],
+                    label = labels[changedFilter.id][val];
+
+                if(changedFilter.id === GeneralConfig.SELECTORS.YEAR){
+                    label = labels[changedFilter.id]["range"];
+                }
+
+
+                if (val === s.values.ALL) {
+                    // Update the TitleView (Remove Item)
+                    amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
+                } else {
+                    // Update the TitleView (Add Item)
+                    //  console.log("::::: _updateView:::: =============== _setItemTitle ============ "+changedFilter.id, labels);
+                    amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter.id, label));
+                }
+            }
+        }
     };
 
     return ProjectsView;

@@ -3,14 +3,14 @@ define(
         'loglevel',
         'jquery',
         'underscore',
-        'html/comp-advantage/filters.hbs',
+        'html/projects/filters.hbs',
         'fenix-ui-filter',
         'common/filter-validator',
         'utils/filter-utils',
         'config/config-base',
         'config/errors',
-        'config/comp-advantage/config-comp-advantage',
-        'config/comp-advantage/events',
+        'config/projects/config-projects',
+        'config/projects/events',
         'amplify-pubsub'
     ], function (log, $, _, template, Filter, FilterValidator, FilterUtils, BaseConfig, Errors, PartnerMatrixConfig, BaseEvents, amplify) {
 
@@ -18,8 +18,8 @@ define(
 
         var s = {
             css_classes: {
-                FILTER_ANALYSE_COMP_ADVANTAGE: "#filter-comp-advantage",
-                FILTER_ERRORS_HOLDER: "#filter-comp-advantage-matrix-errors-holder"
+                FILTER_ANALYSE_PROJECTS: "#filter-projects",
+                FILTER_ERRORS_HOLDER: "#filter-projects-errors-holder"
             },
             exclusions: {
                 ALL: 'all'
@@ -106,10 +106,10 @@ define(
             var filterConfig = this.filterUtils.getUpdatedFilterConfig(this.config, this.lang);
 
             if (!_.isEmpty(filterConfig)) {
-                this.$el.find(s.css_classes.FILTER_ANALYSE_COMP_ADVANTAGE).show();
+                this.$el.find(s.css_classes.FILTER_ANALYSE_PROJECTS).show();
                 this._renderFilter(filterConfig);
             } else {
-                this.$el.find(s.css_classes.FILTER_ANALYSE_COMP_ADVANTAGE).hide();
+                this.$el.find(s.css_classes.FILTER_ANALYSE_PROJECTS).hide();
             }
         };
 
@@ -137,7 +137,7 @@ define(
 
             // instantiate new filter
             this.filter = new Filter({
-                el: this.$el.find(s.css_classes.FILTER_ANALYSE_COMP_ADVANTAGE),
+                el: this.$el.find(s.css_classes.FILTER_ANALYSE_PROJECTS),
                 environment: this.environment,
                 selectors: config,
                 common: {
@@ -167,8 +167,13 @@ define(
 
                     var fc = this.filterUtils.getFilterConfigById(this.config, payload.id),
                         payloadId = payload.id,
+                        payloadLabels = payload.values.labels,
+                        payloadValues = payload.values.values,
+                        payloads = [],
                         dependencies = [];
 
+                    // Set Primary Payload
+                    payload.primary = true;
 
                     if (fc && fc.dependencies) {
                         for (var id in fc.dependencies) {
@@ -178,7 +183,22 @@ define(
                         payload["dependencies"] = dependencies;
                     }
 
-                    if (payloadId === BaseConfig.SELECTORS.YEAR_TO || payloadId === BaseConfig.SELECTORS.YEAR_FROM) {
+                    if (payloadId === BaseConfig.SELECTORS.SECTOR || payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
+
+                        // Check only for the Sub Sector payload but add the sector details to the payload.
+                        //-------------------------------------------------------------------------------
+                        // When Sector is selected, the Sub Sector is automatically re-populated and this in turn triggers its own 'on Change'.
+                        // The result is that the 'BaseEvents.FILTER_ON_CHANGE' is published twice (1 for the sector and then automatically again for the Sub Sector).
+                        // To avoid the double publish, only the last 'on Change' trigger is evaluated i.e. when payload = 'Sub Sector'
+
+                        if (payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
+                            // Payload contains subsector and sector information
+                            var payloadsUpdated = self._processSectorSubSectorPayload(payloads, payload);
+                            amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
+                        }
+
+                    }
+                    else if (payloadId === BaseConfig.SELECTORS.YEAR_TO || payloadId === BaseConfig.SELECTORS.YEAR_FROM) {
 
                         // Check only for the To payload.
                         //--------------------------------
@@ -196,12 +216,15 @@ define(
                                 payload.values = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedValues());
                             }
 
-                            amplify.publish(BaseEvents.FILTER_ON_CHANGE, payload);
+                            payloads.push(payload);
+
+                            amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
                         }
 
                     }
                     else {
-                        amplify.publish(BaseEvents.FILTER_ON_CHANGE, payload);
+                        payloads.push(payload);
+                        amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
                     }
                 } else {
                     this.filterValidator.displayErrorSection(valid);
@@ -280,6 +303,26 @@ define(
             values[BaseConfig.SELECTORS.YEAR_FROM] = [];
             values[BaseConfig.SELECTORS.YEAR_TO] = [];
 
+
+            // if all values selected clear
+            if(values[BaseConfig.SELECTORS.RECIPIENT_COUNTRY][0] === s.exclusions.ALL) {
+                values[BaseConfig.SELECTORS.RECIPIENT_COUNTRY] = [];
+            }
+
+            // if all values selected clear
+            if(values[BaseConfig.SELECTORS.RESOURCE_PARTNER][0] === s.exclusions.ALL) {
+                values[BaseConfig.SELECTORS.RESOURCE_PARTNER] = [];
+            }
+
+            // if all values selected clear
+            if(values[BaseConfig.SELECTORS.SECTOR][0] === s.exclusions.ALL) {
+                values[BaseConfig.SELECTORS.SECTOR] = [];
+            }
+
+            // if all values selected clear
+            if(values[BaseConfig.SELECTORS.SUB_SECTOR][0] === s.exclusions.ALL) {
+                values[BaseConfig.SELECTORS.SUB_SECTOR] = [];
+            }
             // if all values selected clear
             // if(this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) && this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) === s.exclusions.ALL) {
             //    values[BaseConfig.SELECTORS.REGION] = [];
@@ -328,6 +371,39 @@ define(
 
         };
 
+
+        /**
+         * Add the sector to payloads array and set primary payload
+         * @param payloads array
+         * @returns Array filters
+         */
+        ProjectsFilterView.prototype._processSectorSubSectorPayload = function (payloads, subsectorpayload) {
+            var values = this._getSelectedValues();
+            var labels = this._getSelectedLabels();
+
+            var sector = {};
+            sector.id = BaseConfig.SELECTORS.SECTOR;
+            sector.labels =  labels[BaseConfig.SELECTORS.SECTOR];
+            sector.values =  values[BaseConfig.SELECTORS.SECTOR];
+
+
+            // primary indicates the selection type which takes precedence
+            if(this._getFirstPayloadValue(subsectorpayload) === 'all'){
+                sector.primary = true;
+                sector.isSectorRelated = true;
+                subsectorpayload.primary = false;
+            } else {
+                sector.primary = false;
+                subsectorpayload.primary = true;
+                subsectorpayload.isSectorRelated = true;
+            }
+
+            payloads.push(sector);
+            payloads.push(subsectorpayload);
+
+
+            return payloads;
+        };
 
         ProjectsFilterView.prototype._getPayloadValues = function (payload) {
             return  payload.values;

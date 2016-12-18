@@ -195,7 +195,6 @@ define(function () {
                 }
             },
             "year-to": {
-
                 selector: {
                     id: "dropdown",
                     from: 2000,
@@ -210,11 +209,9 @@ define(function () {
                     type: "static",
                     output: "time"
                 },
-
                 dependencies: {
                     "year-from": {id: "min", event: "select"}
                 },
-
                 template: {
                     hideSwitch: true,
                     hideRemoveButton: true

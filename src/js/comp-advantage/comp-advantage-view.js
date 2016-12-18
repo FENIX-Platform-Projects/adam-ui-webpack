@@ -246,11 +246,10 @@ define([
 
     /**
      * Get the appropriate Dashboard JS configuration file via requireJS, if the topic has changed
-     * @param topic
      * @param filterValues
      * @private
      */
-    ComparativeAdvantageView.prototype._getDashboardConfiguration = function (topic, filterValues, props) {
+    ComparativeAdvantageView.prototype._getDashboardConfiguration = function (filterValues) {
         this._rebuildDashboards(filterValues, this.subviews['tableDashboard'].getDashboardConfig());
     };
 

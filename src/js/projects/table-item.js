@@ -6,16 +6,15 @@ define([
     'underscore',
     'config/errors',
     'config/events',
-    'html/comp-advantage/table-item.hbs',
+    'html/projects/table-item.hbs',
     'fenix-ui-table-creator',
     'fenix-ui-filter',
     'utils/filter-utils',
     'utils/utils',
     'nls/table',
-    'nls/comp-advantage',
     'fenix-ui-filter-utils',
     'amplify-pubsub'
-], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, i18nCompAdvantageLabels, FxUtils, amplify) {
+], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, FxUtils, amplify) {
 
     'use strict';
 
@@ -120,7 +119,7 @@ define([
     TableItem.prototype._renderTemplate = function () {
         this.indicatortemplate = Template;
 
-        var data = $.extend(true, {data:  this.model}, i18nTableLabels[this.lang], i18nCompAdvantageLabels[this.lang]);
+        var data = $.extend(true, {data:  this.model}, i18nTableLabels[this.lang]);
         var html = this.indicatortemplate(data);
 
         $(this.el).html(html);

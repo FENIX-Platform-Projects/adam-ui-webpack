@@ -3,16 +3,16 @@ define([
     'loglevel',
     'jquery',
     'underscore',
-    'html/comp-advantage/table-dashboard.hbs',
+    'html/projects/table-dashboard.hbs',
     'fenix-ui-dashboard',
     'utils/utils',
     'config/config-base',
     'config/errors',
-    'nls/comp-advantage',
+    'nls/projects',
     'nls/common',
-    'comp-advantage/table-item',
-    'config/comp-advantage/events',
-    'comp-advantage/table-downloader',
+    'projects/table-item',
+    'config/projects/events',
+    'projects/table-downloader',
     'common/progress-bar'
 ], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nCommonLabels, TableItem, BaseEvents, Downloader, ProgressBar) {
 
