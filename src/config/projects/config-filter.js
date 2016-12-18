@@ -21,7 +21,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-xs-4",
                 cl: {
                     uid: "crs_recipients",
                     version: "2016",
@@ -49,7 +49,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-xs-4",
                 cl: {
                     uid: "crs_donors",
                     version: "2016",
@@ -77,7 +77,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-3",
+                classNames: "col-xs-3",
                 cl: {
                     uid: "crs_dac",
                     version: "2016",
@@ -105,7 +105,7 @@ define(function () {
                         // mode: 'multi'
                     }
                 },
-                className: "col-sm-4",
+                classNames: "col-xs-4",
                 cl: {
                     "codes": [
                         "12240",
@@ -184,7 +184,7 @@ define(function () {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-xs-2",
                 format: {
                     type: "static",
                     output: "time"
@@ -205,7 +205,7 @@ define(function () {
                         maxItems: 1
                     }
                 },
-                className: "col-sm-2",
+                classNames: "col-xs-2",
                 format: {
                     type: "static",
                     output: "time"

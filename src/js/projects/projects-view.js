@@ -41,11 +41,11 @@ define([
      *
      * Creates a new Comparative Advantage View
      * Comparative Advantage View omprises of a series of subviews: title view, filter view and 1 dashboard views (table dashboard)
-     * @class ComparativeAdvantageView
+     * @class ProjectsView
      * @extends View
      */
 
-    function ComparativeAdvantageView(o) {
+    function ProjectsView(o) {
         // log.info("PriorityAnalysisView");
         //  log.info(o);
 
@@ -70,18 +70,18 @@ define([
             return this;
 
         } else {
-            log.error("Impossible to create Comparative Advantage View");
+            log.error("Impossible to create Projects View");
             log.error(valid)
         }
     }
 
-    ComparativeAdvantageView.prototype._parseInput = function (params) {
+    ProjectsView.prototype._parseInput = function (params) {
         this.$el = $(this.el);
         this.lang = params.lang.toLowerCase() || GeneralConfig.LANG.toLowerCase();
         this.environment = params.environment || GeneralConfig.ENVIRONMENT;
     };
 
-    ComparativeAdvantageView.prototype._validateInput = function () {
+    ProjectsView.prototype._validateInput = function () {
 
         var valid = true,
             errors = [];
@@ -95,33 +95,33 @@ define([
         return errors.length > 0 ? errors : valid;
     };
 
-    ComparativeAdvantageView.prototype._attach = function () {
+    ProjectsView.prototype._attach = function () {
         this.template = template;
         this.$el.append(this.template);
     };
 
-    ComparativeAdvantageView.prototype._init = function () {
+    ProjectsView.prototype._init = function () {
         this.subviews = {};
     };
 
-    ComparativeAdvantageView.prototype._render = function () {
+    ProjectsView.prototype._render = function () {
         this._initSubViews();
     };
 
 
-    ComparativeAdvantageView.prototype._bindEventListeners = function () {
+    ProjectsView.prototype._bindEventListeners = function () {
         amplify.subscribe(BaseMatrixEvents.FILTER_ON_READY, this, this._filtersLoaded);
         amplify.subscribe(BaseMatrixEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
     };
 
-    ComparativeAdvantageView.prototype._unbindEventListeners = function () {
+    ProjectsView.prototype._unbindEventListeners = function () {
         // Remove listeners
         amplify.unsubscribe(BaseMatrixEvents.FILTER_ON_READY, this._filtersLoaded);
         amplify.unsubscribe(BaseMatrixEvents.FILTER_ON_CHANGE, this._filtersChanged);
     };
 
 
-    ComparativeAdvantageView.prototype._initSubViews = function () {
+    ProjectsView.prototype._initSubViews = function () {
 
         // Filter Configuration
         if (!BaseFilterConfig || !BaseFilterConfig.filter) {
@@ -174,7 +174,7 @@ define([
      * @param payload Selected Filter Items
      * @private
      */
-    ComparativeAdvantageView.prototype._filtersLoaded = function (payload) {
+    ProjectsView.prototype._filtersLoaded = function (payload) {
 
         var selectedFilterItems = payload.labels;
 
@@ -201,7 +201,7 @@ define([
      * @param changedFilter The filter which has changed
      * @private
      */
-    ComparativeAdvantageView.prototype._filtersChanged = function (changedFilter) {
+    ProjectsView.prototype._filtersChanged = function (changedFilter) {
 
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
@@ -216,7 +216,7 @@ define([
      * @private
      */
 
-    ComparativeAdvantageView.prototype._updateView = function (changedFilter, allFilterValues) {
+    ProjectsView.prototype._updateView = function (changedFilter, allFilterValues) {
 
         var filterValues = allFilterValues;
 
@@ -250,7 +250,7 @@ define([
      * @param filterValues
      * @private
      */
-    ComparativeAdvantageView.prototype._getDashboardConfiguration = function (topic, filterValues, props) {
+    ProjectsView.prototype._getDashboardConfiguration = function (topic, filterValues, props) {
         this._rebuildDashboards(filterValues, this.subviews['tableDashboard'].getDashboardConfig());
     };
 
@@ -262,7 +262,7 @@ define([
      * @private
      */
 
-    ComparativeAdvantageView.prototype._rebuildDashboards = function (filterValues, tableDashboardConfig) {
+    ProjectsView.prototype._rebuildDashboards = function (filterValues, tableDashboardConfig) {
 
         // Set Dashboard Configuration
         this.subviews['tableDashboard'].setDashboardConfig(tableDashboardConfig);
@@ -284,7 +284,7 @@ define([
      * @private
      */
 
-    ComparativeAdvantageView.prototype._createTitleItem = function (filterItem) {
+    ProjectsView.prototype._createTitleItem = function (filterItem) {
 
         var titleItem = {}, labels = filterItem.labels;
 
@@ -296,10 +296,10 @@ define([
         return titleItem;
     };
 
-    ComparativeAdvantageView.prototype._updateTableDashboardModelValues = function () {
+    ProjectsView.prototype._updateTableDashboardModelValues = function () {
 
         this.tableModel.set(s.dashboardModel.LABEL,  this.subviews['title'].getTitleAsLabel());
     };
 
-    return ComparativeAdvantageView;
+    return ProjectsView;
 });
