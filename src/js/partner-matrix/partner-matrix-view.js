@@ -17,9 +17,8 @@ define([
     'config/partner-matrix/events',
     'config/partner-matrix/config-partner-matrix',
     'config/partner-matrix/config-filter',
-    'utils/utils',
     'amplify-pubsub'
-], function (log, $, $UI, _, TitleSubView, FilterSubView, DashboardChartsSubView, DashboardTableSubView, DashboardModel, TableModel, template, Errors, Events, GeneralConfig, BaseMatrixEvents, BasePartnerMatrixConfig, BaseFilterConfig, Utils, amplify) {
+], function (log, $, $UI, _, TitleSubView, FilterSubView, DashboardChartsSubView, DashboardTableSubView, DashboardModel, TableModel, template, Errors, Events, GeneralConfig, BaseMatrixEvents, BasePartnerMatrixConfig, BaseFilterConfig, amplify) {
 
     'use strict';
 
@@ -76,7 +75,7 @@ define([
             return this;
 
         } else {
-            log.error("Impossible to create Browse By View");
+            log.error("Impossible to create Resource Partner Matrix View");
             log.error(valid)
         }
     }

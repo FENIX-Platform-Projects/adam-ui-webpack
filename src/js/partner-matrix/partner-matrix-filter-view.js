@@ -33,7 +33,7 @@ define(
         /**
          * Creates a new Filter View.
          * Instantiates the FENIX filter submodule and responsible for all filter related functionality.
-         * @class FilterView
+         * @class PartnerMatrixFilterView
          * @extends View
          */
 
