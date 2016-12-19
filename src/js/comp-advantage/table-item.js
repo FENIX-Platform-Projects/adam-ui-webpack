@@ -4,6 +4,8 @@ define([
     'jquery',
     'loglevel',
     'underscore',
+    'config//comp-advantage/config-comp-advantage',
+    'config/config-base',
     'config/errors',
     'config/events',
     'html/comp-advantage/table-item.hbs',
@@ -15,7 +17,7 @@ define([
     'nls/comp-advantage',
     'fenix-ui-filter-utils',
     'amplify-pubsub'
-], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, i18nCompAdvantageLabels, FxUtils, amplify) {
+], function ($, log, _, CompAdvantageConfig, BaseConfig, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, i18nCompAdvantageLabels, FxUtils, amplify) {
 
     'use strict';
 
@@ -120,7 +122,8 @@ define([
     TableItem.prototype._renderTemplate = function () {
         this.indicatortemplate = Template;
 
-        var data = $.extend(true, {data:  this.model}, i18nTableLabels[this.lang], i18nCompAdvantageLabels[this.lang]);
+        var path = BaseConfig.ADAM_RESOURCES_DOCS_PATH + CompAdvantageConfig.COMPARATIVE_ADVANTAGE_DESC_FILE;
+        var data = $.extend(true, {data:  this.model, path: path}, i18nTableLabels[this.lang], i18nCompAdvantageLabels[this.lang]);
         var html = this.indicatortemplate(data);
 
         $(this.el).html(html);
