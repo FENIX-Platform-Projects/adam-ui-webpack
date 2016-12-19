@@ -55,6 +55,7 @@ define(function () {
 
         //ADAM DOCs
         ADAM_RESOURCES_DOCS_PATH : ADAM_FILE_RESOURCES_PATH + 'docs/',
+        ADAM_RESOURCES_CPF_UNDAF_PATH : ADAM_FILE_RESOURCES_PATH + 'cpf-undaf/',
 
         //Chaplin JS configuration
         CHAPLINJS_CONTROLLER_SUFFIX: '-controller',

@@ -4,6 +4,7 @@ define([
     'jquery',
     'loglevel',
     'underscore',
+    'config/config-base',
     'config/errors',
     'config/events',
     'html/priority/table-item.hbs',
@@ -15,7 +16,7 @@ define([
     'nls/filter',
     'fenix-ui-filter-utils',
     'amplify-pubsub'
-], function ($, log, _, ERR, EVT,/* C,*/ Template, OlapCreator, Filter, /*FenixTool,*/ FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
+], function ($, log, _, ConfigBase, ERR, EVT,/* C,*/ Template, OlapCreator, Filter, /*FenixTool,*/ FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
 
     'use strict';
 
@@ -29,7 +30,7 @@ define([
             CPF: "#cpf",
             UNDAF: "#undaf"
         },
-        LINKS_BASE_URL: "http://fenix.fao.org/demo/adam-docs/cpf-undaf/",
+        LINKS_BASE_URL: ConfigBase.ADAM_RESOURCES_CPF_UNDAF_PATH, //  "http://fenix.fao.org/demo/adam-docs/cpf-undaf/",
         CPF: "CPF",
         UNDAF: "UNDAF"
    };
@@ -152,7 +153,7 @@ define([
 
         this.controller._trigger('table_ready', {model: this.model, data: {size: this.model.size}});
 
-        console.log(" ================= RENDER ============== ", this.model);
+       // console.log(" ================= RENDER ============== ", this.model);
 
         if (this.model.size > 0) {
             var metadata = this.model.metadata.dsd.columns;
@@ -335,7 +336,7 @@ define([
         var self = this;
 
        this.olap.on('ready', function () {
-           console.log(" ============= THIS OLAP READY 1 ==========");
+          // console.log(" ============= THIS OLAP READY 1 ==========");
             var rowSize = this.olap.model.rows.length;
             $(self.el).find(s.ids.TABLE_SIZE).html(rowSize);
        });
