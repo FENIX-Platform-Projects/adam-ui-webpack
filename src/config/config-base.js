@@ -5,7 +5,8 @@ define(function () {
 
     var SERVER = 'http://fenix.fao.org/',
         CODELIST_PREFIX = SERVER+ 'msd/resources/',
-        CODELIST_HIERARCHY_PREFIX = SERVER+ 'msd/codes/hierarchy/';
+        CODELIST_HIERARCHY_PREFIX = SERVER+ 'msd/codes/hierarchy/',
+        ADAM_FILE_RESOURCES_PATH = 'http://www.fao.org/fileadmin/user_upload/adam/';
 
 
     return {
@@ -51,6 +52,9 @@ define(function () {
         CODES_POSTFIX : '/codes/filter',
         HIERARCHY_CODES_POSTFIX : '/codes/hierarchy',
         D3P_POSTFIX : "d3s_dev/processes/",
+
+        //ADAM DOCs
+        ADAM_RESOURCES_DOCS_PATH : ADAM_FILE_RESOURCES_PATH + 'docs/',
 
         //Chaplin JS configuration
         CHAPLINJS_CONTROLLER_SUFFIX: '-controller',
