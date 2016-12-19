@@ -3,8 +3,7 @@ define(function () {
     'use strict';
 
     return {
-        title: "Dashboard Items",
-        text: "Change me in 118n/root/modules.js",
+        "title": "Dashboard Items",
         "tot-oda": "Total ODA",
         "tot-oda-sector": "Total ODA",
         "tot-oda-subsector": "Total ODA",

@@ -62,6 +62,5 @@ define(function () {
         "info_title_year_to": YEAR_TO,
 
         "reload": "Reload"
-
     }
 });

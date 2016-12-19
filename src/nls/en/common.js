@@ -5,7 +5,6 @@ define(function () {
     return {
         "project_name" : "FENIX",
 
-        // Btn and search
         "btn_go": "View Data",
         "btn_reset": "Reset",
         "courtesy_message" : "No results",
