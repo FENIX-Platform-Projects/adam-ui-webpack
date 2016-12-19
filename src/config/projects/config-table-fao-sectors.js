@@ -32,16 +32,16 @@ define(function () {
                             height: 700,
                             autoSelectFirstRow: false,
                             columns: [
-                                {id: "recipientcode_EN", width: 150},
-                                 {id: "donorcode_EN", width: 150},
-                                {id: "projecttitle", width: 200},
-                                {id: "year", width: 70,  align: 'center', sortOrder: 'desc'},
-                                {id: "parentsector_code_EN", width: 150},
-                                {id: "purposecode_EN", width: 150},
-                                {id: "oda", width: 110, align: 'center', getSortValue : function(value , record){
+                                {id: "recipientcode_EN", width: 110},
+                                {id: "donorcode_EN", width: 120},
+                                {id: "projecttitle", width: 160},
+                                {id: "year", width: 60,  align: 'center', sortOrder: 'desc'},
+                                {id: "parentsector_code_EN", width: 100},
+                                {id: "purposecode_EN", width: 100},
+                                {id: "oda", width: 100, align: 'center', getSortValue : function(value , record){
                                     return Number(value);
                                 }},
-                                {id: "oda", width: 110, align: 'center', getSortValue : function(value , record){
+                                {id: "oda", width: 100, align: 'center', getSortValue : function(value , record){
                                     return Number(value);
                                 }}
                             ]
