@@ -36,10 +36,10 @@ define(function () {
                                     {id: "indicator", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 100, getSortValue : function(value , record){
+                                    {id: "indicator", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 100, getSortValue : function(value , record){
+                                    {id: "indicator", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }}
                                 ]
