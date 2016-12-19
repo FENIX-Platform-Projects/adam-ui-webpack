@@ -129,7 +129,7 @@ define([
     TableItem.prototype._initVariables = function () {
 
        // this.fenixTool = new FenixTool();
-        this.filterUtils = new FilterUtils();
+       // this.filterUtils = new FilterUtils();
 
         //Init status
         this.status = {};
@@ -146,10 +146,12 @@ define([
        // this.controller._trigger('table_ready', {model: this.model, data: {size: this.model.size}});
 
         if (this.model.size > 0) {
+            $(this.el).find(s.TABLE_INFO).addClass("collapse");
             var metadata = this.model.metadata.dsd.columns;
             this._processPayload();
 
         } else {
+            $(this.el).find(s.TABLE_INFO).removeClass("collapse");
             $(this.el).find(s.TABLE_SIZE).html(0);
         }
 

@@ -25,6 +25,7 @@ define([
     var s = {
         ids: {
             TABLE: "#table",
+            TABLE_INFO: "#table-info",
             TABLE_SIZE: "#table-size",
             TABLE_SOURCE: "#table-source",
             CPF: "#cpf",
@@ -156,6 +157,7 @@ define([
        // console.log(" ================= RENDER ============== ", this.model);
 
         if (this.model.size > 0) {
+            $(this.el).find(s.TABLE_INFO).addClass("collapse");
             var metadata = this.model.metadata.dsd.columns;
 
             this._processPayload();
@@ -170,6 +172,7 @@ define([
             }
 
         } else {
+            $(this.el).find(s.TABLE_INFO).removeClass("collapse");
             $(this.el).find(ids.TABLE_SIZE).html(0);
         }
 
