@@ -9350,7 +9350,7 @@ div[data-item="venn-diagram"] {
   background-color: #f4f4f4 !important; }
 
 .gt-head-wrap {
-  width: auto; }
+  width: auto !important; }
 
 .gt-freeze-div[id*="headDiv"] table {
   border-bottom: 1px solid #d6d6d6 !important;
