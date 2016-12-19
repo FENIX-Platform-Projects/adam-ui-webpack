@@ -111,22 +111,8 @@ define([
         var config = this._getBoxModelFromFilter();
 
         log.info(config);
-        
-        console.log('CONFIG', config);
 
-        this.analysis.add(config);
-
-      /*  _.each(this.analysis.gridItems, function(item) {
-            var box = item.model,
-                chart = box.tabs.chart;
-
-            console.log('CHART ITEM',chart)
-
-            chart.config.config.exporting.chartOptions.title = {};
-            //exporting.chartOptions.title = {};
-
-        });*/
-        
+        this.analysis.add(config);        
     };
 
     CompareView.prototype._getBoxModelFromFilter = function () {
@@ -155,7 +141,8 @@ define([
             process.parentsector_code.codes[0].codes = _.without(codes, "9999");
         }
 
-        config.uid = "adam_usd_aggregation_table";
+        //config.uid = "adam_usd_aggregation_table";
+        config.uid = "adam_usd_aggregated_table";
 
         config.title = createTitle(values, this.lang);
 
@@ -166,20 +153,21 @@ define([
             }]
         };
 
-        config.process = [{
-            name: "filter",
-            parameters: {
-                rows: $.extend(faoSectorSelected ? {
-                        "fao_sector": {
-                            "enumeration": [
-                                "1"
-                            ]
-                        }
-                    } : null, process
-                ),
-                columns: columns
-            }
-        },
+        config.process = [
+            {
+                name: "filter",
+                parameters: {
+                    rows: $.extend(faoSectorSelected ? {
+                            "fao_sector": {
+                                "enumeration": [
+                                    "1"
+                                ]
+                            }
+                        } : null, process
+                    ),
+                    columns: columns
+                }
+            },
             {
                 "name": "group",
                 "parameters": {
@@ -199,7 +187,17 @@ define([
                         }
                     ]
                 }
-            }];
+            }
+        ];
+
+        if( faoSectorSelected &&
+            config.process[0].parameters.rows.parentsector_code &&
+            config.process[0].parameters.rows.parentsector_code.codes.length > 0 &&
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes && 
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes.length==0)
+        {
+            delete config.process[0].parameters.rows.parentsector_code;
+        }
 
         return config;
 
