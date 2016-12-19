@@ -22,7 +22,7 @@ define(function () {
                            // "pageSize": "150",
                             "showRowHeaders":true,
                             "columns":["indicator"],
-                            "rows":["donorcode_EN", "recipientcode_EN"],
+                            "rows":["donorcode", "recipientcode"],
                             "aggregations":[],
                             "values":["value"],
                             inputFormat : "fenixtool",
@@ -31,8 +31,8 @@ define(function () {
                                 pageSize: 150,
                                 autoSelectFirstRow: false,
                                 columns: [
-                                    {id: "donorcode_EN", width: 150},
-                                    {id: "recipientcode_EN", width: 150},
+                                    {id: "donorcode", width: 150},
+                                    {id: "recipientcode", width: 150},
                                     {id: "indicator", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
@@ -237,7 +237,7 @@ define(function () {
                                             "columns": [
                                                 "unitcode"
                                             ],
-                                            "rule": "first"
+                                            "rule": "max"
                                         }
                                     ]
                                 }},
@@ -391,6 +391,32 @@ define(function () {
                                 },
                                 "rid": {
                                     "uid": "percentage_oda"
+                                }
+                            },
+
+                            {
+                                "name": "group",
+                                "sid":[{"uid":"union_process"}],
+                                "parameters": {
+                                    "by": [
+                                        "recipientcode",
+                                        "donorcode",
+                                        "indicator"
+                                    ],
+                                    "aggregations": [
+                                        {
+                                            "columns": [
+                                                "value"
+                                            ],
+                                            "rule": "SUM"
+                                        },
+                                        {
+                                            "columns": [
+                                                "unitcode"
+                                            ],
+                                            "rule": "max"
+                                        }
+                                    ]
                                 }
                             }
                         ]

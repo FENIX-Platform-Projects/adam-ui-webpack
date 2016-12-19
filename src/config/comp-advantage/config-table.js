@@ -36,31 +36,15 @@ define(function () {
                                 customRowAttribute : function(record,rn,grid){
                                     grid.autoSelectFirstRow = false;
 
-                                   // grid.columnList[0].styleClass = null;
-                                    //grid.columnList[1].styleClass = null;
-                                   // grid.columnList[6].styleClass = null;
-
-
                                     if (record[6] === 'YES'){
-                                       // grid.columnList[0].styleClass = 'big-col-width';
-                                       // grid.columnList[1].styleClass = 'smaller-col-width';
-                                       // grid.columnList[6].styleClass = 'small-col-width';
-
                                         return 'style="background-color:#A4C368"'; // green
-
                                     }
-
-                                    //else {
-                                       // grid.columnList[0].styleClass = 'gt-col-1_11-purposecode_en';
-                                       // grid.columnList[1].styleClass = 'gt-col-1_11-year';
-                                       // grid.columnList[6].styleClass = 'gt-col-1_11-ratio';
-                                    //}
 
                                 },
                                 columns: [
-                                    {id: "purposecode_EN", width: 250},
-                                    {id: "year", width: 70, align: 'center'},
-                                    {id: "delivery", width: 100, align: 'center', title: "FAO delivery in sub-sector & country &divide; Total FAO delivery in country",
+                                    {id: "purposecode_EN", width: 200},
+                                    {id: "year", width: 50, align: 'center'},
+                                    {id: "delivery", width: 120, align: 'center', title: "FAO delivery in sub-sector & country &divide; Total FAO delivery in country",
                                         renderer: function (value, record, columnObj, grid, colNo, rowNo) {
                                             var val = value;
 
@@ -70,7 +54,7 @@ define(function () {
 
                                         return  val;
                                     }},
-                                    {id: "fao_delivery", width: 100,  align: 'center', title: "FAO delivery in sub-sector & country &divide; Total delivery by all ODA implementing agencies in sub-sector & country",
+                                    {id: "fao_delivery", width: 110,  align: 'center', title: "FAO delivery in sub-sector & country &divide; Total delivery by all ODA implementing agencies in sub-sector & country",
                                         renderer: function (value, record, columnObj, grid, colNo, rowNo) {
                                             var val = value;
 
@@ -97,7 +81,7 @@ define(function () {
                                             return  val;
                                         }},
                                     {
-                                        id: 'ratio', width: 100,  align: 'center', title: "Ratio > 1 = 'Yes' while Ratio < 1 = 'No'",
+                                        id: 'ratio', width: 120,  sortOrder: 'desc', align: 'center', title: "Ratio > 1 = 'Yes' while Ratio < 1 = 'No'",
                                         renderer: function (value, record1, columnObj, grid, colNo, rowNo) {
                                             var lowCase = value.toLowerCase();
                                             return lowCase.charAt(0).toUpperCase() + lowCase.slice(1);
@@ -108,7 +92,7 @@ define(function () {
                         },
 
                         filterFor: {
-                            "filter_fca": ['year', 'recipientcode'],
+                            "filter_fca": ['year', 'recipientcode']
                         },
 
                         postProcess: [
