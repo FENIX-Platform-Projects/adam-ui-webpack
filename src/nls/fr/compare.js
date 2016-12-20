@@ -2,12 +2,12 @@
 
     'use strict';
 
-    var RECIPIENT = "Country / Region",
+    var RECIPIENT = "Pays/Région",
         DONOR = "Donateur",
-        DELIVERY = "Channel of delivery",
+        DELIVERY = "Canal d'acheminement",
         SECTOR = "Secteur",
         SUB_SECTOR = "Sous Secteur",
-        ODA = "Official Development Assistance (ODA)",
+        ODA = "Aide publique au développement (APD)",
         YEAR_FROM = "De",
         YEAR_TO = "À";
 
