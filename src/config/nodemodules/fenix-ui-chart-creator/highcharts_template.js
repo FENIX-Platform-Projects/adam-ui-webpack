@@ -157,6 +157,7 @@ define(['highcharts'], function (Highcharts) {
 
         exporting: {
            // sourceWidth: 700,
+
           buttons: {
                 contextButton: {
 
@@ -165,19 +166,19 @@ define(['highcharts'], function (Highcharts) {
                     symbol: null,
                     enabled: false
 
-                    //, menuItems: [{
-                    //    textKey: 'downloadPNG',
-                    //    onclick: function () {
-                    //        this.exportChart();
-                    //    }
-                    // }, {
-                    //   textKey: 'downloadJPEG',
-                    //  onclick: function () {
-                    //      this.exportChart({
-                    //         type: 'image/jpeg'
-                    //    });
-                    // }
-                    // }]
+                    , menuItems: [{
+                       textKey: 'downloadPNG',
+                       onclick: function () {
+                           this.exportChart();
+                       }
+                    }, {
+                      textKey: 'downloadJPEG',
+                     onclick: function () {
+                         this.exportChart({
+                            type: 'image/jpeg'
+                       });
+                    }
+                    }]
                 },
                 toggleDataLabelsButton: {
                     text: "Display/Hide Values",
@@ -322,8 +323,6 @@ define(['highcharts'], function (Highcharts) {
                 }
 
             }
-
-
         },
 
         plotOptions: {

@@ -17,8 +17,7 @@ define([
     'amplify-pubsub'
 ], function ($, log, _, FxUtils, template, errorTemplate, 
     i18nLabels, i18nErrors, i18nFilter,
-    E, GC, AC,
-    Filter, Analysis, amplify) {
+    E, GC, AC, Filter, Analysis, amplify) {
 
     'use strict';
 
@@ -113,7 +112,7 @@ define([
 
         log.info(config);
 
-        this.analysis.add(config);
+        this.analysis.add(config);        
     };
 
     CompareView.prototype._getBoxModelFromFilter = function () {
@@ -142,9 +141,10 @@ define([
             process.parentsector_code.codes[0].codes = _.without(codes, "9999");
         }
 
-        config.uid = "adam_usd_aggregation_table";
+        //config.uid = "adam_usd_aggregation_table";
+        config.uid = "adam_usd_aggregated_table";
 
-        config.title = createTitle(values);
+        config.title = createTitle(values, this.lang);
 
         process["year"] = {
             time: [{
@@ -153,20 +153,21 @@ define([
             }]
         };
 
-        config.process = [{
-            name: "filter",
-            parameters: {
-                rows: $.extend(faoSectorSelected ? {
-                        "fao_sector": {
-                            "enumeration": [
-                                "1"
-                            ]
-                        }
-                    } : null, process
-                ),
-                columns: columns
-            }
-        },
+        config.process = [
+            {
+                name: "filter",
+                parameters: {
+                    rows: $.extend(faoSectorSelected ? {
+                            "fao_sector": {
+                                "enumeration": [
+                                    "1"
+                                ]
+                            }
+                        } : null, process
+                    ),
+                    columns: columns
+                }
+            },
             {
                 "name": "group",
                 "parameters": {
@@ -186,7 +187,17 @@ define([
                         }
                     ]
                 }
-            }];
+            }
+        ];
+
+        if( faoSectorSelected &&
+            config.process[0].parameters.rows.parentsector_code &&
+            config.process[0].parameters.rows.parentsector_code.codes.length > 0 &&
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes && 
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes.length==0)
+        {
+            delete config.process[0].parameters.rows.parentsector_code;
+        }
 
         return config;
 
@@ -201,20 +212,29 @@ define([
             }
         }
 
-        function createTitle(values) {
+        function createTitle(values, lang) {
 
             var labels = [];
-            labels.push(getLabels("recipientcode", values));
-            labels.push(getLabels("donorcode", values));
-            labels.push(getLabels("parentsector_code", values));
-            labels.push(getLabels("purposecode", values));
-            labels.push(getLabels("year-from", values));
-            labels.push(getLabels("year-to", values));
 
-            labels = cleanArray(labels);
+            if(!values) return;
 
-            return labels.join(" / ");
+            if(values.labels['donorcode'] && values.values['donorcode'].length)
+                labels.push(i18nFilter[lang]["filter_donorcode"]);
+            
+            if(values.labels['recipientcode'] && values.values['recipientcode'].length)
+                labels.push(i18nFilter[lang]["filter_recipientcode"]);
+            
+            if(values.labels['parentsector_code'] && values.values['parentsector_code'].length)
+                labels.push(i18nFilter[lang]["filter_parentsector_code"]);
 
+            if(values.labels['purposecode'] && values.values['purposecode'].length)
+                labels.push(i18nFilter[lang]["filter_purposecode"]);
+
+            var tit = i18nFilter[lang]['filter_compared_by'].toUpperCase()+ ': ';
+
+            tit += labels.join(" / ");
+
+            return tit;
         }
 
         function getLabels(field, values) {

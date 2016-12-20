@@ -15,6 +15,7 @@ define([
                     tab: "chart",
                     hideFlipButton: false,
                     faces: ["front","back"],
+                    hideMinimizeButton: true,
                     hideMetadataButton: true,
                     nls: {
                         tooltip_toolbar_button: "Compare by",
@@ -158,7 +159,8 @@ define([
                                             selector: {
                                                 id: "dropdown",
                                                 source: source,
-                                                default: source.length > 0 ? source[0].value : "",
+                                                //default: source.length > 0 ? source[0].value : "",
+                                                default: ["donorcode"],
                                                 config: {
                                                     maxItems: 1
                                                 }
@@ -240,6 +242,7 @@ define([
                                             align: 'left',
                                             x: 10
                                         };
+
                                         return result;
 
                                         function createTitle(c, v) {
@@ -252,6 +255,9 @@ define([
                                     }
                                 };
 
+                                //console.log('chart config',highchartsTemplate)
+                                //config.exporting = highchartsTemplate.exporting;
+                                //config.exporting.enabled =true;
                                 return config;
                             }
                         }
