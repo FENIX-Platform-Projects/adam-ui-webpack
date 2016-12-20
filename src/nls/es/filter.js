@@ -13,7 +13,7 @@
         "filter_channelcode": "Canales de entrega",
         "filter_year-from": "De",
         "filter_year-to": "Para",
-        "filter_oda": "AOD del Sistema de notificación por parte de los países acreedores de la OCDE",
+        "filter_oda": "AOD del SNPA de la OCDE",
         "filter_country_groupedRow": "Las filas de las tablas están agrupadas por país beneficiario (anule la selección para poder organizar todas las columnas)",
         "filter_donor_groupedRow": "Las filas de las tablas están agrupadas por asociado que aporta recursos (anule la selección para poder organizar todas las columnas)",
         "filter_country-donor_groupedRow": "Las filas de las tablas están agrupadas por asociado que aporta recursos (anule la selección para poder organizar todas las columnas)",

@@ -11,6 +11,6 @@
     "find_btn" : "Buscar",
     "find_projects_btn" : "Buscar proyectos",
     "projects": "Analizar proyectos",
-    "current_prices": "Precios actuales de la AOD del Sistema de notificación por parte de los países acreedores de la OCDE"
+    "current_prices": "AOD del SNPA de la OCDE"
     }
 });

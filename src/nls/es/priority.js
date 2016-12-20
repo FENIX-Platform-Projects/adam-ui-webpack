@@ -16,7 +16,7 @@
         "top-partners": "Principales asociados que aportan recursos para las prioridades seleccionadas",
         "top-recipients": "Principales países beneficiarios para las prioridades seleccionadas",
         "top-channels": "Principales canales de entrega para las prioridades seleccionadas",
-        "financing-priorities-partners": "Prioridades de financiación por asociados que aportan recursos para las prioridades seleccionadas",
-        "financing-priorities-recipients": "Prioridades de financiación por países beneficiarios para las prioridades seleccionadas"
+        "financing-priorities-partners": "Prioridades de financiación por principales asociados que aportan recursos para las prioridades seleccionadas",
+        "financing-priorities-recipients": "Prioridades de financiación por principales países beneficiarios para las prioridades seleccionadas"
     }
 });
