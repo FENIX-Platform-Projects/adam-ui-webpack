@@ -61,6 +61,8 @@ define(function () {
         "info_title_year_from": YEAR_FROM,
         "info_title_year_to": YEAR_TO,
 
-        "reload": "Reload"
+        "reload": "Reload",
+
+        "btn_add_compare": "Add Chart / Compare"
     }
 });

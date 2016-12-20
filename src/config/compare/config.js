@@ -243,6 +243,10 @@ define([
                                             x: 10
                                         };
 
+                                        //result.exporting.enabled = true;
+                                        //result.exporting.buttons.contextButton.enabled =true;
+
+                                        //console.log('inside chart config',result)
                                         return result;
 
                                         function createTitle(c, v) {
@@ -255,7 +259,7 @@ define([
                                     }
                                 };
 
-                                //console.log('chart config',highchartsTemplate)
+                                //console.log('chart config',config)
                                 //config.exporting = highchartsTemplate.exporting;
                                 //config.exporting.enabled =true;
                                 return config;

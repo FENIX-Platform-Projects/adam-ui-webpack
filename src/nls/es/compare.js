@@ -61,6 +61,8 @@
         "info_title_year_from": YEAR_FROM,
         "info_title_year_to": YEAR_TO,
 
-        "reload": "Volver a cargar"
+        "reload": "Volver a cargar",
+
+        "btn_add_compare": "ES Add Chart / Compare"
     }
 });

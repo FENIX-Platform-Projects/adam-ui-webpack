@@ -78,7 +78,9 @@ define([
     };
 
     CompareView.prototype._attach = function () {
+
         this.template = template(i18nLabels[this.lang]);
+
         this.$el.append(this.template);
     };
 
@@ -215,7 +217,7 @@ define([
         function createTitle(values, lang) {
 
             var labels = [];
-
+console.log('createTitle', i18nFilter, lang)
             if(!values) return;
 
             if(values.labels['donorcode'] && values.values['donorcode'].length)
@@ -267,6 +269,7 @@ define([
 
         var filterConfig = $.extend(true, {}, AC.filter, {
                 el: this.$el.find(s.FILTER),
+               // lang: self.lang,
                 summaryEl: this.$el.find(s.FILTER_SUMMARY),
                 environment: GC.ENVIRONMENT,
                 cache: GC.cache
