@@ -128,9 +128,6 @@ define([
     DashboardView.prototype._downloadExcel = function (modelId) {
      var model = this.models[modelId];
 
-     console.log(" =========== _downloadExcel: MODEL ", model);
-
-
      var dataExporter = new DataExporter({
      lang: this.lang,
      environment:  this.environment
@@ -145,12 +142,6 @@ define([
 
         var model = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
-
-        console.log("============ model ID  ", model);
-        console.log("============ model DATA-TYPE ", type);
-
-        console.log("============ model DATA-TYPE ", type);
-
 
         switch(type) {
             case BaseConfig.DOWNLOAD.EXCEL:
@@ -434,8 +425,6 @@ define([
         var gaulcode = this.gaulcode;
         var regionField = defaultOptions.fields.fao_region;
 
-        console.log(" ================= _updateDashboardRegionalMapConfiguration regionField: ", regionField);
-        console.log(regioncode, gaulcode, map);
 
         // region, is no added to the filter values
         if (map) {
@@ -486,7 +475,6 @@ define([
         var self = this;
 
 
-        console.log("============ REBUILD =======", displayConfigForSelectedFilter, this.modelUpdated);
 
         // Re-render the template
         if (displayConfigForSelectedFilter || this.modelUpdated) {
@@ -508,6 +496,8 @@ define([
         this._disposeDashboards();
 
         this.config.filter = filter;
+
+        console.log(" ======================== NEW DASHBOARD ========================");
 
         // Build new dashboard
         this.dashboard = new Dashboard(
@@ -598,8 +588,6 @@ define([
             self.models[item.id].metadata.uid = item.model.metadata.uid;
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
 
-
-            console.log(" ================ ", self.models);
 
 
 
