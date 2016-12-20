@@ -497,8 +497,7 @@ define([
 
         this.config.filter = filter;
 
-        console.log(" ======================== NEW DASHBOARD ========================");
-
+    
         // Build new dashboard
         this.dashboard = new Dashboard(
             this.config

@@ -24,8 +24,8 @@ define(
                 FILTER_ERRORS_HOLDER: "#filter-browse-errors-holder"
             },
             //datasets: {
-             //   USD_COMMITMENT: 'adam_usd_commitment'
-           // },
+            //   USD_COMMITMENT: 'adam_usd_commitment'
+            // },
             codeLists: {
                 SUB_SECTORS: {uid: 'crs_purposes', version: '2016'},
                 RECIPIENT_DONORS: {uid: 'crs_recipientdonors', version: '2016'},
@@ -55,8 +55,8 @@ define(
 
 
         function FilterView(o) {
-          //  log.info("FilterView");
-           // log.info(o);
+            //  log.info("FilterView");
+            // log.info(o);
 
             $.extend(true, this, o);
 
@@ -138,6 +138,8 @@ define(
          */
         FilterView.prototype._renderFilter = function (config) {
             var self = this;
+            // Filters Ready set to false
+            this.readystate = false;
 
 
             // dispose of filter
@@ -170,7 +172,10 @@ define(
             // Filter on Ready: Set some base properties for Recipient and the ODA, then publish Filter Ready Event
             this.filter.on('ready', function (payload) {
 
-                 //console.log("================== FILTERS READY =========== ");
+                // filters are ready
+                self.readystate = true;
+
+                //   console.log("================== FILTERS READY =========== ", self.readystate);
                 // console.log(this._getFormattedFilterValues());
 
                 // For the Recipient Country, get and set the GAUL Code and Region Code as attributes to the props object
@@ -207,313 +212,244 @@ define(
             // Filter on Change: Set some base properties for Recipient and the ODA, then publish Filter On Change Event
             this.filter.on('select', function (payload) {
 
-              // console.log("================== FILTERS CLICK 1: =========== ", payload.id);
-               // console.log(this._getSelectedValues());
+                // filters ready
+                if(self.readystate) {
 
-                // validate filter
-                var valid = this.filterValidator.validateValues(this._getSelectedValues(), this.lang);
+                    //  console.log("================== FILTERS SELECT: =========== ", payload.id,  self.readystate,  payload.values[0]);
+                    //  console.log(this._getSelectedValues());
 
-               // console.log("================== FILTERS CHANGE 2 SELECTED VALUES =========== VALID ", valid, payload.id);
-                //console.log(this._getFirstPayloadValue(payload));
+                    // validate filter
+                    var valid = this.filterValidator.validateValues(this._getSelectedValues(), this.lang);
 
-
-               // console.log("================== FILTERS CHANGE 3 SELECTED VALUES =========== ", this._getFirstPayloadValue(payload));
-
-                if (valid === true && this._getFirstPayloadValue(payload)) {
+                    // console.log("================== FILTERS CHANGE 2 SELECTED VALUES =========== VALID ", valid, payload.id);
+                    //console.log(this._getFirstPayloadValue(payload));
 
 
-                    //Initialize Variables
-                    var payloads = [],
-                        dependencies = [],
-                        payloadId = payload.id,
-                        payloadLabels = payload.values.labels,
-                        payloadValues = payload.values.values;
+                    // console.log("================== FILTERS CHANGE 3 SELECTED VALUES =========== ", this._getFirstPayloadValue(payload));
 
-                    // Set Primary Payload
-                    payload.primary = true;
+                    if (valid === true && this._getFirstPayloadValue(payload)) {
+                        //  console.log("================== FILTERS SELECT: 2 ON CHANGE =========== ", payload.id,  self.readystate,  payload.values[0]);
 
-                    // Hide any Validator Error Messages
-                    this.filterValidator.hideErrorSection();
 
-                    // Get Filter configuration for payloada and evaluated if payload has a dependency
-                    var fc = this.filterUtils.getFilterConfigById(this.config, payloadId);
+                        //Initialize Variables
+                        var payloads = [],
+                            dependencies = [],
+                            payloadId = payload.id,
+                            payloadLabels = payload.values.labels,
+                            payloadValues = payload.values.values;
 
-                    if (fc && fc.dependencies) {
-                        for (var id in fc.dependencies) {
-                            dependencies.push(id);
-                        }
+                        // Set Primary Payload
+                        payload.primary = true;
 
-                        payload["dependencies"] = dependencies;
-                    }
+                        // Hide any Validator Error Messages
+                        this.filterValidator.hideErrorSection();
 
-                    // Process Payload
-                    // ============= REGION AND RECIPIENT
-                    if (payloadId === BaseConfig.SELECTORS.REGION || payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
+                        // Get Filter configuration for payloada and evaluated if payload has a dependency
+                        var fc = this.filterUtils.getFilterConfigById(this.config, payloadId);
 
-                        if (payloadId === BaseConfig.SELECTORS.REGION) {
-                            var payloadRegionValue = this._getFirstPayloadValue(payload);
-
-                            if (payloadRegionValue === s.exclusions.ALL) {
-                                // Hide all Item from Recipient Country
-                                this.filterUtils.removeAllOption(this.$el, BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
+                        if (fc && fc.dependencies) {
+                            for (var id in fc.dependencies) {
+                                dependencies.push(id);
                             }
+
+                            payload["dependencies"] = dependencies;
                         }
 
-                        if (payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
+                        // Process Payload
+                        // ============= REGION AND RECIPIENT
+                        if (payloadId === BaseConfig.SELECTORS.REGION || payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
 
-                            var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, this._getPayloadValues(payload));
+                            if (payloadId === BaseConfig.SELECTORS.REGION) {
+                                var payloadRegionValue = this._getFirstPayloadValue(payload);
 
-                            //Get Selected Values
-                            var payloadRecipientValue = this._getFirstPayloadValue(payload);
-                            var regionValue = this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION);
+                                if (payloadRegionValue === s.exclusions.ALL) {
+                                    // Hide all Item from Recipient Country
+                                    this.filterUtils.removeAllOption(this.$el, BaseConfig.SELECTORS.RECIPIENT_COUNTRY);
+                                }
+                            }
+
+                            if (payloadId === BaseConfig.SELECTORS.RECIPIENT_COUNTRY) {
+
+                                var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.RECIPIENT_COUNTRY, this._getPayloadValues(payload));
+
+                                //Get Selected Values
+                                var payloadRecipientValue = this._getFirstPayloadValue(payload);
+                                var regionValue = this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION);
 
 
-                            // ALL regions selected
-                            if (regionValue === s.exclusions.ALL) {
+                                // ALL regions selected
+                                if (regionValue === s.exclusions.ALL) {
 
-                                if (payloadRecipientValue === s.exclusions.ALL) {
-                                    // Hide all Item
-                                    this.filterUtils.removeAllOption(this.$el, payloadId);
+                                    if (payloadRecipientValue === s.exclusions.ALL) {
+                                        // Hide all Item
+                                        this.filterUtils.removeAllOption(this.$el, payloadId);
 
-                                    // Set the Default Value, will activate onchange and will go into the else
-                                    var defaultValue = this._getSelectorDefaultValue(payloadId);
+                                        // Set the Default Value, will activate onchange and will go into the else
+                                        var defaultValue = this._getSelectorDefaultValue(payloadId);
 
-                                    if (defaultValue)
-                                        this.filterUtils.setDefaultValue(this.$el, payloadId, defaultValue);
+                                        if (defaultValue)
+                                            this.filterUtils.setDefaultValue(this.$el, payloadId, defaultValue);
+
+                                    } else {
+
+                                        this._publishRegionGaulProperties(payload, additionalProperties, payloads);
+
+                                    }
+
 
                                 } else {
+                                    //     console.log("==================== ELSE REGION OTHER  1============== " + payloadId + " - " + additionalProperties);
+                                    //  console.log("==================== ELSE REGION OTHER  1i payloadRecipientValue ============== " + payloadRecipientValue);
 
-                                    this._publishRegionGaulProperties(payload, additionalProperties, payloads);
+                                    // Add all Item
+                                    this.filterUtils.addAllOption(this.$el, payload.id);
 
-                                   // $.extend(payload, {"props": additionalProperties});
-                                   // var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+                                    if (payloadRecipientValue === s.exclusions.ALL) {
+                                        var region = self._getSelectorValues(BaseConfig.SELECTORS.REGION);
+                                        self._setRecipientProperties(region, null, additionalProperties);
 
-
-                                   // console.log(" =================== payloadsUpdated =====  ", payloadsUpdated);
-
-
-                                  //  amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
+                                        //  console.log("==================== ELSE REGION OTHER 2 ============== " + payloadId + " - " + additionalProperties);
 
 
-                                   /* Q.all([
-                                        self._onRecipientChangeGetRegionCode(self._getPayloadValues(payload)),
-                                        self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
-                                    ]).then(function (result) {
-                                        if (result) {
-                                            var regionResult, region = result[0], gaul = result[1];
-
-                                            if (region) {
-                                                regionResult = region.parents[0].parents[0].code;
-                                            }
-                                            self._setRecipientProperties(regionResult, gaul, additionalProperties);
-                                            //self._setRecipientProperties(region, gaul, additionalProperties);
-                                        }
-                                    }).catch(function (error) {
-                                        //console.log("==================== ELSE: payloadRecipientValue OTHER: ERROR ======== ", additionalProperties);
-                                        self._processRegionCodeError(error, additionalProperties)
-                                    }).done(function () {
                                         $.extend(payload, {"props": additionalProperties});
-                                        var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+                                        var payloadsUpdated = this._processRegionRecipientPayload(payloads, payload);
 
-                                        console.log("====================== TEXT  ======", payload);
+                                        //   console.log("==================== ELSE REGION OTHER  3============== " + payloadId + " - " + additionalProperties);
+
+
                                         amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
-                                    });*/
+
+                                    } else {
+
+                                        this.getGAUL(this._getPayloadValues(payload), _.bind(this._processRecipient, this, additionalProperties));
+                                        this._publishGaulProperties(payload, additionalProperties, payloads);
+
+                                    }
 
                                 }
+                            }
 
-                                /*  console.log("==================== IF: 2i RECIPIENT COUNTRY POST ============== "+ payloadId + " - " +payload.values[0]);
+                        }
+                        else if (payloadId === BaseConfig.SELECTORS.SECTOR || payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
 
-                                 $("[data-selector='recipientcode']").addClass("all-item-hidden");
-                                 var filterItem = this.$el.find("[data-selector='"+payload.id+"']")[0];
-                                 var selectize = $(filterItem).find("[data-role=dropdown]")[0].selectize;
-                                 selectize.removeOption("all");
-                                 selectize.setValue('625'); // activate onchange and will go in the else
+                            // Check only for the Sub Sector payload but add the sector details to the payload.
+                            //-------------------------------------------------------------------------------
+                            // When Sector is selected, the Sub Sector is automatically re-populated and this in turn triggers its own 'on Change'.
+                            // The result is that the 'BaseEvents.FILTER_ON_CHANGE' is published twice (1 for the sector and then automatically again for the Sub Sector).
+                            // To avoid the double publish, only the last 'on Change' trigger is evaluated i.e. when payload = 'Sub Sector'
 
-                                 console.log("==================== IF: 2ii RECIPIENT COUNTRY POST ============== "+ payloadId + " - " +payload.values[0]);
-                                 */
-
-                            } else {
-                                 //     console.log("==================== ELSE REGION OTHER  1============== " + payloadId + " - " + additionalProperties);
-                              //  console.log("==================== ELSE REGION OTHER  1i payloadRecipientValue ============== " + payloadRecipientValue);
-
-                                // Add all Item
-                                this.filterUtils.addAllOption(this.$el, payload.id);
-
-                                if (payloadRecipientValue === s.exclusions.ALL) {
-                                    var region = self._getSelectorValues(BaseConfig.SELECTORS.REGION);
-                                    self._setRecipientProperties(region, null, additionalProperties);
-
-                                  //  console.log("==================== ELSE REGION OTHER 2 ============== " + payloadId + " - " + additionalProperties);
+                            //  console.log("FILTER VIEW: ON CHANGE id: ", payload.id, " value: ", payload.values[0]);
 
 
-                                    $.extend(payload, {"props": additionalProperties});
-                                    var payloadsUpdated = this._processRegionRecipientPayload(payloads, payload);
+                            if (payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
+                                // Payload contains subsector and sector information
+                                var payloadsUpdated = this._processSectorSubSectorPayload(payloads, payload);
 
-                                 //   console.log("==================== ELSE REGION OTHER  3============== " + payloadId + " - " + additionalProperties);
+                                amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
+                            }
 
-                                    console.log(" ===============  ###### FILTER_ON_CHANGE PUBLISH REGION NOT ALL: RECIPIENT == ALL == VALUE ======================");
-
-                                    amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
-
-                                } else {
-
-                                    this.getGAUL(this._getPayloadValues(payload), _.bind(this._processRecipient, this, additionalProperties));
-                                    this._publishGaulProperties(payload, additionalProperties, payloads);
+                        }
+                        else if (payloadId === BaseConfig.SELECTORS.YEAR_TO || payloadId === BaseConfig.SELECTORS.YEAR_FROM) {
 
 
-                                    //console.log(" ===============  ###### FILTER_ON_CHANGE PUBLISH REGION NOT ALL: RECIPIENT == HAS == VALUE ======================");
+                            var values = this._getSelectedValues();
+                            // var yearTo = values[BaseConfig.SELECTORS.YEAR_TO][0];
+                            // var yearFrom = values[BaseConfig.SELECTORS.YEAR_FROM][0];
 
-                                    /* Q.all([
-                                         // self._onRecipientChangeGetRegionCode(payload.values.values),
-                                         self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
-                                     ]).then(function (result) {
-                                         if (result) {
-                                             var gaul = result[0], region = self._getSelectorValues(BaseConfig.SELECTORS.REGION);
-                                             // var region = result[0], gaul = result[1];
-                                             // self._setRecipientProperties(region, gaul, additionalProperties);
-                                             self._setRecipientProperties(region, gaul, additionalProperties);
+                            // Check only for the To payload.
+                            //--------------------------------
+                            // When From is selected, the To is automatically re-populated and this in turn triggers its own 'on Change'.
+                            // The result is that the 'BaseEvents.FILTER_ON_CHANGE' is published twice (1 for the From and then automatically again for the To).
+                            // To avoid the double publish, only the last 'on Change' trigger is evaluated i.e. when payload = 'To'
 
-                                         }
-                                     }).catch(function (error) {
-                                         // console.log("====================  ELSE REGION OTHER: ERROR ======== ", additionalProperties);
-                                         self._processRegionCodeError(error, additionalProperties)
-                                     }).done(function () {
-                                         $.extend(payload, {"props": additionalProperties});
-                                         var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
+                            if (payloadId === BaseConfig.SELECTORS.YEAR_TO) {
 
-                                         console.log("====================== TEXT  2 ======", payload);
+                                var newRange = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedLabels());
 
-                                         amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
-                                     });
- */
+                                if (newRange) {
+                                    payload.id = BaseConfig.SELECTORS.YEAR;
+                                    payload.labels = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedLabels());
+                                    payload.values = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedValues());
                                 }
 
-                            }
-                        }
+                                payloads.push(payload);
 
-                    }
-                    else if (payloadId === BaseConfig.SELECTORS.SECTOR || payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
-
-                        // Check only for the Sub Sector payload but add the sector details to the payload.
-                        //-------------------------------------------------------------------------------
-                        // When Sector is selected, the Sub Sector is automatically re-populated and this in turn triggers its own 'on Change'.
-                        // The result is that the 'BaseEvents.FILTER_ON_CHANGE' is published twice (1 for the sector and then automatically again for the Sub Sector).
-                        // To avoid the double publish, only the last 'on Change' trigger is evaluated i.e. when payload = 'Sub Sector'
-
-                        //  console.log("FILTER VIEW: ON CHANGE id: ", payload.id, " value: ", payload.values[0]);
-
-
-                        if (payloadId === BaseConfig.SELECTORS.SUB_SECTOR) {
-                            // Payload contains subsector and sector information
-                            var payloadsUpdated = this._processSectorSubSectorPayload(payloads, payload);
-                            console.log("================== FILTERS CHANGE 5 payloadsUpdated =========== ", payloadsUpdated, " payload.id ", payload.id);
-
-                            amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
-                        }
-
-                    }
-                    else if (payloadId === BaseConfig.SELECTORS.YEAR_TO || payloadId === BaseConfig.SELECTORS.YEAR_FROM) {
-
-
-                        var values = this._getSelectedValues();
-                        // var yearTo = values[BaseConfig.SELECTORS.YEAR_TO][0];
-                        // var yearFrom = values[BaseConfig.SELECTORS.YEAR_FROM][0];
-
-                         // Check only for the To payload.
-                        //--------------------------------
-                        // When From is selected, the To is automatically re-populated and this in turn triggers its own 'on Change'.
-                        // The result is that the 'BaseEvents.FILTER_ON_CHANGE' is published twice (1 for the From and then automatically again for the To).
-                        // To avoid the double publish, only the last 'on Change' trigger is evaluated i.e. when payload = 'To'
-
-                        if (payloadId === BaseConfig.SELECTORS.YEAR_TO) {
-
-                            var newRange = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedLabels());
-
-                            if (newRange) {
-                                payload.id = BaseConfig.SELECTORS.YEAR;
-                                payload.labels = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedLabels());
-                                payload.values = this.filterUtils.getObject(BaseConfig.SELECTORS.YEAR, this._getSelectedValues());
+                                amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
                             }
 
+                            //amplify.publish(BaseEvents.FILTER_ON_CHANGE, payload);
+                        }
+                        else if (payloadId === BaseConfig.SELECTORS.ODA) {
+                            var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.ODA, this._getFirstPayloadValue(payload));
+                            $.extend(payload, {"props": additionalProperties});
                             payloads.push(payload);
 
                             amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
                         }
-
-                        //amplify.publish(BaseEvents.FILTER_ON_CHANGE, payload);
+                        else {
+                            payloads.push(payload);
+                            amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
+                        }
+                    } else {
+                        this.filterValidator.displayErrorSection(valid);
                     }
-                    else if (payloadId === BaseConfig.SELECTORS.ODA) {
-                        var additionalProperties = this.filterUtils.getPropertiesObject(BaseConfig.SELECTORS.ODA, this._getFirstPayloadValue(payload));
-                        $.extend(payload, {"props": additionalProperties});
-                        payloads.push(payload);
-
-                        amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
-                    }
-                    else {
-                        console.log(" ===============  ###### DEFAULT PUBLISH ======================");
-                        payloads.push(payload);
-                        amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloads);
-                    }
-                } else {
-                    this.filterValidator.displayErrorSection(valid);
                 }
             }, this);
+        };
+
+        /**
+         * Format the time range and ODA values
+         * @returns {Object}
+         * @private
+         */
+
+
+        /* FilterView.prototype._getFilterValues = function () {
+
+         var timerange = {
+         values: {year: [{value: '', parent: s.range.FROM}, {value: '', parent: s.range.TO}]},
+         labels: {year: {range: ''}}
          };
 
-            /**
-             * Format the time range and ODA values
-             * @returns {Object}
-             * @private
-             */
+         var updatedValuesWithYear = {}, updatedValuesWithODA = {}, extendedValues = $.extend(true, {}, this.filter.getValues(), timerange);
+
+         updatedValuesWithYear = this.filterUtils.processTimeRange(extendedValues);
+
+         updatedValuesWithODA = this.filterUtils.removeODAPrefix(updatedValuesWithYear);
+
+         return updatedValuesWithODA;
+
+         };*/
 
 
-           /* FilterView.prototype._getFilterValues = function () {
-
-                var timerange = {
-                    values: {year: [{value: '', parent: s.range.FROM}, {value: '', parent: s.range.TO}]},
-                    labels: {year: {range: ''}}
-                };
-
-                var updatedValuesWithYear = {}, updatedValuesWithODA = {}, extendedValues = $.extend(true, {}, this.filter.getValues(), timerange);
-
-                updatedValuesWithYear = this.filterUtils.processTimeRange(extendedValues);
-
-                updatedValuesWithODA = this.filterUtils.removeODAPrefix(updatedValuesWithYear);
-
-                return updatedValuesWithODA;
-
-            };*/
+        /**
+         * Get Formatted Filter Values
+         * @returns {Object}
+         * @private
+         */
 
 
-            /**
-             * Get Formatted Filter Values
-             * @returns {Object}
-             * @private
-             */
-
-
-            FilterView.prototype._getFormattedFilterValues = function () {
-                var filterValues = this.filter.getValues();
-                return this._formatFilterValues(filterValues);
-            };
+        FilterView.prototype._getFormattedFilterValues = function () {
+            var filterValues = this.filter.getValues();
+            return this._formatFilterValues(filterValues);
+        };
 
 
 
 
-            FilterView.prototype._getSelectorValues = function (id) {
-                return  this._getFormattedFilterValues().values[id];
-            };
+        FilterView.prototype._getSelectorValues = function (id) {
+            return  this._getFormattedFilterValues().values[id];
+        };
 
-            FilterView.prototype._getFirstSelectorValue = function (id) {
-                if(this._getSelectorValues(id)){
-                    return this._getFormattedFilterValues().values[id][0]
-                }
-            };
+        FilterView.prototype._getFirstSelectorValue = function (id) {
+            if(this._getSelectorValues(id)){
+                return this._getFormattedFilterValues().values[id][0]
+            }
+        };
 
 
         FilterView.prototype._processRecipient = function (data, additionalProperties) {
 
-            console.log(" ============ _processRecipient ", data, additionalProperties);
 
             if (data) {
 
@@ -523,12 +459,12 @@ define(
                     region = this._getSelectorValues(BaseConfig.SELECTORS.REGION);
                 }
 
-               this._setRecipientProperties(region, gaul, additionalProperties);
+                this._setRecipientProperties(region, gaul, additionalProperties);
 
-              //  $.extend(payload, {"props": additionalProperties});
+                //  $.extend(payload, {"props": additionalProperties});
 
 
-               // return self._processRegionRecipientPayload(payloads, payload)
+                // return self._processRegionRecipientPayload(payloads, payload)
 
             }
         };
@@ -541,7 +477,6 @@ define(
          */
 
         FilterView.prototype._getSelectedValues = function () {
-             console.log(" ================ FILTERVIEW:::: _getSelectedValues ", this._getFormattedFilterValues());
             return this._getFormattedFilterValues().values;
         };
 
@@ -556,28 +491,28 @@ define(
         };
 
 
-            /**
-             * Format the time range and ODA values
-             * @returns {Object}
-             * @private
-             */
+        /**
+         * Format the time range and ODA values
+         * @returns {Object}
+         * @private
+         */
 
 
-            FilterView.prototype._formatFilterValues = function (filterValues) {
-                var timerange = {
-                    values: {year: [{value: '', parent: s.range.FROM}, {value: '', parent: s.range.TO}]},
-                    labels: {year: {range: ''}}
-                };
-
-                var updatedValuesWithYear = {}, updatedValuesWithODA = {}, extendedValues = $.extend(true, {}, filterValues, timerange);
-
-                updatedValuesWithYear = this.filterUtils.processTimeRange(extendedValues);
-
-                updatedValuesWithODA = this.filterUtils.removeODAPrefix(updatedValuesWithYear);
-
-                return updatedValuesWithODA;
-
+        FilterView.prototype._formatFilterValues = function (filterValues) {
+            var timerange = {
+                values: {year: [{value: '', parent: s.range.FROM}, {value: '', parent: s.range.TO}]},
+                labels: {year: {range: ''}}
             };
+
+            var updatedValuesWithYear = {}, updatedValuesWithODA = {}, extendedValues = $.extend(true, {}, filterValues, timerange);
+
+            updatedValuesWithYear = this.filterUtils.processTimeRange(extendedValues);
+
+            updatedValuesWithODA = this.filterUtils.removeODAPrefix(updatedValuesWithYear);
+
+            return updatedValuesWithODA;
+
+        };
 
 
 
@@ -598,11 +533,11 @@ define(
         FilterView.prototype._onRecipientChangeGetRegionCode = function (recipientCodes) {
             var self = this;
             if (recipientCodes.length > 0) {
-               // console.log("IS RECIPIENT value")
+                // console.log("IS RECIPIENT value")
                 return Q.all([
                     self._createRegionPromiseData(s.codeLists.FAO_REGIONS.uid, s.codeLists.FAO_REGIONS.version, s.codeLists.FAO_REGIONS.level, s.codeLists.FAO_REGIONS.direction, recipientCodes[0])
                 ]).then(function (c) {
-                     return c;
+                    return c;
                 }, function (r) {
                     console.error(r);
                 });
@@ -647,15 +582,12 @@ define(
             if(region) {
                 var regionCodeResult = region[0];
 
-                console.log(" =================== _setRecipientProperties: regionCodeResult: ", regionCodeResult);
                 self._setRegionCode(props, regionCodeResult);
                 //self._setRegionCode(props, regionCodeResult.parents[0].parents[0].code);
             }
 
             if(gaul){
                 var gaulCodeResult = gaul[0];
-
-                console.log(" ===================== _setRecipientProperties: gaulCodeResult: ", gaulCodeResult);
 
                 self._setGaulCode(props, gaulCodeResult.data[0][0]);
             }
@@ -811,7 +743,7 @@ define(
             var baseUrl = BaseConfig.SERVER + BaseConfig.CODELIST_SERVICE + BaseConfig.HIERARCHY_CODES_POSTFIX;
             baseUrl += "/" + codelist + "/" + version + "/" + findcode + "?depth=" + depth + "&direction=" + direction;
 
-           // baseUrl = "http://fenix.fao.org/d3s_dev/msd/codes/hierarchy/crs_fao_regions/2016/625?depth=2&direction=up";
+            // baseUrl = "http://fenix.fao.org/d3s_dev/msd/codes/hierarchy/crs_fao_regions/2016/625?depth=2&direction=up";
 
             return Q($.ajax({
                 url: baseUrl,
@@ -839,7 +771,7 @@ define(
 
             var baseUrl = BaseConfig.SERVER + BaseConfig.D3P_POSTFIX + dataset + "?dsd=true&full=true&language=" + lang;
 
-             var data = [{
+            var data = [{
                 "name": "filter",
                 "parameters": {
                     "rows": {
@@ -1025,8 +957,8 @@ define(
 
                 var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
 
-               //  console.log("================= XXXXXXXXXXXXXXXXXXXX ================", additionalProperties);
-             //  console.log("================= XXXXXXXXXXXXXXXXXXXX ================", payload.id);
+                //  console.log("================= XXXXXXXXXXXXXXXXXXXX ================", additionalProperties);
+                //  console.log("================= XXXXXXXXXXXXXXXXXXXX ================", payload.id);
 
 
                 if(additionalProperties.regioncode){
@@ -1035,7 +967,7 @@ define(
                     //var regionValue = self._getFirstSelectorValue(BaseConfig.SELECTORS.REGION);
 
 
-                   // self.config[BaseConfig.SELECTORS.RECIPIENT_COUNTRY].selector.default = [additionalProperties.recipientcode];
+                    // self.config[BaseConfig.SELECTORS.RECIPIENT_COUNTRY].selector.default = [additionalProperties.recipientcode];
                     // Set Value
                     //self.filterUtils.setValue(self.$el, BaseConfig.SELECTORS.REGION, additionalProperties.regioncode);
                     //self.filterUtils.setValue(self.$el, BaseConfig.SELECTORS.REGION, additionalProperties.recipientcode);
@@ -1126,7 +1058,7 @@ define(
             })).then(function (data) {
 
                 return Q.promise(function (resolve, reject, notify) {
-                     callback(data);
+                    callback(data);
                     return data;
                 });
 

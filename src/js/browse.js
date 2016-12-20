@@ -74,8 +74,14 @@ define([
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");
 
         // map
-        require("node_modules/fenix-ui-map/dist/fenix-ui-map.min.css");
+        //require("node_modules/fenix-ui-map/dist/fenix-ui-map.min.css");
+        //require("node_modules/leaflet/dist/leaflet.css");
+
+
         require("node_modules/leaflet/dist/leaflet.css");
+
+       // require("node_modules/fenix-ui-map-creator/src/css/fenix-ui-leaflet.css");
+        require("node_modules/fenix-ui-map-creator/src/css/fenix-ui-map-creator.css");
 
         // INDEX
         require("css/adam.css");

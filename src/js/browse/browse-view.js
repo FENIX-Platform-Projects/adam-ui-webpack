@@ -314,7 +314,6 @@ define([
             }
         }
 
-        this._getDashboardConfiguration(dashboardConfPath, allFilterValues, displayConfigForFilter);
 
        // Render Dashboard : Development Indicators (if appropriate)
         if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
