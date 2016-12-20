@@ -78,6 +78,7 @@ define([
                                         var compare = values.values.compare[0],
                                             index = order.indexOf(compare),
                                             colors = ["#F44336", "#00BCD4", "#4CAF50", "#E91E63", "#3F51B", "#2196F3", "#009688", "#CDDC39", "#FFC107", "#FF9800", "#E91E63"],
+                                            //colors = ["#4CAF50", "#E91E63", "#3F51B", "#2196F3", "#009688", "#CDDC39", "#FFC107", "#FF9800", "#E91E63"],
                                             used = {};
 
                                         for (var ii in model.cols) {
