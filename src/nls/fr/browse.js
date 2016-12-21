@@ -13,7 +13,7 @@
         "development_indicators": "Indicateurs de développement",
         "sector": "Par secteur",
         "country": "Par pays bénéficiaire",
-        "donor": "Par pays fournisseur de ressources",
+        "donor": "Par fournisseur de ressources",
         "country-donor": "Par pays bénéficiaire et partenaire fournisseur de ressources",
         "total_country_oda_recipientcode": "Montant total de l'APD  dans le pays",
         "total_country_oda_fao_region": "Montant total de l'APD dans la région",
