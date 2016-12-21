@@ -13,6 +13,7 @@ define(function () {
 
 
         LANG: 'en',
+        
         BROWSE_SECTIONS: ['country', 'country-donor', 'donor', 'sector'],
         DEFAULT_BROWSE_SECTION: 'sector',
         DASHBOARD_ITEMS: {

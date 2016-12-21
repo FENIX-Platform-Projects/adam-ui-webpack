@@ -63,6 +63,7 @@
 
         "reload": "Recharger",
 
-        "btn_add_compare": "FR Add Chart / Compare"
+        "btn_add_compare": "FR Add Chart / Compare",
+        "subtitle_chart_compare": "Hover for values and click and drag to zoom"
 }
 });

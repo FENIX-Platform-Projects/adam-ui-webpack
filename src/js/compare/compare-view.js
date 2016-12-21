@@ -59,6 +59,8 @@ define([
     CompareView.prototype._parseInput = function (params) {
         this.$el = $(this.el);
         this.lang = params.lang.toLowerCase() || GC.LANG.toLowerCase();
+
+        console.log('view',params)
         this.environment = params.environment || GC.ENVIRONMENT;
         this.browse_type = params.browse_type;
     };
@@ -273,14 +275,16 @@ define([
 
         var self = this;
 
-        var filterConfig = $.extend(true, {}, AC.filter, {
+        self.AC = AC({lang: self.lang });
+
+        var filterConfig = $.extend(true, {}, self.AC.filter, {
                 el: this.$el.find(s.FILTER),
-               // lang: self.lang,
+                lang: self.lang,
                 summaryEl: this.$el.find(s.FILTER_SUMMARY),
                 environment: GC.ENVIRONMENT,
                 cache: GC.cache
             }),
-            analysisConfig = $.extend(true, {}, AC.analysis, {
+            analysisConfig = $.extend(true, {}, self.AC.analysis, {
                 el: this.$el.find(s.ANALYSIS),
                 environment: GC.ENVIRONMENT,
                 catalog: false,

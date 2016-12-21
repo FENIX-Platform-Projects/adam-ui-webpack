@@ -16,7 +16,6 @@ define([
 
 
     function Compare() {
-        console.clear();
 
         this._importThirdPartyCss();
 
@@ -31,8 +30,8 @@ define([
 
         // client parameters
         var params = this.getRequestParameters(url),
-            lang = $("html").attr("lang") || Config.LANG,
-            browse_type = Config.DEFAULT_BROWSE_SECTION;
+            browse_type = Config.DEFAULT_BROWSE_SECTION,
+            lang = $("html").attr("lang") || Config.LANG;
 
 
         if(params && params.domain) {

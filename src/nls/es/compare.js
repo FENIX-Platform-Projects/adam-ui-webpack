@@ -63,6 +63,7 @@
 
         "reload": "Volver a cargar",
 
-        "btn_add_compare": "ES Add Chart / Compare"
+        "btn_add_compare": "ES Add Chart / Compare",
+        "subtitle_chart_compare": "Hover for values and click and drag to zoom"
     }
 });

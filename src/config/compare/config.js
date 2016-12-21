@@ -1,15 +1,19 @@
 /*global define*/
 
 define([
-        'jquery',
-        'config/nodemodules/fenix-ui-chart-creator/highcharts_template'
-    ],
-    function ($, highchartsTemplate) {
+    'jquery',
+    'config/nodemodules/fenix-ui-chart-creator/highcharts_template',
+    'nls/compare'
+],
+function ($, highchartsTemplate, i18nLabels) {
 
-        'use strict';
+    'use strict';
+
+    return function(opts) {
+
+        i18nLabels = i18nLabels[ opts.lang || 'en' ];
 
         return {
-
             analysis: {
                 box: {
                     tab: "chart",
@@ -18,7 +22,7 @@ define([
                     hideMinimizeButton: true,
                     hideMetadataButton: true,
                     nls: {
-                        tooltip_toolbar_button: "Compare by",
+                        tooltip_toolbar_button: i18nLabels['sel_heading_compare_by'],
                     },
                     menu: [
                         //Download
@@ -166,7 +170,7 @@ define([
                                                 }
                                             },
                                             template: {
-                                                title: "Compare by"
+                                                title: i18nLabels['sel_heading_compare_by']
                                             }
                                         }
                                     }
@@ -238,7 +242,7 @@ define([
 
                                         result = $.extend(true, {}, config, highchartsTemplate);
                                         result.subtitle = {
-                                            text: '<b>Hover for values and click and drag to zoom</b>',
+                                            text: '<b>'+i18nLabels['subtitle_chart_compare']+'</b>',
                                             align: 'left',
                                             x: 10
                                         };
@@ -253,7 +257,7 @@ define([
 
                                             var label = v.labels.compare[c];
 
-                                            return "Compare by " + label;
+                                            return i18nLabels['sel_heading_compare_by'] + label;
 
                                         }
                                     }
@@ -423,6 +427,6 @@ define([
                     }
                 }
             }
-        }
-
-    });
+        };
+    };
+});
