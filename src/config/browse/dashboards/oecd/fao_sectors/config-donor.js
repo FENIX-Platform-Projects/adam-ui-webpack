@@ -2700,6 +2700,17 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             ],
                             "parameters": {
+                                "!recipientcode": {
+                                    "codes": [
+                                        {
+                                            "uid": "crs_recipients", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
+                                            "version": "2016",
+                                            "codes": [
+                                                "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679"
+                                            ]
+                                        }
+                                    ]
+                                },
                                 "rows": {
                                     "fao_sector": {
                                         "enumeration": [

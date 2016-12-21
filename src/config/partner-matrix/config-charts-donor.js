@@ -23,7 +23,7 @@ define(function () {
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
 
                         config: {
-                            colors: ["#c6dbef","#9ecae1", "#3182bd"],
+                            colors: ["#3182bd", "#c6dbef","#9ecae1"],
                             chart: {
                                 marginTop: 50,
                                 events: {

@@ -2129,6 +2129,17 @@ define(function () {
                             ],
                             "parameters": {
                                 "rows": {
+                                    "!recipientcode": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_recipients", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
+                                                "version": "2016",
+                                                "codes": [
+                                                    "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "parentsector_code": {
                                         "codes": [
                                             {
@@ -2343,6 +2354,17 @@ define(function () {
                                     "unitcode"
                                 ],
                                 "rows": {
+                                    "!recipientcode": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_recipients", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
+                                                "version": "2016",
+                                                "codes": [
+                                                    "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "oda": {
                                         "codes": [
                                             {
