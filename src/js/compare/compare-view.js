@@ -192,6 +192,7 @@ define([
             }
         ];
 
+        //(1: filter with fao_sector without parentsector_code)
         if( faoSectorSelected &&
             config.process[0].parameters.rows.parentsector_code &&
             config.process[0].parameters.rows.parentsector_code.codes.length > 0 &&
@@ -199,7 +200,12 @@ define([
             config.process[0].parameters.rows.parentsector_code.codes[0].codes.length==0)
         {
             delete config.process[0].parameters.rows.parentsector_code;
+
+            if(_.indexOf(config.process[1].parameters.by,"parentsector_code"))
+                config.process[1].parameters.by = _.without(config.process[1].parameters.by,"parentsector_code"); 
         }
+
+    
 
         return config;
 
@@ -217,7 +223,7 @@ define([
         function createTitle(values, lang) {
 
             var labels = [];
-console.log('createTitle', i18nFilter, lang)
+//console.log('createTitle', i18nFilter, lang)
             if(!values) return;
 
             if(values.labels['donorcode'] && values.values['donorcode'].length)

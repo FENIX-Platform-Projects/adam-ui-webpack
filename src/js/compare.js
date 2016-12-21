@@ -61,11 +61,8 @@ define([
     };
 
     Compare.prototype._importThirdPartyCss = function () {
-
-        //SANDBOXED BOOTSTRAP
+        //Bootstrap
         require("css/sandboxed-bootstrap.css");
-
-
         //dropdown selector
         require("../../node_modules/selectize/dist/css/selectize.bootstrap3.css");
         //tree selector
@@ -82,13 +79,12 @@ define([
         require("../../node_modules/bootstrap-table/dist/bootstrap-table.min.css");
         // fenix-ui-catalog
         require("../../node_modules/fenix-ui-catalog/dist/fenix-ui-catalog.min.css");
-        // fenix-ui-visualization-box
-        require("../../node_modules/fenix-ui-visualization-box/src/css/sandboxed-fenix-ui-visualization-box.css");
         //fenix-ui-analysis
         require("../../node_modules/fenix-ui-analysis/dist/fenix-ui-analysis.min.css");
         // iDangerous swiper
         require("../../node_modules/swiper/dist/css/swiper.min.css");
-
+        // fenix-ui-visualization-box
+        require("../../node_modules/fenix-ui-visualization-box/src/css/sandboxed-fenix-ui-visualization-box.css");
         // INDEX
         require("css/adam.css");
     };
