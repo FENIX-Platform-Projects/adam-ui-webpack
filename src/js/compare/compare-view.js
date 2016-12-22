@@ -280,14 +280,14 @@ define([
 
         var filterConfig = $.extend(true, {}, self.AC.filter, {
                 el: this.$el.find(s.FILTER),
-                lang: fxLang,
+               /// lang: fxLang,
                 summaryEl: this.$el.find(s.FILTER_SUMMARY),
                 environment: GC.ENVIRONMENT,
                 cache: GC.cache
             }),
             analysisConfig = $.extend(true, {}, self.AC.analysis, {
                 el: this.$el.find(s.ANALYSIS),
-                lang: fxLang,
+               // lang: fxLang,
                 environment: GC.ENVIRONMENT,
                 catalog: false,
                 cache: GC.cache
