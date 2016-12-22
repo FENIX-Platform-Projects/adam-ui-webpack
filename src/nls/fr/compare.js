@@ -63,7 +63,7 @@
 
         "reload": "Recharger",
 
-        "btn_add_compare": "FR Add Chart / Compare",
-        "subtitle_chart_compare": "Hover for values and click and drag to zoom"
+        "btn_add_compare": "Ajouter Graphique / Comparer",
+        "subtitle_chart_compare": "Passez la souris sur les valeurs et cliquez et faites glisser pour zoomer"
 }
 });

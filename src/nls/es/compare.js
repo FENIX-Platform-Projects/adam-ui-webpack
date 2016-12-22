@@ -61,9 +61,9 @@
         "info_title_year_from": YEAR_FROM,
         "info_title_year_to": YEAR_TO,
 
-        "reload": "Volver a cargar",
+        "reload": "Recargar",
 
-        "btn_add_compare": "ES Add Chart / Compare",
-        "subtitle_chart_compare": "Hover for values and click and drag to zoom"
+        "btn_add_compare": "Añadir Gráfico / Comparar",
+        "subtitle_chart_compare": "Pasa el cursor por los valores y haga clic y arrastre para ampliar"
     }
 });

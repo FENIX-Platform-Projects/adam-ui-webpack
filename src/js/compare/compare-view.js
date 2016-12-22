@@ -59,8 +59,6 @@ define([
     CompareView.prototype._parseInput = function (params) {
         this.$el = $(this.el);
         this.lang = params.lang.toLowerCase() || GC.LANG.toLowerCase();
-
-        console.log('view',params)
         this.environment = params.environment || GC.ENVIRONMENT;
         this.browse_type = params.browse_type;
     };
@@ -225,7 +223,7 @@ define([
         function createTitle(values, lang) {
 
             var labels = [];
-//console.log('createTitle', i18nFilter, lang)
+
             if(!values) return;
 
             if(values.labels['donorcode'] && values.values['donorcode'].length)
@@ -277,15 +275,18 @@ define([
 
         self.AC = AC({lang: self.lang });
 
+        var fxLang = (self.lang==='en'||self.lang==='fr') ? self.lang : 'en';
+
         var filterConfig = $.extend(true, {}, self.AC.filter, {
                 el: this.$el.find(s.FILTER),
-                lang: self.lang,
+                lang: fxLang,
                 summaryEl: this.$el.find(s.FILTER_SUMMARY),
                 environment: GC.ENVIRONMENT,
                 cache: GC.cache
             }),
             analysisConfig = $.extend(true, {}, self.AC.analysis, {
                 el: this.$el.find(s.ANALYSIS),
+                lang: fxLang,
                 environment: GC.ENVIRONMENT,
                 catalog: false,
                 cache: GC.cache
