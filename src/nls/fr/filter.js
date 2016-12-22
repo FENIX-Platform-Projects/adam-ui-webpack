@@ -3,7 +3,7 @@
     'use strict';
 
     return {
-        "filter_compared_by": "FR Compared by",        
+        "filter_compared_by": "Comparé par",        
         "filter_parentsector_code": "Secteur",
         "filter_donorcode": "Partenaire fournisseur de ressources",
         "filter_recipientcode": "Pays bénéficiaire",
