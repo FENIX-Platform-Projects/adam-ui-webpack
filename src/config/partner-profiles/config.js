@@ -45,11 +45,15 @@ define(['highcharts'],function (Highcharts) {
 
                         config: {
                             chart: {
+                                marginTop: 60,
+                                spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
+
                                 events: {
                                     load: function(event) {
                                         var _that = this;
 
                                         if (this.options.chart.forExport) {
+
                                             this.xAxis[0].update({
                                                 categories: this.xAxis[0].categories,
                                                 labels: {
@@ -111,16 +115,100 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             },
                             title: {
-                                text: 'Total ODA - Disbursements Constant Prices for 2014 (USD Mil)'
+                                text: 'Total ODA - Disbursements Constant Prices for 2014 (USD Mil)',
+                                align: 'center'
+
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS'
+                                text: 'Source: OECD-CRS',
+                                align: 'center'
+
                             },
                             legend: {
                                 enabled: false
                             },
                             xAxis: {
                                 type: 'datetime'
+                            },
+                            exporting: {
+
+                                chartOptions: {
+                                    chart: {
+                                        style: {
+                                            fontFamily: 'Helvetica',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    xAxis: {
+                                        labels: {
+                                            y: 15,
+                                            style: {
+                                                fontSize: '7px',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            style: {
+                                                fontSize: '8px'
+                                            }
+                                        },
+                                        labels: {
+                                            style: {
+                                                fontSize: '7px'
+                                            }
+                                        }
+                                    },
+                                    title: {
+                                        style: {
+                                            fontSize: '8px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        style: {
+                                            fontSize: '7px'
+                                        },
+                                        align: 'center'
+                                    },
+                                    legend: {
+                                        title: {
+                                            text: null
+                                        },
+
+                                        itemDistance: 50,
+                                        itemMarginBottom: 5,
+
+                                        labelFormatter: function(){
+                                            // return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                                            return '<span>'+this.name+'</span>';
+                                        },
+                                        itemStyle: {
+                                            fontSize: '8px',
+                                            fontWeight: 'bold'
+                                        },
+                                        enabled: false//, only one series and all info in title and subtitle
+                                    },
+                                    plotOptions: {
+                                        series: {
+                                            lineWidth: 1
+                                        }
+                                    },
+                                    series: {
+                                        // marker : {
+                                        //  radius: 2
+                                        //},
+                                        dataLabels: {
+                                            enabled: false
+                                            // style: {
+                                            // fontSize: '6px',
+                                            // color: this.series.color,
+                                            // textShadow: 0
+                                            // }
+                                        }
+                                    }
+
+                                }
                             }
                         }
                     },
@@ -240,6 +328,142 @@ define(['highcharts'],function (Highcharts) {
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
+                            chart: {
+                                marginTop: 60,
+                                //spacing: [10, 10, 27, 10], // better spacing when chart exports
+                                spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
+
+                                events: {
+                                    load: function () {
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '6px',
+                                                        fontWeight: 'normal'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 10
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+
+                                            this.redraw();
+                                        }
+
+                                    },
+                                    beforePrint: function (event) {
+                                        var $chart = $(this.renderTo);
+                                        var parent = $(this.renderTo).parent().prev();
+
+                                        var title = parent.find("p").text();
+
+                                        //Set chart title and set subtitle to empty string
+                                        this.setTitle(
+                                            {text: title, style: {
+                                                fontSize: '12px'
+                                            }}, {text: ""});
+
+                                        //Only show in the legend the series that are visible
+                                        $.each(this.series, function (i, serie) {
+                                            if(!serie.visible){
+                                                serie.update({
+                                                    showInLegend: false
+                                                })
+                                            }
+                                        });
+
+
+                                        if(this.options.chart.type === 'pie') {
+                                            // Configure printing of pie charts
+                                            /**   this.options.exporting = {
+                            chartOptions: {
+                                legend: {
+                                    title: '',
+                                        enabled: true,
+                                        align: 'center',
+                                        layout: 'vertical',
+                                        useHTML: true,
+                                        labelFormatter: function () {
+                                        var val = this.y;
+                                        if (val.toFixed(0) < 1) {
+                                            val = (val * 1000).toFixed(2) + ' K'
+                                        } else {
+                                            val = val.toFixed(2) + ' USD Mil'
+                                        }
+
+                                        return '<div style="width:200px"><span style="float:left;  font-size:9px">' + this.name.trim() + ': ' + this.percentage.toFixed(2) + '% (' + val + ')</span></div>';
+                                    }
+                                }
+                            }
+                        }**/
+                                        }
+
+                                        //Hide buttons and legend title
+                                        $chart.find('.highcharts-button').hide();
+                                        $chart.find('.highcharts-legend-title').hide();
+                                    },
+                                    afterPrint: function (event) {
+                                        var $chart = $(this.renderTo);
+
+                                        //Reset series availability in legend, if it was hidden
+                                        $.each(this.series, function (i, serie) {
+                                            if(!serie.visible){
+                                                serie.update({
+                                                    showInLegend: true
+                                                })
+                                            }
+                                        });
+
+                                        //Reset title and subtitle
+                                        this.setTitle(
+                                            {text: ""}, {text: ""});
+
+
+                                        // this.setTitle(
+                                        //  {text: ""}, {text: "<b>Hover for values and click and drag to zoom</b>"});
+
+                                        //Re-show buttons and legend title
+                                        $chart.find('.highcharts-button').show();
+                                        $chart.find('.highcharts-legend-title').show();
+                                    }
+
+                                }
+
+                            },
+
                             title: {
                                 text: 'Top Recipients - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
                             },
@@ -259,6 +483,86 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            exporting: {
+
+                                chartOptions: {
+                                    chart: {
+                                        style: {
+                                            fontFamily: 'Helvetica',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    xAxis: {
+                                        labels: {
+                                            y: 15,
+                                            style: {
+                                                fontSize: '7px',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            style: {
+                                                fontSize: '8px'
+                                            }
+                                        },
+                                        labels: {
+                                            style: {
+                                                fontSize: '7px'
+                                            }
+                                        }
+                                    },
+                                    title: {
+                                        style: {
+                                            fontSize: '8px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        style: {
+                                            fontSize: '7px'
+                                        },
+                                        align: 'center'
+                                    },
+                                    legend: {
+                                        title: {
+                                            text: null
+                                        },
+
+                                        itemDistance: 50,
+                                        itemMarginBottom: 5,
+
+                                        labelFormatter: function(){
+                                            // return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                                            return '<span>'+this.name+'</span>';
+                                        },
+                                        itemStyle: {
+                                            fontSize: '8px',
+                                            fontWeight: 'bold'
+                                        },
+                                        enabled: false//, only one series and all info in title and subtitle
+                                    },
+                                    plotOptions: {
+                                        series: {
+                                            lineWidth: 1
+                                        }
+                                    },
+                                    series: {
+                                        // marker : {
+                                        //  radius: 2
+                                        //},
+                                        dataLabels: {
+                                            enabled: false
+                                            // style: {
+                                            // fontSize: '6px',
+                                            // color: this.series.color,
+                                            // textShadow: 0
+                                            // }
+                                        }
+                                    }
+
+                                }
                             }
                         }
 
@@ -385,6 +689,142 @@ define(['highcharts'],function (Highcharts) {
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
+                            chart: {
+                                marginTop: 60,
+                                //spacing: [10, 10, 27, 10], // better spacing when chart exports
+                                spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
+
+                                events: {
+                                    load: function () {
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '100px',
+                                                        fontSize: '6px',
+                                                        fontWeight: 'normal'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 10
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+
+                                            this.redraw();
+                                        }
+
+                                    },
+                                    beforePrint: function (event) {
+                                        var $chart = $(this.renderTo);
+                                        var parent = $(this.renderTo).parent().prev();
+
+                                        var title = parent.find("p").text();
+
+                                        //Set chart title and set subtitle to empty string
+                                        this.setTitle(
+                                            {text: title, style: {
+                                                fontSize: '12px'
+                                            }}, {text: ""});
+
+                                        //Only show in the legend the series that are visible
+                                        $.each(this.series, function (i, serie) {
+                                            if(!serie.visible){
+                                                serie.update({
+                                                    showInLegend: false
+                                                })
+                                            }
+                                        });
+
+
+                                        if(this.options.chart.type === 'pie') {
+                                            // Configure printing of pie charts
+                                            /**   this.options.exporting = {
+                            chartOptions: {
+                                legend: {
+                                    title: '',
+                                        enabled: true,
+                                        align: 'center',
+                                        layout: 'vertical',
+                                        useHTML: true,
+                                        labelFormatter: function () {
+                                        var val = this.y;
+                                        if (val.toFixed(0) < 1) {
+                                            val = (val * 1000).toFixed(2) + ' K'
+                                        } else {
+                                            val = val.toFixed(2) + ' USD Mil'
+                                        }
+
+                                        return '<div style="width:200px"><span style="float:left;  font-size:9px">' + this.name.trim() + ': ' + this.percentage.toFixed(2) + '% (' + val + ')</span></div>';
+                                    }
+                                }
+                            }
+                        }**/
+                                        }
+
+                                        //Hide buttons and legend title
+                                        $chart.find('.highcharts-button').hide();
+                                        $chart.find('.highcharts-legend-title').hide();
+                                    },
+                                    afterPrint: function (event) {
+                                        var $chart = $(this.renderTo);
+
+                                        //Reset series availability in legend, if it was hidden
+                                        $.each(this.series, function (i, serie) {
+                                            if(!serie.visible){
+                                                serie.update({
+                                                    showInLegend: true
+                                                })
+                                            }
+                                        });
+
+                                        //Reset title and subtitle
+                                        this.setTitle(
+                                            {text: ""}, {text: ""});
+
+
+                                        // this.setTitle(
+                                        //  {text: ""}, {text: "<b>Hover for values and click and drag to zoom</b>"});
+
+                                        //Re-show buttons and legend title
+                                        $chart.find('.highcharts-button').show();
+                                        $chart.find('.highcharts-legend-title').show();
+                                    }
+
+                                }
+
+                            },
+
                             title: {
                                 text: 'Top Sectors - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
                             },
@@ -404,6 +844,86 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            exporting: {
+
+                                chartOptions: {
+                                    chart: {
+                                        style: {
+                                            fontFamily: 'Helvetica',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    xAxis: {
+                                        labels: {
+                                            y: 15,
+                                            style: {
+                                                fontSize: '7px',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            style: {
+                                                fontSize: '8px'
+                                            }
+                                        },
+                                        labels: {
+                                            style: {
+                                                fontSize: '7px'
+                                            }
+                                        }
+                                    },
+                                    title: {
+                                        style: {
+                                            fontSize: '8px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        style: {
+                                            fontSize: '7px'
+                                        },
+                                        align: 'center'
+                                    },
+                                    legend: {
+                                        title: {
+                                            text: null
+                                        },
+
+                                        itemDistance: 50,
+                                        itemMarginBottom: 5,
+
+                                        labelFormatter: function(){
+                                            // return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                                            return '<span>'+this.name+'</span>';
+                                        },
+                                        itemStyle: {
+                                            fontSize: '8px',
+                                            fontWeight: 'bold'
+                                        },
+                                        enabled: false//, only one series and all info in title and subtitle
+                                    },
+                                    plotOptions: {
+                                        series: {
+                                            lineWidth: 1
+                                        }
+                                    },
+                                    series: {
+                                        // marker : {
+                                        //  radius: 2
+                                        //},
+                                        dataLabels: {
+                                            enabled: false
+                                            // style: {
+                                            // fontSize: '6px',
+                                            // color: this.series.color,
+                                            // textShadow: 0
+                                            // }
+                                        }
+                                    }
+
+                                }
                             }
                         }
 
@@ -597,6 +1117,86 @@ define(['highcharts'],function (Highcharts) {
                             },
                             xAxis: {
                                 type: 'datetime'
+                            },
+                            exporting: {
+
+                                chartOptions: {
+                                    chart: {
+                                        style: {
+                                            fontFamily: 'Helvetica',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    xAxis: {
+                                        labels: {
+                                            y: 15,
+                                            style: {
+                                                fontSize: '7px',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            style: {
+                                                fontSize: '8px'
+                                            }
+                                        },
+                                        labels: {
+                                            style: {
+                                                fontSize: '7px'
+                                            }
+                                        }
+                                    },
+                                    title: {
+                                        style: {
+                                            fontSize: '8px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        style: {
+                                            fontSize: '7px'
+                                        },
+                                        align: 'center'
+                                    },
+                                    legend: {
+                                        title: {
+                                            text: null
+                                        },
+
+                                        itemDistance: 50,
+                                        itemMarginBottom: 5,
+
+                                        labelFormatter: function(){
+                                            // return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                                            return '<span>'+this.name+'</span>';
+                                        },
+                                        itemStyle: {
+                                            fontSize: '8px',
+                                            fontWeight: 'bold'
+                                        },
+                                        enabled: false//, only one series and all info in title and subtitle
+                                    },
+                                    plotOptions: {
+                                        series: {
+                                            lineWidth: 1
+                                        }
+                                    },
+                                    series: {
+                                        // marker : {
+                                        //  radius: 2
+                                        //},
+                                        dataLabels: {
+                                            enabled: false
+                                            // style: {
+                                            // fontSize: '6px',
+                                            // color: this.series.color,
+                                            // textShadow: 0
+                                            // }
+                                        }
+                                    }
+
+                                }
                             }
                         }
                     },
@@ -723,7 +1323,10 @@ define(['highcharts'],function (Highcharts) {
 
                         config: {
                             chart: {
-                                events: {
+                               marginTop: 60,
+                                    //spacing: [10, 10, 27, 10], // better spacing when chart exports
+                                 spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
+                                 events: {
                                     load: function (event) {
                                         if (this.options.chart.forExport) {
                                             $.each(this.series, function (i, serie) {
@@ -738,6 +1341,16 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
 
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: false
+                                    },
+                                    showInLegend: true // shows legend for pie
+                                }
                             },
                             title: {
                                 text: 'Top FAO-Related Sub-Sectors - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
@@ -765,6 +1378,66 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 },
                                 chartOptions: {
+
+                                        chart: {
+                                            style: {
+                                                fontFamily: 'Helvetica',
+                                                fontWeight: 'bold'
+                                            }
+                                        },
+                                        xAxis: {
+                                            labels: {
+                                                y: 15,
+                                                style: {
+                                                    fontSize: '7px',
+                                                    fontWeight: 'bold'
+                                                }
+                                            }
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                style: {
+                                                    fontSize: '8px'
+                                                }
+                                            },
+                                            labels: {
+                                                style: {
+                                                    fontSize: '7px'
+                                                }
+                                            }
+                                        },
+                                        title: {
+                                            style: {
+                                                fontSize: '8px'
+                                            }
+                                        },
+                                        subtitle: {
+                                            style: {
+                                                fontSize: '7px'
+                                            },
+                                            align: 'center'
+                                        },
+
+                                        plotOptions: {
+                                            series: {
+                                                lineWidth: 1
+                                            }
+                                        },
+                                        series: {
+                                            // marker : {
+                                            //  radius: 2
+                                            //},
+                                            dataLabels: {
+                                                enabled: false
+                                                // style: {
+                                                // fontSize: '6px',
+                                                // color: this.series.color,
+                                                // textShadow: 0
+                                                // }
+                                            }
+                                        },
+
+
                                     legend: {
                                         title: '',
                                         enabled: true,
@@ -898,6 +1571,142 @@ define(['highcharts'],function (Highcharts) {
                         aggregationFn: {"value": "sum"},
                         useDimensionLabelsIfExist: true,// || default raw else fenixtool
                         config: {
+                            chart: {
+                                marginTop: 60,
+                                //spacing: [10, 10, 27, 10], // better spacing when chart exports
+                                spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
+
+                                events: {
+                                    load: function () {
+
+                                        if (this.options.chart.forExport) {
+                                            this.xAxis[0].update({
+                                                categories: this.xAxis[0].categories,
+                                                labels: {
+                                                    style: {
+                                                        width: '50px',
+                                                        fontSize: '6px',
+                                                        fontWeight: 'normal'
+                                                    },
+                                                    step: 1
+                                                }
+                                            }, false);
+
+
+
+                                            $.each(this.series, function (i, serie) {
+                                                if(!serie.visible){
+                                                    serie.update({
+                                                        showInLegend: false
+                                                    })
+                                                } else {
+                                                    if(serie.options.dataLabels.enabled){
+                                                        serie.update({
+                                                            marker : {
+                                                                radius: 2
+                                                            },
+                                                            dataLabels: {
+                                                                enabled: true,
+                                                                style: {
+                                                                    fontSize: '7px'
+                                                                }
+                                                            }
+                                                        })
+                                                    } else {
+                                                        serie.update({
+                                                            marker: {
+                                                                radius: 10
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            });
+
+
+                                            this.redraw();
+                                        }
+
+                                    },
+                                    beforePrint: function (event) {
+                                        var $chart = $(this.renderTo);
+                                        var parent = $(this.renderTo).parent().prev();
+
+                                        var title = parent.find("p").text();
+
+                                        //Set chart title and set subtitle to empty string
+                                        this.setTitle(
+                                            {text: title, style: {
+                                                fontSize: '12px'
+                                            }}, {text: ""});
+
+                                        //Only show in the legend the series that are visible
+                                        $.each(this.series, function (i, serie) {
+                                            if(!serie.visible){
+                                                serie.update({
+                                                    showInLegend: false
+                                                })
+                                            }
+                                        });
+
+
+                                        if(this.options.chart.type === 'pie') {
+                                            // Configure printing of pie charts
+                                            /**   this.options.exporting = {
+                            chartOptions: {
+                                legend: {
+                                    title: '',
+                                        enabled: true,
+                                        align: 'center',
+                                        layout: 'vertical',
+                                        useHTML: true,
+                                        labelFormatter: function () {
+                                        var val = this.y;
+                                        if (val.toFixed(0) < 1) {
+                                            val = (val * 1000).toFixed(2) + ' K'
+                                        } else {
+                                            val = val.toFixed(2) + ' USD Mil'
+                                        }
+
+                                        return '<div style="width:200px"><span style="float:left;  font-size:9px">' + this.name.trim() + ': ' + this.percentage.toFixed(2) + '% (' + val + ')</span></div>';
+                                    }
+                                }
+                            }
+                        }**/
+                                        }
+
+                                        //Hide buttons and legend title
+                                        $chart.find('.highcharts-button').hide();
+                                        $chart.find('.highcharts-legend-title').hide();
+                                    },
+                                    afterPrint: function (event) {
+                                        var $chart = $(this.renderTo);
+
+                                        //Reset series availability in legend, if it was hidden
+                                        $.each(this.series, function (i, serie) {
+                                            if(!serie.visible){
+                                                serie.update({
+                                                    showInLegend: true
+                                                })
+                                            }
+                                        });
+
+                                        //Reset title and subtitle
+                                        this.setTitle(
+                                            {text: ""}, {text: ""});
+
+
+                                        // this.setTitle(
+                                        //  {text: ""}, {text: "<b>Hover for values and click and drag to zoom</b>"});
+
+                                        //Re-show buttons and legend title
+                                        $chart.find('.highcharts-button').show();
+                                        $chart.find('.highcharts-legend-title').show();
+                                    }
+
+                                }
+
+                            },
+
                             title: {
                                 text: 'Top Channels of Delivery - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
                             },
@@ -917,6 +1726,86 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            exporting: {
+
+                                chartOptions: {
+                                    chart: {
+                                        style: {
+                                            fontFamily: 'Helvetica',
+                                            fontWeight: 'bold'
+                                        }
+                                    },
+                                    xAxis: {
+                                        labels: {
+                                            y: 15,
+                                            style: {
+                                                fontSize: '7px',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            style: {
+                                                fontSize: '8px'
+                                            }
+                                        },
+                                        labels: {
+                                            style: {
+                                                fontSize: '7px'
+                                            }
+                                        }
+                                    },
+                                    title: {
+                                        style: {
+                                            fontSize: '8px'
+                                        }
+                                    },
+                                    subtitle: {
+                                        style: {
+                                            fontSize: '7px'
+                                        },
+                                        align: 'center'
+                                    },
+                                    legend: {
+                                        title: {
+                                            text: null
+                                        },
+
+                                        itemDistance: 50,
+                                        itemMarginBottom: 5,
+
+                                        labelFormatter: function(){
+                                            // return '<span style="color:'+this.color+'">'+this.name+'</span>';
+                                            return '<span>'+this.name+'</span>';
+                                        },
+                                        itemStyle: {
+                                            fontSize: '8px',
+                                            fontWeight: 'bold'
+                                        },
+                                        enabled: false//, only one series and all info in title and subtitle
+                                    },
+                                    plotOptions: {
+                                        series: {
+                                            lineWidth: 1
+                                        }
+                                    },
+                                    series: {
+                                        // marker : {
+                                        //  radius: 2
+                                        //},
+                                        dataLabels: {
+                                            enabled: false
+                                            // style: {
+                                            // fontSize: '6px',
+                                            // color: this.series.color,
+                                            // textShadow: 0
+                                            // }
+                                        }
+                                    }
+
+                                }
                             }
                         }
 
