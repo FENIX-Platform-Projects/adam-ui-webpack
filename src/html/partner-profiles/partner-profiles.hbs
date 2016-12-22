@@ -1,0 +1,104 @@
+<div class="row">
+    <div id="partner-profiles-filter-holder" class="col-xs-12">
+        <div class="obj-box">
+            <div id="filter-partner-profiles" class="filter-container row">
+            </div>
+
+            <div id="filter-partner-profiles-errors-holder" class="row">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TITLE -->
+<div class="row">
+    <div id="partner-profiles-fx-title-items" class="col-xs-12"></div>
+</div>
+<div class="row">
+    <div class="col-xs-12" id="partner-profiles-progress-bar-holder">
+    </div>
+    <button id="download-btn" type="button" class="btn btn-default pull-right">
+        <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>Download
+    </button>
+    <!-- CHARTS DASHBOARD -->
+    <div class="col-xs-12">
+        <div id="partner-profiles-dashboard-content">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12" id="tot-oda-container"> <!-- TOTAL ODA -->
+                        <div>
+                            {{> ../partials/download-menu-partial type='chart' id='tot-oda'}}
+                        </div>
+                        <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b> {{tot-oda}}</b>:</span> {{label}}</p></div>
+                        <div class="obj-box">
+                            <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                            <div data-item="tot-oda"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" id="top-sectors-container"> <!-- TOP SECTORS -->
+                        <div>
+                            {{> ../partials/download-menu-partial type='chart' id='top-sectors'}}
+                        </div>
+                        <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-sectors}}</b>:</span> {{label}}</p></div>
+                        <div class="obj-box">
+                            <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                            <div data-item="top-sectors"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" id="tot-oda-fao-container"> <!-- TOTAL ODA SECTOR -->
+                        <div>
+                            {{> ../partials/download-menu-partial type='chart' id='tot-oda-fao'}}
+                        </div>
+                        <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{tot-oda}}</b>:</span> {{label}}</p></div>
+                        <div class="obj-box">
+                            <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                            <div data-item="tot-oda-fao"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" id="top-fao-subsectors-container"><!-- TOP SUB SECTORS -->
+                        <div>
+                            {{> ../partials/download-menu-partial type='chart' id='top-fao-subsectors'}}
+                        </div>
+                        <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-subsectors}}</b>:</span> {{label}}</p></div>
+                        <div class="obj-box">
+                            <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                            <div data-item="top-fao-subsectors"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-xs-12" id="top-recipients-container"><!-- TOP RECIPIENTS -->
+                        <div>
+                            {{> ../partials/download-menu-partial type='chart' id='top-recipients'}}
+                        </div>
+                        <div class="obj-box-header">
+                            <p title="{{label}}"><span class="display-box-header"><b>{{top-recipients}}</b>:</span> {{label}}</p></div>
+                        <div class="obj-box">
+                            <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                            <div data-item="top-recipients"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12" id="top-channels-container"><!-- TOP CHANNEL CATEGORIES -->
+                        <div>
+                            {{> ../partials/download-menu-partial type='chart' id='top-channels'}}
+                        </div>
+                        <div class="obj-box-header"><p title="{{label}}"><span class="display-box-header"><b>{{top-channels}}</b>:</span> {{label}}</p></div>
+                        <div class="obj-box">
+                            <div class="obj-box-info"><p><b>{{hover_values}}</b></p></div>
+                            <div data-item="top-channels"></div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
