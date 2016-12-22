@@ -459,8 +459,7 @@ define([
                     if(b.name === 'addcolumn' && b.rid){
                         var uid = b.rid.uid;
                         var new_value = i18nLabels[lang][uid+"_"+context];
-                        console.log(b.parameters.value + " - "+uid+"_"+context);
-                        //Update labels
+                          //Update labels
                         if(new_value) {
                             b.parameters.value = new_value;
                         }
