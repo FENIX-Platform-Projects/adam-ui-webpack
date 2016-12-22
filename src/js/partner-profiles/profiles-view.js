@@ -25,7 +25,6 @@ define([
     var s = {
         FILTER: "#filter-partner-profiles",
         DASHBOARD: "#partner-profiles-dashboard-content",
-        DOWNLOAD_BTN: "#download-btn"
     };
 
     function ProfilesView(o) {
@@ -85,8 +84,6 @@ define([
     };
 
     ProfilesView.prototype._initVariables = function () {
-        this.$addBnt = this.$el.find(s.DOWNLOAD_BTN);
-        this.readyComponents = 0;
 
     };
 
@@ -97,19 +94,12 @@ define([
         this.filter.on("select", _.bind(this._onFilterChange, this));
     };
 
-    ProfilesView.prototype._onComponentReady = function () {
 
-       this.$addBnt.on("click", _.bind(this.onDownloadMenuClick, this));
-
-
-        //this.readyComponents++;
-
-        //if (this.readyComponents === 2) {
-          //  this.$addBnt.prop('disabled', false);
-        //}
-    };
 
     ProfilesView.prototype._onFilterChange = function () {
+
+        console.log(" ============= select ============ ");
+
         var dashboardConfig = $.extend(true, {}, Config.dashboard, {
             el: this.$el.find(s.DASHBOARD),
             environment: GC.ENVIRONMENT,
@@ -117,37 +107,9 @@ define([
         });
         dashboardConfig.filter = this.filter.getValues();
         this.dashboard = new Dashboard(dashboardConfig);
-        this.dashboard.on("ready", _.bind(this._onComponentReady, this));
-
-
 
     };
 
-    ProfilesView.prototype.onDownloadMenuClick = function () {
-
-        var models = ['top-sectors', 'tot-oda-fao'];
-
-        for(var i in models){
-
-            var $chartCont =  $("div[data-item='"+models[i]+"']");
-
-            //console.log(models[i]);
-            //console.log($chartCont);
-           //console.log($chartCont.data('highchartsChart'));
-
-            var chart = Highcharts.charts[$chartCont.data('highchartsChart')];
-
-           // console.log(chart);
-
-
-            chart.exportChart({
-                type: 'image/png',
-                filename: models[i]
-            });
-
-        }
-
-    };
 
     ProfilesView.prototype._initComponents = function () {
 
@@ -177,9 +139,6 @@ define([
 
     ProfilesView.prototype._unbindEventListeners = function () {
 
-        if (this.$addBnt) {
-            this.$addBnt.off();
-        }
 
     };
 
