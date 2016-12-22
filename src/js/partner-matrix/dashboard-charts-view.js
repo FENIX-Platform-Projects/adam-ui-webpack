@@ -15,7 +15,7 @@ define([
     'handlebars',
     'config/nodemodules/fenix-ui-chart-creator/highcharts_template',
     'common/progress-bar',
-    'priority/chart-downloader'
+    'partner-matrix/chart-downloader'
 ], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nChartLabels, i18nCommonLabels, BaseEvents, Handlebars, HighchartsTemplate, ProgressBar, Downloader) {
 
     'use strict';
@@ -274,6 +274,9 @@ define([
         this.progressBar.show();
 
         this.dashboard.on('ready', function () {
+
+            self._bindDownloadEventListeners();
+
             self.progressBar.finish();
         });
 
@@ -295,7 +298,7 @@ define([
 
         this._renderDashboard(filter);
 
-        this._bindDownloadEventListeners();
+      //  this._bindDownloadEventListeners();
 
         this._bindDashboardListeners();
 
