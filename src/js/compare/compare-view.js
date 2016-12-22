@@ -144,7 +144,8 @@ define([
         }
 
         //config.uid = "adam_usd_aggregation_table";
-        config.uid = "adam_usd_aggregated_table";
+        //config.uid = "adam_usd_aggregated_table";
+        config.uid = 'adam_compare_analysis';
 
         config.title = createTitle(values, this.lang);
 
