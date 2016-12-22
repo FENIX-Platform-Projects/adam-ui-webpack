@@ -12,7 +12,7 @@
     "dev:partner-matrix": "cross-env SECTIONS=partner-matrix NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:comp-advantage": "cross-env SECTIONS=comp-advantage NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:projects": "cross-env SECTIONS=projects NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
-    "dev:profiles": "cross-env SECTIONS=partner-profiles NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
+    "dev:profiles": "cross-env SECTIONS=profiles NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:base": "cross-env SECTIONS=base NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "build": "cross-env SECTIONS=browse,compare,priority,partner-matrix,comp-advantage,projects,base NODE_ENV=production webpack --display-error-details",
     "build:base": "cross-env SECTIONS=base NODE_ENV=production webpack --display-error-details",
