@@ -46,8 +46,6 @@ define([
 
     ChartsDownloader.prototype.onPrintMenuClick = function (model) {
 
-        console.log(this.chartExporter);
-
         this.chartExporter.print("div[data-item='"+model+"']");
 
     };

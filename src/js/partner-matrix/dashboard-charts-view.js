@@ -194,8 +194,6 @@ define([
         this.config.environment = this.environment;
         this.config.baseItems = this.config.items;
 
-
-        console.log(" -------------------- RENDER DASHBOARD ===================");
         this.dashboard = new Dashboard(this.config);
 
     };

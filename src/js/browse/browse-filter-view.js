@@ -190,7 +190,7 @@ define(
                             self._setRecipientProperties(region, gaul, additionalProperties);
                         }
                     }).catch(function (error) {
-                        console.log(error);
+                        log.error(error);
                         self._processRegionCodeError(error, additionalProperties)
                     }).done(function () {
                         amplify.publish(BaseEvents.FILTER_ON_READY, $.extend(self._getFormattedFilterValues(), {"props": additionalProperties}));
@@ -560,10 +560,10 @@ define(
                 return Q.all([
                     self._createGaulPromiseData(BaseConfig.DEFAULT_UID, this.lang.toUpperCase(), s.codeLists.RECIPIENTS.uid, s.codeLists.RECIPIENTS.version, recipientCodes)
                 ]).then(function (c) {
-                    console.log("_onRecipientChangeGetGaulCode", c)
+                   log.error("_onRecipientChangeGetGaulCode", c)
                     return c;
                 }, function (r) {
-                    console.error(r);
+                    log.error(r);
                 });
             }
 
@@ -982,8 +982,6 @@ define(
 
         FilterView.prototype.getGAUL = function (codes, callback) {
 
-            console.log(" =========================== getGAUL ===================== ");
-
             var dataset = BaseConfig.DEFAULT_UID,
                 lang = this.lang.toUpperCase(),
                 codelist = s.codeLists.RECIPIENTS.uid,
@@ -1075,8 +1073,6 @@ define(
         FilterView.prototype._publishGaulProperties = function (payload, additionalProperties, payloads) {
             var self = this;
 
-            console.log(" =================== BEFFORE 3: _publishGaulProperties ");
-
             Q.all([
                 self._onRecipientChangeGetGaulCode(self._getPayloadValues(payload))
             ]).then(function (result) {
@@ -1093,8 +1089,6 @@ define(
             }).done(function () {
                 $.extend(payload, {"props": additionalProperties});
                 var payloadsUpdated = self._processRegionRecipientPayload(payloads, payload);
-
-                console.log(" XXXXXX =================== PUBLISH : _publishGaulProperties ");
 
                 amplify.publish(BaseEvents.FILTER_ON_CHANGE, payloadsUpdated);
             });

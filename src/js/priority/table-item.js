@@ -194,7 +194,6 @@ define([
         this.olap = new OlapCreator(this.config);
 
         this.olap.on('ready', function () {
-            console.log(" ============= THIS OLAP READY 2 ==========");
             var rowSize = self.olap.model.rows.length;
             $(self.el).find(s.ids.TABLE_SIZE).html(rowSize);
         });

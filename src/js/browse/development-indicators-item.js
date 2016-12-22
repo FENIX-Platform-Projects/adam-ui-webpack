@@ -145,9 +145,6 @@ define([
 
     DevelopmentIndicatorsItem.prototype._render = function () {
 
-        console.log(" ======================== XXXXXXXXXXXXXXXXXXXXXXXX DevelopmentIndicatorsItem _render ");
-        console.log(this.model);
-
         this.controller._trigger('indicators_ready', {model: this.model, data: {size: this.model.size}});
 
         if (this.model.size > 0) {
