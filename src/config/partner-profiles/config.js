@@ -128,10 +128,14 @@ define(['highcharts'],function (Highcharts) {
                                 enabled: false
                             },
                             xAxis: {
-                                type: 'datetime'
+                                type: 'datetime',
+                                gridLineColor: 'transparent'
+                            },
+                            yAxis: {
+                                gridLineColor: 'transparent'
                             },
                             exporting: {
-
+                                filename: 'tot_oda_chart',
                                 chartOptions: {
                                     chart: {
                                         style: {
@@ -485,7 +489,7 @@ define(['highcharts'],function (Highcharts) {
                                 allowPointSelect: false
                             },
                             exporting: {
-
+                                filename: 'top_recipients_chart',
                                 chartOptions: {
                                     chart: {
                                         style: {
@@ -563,6 +567,12 @@ define(['highcharts'],function (Highcharts) {
                                     }
 
                                 }
+                            },
+                            xAxis: {
+                                gridLineColor: 'transparent'
+                            },
+                            yAxis: {
+                                gridLineColor: 'transparent'
                             }
                         }
 
@@ -846,6 +856,7 @@ define(['highcharts'],function (Highcharts) {
                                 allowPointSelect: false
                             },
                             exporting: {
+                                filename: 'top_sectors_chart',
 
                                 chartOptions: {
                                     chart: {
@@ -924,6 +935,12 @@ define(['highcharts'],function (Highcharts) {
                                     }
 
                                 }
+                            },
+                            xAxis: {
+                                gridLineColor: 'transparent'
+                            },
+                            yAxis: {
+                                gridLineColor: 'transparent'
                             }
                         }
 
@@ -1116,9 +1133,14 @@ define(['highcharts'],function (Highcharts) {
                                 enabled: false
                             },
                             xAxis: {
-                                type: 'datetime'
+                                type: 'datetime',
+                                gridLineColor: 'transparent'
+                            },
+                            yAxis: {
+                                gridLineColor: 'transparent'
                             },
                             exporting: {
+                                filename: 'tot_oda_fao_chart',
 
                                 chartOptions: {
                                     chart: {
@@ -1323,6 +1345,7 @@ define(['highcharts'],function (Highcharts) {
 
                         config: {
                             chart: {
+                               height: 500,
                                marginTop: 60,
                                     //spacing: [10, 10, 27, 10], // better spacing when chart exports
                                  spacing: [10, 10, 27, 10], // was [10, 10, 15, 10]
@@ -1344,6 +1367,7 @@ define(['highcharts'],function (Highcharts) {
                             },
                             plotOptions: {
                                 pie: {
+                                    size: 200,
                                     allowPointSelect: true,
                                     cursor: 'pointer',
                                     dataLabels: {
@@ -1372,6 +1396,7 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             },
                             exporting: {
+                                filename: 'top_fao_subsectors_chart',
                                 buttons: {
                                     toggleDataLabelsButton: {
                                         enabled: false
@@ -1728,6 +1753,7 @@ define(['highcharts'],function (Highcharts) {
                                 allowPointSelect: false
                             },
                             exporting: {
+                                filename: 'top_channels_chart',
 
                                 chartOptions: {
                                     chart: {
@@ -1806,6 +1832,12 @@ define(['highcharts'],function (Highcharts) {
                                     }
 
                                 }
+                            },
+                            xAxis: {
+                                gridLineColor: 'transparent'
+                            },
+                            yAxis: {
+                                gridLineColor: 'transparent'
                             }
                         }
 
