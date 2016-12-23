@@ -2,10 +2,11 @@
 
 define([
     'jquery',
+    'fenix-ui-filter-utils',
     'config/nodemodules/fenix-ui-chart-creator/highcharts_template',
     'nls/compare'
 ],
-function ($, highchartsTemplate, i18nLabels) {
+function ($, Utils, highchartsTemplate, i18nLabels) {
 
     'use strict';
 
@@ -149,7 +150,7 @@ function ($, highchartsTemplate, i18nLabels) {
 
                                         var col = columns[i] || {};
 
-                                        if (forbiddenId.indexOf(col.id) < 0 && !col.id.endsWith("_EN")) {
+                                        if (forbiddenId.indexOf(col.id) < 0 && !Utils._endsWith(col.id, "_EN")) {
                                             var title = col.title["EN"];
                                             source.push({
                                                 value: col.id,
@@ -181,7 +182,7 @@ function ($, highchartsTemplate, i18nLabels) {
                                 var tab = this,
                                     order = model.metadata.dsd.columns
                                         .filter(function (c) {
-                                            return !c.id.endsWith("_EN") && c.subject !== "value" && c.id !== 'year' && c.id !== 'unitcode'
+                                            return !Utils._endsWith(c.id, "_EN") && c.subject !== "value" && c.id !== 'year' && c.id !== 'unitcode'
                                         })
                                         .map(function (c) {
                                             return c.id;
