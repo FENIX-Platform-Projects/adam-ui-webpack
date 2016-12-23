@@ -98,13 +98,22 @@ define([
 
     ProfilesView.prototype._onFilterChange = function () {
 
-        console.log(" ============= select ============ ");
-
         var dashboardConfig = $.extend(true, {}, Config.dashboard, {
             el: this.$el.find(s.DASHBOARD),
             environment: GC.ENVIRONMENT,
             cache: GC.cache
         });
+
+        var donorCode = this.filter.getValues().values.donorcode[0];
+        var donorLabel = this.filter.getValues().labels.donorcode[donorCode];
+        var fLabel = donorLabel.split(' ').join('').toLowerCase();
+        var res = fLabel.substring(0, 7);
+
+        //Update chart export filenames
+        $.each(dashboardConfig.items, function( index, item ) {
+           item.config.config.exporting.filename = res+"_"+item.config.config.exporting.filename;
+        });
+
         dashboardConfig.filter = this.filter.getValues();
         this.dashboard = new Dashboard(dashboardConfig);
 
