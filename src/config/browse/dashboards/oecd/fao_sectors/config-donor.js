@@ -1,6 +1,6 @@
 /*global define*/
 
-define(['highcharts'],function (Highcharts) {
+define(['highcharts'], function (Highcharts) {
 
     'use strict';
 
@@ -31,7 +31,7 @@ define(['highcharts'],function (Highcharts) {
                 selector: {
                     id: "dropdown",
                     default: ["9999"],
-                    emptyOption : {
+                    emptyOption: {
                         enabled: true,
                         text: "All",
                         value: "all"
@@ -56,7 +56,7 @@ define(['highcharts'],function (Highcharts) {
                 selector: {
                     id: "dropdown",
                     default: ["all"],
-                    emptyOption : {
+                    emptyOption: {
                         enabled: true,
                         text: "All",
                         value: "all"
@@ -130,12 +130,14 @@ define(['highcharts'],function (Highcharts) {
                     hideRemoveButton: true
                 },
                 dependencies: {
-                    "parentsector_code": {id: "parent", event: "select", args: {
-                        body: {
-                            levels: 3
-                        },
-                        exclude: ["all"]
-                    }}
+                    "parentsector_code": {
+                        id: "parent", event: "select", args: {
+                            body: {
+                                levels: 3
+                            },
+                            exclude: ["all"]
+                        }
+                    }
                 }
             },
             "year-from": {
@@ -221,7 +223,7 @@ define(['highcharts'],function (Highcharts) {
                         config: {
                             chart: {
                                 events: {
-                                    load: function(event) {
+                                    load: function (event) {
                                         var _that = this;
 
                                         if (this.options.chart.forExport) {
@@ -253,14 +255,14 @@ define(['highcharts'],function (Highcharts) {
                                             });
 
                                             $.each(this.series, function (i, serie) {
-                                                if(!serie.visible){
+                                                if (!serie.visible) {
                                                     serie.update({
                                                         showInLegend: false
                                                     })
                                                 } else {
-                                                    if(serie.options.dataLabels.enabled){
+                                                    if (serie.options.dataLabels.enabled) {
                                                         serie.update({
-                                                            marker : {
+                                                            marker: {
                                                                 radius: 2
                                                             },
                                                             dataLabels: {
@@ -342,7 +344,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_total_ODA"}
+                            "rid": {"uid": "filter_total_ODA"}
                         },
                         {
                             "name": "group",
@@ -409,12 +411,12 @@ define(['highcharts'],function (Highcharts) {
                         config: {
                             chart: {
                                 events: {
-                                    load: function(event) {
+                                    load: function (event) {
                                         var _that = this;
                                         var hasSubSector = false;
 
                                         var isVisible = $.each(_that.series, function (i, serie) {
-                                            if(serie.name == '% Sector/Total'){
+                                            if (serie.name == '% Sector/Total') {
                                                 serie.update({
                                                     yAxis: 'subsector-axis',
                                                     dashStyle: 'shortdot',
@@ -427,13 +429,13 @@ define(['highcharts'],function (Highcharts) {
                                             }
                                         });
 
-                                        if(!isVisible){
+                                        if (!isVisible) {
                                             this.options.yAxis[1].title.text = '';
                                             this.yAxis[1].visible = false;
                                             this.yAxis[1].isDirty = true;
                                             this.redraw();
                                         } else {
-                                            this.options.yAxis[1].title.text= '%';
+                                            this.options.yAxis[1].title.text = '%';
                                             this.yAxis[1].visible = true;
                                             this.yAxis[1].isDirty = true;
                                             this.redraw();
@@ -468,14 +470,14 @@ define(['highcharts'],function (Highcharts) {
                                             });
 
                                             $.each(this.series, function (i, serie) {
-                                                if(!serie.visible){
+                                                if (!serie.visible) {
                                                     serie.update({
                                                         showInLegend: false
                                                     })
                                                 } else {
-                                                    if(serie.options.dataLabels.enabled){
+                                                    if (serie.options.dataLabels.enabled) {
                                                         serie.update({
-                                                            marker : {
+                                                            marker: {
                                                                 radius: 2
                                                             },
                                                             dataLabels: {
@@ -544,15 +546,14 @@ define(['highcharts'],function (Highcharts) {
                                     "uid": "total_donor_oda" // RESULT OF PART 2: TOTAL ODA FOR DONOR (ALL SECTORS)
                                 },
                                 {
-                                    "uid":"percentage_ODA" // RESULT OF PART 3: PERCENTAGE CALCULATION (ODA FROM DONOR IN SECTOR / TOTAL ODA FROM DONOR x 100)
+                                    "uid": "percentage_ODA" // RESULT OF PART 3: PERCENTAGE CALCULATION (ODA FROM DONOR IN SECTOR / TOTAL ODA FROM DONOR x 100)
                                 },
                                 {
-                                    "uid":"OECD_AVG" // RESULT OF PART 4: OECD DONORS (DAC MEMBERS) AVERAGE ODA IN SELECTED SECTOR
+                                    "uid": "OECD_AVG" // RESULT OF PART 4: OECD DONORS (DAC MEMBERS) AVERAGE ODA IN SELECTED SECTOR
                                 }
                             ],
-                            "parameters": {
-                            },
-                            "rid":{"uid":"union_process"}
+                            "parameters": {},
+                            "rid": {"uid": "union_process"}
 
                         }, // PART 5: UNION is the FINAL PART IN THE PROCESS
                         {
@@ -741,7 +742,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 ]
                             },
-                            "rid":{"uid":"total_ODA"}
+                            "rid": {"uid": "total_ODA"}
 
                         }, // (2ii): TOTAL ODA FOR DONOR: Group by
                         {
@@ -799,14 +800,13 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             },
-                            "rid":{"uid":"join_process"}
+                            "rid": {"uid": "join_process"}
                         }, // PART 3 PERCENTAGE CALCULATION: (3i) Join
                         {
                             "name": "addcolumn",
-                            "sid":[{"uid":"join_process"}],
+                            "sid": [{"uid": "join_process"}],
                             "parameters": {
                                 "column": {
                                     "dataType": "number",
@@ -817,8 +817,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":[" ( donor_sector_oda_value / total_donor_oda_value )*100"]
+                                    "keys": ["1 = 1"],
+                                    "values": [" ( donor_sector_oda_value / total_donor_oda_value )*100"]
 
                                 }
                             }
@@ -955,7 +955,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 ]
                             },
-                            "rid":{"uid":"aggregated_oecd"}
+                            "rid": {"uid": "aggregated_oecd"}
                         }, // (4ii): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Group by
 
                         {
@@ -1002,7 +1002,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_dac_members_by_donor_year"}
+                            "rid": {"uid": "filter_dac_members_by_donor_year"}
 
                         }, // (4iii): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Filter
                         {
@@ -1012,8 +1012,7 @@ define(['highcharts'],function (Highcharts) {
                                     "donorcode",
                                     "year"
                                 ],
-                                "aggregations": [
-                                ]
+                                "aggregations": []
                             },
                             "rid": {
                                 "uid": "sd"
@@ -1083,8 +1082,7 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             }
                         }, // (4vii): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Join
                         {
@@ -1099,8 +1097,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":[" ( aggregated_oecd_value / count_dac_members_value_count )"]
+                                    "keys": ["1 = 1"],
+                                    "values": [" ( aggregated_oecd_value / count_dac_members_value_count )"]
                                 }
                             },
                             "rid": {
@@ -1115,8 +1113,7 @@ define(['highcharts'],function (Highcharts) {
                                     "value",
                                     "aggregated_oecd_unitcode"
                                 ],
-                                "rows": {
-                                }
+                                "rows": {}
                             }
                         }, // (4ix): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Filter
                         {
@@ -1162,12 +1159,12 @@ define(['highcharts'],function (Highcharts) {
                         config: {
                             chart: {
                                 events: {
-                                    load: function(event) {
+                                    load: function (event) {
                                         var _that = this;
                                         var hasSubSector = false;
 
                                         var isVisible = $.each(_that.series, function (i, serie) {
-                                            if(serie.name == '% Sub Sector/Sector'){
+                                            if (serie.name == '% Sub Sector/Sector') {
                                                 serie.update({
                                                     yAxis: 'subsector-axis',
                                                     dashStyle: 'shortdot',
@@ -1180,13 +1177,13 @@ define(['highcharts'],function (Highcharts) {
                                             }
                                         });
 
-                                        if(!isVisible){
+                                        if (!isVisible) {
                                             this.options.yAxis[1].title.text = '';
                                             this.yAxis[1].visible = false;
                                             this.yAxis[1].isDirty = true;
                                             this.redraw();
                                         } else {
-                                            this.options.yAxis[1].title.text= '%';
+                                            this.options.yAxis[1].title.text = '%';
                                             this.yAxis[1].visible = true;
                                             this.yAxis[1].isDirty = true;
                                             this.redraw();
@@ -1221,14 +1218,14 @@ define(['highcharts'],function (Highcharts) {
                                             });
 
                                             $.each(this.series, function (i, serie) {
-                                                if(!serie.visible){
+                                                if (!serie.visible) {
                                                     serie.update({
                                                         showInLegend: false
                                                     })
                                                 } else {
-                                                    if(serie.options.dataLabels.enabled){
+                                                    if (serie.options.dataLabels.enabled) {
                                                         serie.update({
-                                                            marker : {
+                                                            marker: {
                                                                 radius: 2
                                                             },
                                                             dataLabels: {
@@ -1297,15 +1294,14 @@ define(['highcharts'],function (Highcharts) {
                                     "uid": "donor_subsector_oda" // RESULT OF PART 2: TOTAL ODA FOR DONOR (ALL SECTORS)
                                 },
                                 {
-                                    "uid":"percentage_ODA" // RESULT OF PART 3: PERCENTAGE CALCULATION (ODA FROM DONOR IN SECTOR / TOTAL ODA FROM DONOR x 100)
+                                    "uid": "percentage_ODA" // RESULT OF PART 3: PERCENTAGE CALCULATION (ODA FROM DONOR IN SECTOR / TOTAL ODA FROM DONOR x 100)
                                 },
                                 {
-                                    "uid":"OECD_AVG" // RESULT OF PART 4: OECD DONORS (DAC MEMBERS) AVERAGE ODA IN SELECTED SECTOR
+                                    "uid": "OECD_AVG" // RESULT OF PART 4: OECD DONORS (DAC MEMBERS) AVERAGE ODA IN SELECTED SECTOR
                                 }
                             ],
-                            "parameters": {
-                            },
-                            "rid":{"uid":"union_process"}
+                            "parameters": {},
+                            "rid": {"uid": "union_process"}
 
                         }, // PART 5: UNION is the FINAL PART IN THE PROCESS
                         {
@@ -1502,7 +1498,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 ]
                             },
-                            "rid":{"uid":"total_ODA"}
+                            "rid": {"uid": "total_ODA"}
 
                         }, // (2ii): TOTAL ODA FOR DONOR: Group by
                         {
@@ -1565,14 +1561,13 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             },
-                            "rid":{"uid":"join_process"}
+                            "rid": {"uid": "join_process"}
                         }, // PART 3 PERCENTAGE CALCULATION: (3i) Join
                         {
                             "name": "addcolumn",
-                            "sid":[{"uid":"join_process"}],
+                            "sid": [{"uid": "join_process"}],
                             "parameters": {
                                 "column": {
                                     "dataType": "number",
@@ -1583,8 +1578,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":[" ( donor_subsector_oda_value / donor_sector_oda_value )*100"]
+                                    "keys": ["1 = 1"],
+                                    "values": [" ( donor_subsector_oda_value / donor_sector_oda_value )*100"]
 
                                 }
                             }
@@ -1732,7 +1727,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 ]
                             },
-                            "rid":{"uid":"aggregated_oecd"}
+                            "rid": {"uid": "aggregated_oecd"}
                         }, // (4ii): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Group by
 
                         {
@@ -1779,7 +1774,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_dac_members_by_donor_year"}
+                            "rid": {"uid": "filter_dac_members_by_donor_year"}
 
                         }, // (4iii): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Filter
                         {
@@ -1789,8 +1784,7 @@ define(['highcharts'],function (Highcharts) {
                                     "donorcode",
                                     "year"
                                 ],
-                                "aggregations": [
-                                ]
+                                "aggregations": []
                             },
                             "rid": {
                                 "uid": "sd"
@@ -1860,8 +1854,7 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             }
                         }, // (4vii): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Join
                         {
@@ -1876,8 +1869,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":[" ( aggregated_oecd_value / count_dac_members_value_count )"]
+                                    "keys": ["1 = 1"],
+                                    "values": [" ( aggregated_oecd_value / count_dac_members_value_count )"]
                                 }
                             },
                             "rid": {
@@ -1892,8 +1885,7 @@ define(['highcharts'],function (Highcharts) {
                                     "value",
                                     "aggregated_oecd_unitcode"
                                 ],
-                                "rows": {
-                                }
+                                "rows": {}
                             }
                         }, // (4ix): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Filter
                         {
@@ -1939,12 +1931,12 @@ define(['highcharts'],function (Highcharts) {
                         config: {
                             chart: {
                                 events: {
-                                    load: function(event) {
+                                    load: function (event) {
                                         var _that = this;
                                         var hasSubSector = false;
 
                                         var isVisible = $.each(_that.series, function (i, serie) {
-                                            if(serie.name == '% ODA/GNI'){
+                                            if (serie.name == '% ODA/GNI') {
                                                 serie.update({
                                                     yAxis: 'percent-axis',
                                                     dashStyle: 'shortdot',
@@ -1959,7 +1951,7 @@ define(['highcharts'],function (Highcharts) {
 
 
                                         var isVisible2 = $.each(_that.series, function (i, serie) {
-                                            if(serie.name == '% OECD Average of ODA/GNI'){
+                                            if (serie.name == '% OECD Average of ODA/GNI') {
                                                 serie.update({
                                                     yAxis: 'percent-axis',
                                                     dashStyle: 'shortdot',
@@ -1973,14 +1965,14 @@ define(['highcharts'],function (Highcharts) {
                                         });
 
 
-                                        if(!isVisible && !isVisible2){
+                                        if (!isVisible && !isVisible2) {
                                             this.options.yAxis[1].title.text = '';
                                             this.yAxis[1].visible = false;
                                             this.yAxis[1].isDirty = true;
                                             this.redraw();
                                         }
                                         else {
-                                            if(isVisible || isVisible2) {
+                                            if (isVisible || isVisible2) {
                                                 this.options.yAxis[1].title.text = '%';
                                                 this.yAxis[1].visible = true;
                                                 this.yAxis[1].isDirty = true;
@@ -2017,14 +2009,14 @@ define(['highcharts'],function (Highcharts) {
                                             });
 
                                             $.each(this.series, function (i, serie) {
-                                                if(!serie.visible){
+                                                if (!serie.visible) {
                                                     serie.update({
                                                         showInLegend: false
                                                     })
                                                 } else {
-                                                    if(serie.options.dataLabels.enabled){
+                                                    if (serie.options.dataLabels.enabled) {
                                                         serie.update({
-                                                            marker : {
+                                                            marker: {
                                                                 radius: 2
                                                             },
                                                             dataLabels: {
@@ -2094,15 +2086,14 @@ define(['highcharts'],function (Highcharts) {
                                     "uid": "gni_donor_oda"
                                 },
                                 {
-                                    "uid":"ODA_on_GNI"
+                                    "uid": "ODA_on_GNI"
                                 },
                                 {
                                     "uid": "oecd_oda_gni"
                                 }
                             ],
-                            "parameters": {
-                            },
-                            "rid":{"uid":"union_process"}
+                            "parameters": {},
+                            "rid": {"uid": "union_process"}
                         },
 
                         {
@@ -2151,7 +2142,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_total_ODA"}
+                            "rid": {"uid": "filter_total_ODA"}
                         }, // PART 1: TOTAL ODA FOR DONOR (ALL SECTORS): (1i) Filter
                         {
                             "name": "group",
@@ -2174,7 +2165,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 ]
                             },
-                            "rid":{"uid":"total_ODA"}
+                            "rid": {"uid": "total_ODA"}
                         },
                         {
                             "name": "addcolumn",
@@ -2322,14 +2313,13 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             },
-                            "rid":{"uid":"join_process_oda_gni"}
+                            "rid": {"uid": "join_process_oda_gni"}
                         },
                         {
                             "name": "addcolumn",
-                            "sid":[{"uid":"join_process_oda_gni"}],
+                            "sid": [{"uid": "join_process_oda_gni"}],
                             "parameters": {
                                 "column": {
                                     "dataType": "number",
@@ -2340,8 +2330,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":[" ( total_donor_oda_value / gni_donor_oda_value)*100"]
+                                    "keys": ["1 = 1"],
+                                    "values": [" ( total_donor_oda_value / gni_donor_oda_value)*100"]
                                 }
                             }
                         },
@@ -2477,7 +2467,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"all_subsectors_sum"}
+                            "rid": {"uid": "all_subsectors_sum"}
                         },
                         {
                             "name": "filter",
@@ -2557,8 +2547,7 @@ define(['highcharts'],function (Highcharts) {
                                         }
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             },
                             "rid": {
                                 "uid": "join_oecd_avg"
@@ -2645,8 +2634,8 @@ define(['highcharts'],function (Highcharts) {
                                     "indicator"
                                 ]
                             },
-                            "rid":{
-                                "uid":"oecd_oda_gni"
+                            "rid": {
+                                "uid": "oecd_oda_gni"
                             }
                         }
 
@@ -2707,7 +2696,7 @@ define(['highcharts'],function (Highcharts) {
                                                 "uid": "crs_recipients", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
                                                 "version": "2016",
                                                 "codes": [
-                                                    "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679"
+                                                    "298", "498", "798", "89", "589", "889", "189", "289", "389", "380", "489", "789", "689", "619", "679"
                                                 ]
                                             }
                                         ]
@@ -2727,6 +2716,13 @@ define(['highcharts'],function (Highcharts) {
                                                 ]
                                             }
                                         ]
+                                    },
+                                    "purposecode": {
+                                        "codes": [{
+                                            "uid": "crs_purposes",
+                                            "version": "2016",
+                                            "codes": ["31195"]
+                                        }]
                                     },
                                     "year": {
                                         "time": [
@@ -2749,7 +2745,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_recipients"}
+                            "rid": {"uid": "filter_recipients"}
                         },
                         {
                             "name": "group",
@@ -2897,12 +2893,11 @@ define(['highcharts'],function (Highcharts) {
                                     "uid": "top_10_recipients_sum"
                                 },
                                 {
-                                    "uid":"others"
+                                    "uid": "others"
                                 }
                             ],
-                            "parameters": {
-                            },
-                            "rid":{"uid":"union_process"}
+                            "parameters": {},
+                            "rid": {"uid": "union_process"}
                         },
 
                         {
@@ -2925,7 +2920,7 @@ define(['highcharts'],function (Highcharts) {
                                                 "uid": "crs_recipients", // skipping regional recipient countries (e.g. "Africa, regional"; "North of Sahara, regional")
                                                 "version": "2016",
                                                 "codes": [
-                                                    "298", "498", "798", "89", "589", "889", "189", "289","389", "380", "489", "789","689", "619", "679"
+                                                    "298", "498", "798", "89", "589", "889", "189", "289", "389", "380", "489", "789", "689", "619", "679"
                                                 ]
                                             }
                                         ]
@@ -2957,6 +2952,13 @@ define(['highcharts'],function (Highcharts) {
                                             "1"
                                         ]
                                     },
+                                    "purposecode": {
+                                        "codes": [{
+                                            "uid": "crs_purposes",
+                                            "version": "2016",
+                                            "codes": ["31195"]
+                                        }]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -2967,7 +2969,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_top_10_recipients_sum"}
+                            "rid": {"uid": "filter_top_10_recipients_sum"}
                         },
                         {
                             "name": "group",
@@ -2996,7 +2998,7 @@ define(['highcharts'],function (Highcharts) {
                             "parameters": {
                                 "value": "DESC"
                             },
-                            "rid":{"uid":"filtered_dataset"}
+                            "rid": {"uid": "filtered_dataset"}
                         },
                         {
                             "name": "page",
@@ -3050,7 +3052,7 @@ define(['highcharts'],function (Highcharts) {
                         },
                         {
                             "name": "group",
-                            "sid":[{"uid":"filtered_dataset"}],
+                            "sid": [{"uid": "filtered_dataset"}],
                             "parameters": {
                                 "by": [
                                     "unitcode"
@@ -3120,14 +3122,13 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             },
-                            "rid":{"uid":"join_process_total_recipients"}
+                            "rid": {"uid": "join_process_total_recipients"}
                         },
                         {
                             "name": "addcolumn",
-                            "sid":[{"uid":"join_process_total_recipients"}],
+                            "sid": [{"uid": "join_process_total_recipients"}],
                             "parameters": {
                                 "column": {
                                     "dataType": "number",
@@ -3138,8 +3139,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":["top_all_recipients_sum_value - top_10_recipients_sum_value"]
+                                    "keys": ["1 = 1"],
+                                    "values": ["top_all_recipients_sum_value - top_10_recipients_sum_value"]
                                 }
                             }
                         },
@@ -3499,7 +3500,7 @@ define(['highcharts'],function (Highcharts) {
                             "parameters": {
                                 "value": "DESC"
                             },
-                            "rid":{"uid":"filtered_dataset"}
+                            "rid": {"uid": "filtered_dataset"}
                         },
                         {
                             "name": "page",
@@ -3553,7 +3554,7 @@ define(['highcharts'],function (Highcharts) {
                         },
                         {
                             "name": "group",
-                            "sid":[{"uid":"filtered_dataset"}],
+                            "sid": [{"uid": "filtered_dataset"}],
                             "parameters": {
                                 "by": [
                                     "unitcode"
@@ -3774,7 +3775,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_channels"}
+                            "rid": {"uid": "filter_channels"}
                         },
                         {
                             "name": "group",
@@ -3922,12 +3923,11 @@ define(['highcharts'],function (Highcharts) {
                                     "uid": "top_10_channels_sum"
                                 },
                                 {
-                                    "uid":"others"
+                                    "uid": "others"
                                 }
                             ],
-                            "parameters": {
-                            },
-                            "rid":{"uid":"union_process"}
+                            "parameters": {},
+                            "rid": {"uid": "union_process"}
                         },
 
                         {
@@ -3981,7 +3981,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_top_10_channels_sum"}
+                            "rid": {"uid": "filter_top_10_channels_sum"}
                         },
                         {
                             "name": "group",
@@ -4010,7 +4010,7 @@ define(['highcharts'],function (Highcharts) {
                             "parameters": {
                                 "value": "DESC"
                             },
-                            "rid":{"uid":"filtered_dataset"}
+                            "rid": {"uid": "filtered_dataset"}
                         },
                         {
                             "name": "page",
@@ -4064,7 +4064,7 @@ define(['highcharts'],function (Highcharts) {
                         },
                         {
                             "name": "group",
-                            "sid":[{"uid":"filtered_dataset"}],
+                            "sid": [{"uid": "filtered_dataset"}],
                             "parameters": {
                                 "by": [
                                     "unitcode"
@@ -4134,14 +4134,13 @@ define(['highcharts'],function (Highcharts) {
 
                                     ]
                                 ],
-                                "values": [
-                                ]
+                                "values": []
                             },
-                            "rid":{"uid":"join_process_total_channels"}
+                            "rid": {"uid": "join_process_total_channels"}
                         },
                         {
                             "name": "addcolumn",
-                            "sid":[{"uid":"join_process_total_channels"}],
+                            "sid": [{"uid": "join_process_total_channels"}],
                             "parameters": {
                                 "column": {
                                     "dataType": "number",
@@ -4152,8 +4151,8 @@ define(['highcharts'],function (Highcharts) {
                                     "subject": null
                                 },
                                 "value": {
-                                    "keys":  ["1 = 1"],
-                                    "values":["top_all_channels_sum_value - top_10_channels_sum_value"]
+                                    "keys": ["1 = 1"],
+                                    "values": ["top_all_channels_sum_value - top_10_channels_sum_value"]
                                 }
                             }
                         },
@@ -4502,7 +4501,7 @@ define(['highcharts'],function (Highcharts) {
 
 
                             },
-                            "rid":{"uid":"filter_fao_region"}
+                            "rid": {"uid": "filter_fao_region"}
                         },
                         {
                             "name": "select",
@@ -4572,7 +4571,7 @@ define(['highcharts'],function (Highcharts) {
                         }
                     },
 
-                    filterFor: { "filter_map_region": ['donorcode', 'purposecode', 'year', 'oda']},
+                    filterFor: {"filter_map_region": ['donorcode', 'purposecode', 'year', 'oda']},
                     postProcess: [
                         {
                             "name": "filter",
@@ -4582,7 +4581,7 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             ],
                             "parameters": {
-                                "columns": [ "gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
+                                "columns": ["gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [
@@ -4632,7 +4631,7 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_map_region"}
+                            "rid": {"uid": "filter_map_region"}
                         },
                         {
                             "name": "group",
