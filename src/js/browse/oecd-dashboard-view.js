@@ -129,8 +129,8 @@ define([
      var model = this.models[modelId];
 
      var dataExporter = new DataExporter({
-     lang: this.lang,
-     environment:  this.environment
+        lang: this.lang,
+        environment:  this.environment
      });
 
      return dataExporter.downloadData(model);

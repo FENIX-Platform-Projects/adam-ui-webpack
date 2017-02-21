@@ -21,6 +21,9 @@ define(function () {
         "oda-regional": "ODA Regional Distribution",
         "country-map": "Map on ODA received",
         "regional-map": "Regional Map on ODA received",
-        "download-data": "Download Data"
+        "download-data": "Download Data",
+        "top-recipients-all-sectors" : "Top Recipients",
+        "top-partners-all-sectors" :  "Top Resource Partners",
+        "top-channels-all-sectors" : "Top Channels of Delivery"
     }
 });
