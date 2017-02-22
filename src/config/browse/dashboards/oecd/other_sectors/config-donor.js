@@ -232,6 +232,8 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
+                            //d2ccbf
+                            colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F1E300", "#F7AE3C"],
                             xAxis: {
                                 type: 'datetime'
                             }
@@ -450,6 +452,8 @@ define(['highcharts'],function (Highcharts) {
                             xAxis: {
                                 type: 'datetime'
                             },
+                            //d2ccbf
+                            colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F1E300", "#F7AE3C"],
                             yAxis: [{ //Primary Axis in default template
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
@@ -1221,6 +1225,8 @@ define(['highcharts'],function (Highcharts) {
                             xAxis: {
                                 type: 'datetime'
                             },
+                            //d2ccbf
+                            colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F1E300", "#F7AE3C"],
                             yAxis: [{ //Primary Axis in default template
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
@@ -2038,6 +2044,8 @@ define(['highcharts'],function (Highcharts) {
                                     }
                                 }
                             },
+                            //d2ccbf
+                            colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F1E300", "#F7AE3C"],
                             xAxis: {
                                 type: 'datetime'
                             },
