@@ -485,10 +485,7 @@ define([
 
             this.render();
         }
-
-
-      //  console.log("============ REBUILD =======", this.config.items);
-
+        //console.log("============ REBUILD =======");
         // Update Dashboard Items Configuration
         this.updateItemsConfig();
 

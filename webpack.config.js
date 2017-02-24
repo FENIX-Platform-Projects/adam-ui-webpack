@@ -45,7 +45,8 @@ module.exports = sections.map(function (section) {
                 'comp-advantage':Path.join(__dirname, 'src/js/comp-advantage'),
                 'projects':Path.join(__dirname, 'src/js/projects'),
                 'partner-profiles':Path.join(__dirname, 'src/js/partner-profiles'),
-                'node_modules': Path.join(__dirname, 'node_modules')//,
+                'node_modules': Path.join(__dirname, 'node_modules'),
+                'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')//,
                 //'fenix-ui-table-creator': Path.join(__dirname, 'node_modules/fenix-ui-table-creator/src/js/index.js'),
                 //'fenix-ui-pivotator-utils':  Path.join(__dirname, 'node_modules/fenix-ui-pivotator-utils/src/js/index.js')
                 //'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js'),

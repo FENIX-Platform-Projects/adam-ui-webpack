@@ -39,12 +39,16 @@ define([
             TOPIC: 'topic',
             LABEL: 'label'
         },
+        filterSelection : {
+            id : 'parentsector_code'
+        },
         values: {
             ALL: 'all'
         },
         paths: {
             OECD_DASHBOARD_FAO_SECTORS_CONFIG: 'config/browse/dashboards/oecd/fao_sectors/config-',
             OECD_DASHBOARD_OTHER_SECTORS_CONFIG: 'config/browse/dashboards/oecd/other_sectors/config-',
+            OECD_DASHBOARD_ALL_SECTORS_CONFIG: 'config/browse/dashboards/oecd/config-all-sectors',
             OECD_DASHBOARD: 'config/browse/dashboards/oecd/'
         }
     };
@@ -152,8 +156,9 @@ define([
     BrowseByView.prototype._loadDashboardConfigurations = function () {
         var pth1 = s.paths.OECD_DASHBOARD_OTHER_SECTORS_CONFIG+ this.browse_type + '.js';
         var pth2 = s.paths.OECD_DASHBOARD_FAO_SECTORS_CONFIG+ this.browse_type + '.js';
+        var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG + '.js';
 
-       require(['../../'+pth1, '../../'+pth2], _.bind(this._initSubViews, this));
+       require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
     };
 
 
@@ -165,7 +170,7 @@ define([
     * @private
     */
 
-    BrowseByView.prototype._initSubViews = function (ConfigOtherSectors, ConfigFAOSectors) {
+    BrowseByView.prototype._initSubViews = function (ConfigOtherSectors, ConfigFAOSectors, ConfigAllSectors) {
 
         if (!ConfigOtherSectors || !ConfigOtherSectors.dashboard || !ConfigOtherSectors.filter) {
             alert("Impossible to find default ODA dashboard/filter configuration for the topic: " + this.browse_type);
@@ -179,11 +184,17 @@ define([
 
         this.otherSectorsDashboardConfig = ConfigOtherSectors.dashboard;
         this.faoSectorDashboardConfig = ConfigFAOSectors.dashboard;
+        this.allSectorDashboardConfig = ConfigAllSectors.dashboard;
 
 
         //Set default dashboard configuration
         if (ConfigOtherSectors.id === BaseBrowseConfig.dashboard.DEFAULT_CONFIG) {
-            this.defaultDashboardConfig = ConfigOtherSectors;
+            if((ConfigOtherSectors.type == BaseBrowseConfig.dashboard.DEFAULT_TYPE)||(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR)){
+                this.defaultDashboardConfig = ConfigOtherSectors;
+            }
+            else {
+                this.defaultDashboardConfig = ConfigAllSectors;
+            }
         } else if (ConfigFAOSectors.id === BaseBrowseConfig.dashboard.DEFAULT_CONFIG) {
             this.defaultDashboardConfig = ConfigFAOSectors;
         }
@@ -418,9 +429,9 @@ define([
     };
 
     BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
-        //console.log("================== _processSelection  =========== 1 ");
+        //console.log("================== _processSelection  ===========  ");
 
-        var dashboardConfPath, displayConfigBasedOnFilter, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
+        var dashboardConfPath, displayConfigBasedOnFilter, allSectorSelection = false, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
 
 
         // Update filter with region code
@@ -440,12 +451,18 @@ define([
             }
         }
 
+        if ((filterValues)&&(filterValues.labels)&&(this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)) {
+            if ((filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL))) {
+                allSectorSelection = true;
+            }
+        }
+
         // Update dashboard properties
         if (changedFilter['props']) {
             this.subviews['oecdDashboard'].setProperties(changedFilter['props']);
         }
 
-        this._getDashboardConfiguration(dashboardConfPath, filterValues, displayConfigBasedOnFilter);
+        this._getDashboardConfiguration(dashboardConfPath, allSectorSelection, filterValues, displayConfigBasedOnFilter);
 
     };
 
@@ -524,20 +541,22 @@ define([
     * @param displayConfigForSelectedFilter
     * @private
     */
-    BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, filterValues, displayConfigForSelectedFilter) {
+    BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, allSectorSelection, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-        // console.log("================= _setDashboardConfiguration Start =============== ", filterValues);
-       //  console.log(dashboardConfPath);
+        //console.log("================= _getDashboardConfiguration Start =============== ", filterValues);
 
         if (dashboardConfPath) {
-
            var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';
 
             require(['../../'+pth1], function (NewDashboardConfig) {
                self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
             });
         } else {
-            self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, this.otherSectorsDashboardConfig);
+            var dashboardConfig = this.otherSectorsDashboardConfig;
+            if(allSectorSelection){
+                dashboardConfig = this.allSectorDashboardConfig;
+            }
+            self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, dashboardConfig);
         }
     };
 
@@ -549,7 +568,6 @@ define([
     * @param dashboardConfig
     * @private
     */
-
     BrowseByView.prototype._rebuildDashboard = function (ovalues, displayConfigForSelectedFilter, dashboardConfig) {
 
       //  console.log("============= _rebuildDashboard START  ======== IS FAO SELECTED ", this.subviews['filters'].isFAOSectorsSelected());

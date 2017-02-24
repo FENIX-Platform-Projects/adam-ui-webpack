@@ -6,6 +6,7 @@ define(function () {
 
     return {
         id: 'OTHER_SECTORS',
+        type: 'OTHER',
         filter: {
             fao_region: {
                 selector: {

@@ -6,6 +6,7 @@ define(['highcharts'],function (Highcharts) {
 
     return {
         id: 'FAO_SECTOR',
+        type: 'FAO',
         filter: {
             parentsector_code: {
                 selector: {
@@ -185,7 +186,6 @@ define(['highcharts'],function (Highcharts) {
         dashboard: {
             //default dataset id
             uid: "adam_browse_sector_oda",
-
             items: [
              {
                     id: "tot-oda-sector", //ref [data-item=':id']

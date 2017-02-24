@@ -3,9 +3,9 @@
 define(['highcharts'],function (Highcharts) {
 
     'use strict';
-
     return {
         id: 'OTHER_SECTORS',
+        type: 'ALL',
         filter: {
             parentsector_code: {
                 selector: {
@@ -131,7 +131,6 @@ define(['highcharts'],function (Highcharts) {
         dashboard: {
             //default dataset id
             uid: "adam_browse_sector_oda",
-
             items: [
                 {
                     id: "tot-oda", //ref [data-item=':id']

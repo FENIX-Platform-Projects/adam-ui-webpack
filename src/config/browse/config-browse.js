@@ -5,7 +5,8 @@ define(function ( ) {
 
     return {
        dashboard: {
-            DEFAULT_CONFIG : 'FAO_SECTOR' //OTHER_SECTORS || FAO_SECTOR
+            DEFAULT_CONFIG : 'FAO_SECTOR', //OTHER_SECTORS || FAO_SECTOR
+            DEFAULT_TYPE : 'FAO' //ALL || OTHER
         },
         filter: {
             RECIPIENT_COUNTRY: 'recipientcode',

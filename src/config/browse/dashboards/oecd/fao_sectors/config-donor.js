@@ -6,6 +6,7 @@ define(['highcharts'], function (Highcharts) {
 
     return {
         id: 'FAO_SECTOR',
+        type: 'FAO',
         filter: {
             donorcode: {
                 selector: {

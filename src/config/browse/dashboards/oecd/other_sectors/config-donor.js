@@ -6,6 +6,7 @@ define(['highcharts'],function (Highcharts) {
 
     return {
         id: 'OTHER_SECTORS',
+        type: 'OTHER',
         filter: {
             donorcode: {
                 selector: {

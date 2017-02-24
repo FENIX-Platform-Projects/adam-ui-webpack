@@ -6,6 +6,7 @@ define(function () {
 
     return {
         id: 'FAO_SECTOR',
+        type: 'FAO',
         filter: {
             fao_region: {
                 selector: {
