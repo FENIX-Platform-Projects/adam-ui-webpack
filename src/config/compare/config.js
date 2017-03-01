@@ -285,7 +285,7 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                     recipientcode: {
                         selector: {
                             id: "tree",
-                            hideSummary: true, //Hide selection summary,
+                            hideSummary: false, //Hide selection summary,
                         },
                         cl: {
                             uid: "crs_recipients",
@@ -302,7 +302,7 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                         selector: {
                             id: "tree",
                             default: ["2", "7"], // Belgium, Netherlands
-                            hideSummary: true, //Hide selection summary,
+                            hideSummary: false, //Hide selection summary,
                         },
                         cl: {
                             uid: "crs_donors",
@@ -319,7 +319,7 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                         selector: {
                             id: "tree",
                             default: ["311", "600"],
-                            hideSummary: true, //Hide selection summary,
+                            hideSummary: false, //Hide selection summary,
                         },
                         cl: {
                             uid: "crs_dac",
@@ -335,7 +335,7 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                     purposecode: {
                         selector: {
                             id: "tree",
-                            hideSummary: true, //Hide selection summary,
+                            hideSummary: false, //Hide selection summary,
                         },
                         cl: {
                             // codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
