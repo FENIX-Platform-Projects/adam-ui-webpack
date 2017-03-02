@@ -39,7 +39,6 @@ define([
     };
 
     DataExporter.prototype.downloadData = function (model) {
-
         var payload = {
             resource: model,
             input: {

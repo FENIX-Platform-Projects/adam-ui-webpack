@@ -256,7 +256,7 @@ define([
             recipient = ""
         }
 
-        this._createLink(recipient, cpfPeriod, s.CPF);
+        //this._createLink(recipient, cpfPeriod, s.CPF);
         this._createLink(recipient, undafPeriod, s.UNDAF);
 
     };

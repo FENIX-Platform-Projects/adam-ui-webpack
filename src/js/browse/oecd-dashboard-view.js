@@ -573,7 +573,6 @@ define([
 
 
         this.dashboard.on('ready.item', function (item) {
-         //   console.log(" ================== item READY: =================== ", item.id,  item.model.data.length, item.model.metadata.dsd.columns.length, item.model.metadata.dsd.columns, item.model.metadata.dsd, item.model.metadata);
 
             self.models[item.id] = {};
             self.models[item.id].data = {};
