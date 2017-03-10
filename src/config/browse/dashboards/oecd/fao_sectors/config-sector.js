@@ -3200,7 +3200,8 @@ define(['highcharts'],function (Highcharts) {
                                                 "uid": "GAUL0",
                                                 "version": "2014",
                                                 "codes": [
-                                                    "NA"
+                                                    "NA",
+                                                    "ZZZZZ"
                                                 ]
                                             }
                                         ]

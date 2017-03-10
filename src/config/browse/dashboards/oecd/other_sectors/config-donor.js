@@ -4492,8 +4492,8 @@ define(['highcharts'],function (Highcharts) {
                         {
                             "name": "select",
                             "parameters": {
-                                "query": "WHERE fao_region IS NOT NULL",
-                                "queryParameters": []
+                                "query": "WHERE fao_region <>",
+                                "queryParameters": ["ZZZZZ"]
                             }
                         },
                         {

@@ -46,13 +46,15 @@ define(function () {
 
         PRINT: 'print',
 
-        ENVIRONMENT : 'develop',
+        // ENVIRONMENT : 'develop',
+        ENVIRONMENT : 'demo',
         CACHE: false,
         DEFAULT_UID: 'adam_usd_aggregated_table', //'adam_usd_commitment',
         SERVER: SERVER,
         CODES_POSTFIX : '/codes/filter',
         HIERARCHY_CODES_POSTFIX : '/codes/hierarchy',
-        D3P_POSTFIX : "d3s_dev/processes/",
+        //D3P_POSTFIX : "d3s_dev/processes/",
+        D3P_POSTFIX : "d3s/processes/",
 
         //ADAM DOCs
         ADAM_RESOURCES_DOCS_PATH : ADAM_FILE_RESOURCES_PATH + 'docs/',
@@ -92,7 +94,8 @@ define(function () {
 
         CODELIST_POSTFIX: "/resources/",
 
-        CODELIST_SERVICE: "d3s_dev/msd"
+        //CODELIST_SERVICE: "d3s_dev/msd"
+        CODELIST_SERVICE: "d3s/msd"
 
 
     };
