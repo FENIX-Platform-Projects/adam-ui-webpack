@@ -359,7 +359,7 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                         selector: {
                             id: "dropdown",
                             from: 2000,
-                            to: 2014,
+                            to: 2015,
                             default: [2000],
                             config: { //Selectize configuration
                                 maxItems: 1
@@ -380,8 +380,8 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                         selector: {
                             id: "dropdown",
                             from: 2000,
-                            to: 2014,
-                            default: [2014],
+                            to: 2015,
+                            default: [2015],
                             hideSummary: true, //Hide selection summary,
                             config: {
                                 maxItems: 1
