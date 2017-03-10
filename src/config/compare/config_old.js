@@ -2,9 +2,10 @@
 
 define([
         'jquery',
-        'config/nodemodules/fenix-ui-chart-creator/highcharts_template'
+        'config/nodemodules/fenix-ui-chart-creator/highcharts_template',
+        '../config-base'
     ],
-    function ($, highchartsTemplate) {
+    function ($, highchartsTemplate, Config) {
 
         'use strict';
 
@@ -201,9 +202,9 @@ define([
                     "year-from": {
                         selector: {
                             id: "dropdown",
-                            from: 2000,
-                            to: 2015,
-                            default: [2000],
+                            from: Config.YEARSTART,
+                            to: Config.YEARFINISH,
+                            default: [Config.YEARSTART],
                             config: { //Selectize configuration
                                 maxItems: 1
                             },
@@ -222,9 +223,9 @@ define([
 
                         selector: {
                             id: "dropdown",
-                            from: 2000,
-                            to: 2015,
-                            default: [2015],
+                            from: Config.YEARSTART,
+                            to: Config.YEARFINISH,
+                            default: [Config.YEARFINISH],
                             hideSummary: true, //Hide selection summary,
                             config: {
                                 maxItems: 1

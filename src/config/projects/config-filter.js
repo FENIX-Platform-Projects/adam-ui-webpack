@@ -1,4 +1,4 @@
-define(function () {
+define(['../config-base'], function(Config) {
 
     'use strict';
 
@@ -177,9 +177,9 @@ define(function () {
             "year-from": {
                 selector: {
                     id: "dropdown",
-                    from: 2000,
-                    to: 2015,
-                    default: [2000],
+                    from: Config.YEARSTART,
+                    to: Config.YEARFINISH,
+                    default: [Config.YEARSTART],
                     config: { //Selectize configuration
                         maxItems: 1
                     }
@@ -197,9 +197,9 @@ define(function () {
             "year-to": {
                 selector: {
                     id: "dropdown",
-                    from: 2000,
-                    to: 2015,
-                    default: [2015],
+                    from: Config.YEARSTART,
+                    to: Config.YEARFINISH,
+                    default: [Config.YEARFINISH],
                     config: {
                         maxItems: 1
                     }

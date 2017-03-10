@@ -1,6 +1,6 @@
 /*global define*/
 
-define(function () {
+define(['../config-base'], function(Config) {
 
     'use strict';
 
@@ -77,8 +77,8 @@ define(function () {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },

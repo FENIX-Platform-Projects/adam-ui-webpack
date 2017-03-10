@@ -4,9 +4,10 @@ define([
     'jquery',
     'fenix-ui-filter-utils',
     'config/nodemodules/fenix-ui-chart-creator/highcharts_template',
-    'nls/compare'
+    'nls/compare',
+    '../config-base'
 ],
-function ($, Utils, highchartsTemplate, i18nLabels) {
+function ($, Utils, highchartsTemplate, i18nLabels, Config) {
 
     'use strict';
 
@@ -358,9 +359,9 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
                     "year-from": {
                         selector: {
                             id: "dropdown",
-                            from: 2000,
-                            to: 2015,
-                            default: [2000],
+                            from: Config.YEARSTART,
+                            to: Config.YEARFINISH,
+                            default: [Config.YEARSTART],
                             config: { //Selectize configuration
                                 maxItems: 1
                             },
@@ -379,9 +380,9 @@ function ($, Utils, highchartsTemplate, i18nLabels) {
 
                         selector: {
                             id: "dropdown",
-                            from: 2000,
-                            to: 2015,
-                            default: [2015],
+                            from: Config.YEARSTART,
+                            to: Config.YEARFINISH,
+                            default: [Config.YEARFINISH],
                             hideSummary: true, //Hide selection summary,
                             config: {
                                 maxItems: 1

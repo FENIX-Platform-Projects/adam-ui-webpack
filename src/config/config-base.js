@@ -12,6 +12,9 @@ define(function () {
     return {
 
 
+        YEARSTART : 2000,
+        YEARFINISH: 2015,
+
         LANG: 'en',
         
         BROWSE_SECTIONS: ['country', 'country-donor', 'donor', 'sector'],

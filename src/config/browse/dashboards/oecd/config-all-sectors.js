@@ -1,6 +1,6 @@
 /*global define*/
 
-define(['highcharts'],function (Highcharts) {
+define(['highcharts','../../../config-base'],function (Highcharts, Config) {
 
     'use strict';
     return {
@@ -67,9 +67,9 @@ define(['highcharts'],function (Highcharts) {
             "year-from": {
                 selector: {
                     id: "dropdown",
-                    from: 2000,
-                    to: 2015,
-                    default: [2000],
+                    from: Config.YEARSTART,
+                    to: Config.YEARFINISH,
+                    default: [Config.YEARSTART],
                     config: { //Selectize configuration
                         maxItems: 1
                     }
@@ -87,9 +87,9 @@ define(['highcharts'],function (Highcharts) {
             "year-to": {
                 selector: {
                     id: "dropdown",
-                    from: 2000,
-                    to: 2015,
-                    default: [2015],
+                    from: Config.YEARSTART,
+                    to: Config.YEARFINISH,
+                    default: [Config.YEARFINISH],
                     config: {
                         maxItems: 1
                     }
@@ -249,8 +249,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -386,8 +386,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -533,8 +533,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -686,8 +686,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -835,8 +835,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -1027,8 +1027,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -1207,8 +1207,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1337,8 +1337,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }

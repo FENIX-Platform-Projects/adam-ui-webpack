@@ -1,6 +1,6 @@
 /*global define*/
 
-define(function () {
+define(['../config-base'], function(Config) {
 
     'use strict';
 

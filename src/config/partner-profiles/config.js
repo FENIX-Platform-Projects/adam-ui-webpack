@@ -1,6 +1,6 @@
 /*global define*/
 
-define(['highcharts'],function (Highcharts) {
+define(['highcharts', '../config-base'],function (Highcharts, Config) {
 
     'use strict';
 
@@ -261,7 +261,7 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
+                                                "from": Config.YEARSTART,
                                                 "to": 2014
                                             }
                                         ]
@@ -469,7 +469,7 @@ define(['highcharts'],function (Highcharts) {
                             },
 
                             title: {
-                                text: 'Top Recipients - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
+                                text: 'Top Recipients - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
                                 text: 'Source: OECD-CRS'
@@ -624,8 +624,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -836,7 +836,7 @@ define(['highcharts'],function (Highcharts) {
                             },
 
                             title: {
-                                text: 'Top Sectors - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
+                                text: 'Top Sectors - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
                                 text: 'Source: OECD-CRS'
@@ -980,8 +980,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1272,8 +1272,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -1377,7 +1377,7 @@ define(['highcharts'],function (Highcharts) {
                                 }
                             },
                             title: {
-                                text: 'Top FAO-Related Sub-Sectors - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
+                                text: 'Top FAO-Related Sub-Sectors - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
                                 text: 'Source: OECD-CRS'
@@ -1521,8 +1521,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1733,7 +1733,7 @@ define(['highcharts'],function (Highcharts) {
                             },
 
                             title: {
-                                text: 'Top Channels of Delivery - Total ODA / Commitment Current Prices (USD Mil) / 2000-2014'
+                                text: 'Top Channels of Delivery - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
                                 text: 'Source: OECD-CRS'
@@ -1878,8 +1878,8 @@ define(['highcharts'],function (Highcharts) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
