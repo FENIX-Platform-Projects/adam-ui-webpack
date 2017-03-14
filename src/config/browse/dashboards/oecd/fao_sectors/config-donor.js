@@ -4473,6 +4473,17 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
 
                             "parameters": {
                                 "rows": {
+                                    "!fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "NA","ZZZZZ"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
@@ -4513,13 +4524,6 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
 
                             },
                             "rid": {"uid": "filter_fao_region"}
-                        },
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE fao_region <>",
-                                "queryParameters": ["ZZZZZ"]
-                            }
                         },
                         {
                             "name": "group",
@@ -4592,7 +4596,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 }
                             ],
                             "parameters": {
-                                "columns": ["gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
+                                "columns": ["gaul0", "value", "unitcode"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [
@@ -4600,7 +4604,8 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                                 "uid": "GAUL0",
                                                 "version": "2014",
                                                 "codes": [
-                                                    "NA"
+                                                    "NA",
+                                                    "ZZZZZ"
                                                 ]
                                             }
                                         ]

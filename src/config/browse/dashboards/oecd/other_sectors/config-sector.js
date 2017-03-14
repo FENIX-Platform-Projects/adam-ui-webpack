@@ -3063,7 +3063,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "uid": "crs_fao_regions",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "NA"
+                                                    "NA","ZZZZZ"
                                                 ]
                                             }
                                         ]
@@ -3101,13 +3101,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 }
                             },
                             "rid":{"uid":"filter_regions"}
-                        },
-                        {
-                            "name": "select",
-                            "parameters": {
-                                "query": "WHERE fao_region IS NOT NULL",
-                                "queryParameters": []
-                            }
                         },
                         {
                             "name": "addcolumn",
@@ -3205,7 +3198,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 }
                             ],
                             "parameters": {
-                                "columns": [ "gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
+                                "columns": [ "gaul0", "value", "unitcode"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [

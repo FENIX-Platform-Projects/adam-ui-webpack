@@ -3698,7 +3698,7 @@ define(['../../../../config-base'],function (Config) {
                                 }
                             ],
                             "parameters": {
-                                "columns": [ "gaul0", "value", "unitcode", "gaul0_EN", "unitcode_EN"],
+                                "columns": [ "gaul0", "value", "unitcode"],
                                 "rows": {
                                     "!gaul0": {
                                         "codes": [
@@ -3706,7 +3706,8 @@ define(['../../../../config-base'],function (Config) {
                                                 "uid": "GAUL0",
                                                 "version": "2014",
                                                 "codes": [
-                                                    "NA"
+                                                    "NA",
+                                                    "ZZZZZ"
                                                 ]
                                             }
                                         ]
