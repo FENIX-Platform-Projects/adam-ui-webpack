@@ -414,7 +414,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                         },
                         classNames: "col-xs-4",
                         cl: {
-                            uid: "crs_flow_amounts",
+                            uid: "oda_crs",
                             version: "2016"
                         },
                         template: {

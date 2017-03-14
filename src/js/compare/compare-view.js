@@ -134,7 +134,7 @@ define([
         addToProcess(values, "purposecode");
 
         //parse oda selection
-        var v = process.oda.enumeration[0].substring(5);
+        var v = process.oda.enumeration[0]; //.substring(5);
         process.oda.enumeration = [v];
 
         //parse parent sector code
