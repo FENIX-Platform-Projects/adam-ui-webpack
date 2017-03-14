@@ -1284,7 +1284,6 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                     filterFor: {
                         "filter_donor_sector_oda": ['donorcode', 'year', 'oda'],
                         "filter_donor_subsector_oda": ['donorcode', 'purposecode', 'year', 'oda'],
-
                         "filter_total_oda_dac_members_by_year": ['purposecode', 'year', 'oda'],
                         "filter_dac_members_by_donor_year": ['year', 'oda']
                     },
@@ -2687,7 +2686,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
 
 
                     filterFor: {
-                        "filter_recipients": ['donorcode', 'year', 'oda']
+                        "filter_recipients": ['donorcode','purposecode', 'year', 'oda']
                     },
 
 
