@@ -53,6 +53,8 @@ define([
         }
     };
 
+    var filterReady = false;
+
 
     /**
      *
@@ -292,7 +294,7 @@ define([
     */
     BrowseByView.prototype._filtersLoaded = function (payload) {
 
-         var selectedFilterItems = payload.labels, displayConfigForFilter, dashboardConfPath;
+        var selectedFilterItems = payload.labels, displayConfigForFilter, dashboardConfPath;
 
         // Set Dashboard 1 (ODA) Properties
         if (payload["props"]) {
@@ -325,6 +327,8 @@ define([
             }
         }
 
+        filterReady = true;
+
 
        // Render Dashboard : Development Indicators (if appropriate)
         if (this.browse_type === BaseBrowseConfig.topic.BY_COUNTRY || this.browse_type === BaseBrowseConfig.topic.BY_RESOURCE_PARTNER) {
@@ -341,7 +345,9 @@ define([
     * @private
     */
     BrowseByView.prototype._filtersChanged = function (changedFilter) {
-      
+
+        if (!filterReady) return;
+
         //Reset the display configuration
         this.filterSelectionsTypeDisplayConfig = $.extend( true, {}, DisplayConfigByFilterSelections[this.browse_type]);
 
@@ -364,7 +370,7 @@ define([
 
     BrowseByView.prototype._updateView = function (changedFilterItems, allFilterValues) {
 
-          var filterValues = allFilterValues;
+        var filterValues = allFilterValues;
 
         if (changedFilterItems) {
 
@@ -405,7 +411,7 @@ define([
                     amplify.publish(Events.TITLE_REMOVE_ITEM, changedFilter.id);
                 } else {
                     // Update the TitleView (Add Item)
-                  //  console.log("::::: _updateView:::: =============== _setItemTitle ============ "+changedFilter.id, labels);
+                    //  console.log("::::: _updateView:::: =============== _setItemTitle ============ "+changedFilter.id, labels);
 
                     amplify.publish(Events.TITLE_ADD_ITEM, this._createTitleItem(changedFilter.id, label));
                 }
@@ -461,7 +467,6 @@ define([
         if (changedFilter['props']) {
             this.subviews['oecdDashboard'].setProperties(changedFilter['props']);
         }
-
         this._getDashboardConfiguration(dashboardConfPath, allSectorSelection, filterValues, displayConfigBasedOnFilter);
 
     };
@@ -543,10 +548,10 @@ define([
     */
     BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, allSectorSelection, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-        //console.log("================= _getDashboardConfiguration Start =============== ", filterValues);
+        //console.log("================= _getDashboardConfiguration Start =============== ", dashboardConfPath);
 
-        if (dashboardConfPath) {
-           var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';
+        if (dashboardConfPath !== undefined) {
+            var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';
 
             require(['../../'+pth1], function (NewDashboardConfig) {
                self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
@@ -570,13 +575,11 @@ define([
     */
     BrowseByView.prototype._rebuildDashboard = function (ovalues, displayConfigForSelectedFilter, dashboardConfig) {
 
-      //  console.log("============= _rebuildDashboard START  ======== IS FAO SELECTED ", this.subviews['filters'].isFAOSectorsSelected());
-
+        //console.log("============= _rebuildDashboard START  ======== IS FAO SELECTED ", this.subviews['filters'].isFAOSectorsSelected());
 
         // Set Sector Related Dashboard Configuration
         switch (this.subviews['filters'].isFAOSectorsSelected()) {
             case true:
-                //  console.log(this.faoSectorDashboardConfig);
                 this.subviews['filters'].clearFilterValue(BaseBrowseConfig.filter.SECTOR, ovalues);
                 this.subviews['oecdDashboard'].setDashboardConfig(this.faoSectorDashboardConfig);
                 break;

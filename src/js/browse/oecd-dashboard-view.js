@@ -113,7 +113,6 @@ define([
         this.modelUpdated = false;
         this.models = {};
 
-
         this.chartExporter = new ChartExporter();
 
      //Initialize Progress Bar
@@ -312,6 +311,7 @@ define([
     };
 
     DashboardView.prototype.setDashboardConfig = function (config) {
+        //console.log('setDash', config.filter);
         this.baseConfig = config;
 
         this.config = config;
@@ -420,6 +420,7 @@ define([
     };
 
     DashboardView.prototype._updateDashboardRegionalMapConfiguration = function () {
+
         var map = _.filter(this.config.items, {id: 'regional-map'})[0];
         var regioncode = this.regioncode;
         var gaulcode = this.gaulcode;
@@ -473,8 +474,6 @@ define([
     DashboardView.prototype.rebuildDashboard = function (filter, displayConfigForSelectedFilter) {
         var self = this;
 
-
-
         // Re-render the template
         if (displayConfigForSelectedFilter || this.modelUpdated) {
             if(displayConfigForSelectedFilter){
@@ -493,8 +492,9 @@ define([
 
         this.config.filter = filter;
 
-    
+
         // Build new dashboard
+
         this.dashboard = new Dashboard(
             this.config
         );
