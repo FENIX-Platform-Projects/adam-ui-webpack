@@ -21,8 +21,7 @@
     "build:partner-matrix": "cross-env SECTIONS=partner-matrix NODE_ENV=production webpack --display-error-details",
     "build:comp-advantage": "cross-env SECTIONS=comp-advantage NODE_ENV=production webpack --display-error-details",
     "build:profiles": "cross-env SECTIONS=profiles NODE_ENV=production webpack --display-error-details",
-    "build:projects": "cross-env SECTIONS=projects NODE_ENV=production webpack --display-error-details",
-    "w-build": "cross-env SET SECTIONS=browse,compare,priority,partner-matrix,comp-advantage,projects,profiles,base&&SET NODE_ENV=production&&webpack --display-error-details "
+    "build:projects": "cross-env SECTIONS=projects NODE_ENV=production webpack --display-error-details"
   },
   "repository": {
     "type": "git",

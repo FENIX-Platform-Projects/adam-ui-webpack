@@ -32,7 +32,7 @@
         "sel_heading_donor": "DONANTE",
         "sel_heading_oda": "AOD",
         "sel_heading_year": "Año",
-        "sel_heading_compare_by": "Comparar por",
+        "sel_heading_compare_by": "Comparar por ",
         "sel_heading_channel_of_delivery": "ENTREGA",
         "sel_heading_sector": "SECTOR",
         "sel_heading_sub_sector": "SUBSECTOR",

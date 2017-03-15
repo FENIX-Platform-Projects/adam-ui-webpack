@@ -32,7 +32,7 @@ define(function () {
         "sel_heading_donor": DONOR,
         "sel_heading_oda": ODA,
         "sel_heading_year": "Year",
-        "sel_heading_compare_by": "Compare by",
+        "sel_heading_compare_by": "Compare by ",
         "sel_heading_channel_of_delivery": DELIVERY,
         "sel_heading_sector": SECTOR,
         "sel_heading_sub_sector": SUB_SECTOR,
