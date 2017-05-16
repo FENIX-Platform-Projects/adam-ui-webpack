@@ -488,7 +488,7 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
                                     },
                                     "subject": null
                                 },
-                                "value": "rank() over (partition by purposecode order by value DESC)"
+                                "value": "@@direct rank() over (partition by purposecode order by value DESC)"
                             }
                         },
 
@@ -585,7 +585,7 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
 
 
                                 },
-                                "value": "filter_top_10_purposes_donors_value"
+                                "value": "@@direct filter_top_10_purposes_donors_value"
                             }
                         },
 
@@ -826,7 +826,7 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
                                     },
                                     "subject": null
                                 },
-                                "value": "rank() over (partition by purposecode order by value DESC)"
+                                "value": "@@direct rank() over (partition by purposecode order by value DESC)"
                             }
                         },
 
@@ -923,7 +923,7 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
 
 
                                 },
-                                "value": "filter_top_10_purposes_recipients_value"
+                                "value": "@@direct filter_top_10_purposes_recipients_value"
                             }
                         },
 

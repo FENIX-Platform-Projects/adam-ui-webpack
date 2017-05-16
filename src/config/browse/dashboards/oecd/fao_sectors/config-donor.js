@@ -823,7 +823,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": [" ( donor_sector_oda_value / total_donor_oda_value )*100"]
+                                    "values": ["@@direct ( donor_sector_oda_value / total_donor_oda_value )*100"]
 
                                 }
                             }
@@ -1103,7 +1103,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": [" ( aggregated_oecd_value / count_dac_members_value_count )"]
+                                    "values": ["@@direct ( aggregated_oecd_value / count_dac_members_value_count )"]
                                 }
                             },
                             "rid": {
@@ -1585,7 +1585,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": [" ( donor_subsector_oda_value / donor_sector_oda_value )*100"]
+                                    "values": ["@@direct ( donor_subsector_oda_value / donor_sector_oda_value )*100"]
 
                                 }
                             }
@@ -1876,7 +1876,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": [" ( aggregated_oecd_value / count_dac_members_value_count )"]
+                                    "values": ["@@direct ( aggregated_oecd_value / count_dac_members_value_count )"]
                                 }
                             },
                             "rid": {
@@ -2341,7 +2341,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": [" ( total_donor_oda_value / gni_donor_oda_value)*100"]
+                                    "values": ["@@direct ( total_donor_oda_value / gni_donor_oda_value)*100"]
                                 }
                             }
                         },
@@ -2584,7 +2584,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        " ( all_subsectors_sum_value / GNI_sum_value)*100"
+                                        "@@direct ( all_subsectors_sum_value / GNI_sum_value)*100"
                                     ]
                                 }
                             }
@@ -3150,7 +3150,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": ["top_all_recipients_sum_value - top_10_recipients_sum_value"]
+                                    "values": ["@@direct top_all_recipients_sum_value - top_10_recipients_sum_value"]
                                 }
                             }
                         },
@@ -3658,7 +3658,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_sectors_sum_value - top_10_sectors_sum_value"
+                                        "@@direct top_all_sectors_sum_value - top_10_sectors_sum_value"
                                     ]
                                 }
                             }
@@ -4162,7 +4162,7 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1 = 1"],
-                                    "values": ["top_all_channels_sum_value - top_10_channels_sum_value"]
+                                    "values": ["@@direct top_all_channels_sum_value - top_10_channels_sum_value"]
                                 }
                             }
                         },

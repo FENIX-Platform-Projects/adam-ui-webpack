@@ -373,7 +373,7 @@ define(['../config-base'], function(Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( related_oda_value / total_oda_value )*100"]
+                                    "values":["@@direct ( related_oda_value / total_oda_value )*100"]
 
                                 }
                             }

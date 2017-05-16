@@ -906,7 +906,7 @@ define(['../../../../config-base'],function (Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( total_donor_recipient_sector_oda_value / total_donor_recipient_oda_value )*100"]
+                                    "values":["@@direct ( total_donor_recipient_sector_oda_value / total_donor_recipient_oda_value )*100"]
 
                                 }
                             }
@@ -1214,7 +1214,7 @@ define(['../../../../config-base'],function (Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( aggregated_oecd_value / count_dac_members_value_count )"]
+                                    "values":["@@direct ( aggregated_oecd_value / count_dac_members_value_count )"]
                                 }
                             },
                             "rid": {
@@ -1729,7 +1729,7 @@ define(['../../../../config-base'],function (Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( subsector_donor_oda_value  / sector_donor_oda_value )*100"]
+                                    "values":["@@direct ( subsector_donor_oda_value  / sector_donor_oda_value )*100"]
 
                                 }
                             }
@@ -2048,7 +2048,7 @@ define(['../../../../config-base'],function (Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( aggregated_oecd_value / count_dac_members_value_count )"]
+                                    "values":["@@direct ( aggregated_oecd_value / count_dac_members_value_count )"]
                                 }
                             },
                             "rid": {
@@ -2597,7 +2597,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_recipients_sum_value - top_10_recipients_sum_value"
+                                        "@@direct top_all_recipients_sum_value - top_10_recipients_sum_value"
                                     ]
                                 }
                             }
@@ -3141,7 +3141,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_channels_sum_value - top_10_channels_sum_value"
+                                        "@@direct top_all_channels_sum_value - top_10_channels_sum_value"
                                     ]
                                 }
                             }
@@ -3681,7 +3681,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_sectors_sum_value - top_10_sectors_sum_value"
+                                        "@@direct top_all_sectors_sum_value - top_10_sectors_sum_value"
                                     ]
                                 }
                             }

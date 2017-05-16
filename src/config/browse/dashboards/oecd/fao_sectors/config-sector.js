@@ -603,7 +603,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys": ["1=1"],
-                                    "values": ["(total_sector_oda_value/total_oda_value)*100"]
+                                    "values": ["@@direct (total_sector_oda_value/total_oda_value)*100"]
                                 }
                             },
                             "rid": {
@@ -1229,7 +1229,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                         "1=1"
                                     ],
                                     "values": [
-                                        "(total_subsector_oda_value/total_sector_oda_value)*100"
+                                        "@@direct (total_subsector_oda_value/total_sector_oda_value)*100"
                                     ]
                                 }
                             },
@@ -1769,7 +1769,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_donors_sum_value - top_10_donors_sum_value"
+                                        "@@direct top_all_donors_sum_value - top_10_donors_sum_value"
                                     ]
                                 }
                             }
@@ -2276,7 +2276,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":["top_all_recipients_sum_value - top_10_recipients_sum_value"]
+                                    "values":["@@direct top_all_recipients_sum_value - top_10_recipients_sum_value"]
                                 }
                             }
                         },
@@ -2756,7 +2756,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":["top_all_channels_sum_value - top_10_channels_sum_value"]
+                                    "values":["@@direct top_all_channels_sum_value - top_10_channels_sum_value"]
                                 }
                             }
                         },

@@ -410,7 +410,7 @@ define(['../config-base'], function(Config) {
                               },
                               "value": {
                                   "keys":  ["1 = 1"],
-                                  "values":[" ( fao_sector_value / total_oda_value )*100"]
+                                  "values":["@@direct ( fao_sector_value / total_oda_value )*100"]
 
                               }
                           }

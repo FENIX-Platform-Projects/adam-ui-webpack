@@ -827,7 +827,7 @@ define(['../../../../config-base'],function (Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( total_sector_country_oda_value / total_country_oda_value )*100"]
+                                    "values":["@@direct ( total_sector_country_oda_value / total_country_oda_value )*100"]
 
                                 }
                             },
@@ -1327,7 +1327,7 @@ define(['../../../../config-base'],function (Config) {
                                 },
                                 "value": {
                                     "keys":  ["1 = 1"],
-                                    "values":[" ( total_country_subsector_oda_value / total_country_sector_oda_value )*100"]
+                                    "values":["@@direct ( total_country_subsector_oda_value / total_country_sector_oda_value )*100"]
 
                                 }
                             },
@@ -1865,7 +1865,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_donors_sum_value - top_10_donors_sum_value"
+                                        "@@direct top_all_donors_sum_value - top_10_donors_sum_value"
                                     ]
                                 }
                             }
@@ -2408,7 +2408,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_recipients_sum_value - top_10_recipients_sum_value"
+                                        "@@direct top_all_recipients_sum_value - top_10_recipients_sum_value"
                                     ]
                                 }
                             }
@@ -2930,7 +2930,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_channels_sum_value - top_10_channels_sum_value"
+                                        "@@direct top_all_channels_sum_value - top_10_channels_sum_value"
                                     ]
                                 }
                             }
@@ -3431,7 +3431,7 @@ define(['../../../../config-base'],function (Config) {
                                         "1 = 1"
                                     ],
                                     "values": [
-                                        "top_all_sectors_sum_value - top_10_sectors_sum_value"
+                                        "@@direct top_all_sectors_sum_value - top_10_sectors_sum_value"
                                     ]
                                 }
                             }
