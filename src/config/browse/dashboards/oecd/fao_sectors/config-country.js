@@ -1488,6 +1488,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -1704,6 +1711,13 @@ define(['../../../../config-base'],function (Config) {
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -2005,6 +2019,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "fao_region": {
                                         "codes": [
                                             {
@@ -2235,6 +2256,13 @@ define(['../../../../config-base'],function (Config) {
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -2525,6 +2553,13 @@ define(['../../../../config-base'],function (Config) {
                                                 "codes": [
                                                     "625"
                                                 ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
                                             }
                                         ]
                                     },
@@ -3035,6 +3070,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -3245,6 +3287,13 @@ define(['../../../../config-base'],function (Config) {
                                                 "codes": [
                                                     "625"
                                                 ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
                                             }
                                         ]
                                     },
@@ -3589,6 +3638,13 @@ define(['../../../../config-base'],function (Config) {
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {

@@ -381,8 +381,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -657,8 +657,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -776,8 +776,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1016,8 +1016,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -1136,8 +1136,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -1465,8 +1465,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1610,8 +1610,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1839,8 +1839,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -1970,8 +1970,8 @@ define(['../../../../config-base'],function (Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -2172,11 +2172,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -2408,11 +2415,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -2716,11 +2730,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -2952,11 +2973,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -3262,11 +3290,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -3481,11 +3516,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -3856,11 +3898,18 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
-                                                "from": "2000",
-                                                "to": "2014"
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     }
@@ -3896,6 +3945,27 @@ define(['../../../../config-base'],function (Config) {
                                         "rule": "max"
                                     }
                                 ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "percentage",
+                                    "title": { "EN": "Percentage" }
+                                },
+                                "value": {
+                                    "keys": [ "1=1" ],
+                                    "values": [ "@@direct value" ]
+                                }
+                            }
+                        },
+
+                        {
+                            "name" : "percentage",
+                            "parameters" : {
+                                "valueColumnId" : "percentage"
                             }
                         },
                         {

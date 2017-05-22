@@ -287,6 +287,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                         selector: {
                             id: "tree",
                             hideSummary: false, //Hide selection summary,
+                            sort: true
                         },
                         cl: {
                             uid: "crs_recipients",
@@ -296,14 +297,16 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                         },
                         template: {
                             hideSwitch: true,
-                            hideRemoveButton: true
+                            hideRemoveButton: true,
+                            hideSummaryCode : true
                         }
                     },
                     donorcode: {
                         selector: {
                             id: "tree",
-                            default: ["2", "7"], // Belgium, Netherlands
+                            //default: ["2", "7"], // Belgium, Netherlands
                             hideSummary: false, //Hide selection summary,
+                            sort: true
                         },
                         cl: {
                             uid: "crs_donors",
@@ -313,7 +316,8 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                         },
                         template: {
                             hideSwitch: true,
-                            hideRemoveButton: true
+                            hideRemoveButton: true,
+                            hideSummaryCode : true
                         }
                     },
                     parentsector_code: {
@@ -321,6 +325,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                             id: "tree",
                             default: ["311", "600"],
                             hideSummary: false, //Hide selection summary,
+                            sort: true
                         },
                         cl: {
                             uid: "crs_dac",
@@ -330,13 +335,15 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                         },
                         template: {
                             hideSwitch: true,
-                            hideRemoveButton: true
+                            hideRemoveButton: true,
+                            hideSummaryCode : true
                         }
                     },
                     purposecode: {
                         selector: {
                             id: "tree",
                             hideSummary: false, //Hide selection summary,
+                            sort: true
                         },
                         cl: {
                             // codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
@@ -347,7 +354,8 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                         },
                         template: {
                             hideSwitch: true,
-                            hideRemoveButton: true
+                            hideRemoveButton: true,
+                            hideSummaryCode : true
                         },
                         format: {
                             uid: "crs_purposes"

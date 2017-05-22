@@ -243,6 +243,9 @@ define(['../../../../config-base'],function (Config) {
                         useDimensionLabelsIfExist: false,// || default raw else fenixtool
 
                         config: {
+                            lang: {
+                                numericSymbols: null //otherwise by default ['k', 'M', 'G', 'T', 'P', 'E']
+                            },
                             chart: {
                                 events: {
                                     load: function(event) {
@@ -1452,6 +1455,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -1673,6 +1683,13 @@ define(['../../../../config-base'],function (Config) {
                                                 "codes": [
                                                     "600"
                                                 ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
                                             }
                                         ]
                                     },
@@ -1973,6 +1990,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -2216,6 +2240,13 @@ define(['../../../../config-base'],function (Config) {
                                                 "codes": [
                                                     "600"
                                                 ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
                                             }
                                         ]
                                     },
@@ -2513,6 +2544,13 @@ define(['../../../../config-base'],function (Config) {
                                                 "codes": [
                                                     "625"
                                                 ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
                                             }
                                         ]
                                     },
@@ -3242,6 +3280,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -3591,6 +3636,13 @@ define(['../../../../config-base'],function (Config) {
                                             }
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -3629,6 +3681,27 @@ define(['../../../../config-base'],function (Config) {
                                         "rule": "max"
                                     }
                                 ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "percentage",
+                                    "title": { "EN": "Percentage" }
+                                },
+                                "value": {
+                                    "keys": [ "1=1" ],
+                                    "values": [ "@@direct value" ]
+                                }
+                            }
+                        },
+
+                        {
+                            "name" : "percentage",
+                            "parameters" : {
+                                "valueColumnId" : "percentage"
                             }
                         },
                         {

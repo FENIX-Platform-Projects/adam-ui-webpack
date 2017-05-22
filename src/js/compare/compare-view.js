@@ -114,6 +114,13 @@ define([
 
         log.info(config);
 
+        config.loadResourceServiceQueryParams = {
+             perPage: 2001,
+             maxSize: 2000
+        };
+
+        console.log(config);
+
         this.analysis.add(config);        
     };
 
@@ -136,6 +143,12 @@ define([
         //parse oda selection
         var v = process.oda.enumeration[0]; //.substring(5);
         process.oda.enumeration = [v];
+
+
+        // Filter process value > 0
+        process.value = {
+            "number": [ { "from": 0.00001 } ]
+        };
 
         //parse parent sector code
         if (faoSectorSelected) {

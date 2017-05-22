@@ -48,9 +48,8 @@ define(['../config-base'], function(Config) {
                         }
                     },
 
-
                     filterFor: {
-                        "filter_projects": ['recipientcode', 'donorcode', 'parentsector_code', 'purposecode', 'year']
+                        "filter_projects": ['recipientcode', 'donorcode', 'parentsector_code', 'purposecode', 'year', 'fao_region']
                     },
 
                     postProcess: [
@@ -103,6 +102,17 @@ define(['../config-base'], function(Config) {
                                                 ]
                                             }
                                         ]
+                                    },
+                                    "fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "RAP"
+                                                ]
+                                            }
+                                        ]
                                     }
                                 }
                             },
@@ -111,7 +121,8 @@ define(['../config-base'], function(Config) {
                         {
                             "name": "order",
                             "parameters": {
-                                "year": "DESC"
+                                "year": "DESC",
+                                "recipientcode": "DESC"
                             }
                         }
                     ]/*,

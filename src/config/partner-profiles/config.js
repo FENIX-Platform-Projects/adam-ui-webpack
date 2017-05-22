@@ -1570,6 +1570,26 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                             }
                         },
                         {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "percentage",
+                                    "title": { "EN": "Percentage" }
+                                },
+                                "value": {
+                                    "keys": [ "1=1" ],
+                                    "values": [ "@@direct value" ]
+                                }
+                            }
+                        },
+                        {
+                            "name" : "percentage",
+                            "parameters" : {
+                                "valueColumnId" : "percentage"
+                            }
+                        },
+                        {
                             "name": "order",
                             "parameters": {
                                 "value": "DESC"

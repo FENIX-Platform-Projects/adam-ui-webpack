@@ -225,6 +225,7 @@ define([
     TableVennDashboardView.prototype._updateItems = function(props){
 
 
+
         var selectionsObj = _.find(props, function(obj){
             if(obj['selections'])
                 return obj;
@@ -270,7 +271,6 @@ define([
                 return o.id === itemid;
             });
 
-
             // update the process
             if(item) {
                 var process = _.filter(item.postProcess, function(obj){
@@ -282,7 +282,6 @@ define([
                     var label = value;
                 if(i18nDashboardLabels[this.lang][value])
                     label = i18nDashboardLabels[this.lang][value];
-
 
                 process[0].parameters.value = i18nDashboardLabels[this.lang][type] + ' ('+ label +')';
             }
@@ -324,6 +323,7 @@ define([
 
 
         this.dashboard.on('click.item', function (values) {
+
             // reset others
             $("div[id^='resultC']").css('color', 'black');
 
@@ -366,7 +366,7 @@ define([
             }
 
 
-            $('#'+values.id+'-title').html(title);
+            $('#venn-diagram-title').html(title);
 
             // priorities list
             var value = "";
@@ -405,7 +405,9 @@ define([
             }
 
 
-            $('#'+values.id+'-info').val(value);
+
+
+            $('#venn-diagram-info').val(value);
 
             if(codes.length > 0) {
                 amplify.publish(BaseEvents.VENN_ON_CHANGE,{values: {purposecode: codes}});

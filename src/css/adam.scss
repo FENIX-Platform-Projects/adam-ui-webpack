@@ -19,7 +19,7 @@
 
 
   //pages
- // @import 'pages/readyToUse';
+  // @import 'pages/readyToUse';
 
   @import 'themes/fx-material-theme-light';
   @import 'themes/unified-style';
@@ -227,9 +227,6 @@
   font-weight: bold;
 }
 
-#venn-diagram-info-box {
-  display: none;
-}
 
 #venn-diagram-info-box textarea {
   width: 100%;

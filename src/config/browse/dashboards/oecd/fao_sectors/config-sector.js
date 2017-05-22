@@ -1357,6 +1357,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             "1"
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -1567,6 +1574,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -2094,6 +2108,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             "1"
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -2365,6 +2386,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     "fao_sector": {
                                         "enumeration": [
                                             "1"
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -2888,6 +2916,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             "1"
                                         ]
                                     },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -2937,6 +2972,27 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                         "rule": "max"
                                     }
                                 ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "percentage",
+                                    "title": { "EN": "Percentage" }
+                                },
+                                "value": {
+                                    "keys": [ "1=1" ],
+                                    "values": [ "@@direct value" ]
+                                }
+                            }
+                        },
+
+                        {
+                            "name" : "percentage",
+                            "parameters" : {
+                                "valueColumnId" : "percentage"
                             }
                         },
                         {

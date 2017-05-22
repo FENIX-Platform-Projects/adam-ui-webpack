@@ -17,9 +17,9 @@ define(['../config-base'], function(Config) {
                         "groupedRow": false,
                         "formatter": "localstring",
                         "showRowHeaders": true,
-                        "columns": ["indicator"],
+                        //"columns": ["total_oda_value", "fao_sector_val", "percentage_val"],
                         "rows": ["recipientcode", "donorcode"],
-                        "values":["value"],
+                        "values": ["total_oda_value", "fao_sector_val", "percentage_val"],//["value"],
                         "aggregations": [],
                         inputFormat: "fenixtool",
 
@@ -27,19 +27,19 @@ define(['../config-base'], function(Config) {
                         config: {
                             pageSize: 150,
                             autoSelectFirstRow: false,
-                           columns: [
+                            columns: [
                                     {id: "recipientcode", width: 150},
                                     {id: "donorcode", width: 150},
-                                    {id: "indicator", width: 150, getSortValue : function(value , record){
+                                    {id: "total_oda_value", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 150, getSortValue : function(value , record){
+                                    {id: "fao_sector_val", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "indicator", width: 150, getSortValue : function(value , record){
+                                    {id: "percentage_val", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }}
-                                ]
+                            ]
                         }
                     },
 
@@ -49,27 +49,6 @@ define(['../config-base'], function(Config) {
                         },
 
                         postProcess: [
-                            {
-                                "name": "union",
-                                "sid": [
-                                    {
-                                        "uid": "total_oda"
-                                    },
-                                    {
-                                        "uid": "related_oda"
-                                    },
-                                    {
-                                        "uid":"percentage_oda"
-                                    }
-
-                                ],
-                                "parameters": {
-                                },
-                                "rid":{"uid":"union_process"}
-
-                            },
-
-
                             {
                                 "name": "filter",
                                 "sid": [
@@ -99,8 +78,8 @@ define(['../config-base'], function(Config) {
                                         "year": {
                                             "time": [
                                                 {
-                                                    "from": 2000,
-                                                    "to": 2014
+                                                    "from": Config.YEARSTART,
+                                                    "to": Config.YEARFINISH
                                                 }
                                             ]
                                         },
@@ -111,7 +90,9 @@ define(['../config-base'], function(Config) {
                                         }
                                     }
                                 },
-                                "rid":{"uid":"filter_all_subsectors"}
+                                "rid": {
+                                    "uid": "filter_all_subsectors"
+                                }
                             },
                             {
                                 "name": "group",
@@ -167,7 +148,6 @@ define(['../config-base'], function(Config) {
                                     "uid": "total_oda"
                                 }
                             },
-
                             {
                                 "name": "filter",
                                 "sid": [
@@ -197,8 +177,8 @@ define(['../config-base'], function(Config) {
                                         "year": {
                                             "time": [
                                                 {
-                                                    "from": 2000,
-                                                    "to": 2014
+                                                    "from": Config.YEARSTART,
+                                                    "to": Config.YEARFINISH
                                                 }
                                             ]
                                         },
@@ -214,7 +194,9 @@ define(['../config-base'], function(Config) {
                                         }
                                     }
                                 },
-                                "rid":{"uid":"filter_faosubsectors"}
+                                "rid": {
+                                    "uid": "filter_faosubsectors"
+                                }
                             },
                             {
                                 "name": "group",
@@ -237,7 +219,8 @@ define(['../config-base'], function(Config) {
                                             "rule": "max"
                                         }
                                     ]
-                                }},
+                                }
+                            },
                             {
                                 "name": "addcolumn",
                                 "parameters": {
@@ -279,7 +262,6 @@ define(['../config-base'], function(Config) {
                                 "parameters": {
                                     "joins": [
                                         [
-
                                             {
                                                 "type": "id",
                                                 "value": "recipientcode"
@@ -298,122 +280,61 @@ define(['../config-base'], function(Config) {
                                                 "type": "id",
                                                 "value": "donorcode"
                                             }
-
                                         ]
                                     ],
-                                    "values": [
-                                    ]
+                                    "values": []
                                 },
-                                "rid":{"uid":"join_process"}
+                                "rid": {
+                                    "uid": "join_process"
+                                }
                             },
                             {
                                 "name": "addcolumn",
-                                "sid":[{"uid":"join_process"}],
                                 "parameters": {
                                     "column": {
                                         "dataType": "number",
-                                        "id": "value",
-                                        "title": {
-                                            "EN": "FAO Sector (%)"
-                                        },
-                                        "subject": null
-                                    },
-                                    "value": {
-                                        "keys":  ["1 = 1"],
-                                        "values":["@@direct ( related_oda_value / total_oda_value )*100"]
-
-                                    }
-                                }
-                            },
-                            {
-                                "name": "addcolumn",
-                                "parameters": {
-                                    "column": {
-                                        "id": "unitcode",
-                                        "title": {
-                                            "EN": "Measurement Unit"
-                                        },
-                                        "domain": {
-                                            "codes": [{
-                                                "idCodeList": "crs_units",
-                                                "version": "2016",
-                                                "level": 1
-                                            }]
-                                        },
-                                        "dataType": "code",
-                                        "subject": null
-                                    },
-                                    "value": "percentage"
-                                }
-                            },
-                            {
-                                "name": "addcolumn",
-                                "parameters": {
-                                    "column": {
-                                        "dataType": "text",
-                                        "id": "indicator",
+                                        "id": "fao_sector_val",
                                         "key": true,
                                         "title": {
-                                            "EN": "Indicator"
-                                        },
-                                        "domain": {
-                                            "codes": [
-                                                {
-                                                    "extendedName": {
-                                                        "EN": "Adam Processes"
-                                                    },
-                                                    "idCodeList": "adam_processes"
-                                                }
-                                            ]
+                                            "EN": "FAO sector %"
                                         },
                                         "subject": null
                                     },
-                                    "value": "FAO Sectors (%)"
+                                    "value": "@@direct related_oda_value"
                                 }
-
                             },
-
+                            {
+                                "name": "addcolumn",
+                                "parameters": {
+                                    "column": {
+                                        "dataType": "number",
+                                        "id": "percentage_val",
+                                        "key": true,
+                                        "title": {
+                                            "EN": "ODA in FAO sector (MIL $)"
+                                        },
+                                        "subject": null
+                                    },
+                                    "value": "@@direct ( related_oda_value / total_oda_value )*100"
+                                }
+                            },
                             {
                                 "name": "filter",
                                 "parameters": {
                                     "columns": [
                                         "recipientcode",
                                         "donorcode",
-                                        "value",
-                                        "unitcode",
-                                        "indicator"
+                                        "total_oda_value",
+                                        "fao_sector_val",
+                                        "percentage_val"
                                     ],
-                                    "rows": {
-                                    }
-                                },
-                                "rid": {
-                                    "uid": "percentage_oda"
+                                    "rows": {}
                                 }
                             },
-
                             {
-                                "name": "group",
-                                "sid":[{"uid":"union_process"}],
+                                "name": "order",
                                 "parameters": {
-                                    "by": [
-                                        "recipientcode",
-                                        "donorcode",
-                                        "indicator"
-                                    ],
-                                    "aggregations": [
-                                        {
-                                            "columns": [
-                                                "value"
-                                            ],
-                                            "rule": "SUM"
-                                        },
-                                        {
-                                            "columns": [
-                                                "unitcode"
-                                            ],
-                                            "rule": "max"
-                                        }
-                                    ]
+                                    "donorcode_EN": "ASC"
                                 }
                             }
                         ]
