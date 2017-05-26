@@ -193,8 +193,13 @@ body {
     margin-top: 0;
     position: relative; }
 
-  #browse-filter-holder .obj-box {background: #fbfbfb;}
 
+#browse-filter-holder .obj-box,
+#projects-filter-holder .obj-box,
+#priority-filter-holder .obj-box,
+#partner-matrix-filter-holder .obj-box,
+#comp-advantage-filter-holder .obj-box {
+  background: #fbfbfb; }
 
   .adam-entry-point {
     position: relative; }
@@ -344,7 +349,7 @@ div[data-item="venn-diagram"]{
 }
 
 .selector-header {padding: 0px;}
-.fx-sandbox .h5, .fx-sandbox h5 {font-size: 13px; font-weight: 600; margin-left: 5px; margin-top: 0px; margin-bottom: 4px;}
+.fx-sandbox .h5, .fx-sandbox h5 {font-size: 13px !important; font-weight: 600 !important; margin-left: 5px !important; margin-top: 0px !important; margin-bottom: 4px !important;}
 
 .jstree-ocl {display: none !important;}
 .form-control {font-size: 13px !important;}
