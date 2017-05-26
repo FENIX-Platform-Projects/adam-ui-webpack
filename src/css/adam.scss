@@ -363,7 +363,12 @@ div[data-item="venn-diagram"]{
 
 .selector-footer {display: block; max-height: 100px; overflow-y: auto; margin-top: 10px;}
 
+#compare-filter-summary {display: block; max-height: 150px; overflow-y: auto; margin-top: 10px; position: relative; width: 98%;}
+
+
+
 .list-unstyled {line-height: 1.2em; margin-left: 5px;}
+.list-unstyled span span:hover {text-decoration: underline;}
 
 .code-brk {margin-left: 3px; margin-right: 5px;}
 
