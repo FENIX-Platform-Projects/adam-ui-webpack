@@ -324,9 +324,9 @@ define(
                 values[BaseConfig.SELECTORS.SUB_SECTOR] = [];
             }
             // if all values selected clear
-            // if(this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) && this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) === s.exclusions.ALL) {
-            //    values[BaseConfig.SELECTORS.REGION] = [];
-            //}
+            if(this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) && this._getFirstSelectorValue(BaseConfig.SELECTORS.REGION) === s.exclusions.ALL) {
+                values[BaseConfig.SELECTORS.REGION] = [];
+            }
 
             // if all values selected clear
            // if(this._getFirstSelectorValue(BaseConfig.SELECTORS.RECIPIENT_COUNTRY) && this._getFirstSelectorValue(BaseConfig.SELECTORS.RECIPIENT_COUNTRY) === s.exclusions.ALL) {

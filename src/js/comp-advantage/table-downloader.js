@@ -25,18 +25,18 @@ define([
         return this;
     }
 
-    TableDownloader.prototype.onDownloadMenuClick = function (modelObj) {
-        this._downloadExcel(modelObj);
+    TableDownloader.prototype.onDownloadMenuClick = function (modelObj, title, subtitle) {
+        this._downloadExcel(modelObj, title, subtitle);
     };
 
-    TableDownloader.prototype._downloadExcel = function (model) {
+    TableDownloader.prototype._downloadExcel = function (model, title, subtitle) {
 
         var dataExporter = new DataExporter({
             lang: this.lang,
             environment:  this.environment
         });
 
-        return dataExporter.downloadData(model);
+        return dataExporter.downloadData(model, title, subtitle);
 
     };
 

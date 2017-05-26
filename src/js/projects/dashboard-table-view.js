@@ -136,8 +136,9 @@ define([
         event.preventDefault();// prevent the default functionality
 
         var modelId = $(event.target).attr('data-model-id');
+        var dash = this.getDashboardConfig();
 
-        this.downloader.onDownloadMenuClick(this.models[modelId]);
+        this.downloader.onDownloadMenuClick(this.models[modelId], "", "", dash.filter.values);
 
     };
 

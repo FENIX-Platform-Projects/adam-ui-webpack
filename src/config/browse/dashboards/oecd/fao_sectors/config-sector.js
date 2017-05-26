@@ -446,6 +446,11 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     "unitcode"
                                 ],
                                 "rows": {
+                                    "!dac_member": {
+                                        "enumeration": [
+                                            "t"
+                                        ]
+                                    },
                                     "oda": {
                                         "codes": [
                                             {

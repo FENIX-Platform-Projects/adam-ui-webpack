@@ -74,6 +74,8 @@ define([
         this.topic = params.topic;
         this.model = params.model;
         this.config =  params.config;
+        this.title = params.title;
+        this.subtitle = params.subtitle;
     };
 
 
@@ -138,7 +140,7 @@ define([
 
         var modelId = $(event.target).attr('data-model-id');
 
-        this.downloader.onDownloadMenuClick(this.models[modelId]);
+        this.downloader.onDownloadMenuClick(this.models[modelId],this.title,this.subtitle.getTitleAsLabel());
 
     };
 

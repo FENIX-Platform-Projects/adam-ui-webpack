@@ -25,7 +25,7 @@ define([
         return this;
     }
 
-    TableVennDownloader.prototype.onDownloadMenuClick = function (modelObj, modelId, type) {
+    TableVennDownloader.prototype.onDownloadMenuClick = function (modelObj, modelId, type, title, subtitle) {
 
         var type_id = type.split("/").pop();
         var containerId =  "#"+modelId+ s.prefix.DOWNLOAD_OPTIONS;
@@ -33,7 +33,7 @@ define([
 
         switch(type) {
             case BaseConfig.DOWNLOAD.EXCEL:
-                this._downloadExcel(modelObj);
+                this._downloadExcel(modelObj, title, subtitle);
                 break;
             default:
                 this._downloadVennImage($container, type, type_id, modelId);
@@ -100,14 +100,14 @@ define([
 
     };
 
-    TableVennDownloader.prototype._downloadExcel = function (model) {
+    TableVennDownloader.prototype._downloadExcel = function (model, title, subtitle) {
 
         var dataExporter = new DataExporter({
             lang: this.lang,
             environment:  this.environment
         });
 
-        return dataExporter.downloadData(model);
+        return dataExporter.downloadData(model, title, subtitle);
 
     };
 

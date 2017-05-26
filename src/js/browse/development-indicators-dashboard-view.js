@@ -104,6 +104,8 @@ define([
     DashboardDevelopmentIndicatorsView.prototype._init = function () {
         this.template = template;
         this.models = {};
+        this.titles = [];
+        this.subtitles = [];
         this.setDashboardConfig();
 
     };
@@ -177,13 +179,15 @@ define([
 
     DashboardDevelopmentIndicatorsView.prototype._downloadData = function (modelId) {
         var modelItem = this.models[modelId];
+        var title = this.titles[modelId];
+        var subtitle = this.subtitles[modelId];
 
         var dataExporter = new DataExporter({
             lang: this.lang,
             environment:  this.environment,
         });
 
-        return dataExporter.downloadData(modelItem);
+        return dataExporter.downloadData(modelItem, title, subtitle);
     };
 
     DashboardDevelopmentIndicatorsView.prototype._downloadImage = function (container, type, type_id, model) {
@@ -204,6 +208,9 @@ define([
     DashboardDevelopmentIndicatorsView.prototype.render = function () {
         var updatedTemplate = this._updateTemplate();
         this.source = $(updatedTemplate).find("[data-topic='" + this.topic + "']");
+
+        this.titles[item.id] = i18nDashboardLabels[this.lang][this.topic];
+        this.subtitles[item.id] = this.model.get('label');
 
         this.$el.hide();
 

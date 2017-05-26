@@ -283,6 +283,99 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
 
             filter: {
                 selectors: {
+                    fao_region: {
+                        selector: {
+                            id: "dropdown",
+                            default: ["RAP"],
+                            emptyOption : {
+                                enabled: true,
+                                text: "All",
+                                value: "all"
+                            },
+                            config: { //Selectize configuration
+                                maxItems: 1
+                                // openOnFocus: false
+                            }
+                        },
+                        classNames: "col-xs-5",
+                        cl: {
+                            uid: "crs_fao_regions",
+                            version: "2016",
+                            level: 1,
+                            levels: 1
+                        },
+                        template: {
+                            hideSwitch: true,
+                            hideRemoveButton: true
+                        }
+                    },
+                    recipientcode: {
+                        selector: {
+                            id: "tree",
+                            sort: true
+                        },
+                        classNames: "col-xs-3",
+                        cl: {
+                            "uid": "crs_fao_regions",
+                            "version": "2016",
+                            level: 2,
+                            levels: 2,
+                            "codes": [
+                                "625",
+                                "666",
+                                "630",
+                                "728",
+                                "730",
+                                "831",
+                                "740",
+                                "832",
+                                "645",
+                                "738",
+                                "836",
+                                "745",
+                                "751",
+                                "655",
+                                "859",
+                                "860",
+                                "753",
+                                "635",
+                                "845",
+                                "660",
+                                "856",
+                                "665",
+                                "861",
+                                "862",
+                                "755",
+                                "880",
+                                "866",
+                                "640",
+                                "764",
+                                "765",
+                                "868",
+                                "870",
+                                "872",
+                                "854",
+                                "769",
+                                "876"
+                            ]
+                        },
+                        template: {
+                            hideSwitch: true,
+                            hideRemoveButton: true,
+                            hideSummaryCode : true
+                        },
+                        dependencies: {
+                            "fao_region": {id: "parent", event: "select", args: {
+                                body: {
+                                    levels: 2
+                                },
+                                exclude: ["all"]
+                            }}
+                        }
+                    },
+
+
+                    /*
                     recipientcode: {
                         selector: {
                             id: "tree",
@@ -301,6 +394,8 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                             hideSummaryCode : true
                         }
                     },
+                    */
+
                     donorcode: {
                         selector: {
                             id: "tree",
@@ -323,7 +418,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                     parentsector_code: {
                         selector: {
                             id: "tree",
-                            default: ["311", "600"],
+                            //default: ["311", "600"],
                             hideSummary: false, //Hide selection summary,
                             sort: true
                         },

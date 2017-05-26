@@ -219,6 +219,14 @@ define([
                 config.process[1].parameters.by = _.without(config.process[1].parameters.by,"parentsector_code"); 
         }
 
+        if (config.process[0].parameters.rows.recipientcode &&
+            config.process[0].parameters.rows.recipientcode.codes.length > 0 &&
+            config.process[0].parameters.rows.recipientcode.codes[0].codes &&
+            config.process[0].parameters.rows.recipientcode.codes[0].codes.length>0) {
+
+                config.process[0].parameters.rows.recipientcode.codes[0].uid = 'crs_recipients'
+
+        }
     
 
         return config;

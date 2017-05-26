@@ -199,6 +199,8 @@ define([
 
         // Set TABLE DASHBOARD Model
         this.tableModel = new TableModel();
+        this.tableTitle = "Resource Partner Matrix / By Recipient Country";
+        this.tableSubtitle = this.subviews['title'];
 
         // Set DASHBOARD Table Sub View
         var dashboardTableSubView = new DashboardTableSubView({
@@ -206,6 +208,8 @@ define([
             lang:  this.lang,
             topic: this.topic,
             model: this.tableModel,
+            title: this.tableTitle,
+            subtitle: this.tableSubtitle,
             environment: this.environment,
             config: this.tableConfig.dashboard
         });

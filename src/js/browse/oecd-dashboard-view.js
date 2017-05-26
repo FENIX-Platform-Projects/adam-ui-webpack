@@ -112,6 +112,9 @@ define([
         this.template = template;
         this.modelUpdated = false;
         this.models = {};
+        this.titles = [];
+        this.subtitles = [];
+
 
         this.chartExporter = new ChartExporter();
 
@@ -125,16 +128,18 @@ define([
 
 
     DashboardView.prototype._downloadExcel = function (modelId) {
-     var model = this.models[modelId];
+         var model = this.models[modelId];
+         var title = this.titles[modelId];
+         var subtitle = this.subtitles[modelId];
 
-     var dataExporter = new DataExporter({
-        lang: this.lang,
-        environment:  this.environment
-     });
+         var dataExporter = new DataExporter({
+            lang: this.lang,
+            environment:  this.environment
+         });
 
-     return dataExporter.downloadData(model);
+         return dataExporter.downloadData(model,title,subtitle);
 
-     };
+    };
 
     DashboardView.prototype.onDownloadMenuClick = function (event) {
         event.preventDefault();// prevent the default anchor functionality
@@ -171,7 +176,7 @@ define([
 
         var model = this.model.getProperties();
 
-       var data = $.extend(true, model, i18nLabels[this.lang], i18nCommonLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
+        var data = $.extend(true, model, i18nLabels[this.lang], i18nCommonLabels[this.lang], i18nDashboardLabels[this.lang], i18nChartLabels[this.lang]);
 
         return this.template(data);
 
@@ -265,6 +270,8 @@ define([
             var item = this.config.items[it];
            // console.log(item.id, i18nDashboardLabels[this.lang][item.id])
             this._updateChartExportTitles(this.config.items[it], i18nDashboardLabels[this.lang][item.id], this.model.get('label'));
+            this.titles[item.id] = i18nDashboardLabels[this.lang][item.id];
+            this.subtitles[item.id] = this.model.get('label');
         }
 
         var updatedTemplate = this._updateTemplate();

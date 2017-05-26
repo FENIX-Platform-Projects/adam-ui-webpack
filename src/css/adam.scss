@@ -363,3 +363,16 @@ div[data-item="venn-diagram"]{
 .code-brk {margin-left: 3px; margin-right: 5px;}
 
 .glyphicon {margin-right: 5px;}
+
+
+// Mario
+.fx-sandbox .selector-footer ul div span[data-value]:after {
+  content: "";
+  height: 15px;
+  width: 15px;
+  background: url(img/fenix-catalog-sprite-small.svg) no-repeat 0 -15px;
+  background-size: 150px 30px;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+}

@@ -71,6 +71,8 @@ define([
         this.template = template;
         this.modelUpdated = false;
         this.models = {};
+        this.titles = [];
+        this.subtitles = [];
 
         //Initialize Progress Bar
         this.progressBar = new ProgressBar({
@@ -135,7 +137,7 @@ define([
         var modelId = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
 
-        this.downloader.onDownloadMenuClick(this.models[modelId], modelId, type);
+        this.downloader.onDownloadMenuClick(this.models[modelId], modelId, type, this.titles[modelId], this.subtitles[modelId]);
 
     };
 
@@ -229,6 +231,8 @@ define([
             var item = this.config.items[it];
             // console.log(item.id, i18nDashboardLabels[this.lang][item.id])
             this._updateChartExportTitles(this.config.items[it], i18nDashboardLabels[this.lang][item.id], this.model.get('label'));
+            this.titles[item.id] = i18nDashboardLabels[this.lang][item.id];
+            this.subtitles[item.id] = this.model.get('label');
         }
 
     };
@@ -285,6 +289,8 @@ define([
     PriorityMatrixChartsDashboardView.prototype.rebuildDashboard = function (filter, topic) {
 
         this.models = {};
+        this.titles = [];
+        this.subtitles = [];
         this.topic = topic;
 
         this._disposeDashboards();

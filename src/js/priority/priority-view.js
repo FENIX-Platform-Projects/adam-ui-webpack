@@ -258,8 +258,6 @@ define([
 
         }
 
-debugger;
-
         // Build Title View
         this.subviews['title'].setLabels(selectedFilterItems);
         this.subviews['title'].build();

@@ -77,6 +77,8 @@ define([
         this.template = template;
         this.modelUpdated = false;
         this.models = {};
+        this.titles = [];
+        this.venntitle = "";
 
         //Initialize Progress Bar
         this.progressBar = new ProgressBar({
@@ -139,8 +141,10 @@ define([
 
         var modelId = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
+        var title = i18nDashboardLabels[this.lang][modelId];
+        var subtitle = "";
 
-        this.downloader.onDownloadMenuClick(this.models[modelId], modelId, type);
+        this.downloader.onDownloadMenuClick(this.models[modelId], modelId, type, title, subtitle);
 
     };
 
@@ -226,6 +230,7 @@ define([
 
 
 
+
         var selectionsObj = _.find(props, function(obj){
             if(obj['selections'])
                 return obj;
@@ -300,9 +305,10 @@ define([
             self.models[item.id].metadata.rid = item.model.metadata.rid;
             self.models[item.id].metadata.uid = item.model.metadata.uid;
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
+            self.titles[item.id] = "";
 
-             increment = increment + percent;
-             self.progressBar.update(increment);
+            increment = increment + percent;
+            self.progressBar.update(increment);
         });
 
         this.dashboard.on('table_ready', function (item) {
@@ -317,6 +323,8 @@ define([
                 self.models[id].metadata.rid = item.model.metadata.rid;
                 self.models[id].metadata.uid = item.model.metadata.uid;
                 self.models[id].metadata.dsd = item.model.metadata.dsd;
+
+                self.titles[item.id] = i18nDashboardLabels[self.lang]["priorities-table"];
 
             }
         });
@@ -340,6 +348,8 @@ define([
             } else {
                 title += i18nDashboardLabels[self.lang].commonPrioritiesIn + " ";
             }
+
+
 
             // get first list
             var firstList = listnames[0];
@@ -463,6 +473,8 @@ define([
     };
 
     TableVennDashboardView.prototype.setDashboardConfig = function (config) {
+
+
 
         this.config = config;
 

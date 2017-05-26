@@ -31,11 +31,11 @@ define([
     }
 
 
-    ChartsDownloader.prototype.onDownloadMenuClick = function (modelObj, modelId, type) {
+    ChartsDownloader.prototype.onDownloadMenuClick = function (modelObj, modelId, type, title, subtitle) {
 
         switch(type) {
             case BaseConfig.DOWNLOAD.EXCEL:
-                this._downloadExcel(modelObj);
+                this._downloadExcel(modelObj, title, subtitle);
                 break;
             default:
                 this.chartExporter.download("div[data-item='"+modelId+"']", type, modelId);
@@ -50,14 +50,14 @@ define([
 
     };
 
-    ChartsDownloader.prototype._downloadExcel = function (model) {
+    ChartsDownloader.prototype._downloadExcel = function (model, title, subtitle) {
 
         var dataExporter = new DataExporter({
             lang: this.lang,
             environment:  this.environment
         });
 
-        return dataExporter.downloadData(model);
+        return dataExporter.downloadData(model, title, subtitle);
 
     };
 

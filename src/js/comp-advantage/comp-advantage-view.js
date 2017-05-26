@@ -143,6 +143,8 @@ define([
         });
         this.subviews['title'] = titleSubView;
 
+
+
         // Set FILTER Sub View
         var filtersSubView = new FilterSubView({
             el: this.$el.find(s.css_classes.FILTER_HOLDER),
@@ -161,7 +163,8 @@ define([
             lang:  this.lang,
             model: this.tableModel,
             environment: this.environment,
-            config: this.tableConfig.dashboard
+            config: this.tableConfig.dashboard,
+            subtitle: this.subviews['title']
         });
 
         this.tableModel.addObserver(dashboardTableSubView);

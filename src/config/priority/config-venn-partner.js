@@ -103,7 +103,7 @@ define(function () {
                                         },
                                         "subject": null
                                     },
-                                    "value": "Countries (All)" // PART 1 FINAL INDICATOR NAME
+                                    "value": "Recipient Country (All)" // PART 1 FINAL INDICATOR NAME
                                 },
                                 "rid": {
                                     "uid": "recipient"
@@ -236,7 +236,7 @@ define(function () {
                                         },
                                         "subject": null
                                     },
-                                    "value": "Partners (Austria)" // PART 3 FINAL INDICATOR NAME
+                                    "value": "Resource Partner (Austria)" // PART 3 FINAL INDICATOR NAME
                                 },
                                 "rid":{"uid":"partner"}
                             }// (3iii): ALL RESOURCE PARTNER PRIORITIES: Add Column

@@ -73,6 +73,7 @@ define([
         this.environment = params.environment || BaseConfig.ENVIRONMENT;
         this.model = params.model;
         this.config =  params.config;
+        this.subtitle = params.subtitle;
     };
 
 
@@ -136,8 +137,8 @@ define([
         event.preventDefault();// prevent the default functionality
 
         var modelId = $(event.target).attr('data-model-id');
-
-        this.downloader.onDownloadMenuClick(this.models[modelId]);
+        console.log(this.subtitle.getTitleAsLabel());
+        this.downloader.onDownloadMenuClick(this.models[modelId],i18nDashboardLabels[this.lang]['comparative-advantage'],this.subtitle.getTitleAsLabel());
 
     };
 

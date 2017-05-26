@@ -235,6 +235,22 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                     "unitcode"
                                 ],
                                 "rows": {
+                                    "!dac_member": {
+                                        "enumeration": [
+                                            "t"
+                                        ]
+                                    },
+                                    "donorcode":{
+                                        "codes":[
+                                            {
+                                                "uid":"crs_donors",
+                                                "version":"2016",
+                                                "codes":[
+                                                    "NA"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "oda": {
                                         "codes": [
                                             {
