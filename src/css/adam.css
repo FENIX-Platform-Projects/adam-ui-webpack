@@ -9138,6 +9138,19 @@ button_new_2:before {
   .fx-sandbox.fao-holder .btn-fx-toolbar, .fx-sandbox.fao-holder .btn-fx-toolbar-confirm {
     position: absolute; }
 
+/*TBRMV
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans',Arial ,Helvetica, Verdana, sans-serif;
+  font-size: 0.813em !important;
+  line-height: 1.2;
+  word-wrap: break-word;
+  background-color: #f0f0f0;
+  color: #003b43;
+}
+
+*/
 .main-container {
   padding-left: 0;
   padding-right: 0; }
@@ -9223,7 +9236,7 @@ button_new_2:before {
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
-  background-color: white;
+  background-color: #ffffff;
   border-color: #D2D0D0;
   border-image: none;
   -webkit-border-radius: 0;
@@ -9233,7 +9246,7 @@ button_new_2:before {
   border-style: solid;
   border-width: 1px 1px 2px;
   margin: 10px 0 20px;
-  padding: 20px;
+  padding: 10px 20px;
   width: auto; }
 
 .obj-box-radius10 {
@@ -9250,7 +9263,11 @@ button_new_2:before {
   font: normal normal 300 11px/normal "FrutigerLTW02-45Light", Arial, Helvetica, Verdana, sans-serif; }
 
 .obj-box-info {
-  font-size: 12px; }
+  font-size: 13px;
+  text-align: center; }
+  .obj-box-info b {
+    font-weight: normal;
+    font-style: italic; }
 
 .obj-box-header {
   z-index: 1;
@@ -9275,6 +9292,13 @@ button_new_2:before {
 .obj-box, .obj-box-radius10, .obj-box-title {
   margin-top: 0;
   position: relative; }
+
+#browse-filter-holder .obj-box,
+#projects-filter-holder .obj-box,
+#priority-filter-holder .obj-box,
+#partner-matrix-filter-holder .obj-box,
+#comp-advantage-filter-holder .obj-box {
+  background: #fbfbfb; }
 
 .adam-entry-point {
   position: relative; }
@@ -9411,5 +9435,85 @@ div[data-item="venn-diagram"] {
 #label1, #label2, #label3 {
   font-size: 12px;
   font-weight: bold; }
+
+.selector-header {
+  padding: 0px; }
+
+.fx-sandbox .h5, .fx-sandbox h5 {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-left: 5px !important;
+  margin-top: 0px !important;
+  margin-bottom: 4px !important; }
+
+.jstree-ocl {
+  display: none !important; }
+
+.form-control {
+  font-size: 13px !important; }
+
+.btn-group-justified > .btn-group .btn {
+  width: 100%;
+  background: #0d6cac;
+  color: #fff;
+  font-size: 13px !important;
+  padding: 3px;
+  margin: 0px 5px; }
+
+.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  max-width: 70%;
+  float: right; }
+
+.fx-sandbox .btn-group-justified > .btn-group .btn {
+  width: 70%;
+  margin-top: 3px; }
+
+.selector-footer {
+  display: block;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 10px; }
+
+#compare-filter-summary {
+  display: block;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-top: 10px;
+  position: relative;
+  width: 98%; }
+
+.list-unstyled {
+  line-height: 1.2em;
+  margin-left: 5px; }
+
+.list-unstyled span span:hover {
+  text-decoration: underline; }
+
+.code-brk {
+  margin-left: 3px;
+  margin-right: 5px; }
+
+.glyphicon {
+  margin-right: 5px; }
+
+.fx-sandbox .selector-footer ul div span[data-value]:after {
+  content: "";
+  height: 15px;
+  width: 15px;
+  background: url(img/fenix-catalog-sprite-small.svg) no-repeat 0 -15px;
+  background-size: 150px 30px;
+  display: inline-block;
+  position: relative;
+  top: 3px; }
+
+.gt-head-div, .gt-freeze-div {
+  pointer-events: none; }
+
+.gt-hd-tool {
+  display: none; }
+
+button[data-action="flip"] {
+  pointer-events: none; }
 
 /*# sourceMappingURL=adam.css.map */
