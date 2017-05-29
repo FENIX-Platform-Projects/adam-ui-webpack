@@ -375,6 +375,9 @@ div[data-item="venn-diagram"]{
 .glyphicon {margin-right: 5px;}
 
 
+
+
+
 // Mario
 .fx-sandbox .selector-footer ul div span[data-value]:after {
   content: "";
@@ -386,3 +389,9 @@ div[data-item="venn-diagram"]{
   position: relative;
   top: 3px;
 }
+
+.gt-head-div, .gt-freeze-div {
+ pointer-events: none;
+}
+
+.gt-hd-tool { display: none; }
