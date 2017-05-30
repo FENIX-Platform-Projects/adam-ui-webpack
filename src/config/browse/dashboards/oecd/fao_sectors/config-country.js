@@ -3560,7 +3560,7 @@ define(['../../../../config-base'],function (Config) {
                     type: 'chart',
                     config: {
                         type: "pieold",
-                        x: ["purposecode"], //x axis and series
+                        x: ["indicator_label"], //x axis and series
                         series: ["flowcategory"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
@@ -3626,7 +3626,7 @@ define(['../../../../config-base'],function (Config) {
                     },
 
                     filterFor: {
-                        "filter_top_10_subsectors": ['fao_region', 'recipientcode', 'year', 'oda']
+                        "filter_subsectors": ['fao_region', 'recipientcode', 'year', 'oda']
                     },
 
                     postProcess: [
@@ -3683,47 +3683,241 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_top_10_subsectors"}
+                            "rid":{"uid":"filter_subsectors"}
                         },
                         {
-                            "name": "group",
-                            "parameters": {
-                                "by": [
-                                    "purposecode", "flowcategory"
+                            "name":"group",
+                            "parameters":{
+                                "by":[
+                                    "purposecode","flowcategory"
                                 ],
-                                "aggregations": [
+                                "aggregations":[
                                     {
-                                        "columns": [
+                                        "columns":[
                                             "value"
                                         ],
-                                        "rule": "SUM"
+                                        "rule":"SUM"
                                     },
                                     {
-                                        "columns": [
+                                        "columns":[
                                             "unitcode"
                                         ],
-                                        "rule": "max"
-                                    },
-                                    {
-                                        "columns": [
-                                            "flowcategory"
-                                        ],
-                                        "rule": "max"
+                                        "rule":"max"
                                     }
+
                                 ]
                             }
                         },
                         {
-                            "name": "order",
-                            "parameters": {
-                                "value": "DESC"
+                            "name":"order",
+                            "parameters":{
+                                "value":"DESC"
                             }
                         },
                         {
-                            "name": "page",
+                            "name":"page",
+                            "parameters":{
+                                "perPage":10,
+                                "page":1
+                            },
+                            "rid": {"uid":"top10Subs"}
+                        },
+                        {
+                            "name": "addcolumn",
                             "parameters": {
-                                "perPage": 10,
-                                "page": 1
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator_label",
+                                    "title": {
+                                        "EN": "Purposecode"
+                                    }
+                                },
+                                "value": {
+                                    "keys": [
+                                        "1=1"
+                                    ],
+                                    "values": [
+                                        "@@direct purposecode_EN"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name":"filter",
+                            "parameters":{
+                                "rows":{},
+                                "columns":[
+                                    "indicator_label",
+                                    "value",
+                                    "unitcode",
+                                    "flowcategory"
+                                ]
+                            },
+                            "rid":{
+                                "uid":"filter_top10_subsectors"
+                            }
+                        },
+
+
+
+                        {
+                            "name":"filter",
+                            "sid":[
+                                {"uid": "filter_subsectors"},
+                                {
+                                    "uid":"top10Subs"
+                                }
+                            ],
+                            "parameters":{
+                                "rows":{
+                                    "!purposecode" : {
+                                        "tables":[
+                                            {
+                                                "uid":"top10Subs",
+                                                "column":"purposecode"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name":"group",
+                            "parameters":{
+                                "by":[
+                                    "unitcode", "flowcategory"
+                                ],
+                                "aggregations":[
+                                    {
+                                        "columns":[
+                                            "value"
+                                        ],
+                                        "rule":"SUM"
+                                    },
+                                    {
+                                        "columns":[
+                                            "unitcode"
+                                        ],
+                                        "rule":"max"
+                                    }
+
+                                ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator_label",
+                                    "title": {
+                                        "EN": "Purposecode"
+                                    }
+                                },
+                                "value": {
+                                    "keys": [
+                                        "1=1"
+                                    ],
+                                    "values": [
+                                        "Others"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name":"filter",
+                            "parameters":{
+                                "rows":{},
+                                "columns":[
+                                    "indicator_label",
+                                    "value",
+                                    "unitcode",
+                                    "flowcategory"
+                                ]
+                            },
+                            "rid":{
+                                "uid":"filter_others_subsectors"
+                            }
+                        },
+                        {
+                            "name": "union",
+                            "sid": [
+                                {
+                                    "uid": "filter_top10_subsectors"
+                                },
+                                {
+                                    "uid": "filter_others_subsectors"
+                                }
+                            ],
+                            "parameters": {},
+                            "rid":{
+                                "uid":"union_proc"
+                            }
+
+                        },
+                        {
+                            "name": "addcolumn",
+                            "sid":[{
+                                "uid":"union_proc"
+                            }],
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "percent",
+                                    "title": {
+                                        "EN": "Percentage"
+                                    }
+                                },
+                                "value": {
+                                    "keys": [
+                                        "1=1"
+                                    ],
+                                    "values": [
+                                        "@@direct value"
+                                    ]
+                                }
+                            }
+                        },
+
+                        {
+                            "name":"group",
+                            "parameters":{
+                                "by":[
+                                    "indicator_label",
+                                    "percent",
+                                    "flowcategory"
+
+                                ],
+                                "aggregations":[
+                                    {
+                                        "columns":[
+                                            "value"
+                                        ],
+                                        "rule":"SUM"
+                                    },
+                                    {
+                                        "columns":[
+                                            "unitcode"
+                                        ],
+                                        "rule":"max"
+                                    }
+
+                                ]
+                            }
+                        },
+
+
+                        {
+                            "name": "percentage",
+
+                            "parameters": {
+                                "valueColumnId": "percent"
+                            }
+                        },
+                        {
+                            "name":"order",
+                            "parameters":{
+                                "value":"DESC"
                             }
                         }
                     ]

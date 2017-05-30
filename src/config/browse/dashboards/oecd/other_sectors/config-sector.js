@@ -243,7 +243,11 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             xAxis: {
                                 type: 'datetime'
                             },
-                            yAxis: [{ //Primary Axis in default template
+                            yAxis: [{
+                                //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
                                 gridLineWidth: 0,
@@ -749,7 +753,11 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             xAxis: {
                                 type: 'datetime'
                             },
-                            yAxis: [{ //Primary Axis in default template
+                            yAxis: [{
+                                //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'sector-axis',
                                 gridLineWidth: 0,
@@ -1304,6 +1312,11 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -1838,6 +1851,11 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -2366,6 +2384,11 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 

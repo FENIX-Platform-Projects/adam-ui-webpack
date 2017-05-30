@@ -314,6 +314,11 @@ define(['../../../../config-base'],function (Config) {
                             },
                             xAxis: {
                                 type: 'datetime'
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
                     },
@@ -530,7 +535,11 @@ define(['../../../../config-base'],function (Config) {
                             xAxis: {
                                 type: 'datetime'
                             },
-                            yAxis: [{ //Primary Axis in default template
+                            yAxis: [{
+                                //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
                                 gridLineWidth: 0,
@@ -1011,7 +1020,11 @@ define(['../../../../config-base'],function (Config) {
                             xAxis: {
                                 type: 'datetime'
                             },
-                            yAxis: [{ //Primary Axis in default template
+                            yAxis: [{
+                                //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
                                 gridLineWidth: 0,
@@ -1427,6 +1440,9 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            labels: {
+                                format: '{value:,.0f}'
                             }
                         }
 
@@ -1951,6 +1967,9 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            labels: {
+                                format: '{value:,.0f}'
                             }
                         }
 
@@ -2508,6 +2527,9 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            labels: {
+                                format: '{value:,.0f}'
                             }
                         }
 
@@ -3037,6 +3059,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -3590,9 +3617,318 @@ define(['../../../../config-base'],function (Config) {
                     },
 
                     filterFor: {
-                        "filter_top_10_subsectors": ['fao_region', 'recipientcode', 'parentsector_code', 'year', 'oda']
+                        "filter_subsectors": ['fao_region', 'recipientcode', 'parentsector_code', 'year', 'oda']
                     },
 
+                    postProcess: [
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "adam_browse_recipient_oda"
+                                }
+                            ],
+                            "parameters": {
+                                "rows": {
+                                    "recipientcode": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_recipients",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "625"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "oda": {
+                                        "codes": [
+                                            {
+                                                "uid": "oda_crs",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
+                                        ]
+                                    },
+                                    "year": {
+                                        "time": [
+                                            {
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
+                                            }
+                                        ]
+                                    },
+                                    "fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "RAP"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "rid": {
+                                "uid": "filter_subsectors"
+                            }
+                        },
+                        {
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "purposecode",
+                                    "flowcategory"
+                                ],
+                                "aggregations": [
+                                    {
+                                        "columns": [
+                                            "value"
+                                        ],
+                                        "rule": "SUM"
+                                    },
+                                    {
+                                        "columns": [
+                                            "unitcode"
+                                        ],
+                                        "rule": "max"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "order",
+                            "parameters": {
+                                "value": "DESC"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "parameters": {
+                                "perPage": 10,
+                                "page": 1
+                            },
+                            "rid": {
+                                "uid": "top10Subs"
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator_label",
+                                    "title": {
+                                        "EN": "Purposecode"
+                                    }
+                                },
+                                "value": {
+                                    "keys": [
+                                        "1=1"
+                                    ],
+                                    "values": [
+                                        "@@direct purposecode_EN"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "filter",
+                            "parameters": {
+                                "rows": {},
+                                "columns": [
+                                    "indicator_label",
+                                    "value",
+                                    "unitcode",
+                                    "flowcategory"
+                                ]
+                            },
+                            "rid": {
+                                "uid": "filter_top10_subsectors"
+                            }
+                        },
+                        {
+                            "name": "filter",
+                            "sid": [
+                                {
+                                    "uid": "filter_subsectors"
+                                },
+                                {
+                                    "uid": "top10Subs"
+                                }
+                            ],
+                            "parameters": {
+                                "rows": {
+                                    "!purposecode": {
+                                        "tables": [
+                                            {
+                                                "uid": "top10Subs",
+                                                "column": "purposecode"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "unitcode",
+                                    "flowcategory"
+                                ],
+                                "aggregations": [
+                                    {
+                                        "columns": [
+                                            "value"
+                                        ],
+                                        "rule": "SUM"
+                                    },
+                                    {
+                                        "columns": [
+                                            "unitcode"
+                                        ],
+                                        "rule": "max"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "parameters": {
+                                "column": {
+                                    "dataType": "text",
+                                    "id": "indicator_label",
+                                    "title": {
+                                        "EN": "Purposecode"
+                                    }
+                                },
+                                "value": {
+                                    "keys": [
+                                        "1=1"
+                                    ],
+                                    "values": [
+                                        "Others"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "filter",
+                            "parameters": {
+                                "rows": {},
+                                "columns": [
+                                    "indicator_label",
+                                    "value",
+                                    "unitcode",
+                                    "flowcategory"
+                                ]
+                            },
+                            "rid": {
+                                "uid": "filter_others_subsectors"
+                            }
+                        },
+                        {
+                            "name": "union",
+                            "sid": [
+                                {
+                                    "uid": "filter_top10_subsectors"
+                                },
+                                {
+                                    "uid": "filter_others_subsectors"
+                                }
+                            ],
+                            "parameters": {},
+                            "rid": {
+                                "uid": "union_proc"
+                            }
+                        },
+                        {
+                            "name": "addcolumn",
+                            "sid": [
+                                {
+                                    "uid": "union_proc"
+                                }
+                            ],
+                            "parameters": {
+                                "column": {
+                                    "dataType": "number",
+                                    "id": "percent",
+                                    "title": {
+                                        "EN": "Percentage"
+                                    }
+                                },
+                                "value": {
+                                    "keys": [
+                                        "1=1"
+                                    ],
+                                    "values": [
+                                        "@@direct value"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "indicator_label",
+                                    "percent",
+                                    "flowcategory"
+                                ],
+                                "aggregations": [
+                                    {
+                                        "columns": [
+                                            "value"
+                                        ],
+                                        "rule": "SUM"
+                                    },
+                                    {
+                                        "columns": [
+                                            "unitcode"
+                                        ],
+                                        "rule": "max"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "percentage",
+                            "parameters": {
+                                "valueColumnId": "percent"
+                            }
+                        },
+                        {
+                            "name": "order",
+                            "parameters": {
+                                "value": "DESC"
+                            }
+                        }
+                    ]
+
+/*
                     postProcess: [
                         {
                             "name": "filter",
@@ -3653,6 +3989,7 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 }
                             },
+                            "rid":{"uid":"filter_subsectors"}
                         },
                         {
                             "name":"group",
@@ -3890,6 +4227,8 @@ define(['../../../../config-base'],function (Config) {
                             }
                         }
                     ]
+*/
+
                 },
                 {
                     id: 'regional-map',
