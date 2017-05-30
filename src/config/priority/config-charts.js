@@ -30,6 +30,11 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
                             },
                             subtitle: {
                                 text: ''
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -161,6 +166,11 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
                             },
                             subtitle: {
                                 text: ''
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -336,6 +346,11 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
                                     toggleDataLabelsButton: {
                                         enabled: false
                                     }
+                                }
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
                                 }
                             }
                         }
@@ -674,6 +689,11 @@ define(['highcharts', '../config-base'], function (Highcharts, Config) {
                                     toggleDataLabelsButton: {
                                         enabled: false
                                     }
+                                }
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
                                 }
                             }
                         }

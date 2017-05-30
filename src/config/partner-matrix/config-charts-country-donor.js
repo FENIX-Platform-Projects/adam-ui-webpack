@@ -63,13 +63,19 @@ define(['../config-base'], function(Config) {
                                 type: 'datetime'
                             },
                             yAxis: [{ //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
                                 gridLineWidth: 0,
                                 title: {
                                     text: '%'
                                 },
-                                opposite: true
+                                opposite: true,
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }],
                             exporting: {
                                 chartOptions: {

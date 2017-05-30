@@ -132,7 +132,10 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 gridLineColor: 'transparent'
                             },
                             yAxis: {
-                                gridLineColor: 'transparent'
+                                gridLineColor: 'transparent',
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             },
                             exporting: {
                                 filename: 'tot_oda_chart',
@@ -572,7 +575,10 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 gridLineColor: 'transparent'
                             },
                             yAxis: {
-                                gridLineColor: 'transparent'
+                                gridLineColor: 'transparent',
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -940,7 +946,10 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 gridLineColor: 'transparent'
                             },
                             yAxis: {
-                                gridLineColor: 'transparent'
+                                gridLineColor: 'transparent',
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -1137,7 +1146,10 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 gridLineColor: 'transparent'
                             },
                             yAxis: {
-                                gridLineColor: 'transparent'
+                                gridLineColor: 'transparent',
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             },
                             exporting: {
                                 filename: 'tot_oda_fao_chart',
@@ -1857,7 +1869,10 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 gridLineColor: 'transparent'
                             },
                             yAxis: {
-                                gridLineColor: 'transparent'
+                                gridLineColor: 'transparent',
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 

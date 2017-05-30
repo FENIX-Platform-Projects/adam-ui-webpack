@@ -74,13 +74,19 @@ define(['../config-base'], function(Config) {
                            //     type: 'datetime'
                           //  },
                             yAxis: [{ //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'fao-axis',
                                 gridLineWidth: 0,
                                 title: {
                                     text: '%'
                                 },
-                                opposite: true
+                                opposite: true,
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }],
                             exporting: {
                                 chartOptions: {
@@ -608,6 +614,11 @@ define(['../config-base'], function(Config) {
                             xAxis: {
                                 type: 'datetime'
                             },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
+                            },
                             chart: {
                                 marginTop: 50
                             },
@@ -775,6 +786,11 @@ define(['../config-base'], function(Config) {
                         config: {
                             xAxis: {
                                 type: 'datetime'
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             },
 
                             chart: {
