@@ -349,7 +349,11 @@ div[data-item="venn-diagram"]{
 }
 
 .selector-header {padding: 0px;}
-.fx-sandbox .h5, .fx-sandbox h5 {font-size: 13px !important; font-weight: 600 !important; margin-left: 5px !important; margin-top: 0px !important; margin-bottom: 4px !important;}
+.fx-sandbox .h5, .fx-sandbox h5 {font-size: 13px !important; font-weight: 600 !important; margin-left: 5px !important; margin-top: 0px !important; margin-bottom: 4px !important; line-height:1.2em;}
+
+#filter-browse .selector-header,
+#filter-partner-matrix .selector-header,
+#filter-priority .selector-header {padding: 10px 0px 1px 0px !important;}
 
 .jstree-ocl {display: none !important;}
 .form-control {font-size: 13px !important;}
@@ -364,6 +368,8 @@ div[data-item="venn-diagram"]{
 .selector-footer {display: block; max-height: 100px; overflow-y: auto; margin-top: 10px;}
 
 #compare-filter-summary {display: block; max-height: 150px; overflow-y: auto; margin-top: 10px; position: relative; width: 98%;}
+
+#compare #add-btn {color: #fff; background-color: #e46d2b;}
 
 
 
