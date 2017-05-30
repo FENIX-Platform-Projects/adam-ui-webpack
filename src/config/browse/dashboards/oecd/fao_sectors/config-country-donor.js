@@ -386,6 +386,11 @@ define(['../../../../config-base'],function (Config) {
                             colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F1E300", "#F7AE3C"],
                             xAxis: {
                                 type: 'datetime'
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
                     },
@@ -618,7 +623,11 @@ define(['../../../../config-base'],function (Config) {
                             xAxis: {
                                 type: 'datetime'
                             },
-                            yAxis: [{ //Primary Axis in default template
+                            yAxis: [{
+                                //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'sector-axis',
                                 gridLineWidth: 0,
@@ -1407,7 +1416,11 @@ define(['../../../../config-base'],function (Config) {
                             },
                             //d2ccbf
                             colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F1E300", "#F7AE3C"],
-                            yAxis: [{ //Primary Axis in default template
+                            yAxis: [{
+                                //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'sector-axis',
                                 gridLineWidth: 0,
@@ -2131,6 +2144,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -2677,6 +2695,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -3223,6 +3246,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 

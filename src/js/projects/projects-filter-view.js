@@ -94,6 +94,8 @@ define(
             this.filterUtils = new FilterUtils();
 
             this.$titleItemsList = this.$el.find(s.css_classes.TITLE_ITEMS_LIST);
+
+            this.alls = [];
         };
 
         /**
@@ -161,9 +163,23 @@ define(
                 // validate filter
                 var valid = this.filterValidator.validateValues(this._getSelectedValues(), this.lang);
 
+                this.alls[payload.id] = false;
 
                 if (valid === true && this._getFirstPayloadValue(payload)) {
                     this.filterValidator.hideErrorSection();
+
+                    if (payload.values == "all" ) this.alls[payload.id] = true;
+
+                    if (this.alls[BaseConfig.SELECTORS.SUB_SECTOR]&&
+                        this.alls[BaseConfig.SELECTORS.REGION]&&
+                        this.alls[BaseConfig.SELECTORS.RECIPIENT_COUNTRY]&&
+                        this.alls[BaseConfig.SELECTORS.SECTOR]&&
+                        this.alls[BaseConfig.SELECTORS.RESOURCE_PARTNER]
+                    ) {
+                        // We Got all the Alls so..
+                        this.filterValidator.displayErrorSection(valid);
+                        return;
+                    }
 
                     var fc = this.filterUtils.getFilterConfigById(this.config, payload.id),
                         payloadId = payload.id,

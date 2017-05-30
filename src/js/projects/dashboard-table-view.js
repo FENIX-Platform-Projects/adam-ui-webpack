@@ -54,13 +54,9 @@ define([
         var valid = this._validateInput();
 
         if (valid === true) {
-
             this._init();
-
             this._attach();
-
             return this;
-
         } else {
             log.error("Impossible to create Table View");
             log.error(valid)
@@ -138,7 +134,9 @@ define([
         var modelId = $(event.target).attr('data-model-id');
         var dash = this.getDashboardConfig();
 
-        this.downloader.onDownloadMenuClick(this.models[modelId], "", "", dash.filter.values);
+        console.log(dash);
+
+        this.downloader.onDownloadMenuClick(this.models[modelId], i18nDashboardLabels[this.lang]['projects'], "", dash.filter.values);
 
     };
 

@@ -209,8 +209,8 @@ define([
         var updatedTemplate = this._updateTemplate();
         this.source = $(updatedTemplate).find("[data-topic='" + this.topic + "']");
 
-        this.titles[item.id] = i18nDashboardLabels[this.lang][this.topic];
-        this.subtitles[item.id] = this.model.get('label');
+        //this.titles[this.topic] = i18nDashboardLabels[this.lang][this.topic];
+        //this.subtitles[this.topic] = this.model.get('label');
 
         this.$el.hide();
 

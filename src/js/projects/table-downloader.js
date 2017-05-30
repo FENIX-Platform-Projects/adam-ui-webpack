@@ -18,7 +18,7 @@ define([
          }
     };
 
-    function TableDownloader(params, values) {
+    function TableDownloader(params) {
         this.lang = params.lang;
         this.environment =  params.environment;
 
@@ -26,14 +26,15 @@ define([
     }
 
     TableDownloader.prototype.onDownloadMenuClick = function (modelObj, title, subtitle, params) {
-        if ((params.fao_region.length > 1) &&
-            (params.recipientcode.length > 1) &&
-            (params.donorcode.length > 1) &&
-            (params.parentsector_code.length > 1) &&
+
+        if ((params.fao_region.length > 1) ||
+            (params.recipientcode.length > 1) ||
+            (params.donorcode.length > 1) ||
+            (params.parentsector_code.length > 1) ||
             (params.purposecode.length > 1) ) {
-                this._downloadExcel(modelObj, title, subtitle);
-        } else {
                 window.open('http://fenixrepo.fao.org/cdn/data/adam/project_analysis/project_analysis.zip');
+        } else {
+                this._downloadExcel(modelObj, title, subtitle);
         }
     };
 

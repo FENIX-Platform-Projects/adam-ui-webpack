@@ -472,7 +472,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: "tot-oda-sector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -581,6 +581,9 @@ define(['../../../../config-base'],function (Config) {
                                 type: 'datetime'
                             },
                             yAxis: [{ //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
                                 gridLineWidth: 0,
@@ -945,7 +948,7 @@ define(['../../../../config-base'],function (Config) {
                         } // (3vi) PERCENTAGE CALCULATION: Add Column
                     ]
                 },
-                {
+               {
                     id: "tot-oda-subsector", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
                     config: {
@@ -1056,6 +1059,9 @@ define(['../../../../config-base'],function (Config) {
                                 type: 'datetime'
                             },
                             yAxis: [{ //Primary Axis in default template
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }, { // Secondary Axis
                                 id: 'subsector-axis',
                                 gridLineWidth: 0,
@@ -1429,7 +1435,7 @@ define(['../../../../config-base'],function (Config) {
                         } // (3vi) PERCENTAGE CALCULATION: Add Column
                     ]
                 },
-                {
+               {
                     id: 'top-partners', // TOP DONORS
                     type: 'chart',
                     config: {
@@ -1455,6 +1461,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -1562,7 +1573,7 @@ define(['../../../../config-base'],function (Config) {
 
                     ]
                 },
-                {
+               {
                     id: 'top-partners-others', // TOP DONORS Vs OTHER DONORS
                     type: 'chart',
                     config: {
@@ -1952,7 +1963,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: 'top-recipients', // TOP RECIPIENTS
                     type: 'chart',
                     config: {
@@ -1978,6 +1989,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -2096,7 +2112,7 @@ define(['../../../../config-base'],function (Config) {
 
                     ]
                 },
-                {
+               {
                     id: 'top-recipients-others', // TOP RECIPIENTS Vs OTHER RECIPIENTS
                     type: 'chart',
                     config: {
@@ -2497,7 +2513,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: 'top-channels', // TOP CHANNELS
                     type: 'chart',
                     config: {
@@ -2523,6 +2539,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -2630,7 +2651,7 @@ define(['../../../../config-base'],function (Config) {
 
                     ]
                 },
-                {
+               {
                     id: 'top-channels-others', // TOP CHANNELS Vs OTHER CHANNELS
                     type: 'chart',
                     config: {
@@ -3014,7 +3035,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: 'top-sectors', // TOP SECTORS
                     type: 'chart',
                     config: {
@@ -3040,6 +3061,11 @@ define(['../../../../config-base'],function (Config) {
                                     }
                                 },
                                 allowPointSelect: false
+                            },
+                            yAxis: {
+                                labels: {
+                                    format: '{value:,.0f}'
+                                }
                             }
                         }
 
@@ -3143,7 +3169,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: 'top-sectors-others', // TOP SECTORS Vs OTHER SECTORS
                     type: 'chart',
                     config: {
@@ -3529,7 +3555,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: 'top-subsectors', // TOP SUB SECTORS
                     type: 'chart',
                     config: {
@@ -3702,7 +3728,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 },
-                {
+               {
                     id: 'regional-map',
                     type: 'map',
                     config: {

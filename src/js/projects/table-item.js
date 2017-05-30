@@ -141,7 +141,6 @@ define([
 
     TableItem.prototype._render = function () {
 
-
        // this.controller._trigger('table_ready', {model: this.model, data: {size: this.model.size}});
 
         if (this.model.size > 0) {
@@ -181,6 +180,12 @@ define([
 
     TableItem.prototype._bindEventListeners = function () {
         var self = this;
+
+        //This is a test
+        $('.datagrid').on('click', function(event){
+            event.preventDefault();
+            console.log('clock');
+        });
 
        this.olap.on('ready', function () {
             var rowSize = this.olap.model.rows.length;
