@@ -39,11 +39,11 @@ define([
     };
 
     DataExporter.prototype.downloadData = function (model, title, subtitle) {
-
+        /*
         console.log('Data Expoter is called');
         console.log('Title: ' + title);
         console.log('Subtitle: ' + subtitle);
-
+        */
         var payload = {
             resource: model,
             input: {

@@ -181,6 +181,8 @@ define([
         this.config.environment = this.environment;
         this.config.baseItems = this.config.items;
 
+       // console.log(this.config);
+
         // the path to the custom item is registered
         this.config.itemsRegistry = {
             custom: {

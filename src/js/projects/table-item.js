@@ -184,7 +184,6 @@ define([
         //This is a test
         $('.datagrid').on('click', function(event){
             event.preventDefault();
-            console.log('clock');
         });
 
        this.olap.on('ready', function () {

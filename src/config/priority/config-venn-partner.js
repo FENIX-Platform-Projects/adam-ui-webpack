@@ -165,7 +165,7 @@ define(function () {
                                         },
                                         "subject": null
                                     },
-                                    "value": "FAO (All)" // PART 2 FINAL INDICATOR NAME
+                                    "value": "FAOAO (All)" // PART 2 FINAL INDICATOR NAME
                                 },
                                 "rid":{"uid":"fao"}
                             }, // (2iii): ALL FAO PRIORITIES: Add Column

@@ -19,7 +19,7 @@ define(function () {
         "filter_donor_groupedRow": "Table rows are grouped by Resource Partner (uncheck to enable sort on all columns)",
         "filter_country-donor_groupedRow": "Table rows are grouped by Resource Partner (uncheck to enable sort on all columns)",
         "filter_tooltip_oda": "The ODA data shown below is on resources that flow out of donor countries or resource partners, not necessarily the money that flows into recipient countries. The reason why these two data might not correspond is that ODA can also be spent in the donor country, for example towards debt relief and migrant crisis support. The ADAM is based on CRS dataset thus where not specifically indicated the data refers to CRS ODA.",
-        "please_make_selections": "Please make a selection for",
+        "please_make_selections": "Please make a valid selection for",
         "close": "Close",
         "and": "and"
     }

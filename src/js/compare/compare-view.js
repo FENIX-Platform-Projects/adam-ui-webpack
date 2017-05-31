@@ -119,9 +119,7 @@ define([
              maxSize: 2000
         };
 
-        console.log(config);
-
-        this.analysis.add(config);        
+        this.analysis.add(config);
     };
 
     CompareView.prototype._getBoxModelFromFilter = function () {

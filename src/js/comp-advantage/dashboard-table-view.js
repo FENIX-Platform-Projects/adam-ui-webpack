@@ -137,7 +137,7 @@ define([
         event.preventDefault();// prevent the default functionality
 
         var modelId = $(event.target).attr('data-model-id');
-        console.log(this.subtitle.getTitleAsLabel());
+        //console.log(this.subtitle.getTitleAsLabel());
         this.downloader.onDownloadMenuClick(this.models[modelId],i18nDashboardLabels[this.lang]['comparative-advantage'],this.subtitle.getTitleAsLabel());
 
     };

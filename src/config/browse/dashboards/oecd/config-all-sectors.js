@@ -212,13 +212,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             },
                             xAxis: {
                                 type: 'datetime'
-                            },
-                            yAxis: {
-                                labels: {
-                                    formatter: function () {
-                                        return this.value + "FABRI";
-                                    }
-                                }
                             }
                         }
                     },

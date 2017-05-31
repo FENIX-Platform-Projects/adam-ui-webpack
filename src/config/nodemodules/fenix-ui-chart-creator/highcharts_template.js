@@ -142,7 +142,8 @@ define(['highcharts'], function (Highcharts) {
 
         lang: {
             toggleDataLabels: 'Display/hide values on the chart',
-            printDownload: 'Print and Download chart options'
+            printDownload: 'Print and Download chart options',
+            numericSymbols: null
         },
 
         credits: {
@@ -367,7 +368,10 @@ define(['highcharts'], function (Highcharts) {
             title: {
                enabled: true,
                text: 'USD Millions'
-             }
+            },
+            labels: {
+                format: '{value:,.0f}'
+            }
         }],
 
         xAxis: {crosshair: false}, // removes 'blue' highlight when hovering over points

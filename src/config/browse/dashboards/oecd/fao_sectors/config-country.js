@@ -12,6 +12,7 @@ define(['../../../../config-base'],function (Config) {
                 selector: {
                     id: "dropdown",
                     default: ["RAP"],
+                    blacklist: ["UNSP"],
                     emptyOption : {
                         enabled: true,
                         text: "All",
@@ -37,6 +38,7 @@ define(['../../../../config-base'],function (Config) {
                 selector: {
                     id: "dropdown",
                     default: ["625"],
+                    blacklist: ["UNSP"],
                     emptyOption : {
                         enabled: true,
                         text: "All",

@@ -19,7 +19,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
             analysis: {
                 box: {
                     tab: "chart",
-                    hideFlipButton: false,
+                    hideFlipButton: true,
                     faces: ["front","back"],
                     hideMinimizeButton: true,
                     hideMetadataButton: true,
@@ -249,6 +249,16 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                             x: 10
                                         };
 
+                                        result.renderer = {
+                                            button: {
+                                                    x: -162,
+                                                    onclick: function () {
+                                                        alert('Clicked');
+                                                    },
+                                                    symbol: 'circle'
+                                            }
+                                        };
+
                                         //result.exporting.enabled = true;
                                         //result.exporting.buttons.contextButton.enabled =true;
 
@@ -264,6 +274,8 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                         }
                                     }
                                 };
+
+
 
                                 //console.log('chart config',config)
                                 //config.exporting = highchartsTemplate.exporting;
@@ -286,7 +298,8 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                     fao_region: {
                         selector: {
                             id: "dropdown",
-                            default: ["RAP"],
+                            blacklist: ["UNSP"],
+                            default: ["all"],
                             emptyOption : {
                                 enabled: true,
                                 text: "All",
@@ -312,6 +325,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                     recipientcode: {
                         selector: {
                             id: "tree",
+                            blacklist: ["UNSP"],
                             sort: true
                         },
                         classNames: "col-xs-3",

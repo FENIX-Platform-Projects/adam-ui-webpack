@@ -115,7 +115,7 @@ define(function () {
                                         },
                                         "subject": null
                                     },
-                                    "value": "Countries (Afghanistan)" // PART 1 FINAL INDICATOR NAME
+                                    "value": "Recipient Countries (Afghanistan)" // PART 1 FINAL INDICATOR NAME
                                 },
                                 "rid": {
                                     "uid": "recipient"
@@ -248,7 +248,7 @@ define(function () {
                                         },
                                         "subject": null
                                     },
-                                    "value": "Partners (All)" // PART 3 FINAL INDICATOR NAME
+                                    "value": "Resource Partner (All)" // PART 3 FINAL INDICATOR NAME
                                 },
                                 "rid":{"uid":"partner"}
                             }// (3iii): ALL RESOURCE PARTNER PRIORITIES: Add Column

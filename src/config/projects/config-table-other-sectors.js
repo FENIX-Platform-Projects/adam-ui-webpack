@@ -35,15 +35,11 @@ define(['../config-base'], function(Config) {
                                 {id: "recipientcode_EN", width: 110},
                                 {id: "donorcode_EN", width: 120},
                                 {id: "projecttitle", width: 160},
-                                {id: "year", width: 60,  align: 'center', sortOrder: 'desc'},
+                                {id: "year", width: 60,  align: 'center'},
                                 {id: "parentsector_code_EN", width: 100},
                                 {id: "purposecode_EN", width: 100},
-                                {id: "oda", width: 100, align: 'center', getSortValue : function(value , record){
-                                    return Number(value);
-                                }},
-                                {id: "oda", width: 100, align: 'center', getSortValue : function(value , record){
-                                    return Number(value);
-                                }}
+                                {id: "oda", width: 100, align: 'center',sortOrder: 'desc'},
+                                {id: "oda", width: 100, align: 'center'}
                             ]
                         }
                     },
@@ -121,7 +117,9 @@ define(['../config-base'], function(Config) {
                         {
                             "name": "order",
                             "parameters": {
-                                "year": "DESC",
+                                "oda": "ASC",
+                                "value": "DESC",
+                                //"year": "DESC",
                                 "recipientcode": "DESC"
                             }
                         }

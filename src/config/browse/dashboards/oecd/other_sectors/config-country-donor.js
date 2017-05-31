@@ -11,6 +11,7 @@ define(['../../../../config-base'],function (Config) {
             fao_region: {
                 selector: {
                     id: "dropdown",
+                    blacklist: ["UNSP"],
                     default: ["RAP"],
                     emptyOption : {
                         enabled: true,
@@ -36,6 +37,7 @@ define(['../../../../config-base'],function (Config) {
             recipientcode: {
                 selector: {
                     id: "dropdown",
+                    blacklist: ["UNSP"],
                     default: ["625"],
                     emptyOption : {
                         enabled: true,

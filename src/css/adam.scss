@@ -383,8 +383,6 @@ div[data-item="venn-diagram"]{
 
 
 
-
-
 // Mario
 .fx-sandbox .selector-footer ul div span[data-value]:after {
   content: "";
@@ -402,3 +400,7 @@ div[data-item="venn-diagram"]{
 }
 
 .gt-hd-tool { display: none; }
+
+.fx-sandbox .selector-footer ul div span[data-value] {
+  cursor:pointer;
+}
