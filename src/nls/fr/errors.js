@@ -19,6 +19,7 @@
         "compare_missing" : "Valeurs manquantes pour la dimension 'comparer'.",
         "no_compare" : "Impossible de trouver la dimension 'comparer'.",
         "at_least_one_more_dimension" : "Veuillez spécifier les valeurs d’au moins deux dimensions.",
-        "missing_mandatory_field" : "Veuillez remplir tous les champs obligatoires."
+        "missing_mandatory_field" : "Veuillez remplir tous les champs obligatoires.",
+        "error_resource_416" : " La gamme de ressource demandée ne peut être satisfaite. S'il vous plaît spécifier une autre sélection, avec moins d'éléments."
     }
 });

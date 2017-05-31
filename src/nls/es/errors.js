@@ -19,6 +19,7 @@
         "compare_missing" : "Faltan valores de la dimensión de 'comparación'.",
         "no_compare" : "Imposible encontrar la dimensión de 'comparación'.",
         "at_least_one_more_dimension" : "Especifique los valores de dos dimensiones como mínimo.",
-        "missing_mandatory_field" : "Rellene todos los campos obligatorios."
+        "missing_mandatory_field" : "Rellene todos los campos obligatorios.",
+        "error_resource_416" : "El rango recurso solicitado no puede ser satisfecha. Por favor especificar una selección diferente, con menos elementos."
 }
 });

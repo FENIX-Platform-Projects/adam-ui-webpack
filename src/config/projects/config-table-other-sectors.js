@@ -11,6 +11,8 @@ define(['../config-base'], function(Config) {
             //default dataset id
             uid: "adam_project_analysis",
 
+            maxSize: 2000,
+
             items: [
                 {
                     id: "projects",

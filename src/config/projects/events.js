@@ -5,6 +5,7 @@ define(function ( ) {
 
     return {
         FILTER_ON_READY : "fx.filter.onready",
-        FILTER_ON_CHANGE : "fx.filter.onchange"
+        FILTER_ON_CHANGE : "fx.filter.onchange",
+        HTTP_416 : 'fx.bridge.resource.error'
     };
 });

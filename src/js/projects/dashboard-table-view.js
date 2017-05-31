@@ -10,11 +10,13 @@ define([
     'config/errors',
     'nls/projects',
     'nls/common',
+    'nls/errors',
     'projects/table-item',
     'config/projects/events',
     'projects/table-downloader',
-    'common/progress-bar'
-], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nCommonLabels, TableItem, BaseEvents, Downloader, ProgressBar) {
+    'common/progress-bar',
+    'amplify-pubsub'
+], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nCommonLabels, i18nErrors, TableItem, BaseEvents, Downloader, ProgressBar, amplify) {
 
     'use strict';
 
@@ -174,6 +176,8 @@ define([
 
     ProjectsTableView.prototype._renderDashboard = function (filter) {
 
+        var self = this;
+
         this.config.filter = filter;
 
         this.config.el = this.$el;
@@ -195,6 +199,10 @@ define([
         this.dashboard = new Dashboard(
             this.config
         );
+
+        this.dashboard.on('error.resource', function() {
+            amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
+        });
 
     };
 

@@ -11,8 +11,9 @@ define(
         'config/errors',
         'config/projects/config-projects',
         'config/projects/events',
+        'nls/errors',
         'amplify-pubsub'
-    ], function (log, $, _, template, Filter, FilterValidator, FilterUtils, BaseConfig, Errors, PartnerMatrixConfig, BaseEvents, amplify) {
+    ], function (log, $, _, template, Filter, FilterValidator, FilterUtils, BaseConfig, Errors, PartnerMatrixConfig, BaseEvents, i18nErrors, amplify) {
 
         'use strict';
 
@@ -98,6 +99,10 @@ define(
             this.alls = [];
         };
 
+        ProjectsFilterView.prototype._riseErrors = function (obj) {
+            if (obj) this.filterValidator.displayErrorSection(i18nErrors[this.lang]['error_resource_416']);
+        };
+
         /**
          * Updates filter configuration and renders the filter.
          * @private
@@ -177,7 +182,7 @@ define(
                         this.alls[BaseConfig.SELECTORS.RESOURCE_PARTNER]
                     ) {
                         // We Got all the Alls so..
-                        this.filterValidator.displayErrorSection(valid);
+                        this.filterValidator.displayErrorSection(' all selectors ');
                         return;
                     }
 
@@ -247,6 +252,12 @@ define(
                 }
 
             }, this);
+
+            var self = this;
+
+            amplify.subscribe(BaseEvents.HTTP_416, function (object) {
+                self._riseErrors(object);
+            });
 
         };
 
