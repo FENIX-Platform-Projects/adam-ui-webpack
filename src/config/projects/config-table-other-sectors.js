@@ -61,13 +61,13 @@ define(['../config-base'], function(Config) {
                             "parameters": {
                                 "columns": [
                                     "recipientcode",
-                                    "oda",
                                     "donorcode",
                                     "projecttitle",
                                     "year",
                                     "parentsector_code",
                                     "purposecode",
-                                    "value",
+                                    "commitment_value",
+                                    "disbursement_value",
                                     "unitcode"
                                 ],
                                 "rows": {
@@ -119,78 +119,11 @@ define(['../config-base'], function(Config) {
                         {
                             "name": "order",
                             "parameters": {
-                                "oda": "ASC",
-                                "value": "DESC",
-                                //"year": "DESC",
+                                "commitment_value": "DESC",
                                 "recipientcode": "DESC"
                             }
                         }
-                    ]/*,
-
-                    postProcess1: [
-                        {
-                            "name": "filter",
-                            "sid": [
-                                {
-                                    "uid": "adam_usd_commitment"
-                                }
-                            ],
-                            "parameters": {
-                                "columns": [
-                                    "recipientcode",
-                                    "donorcode",
-                                    "projecttitle",
-                                    "year",
-                                    "agencyname",
-                                    "parentsector_code",
-                                    "purposecode",
-                                    "value"
-                                ],
-                                "rows": {
-                                    "recipientcode": {
-                                        "codes": [
-                                            {
-                                                "uid": "crs_recipients",
-                                                "version": "2016",
-                                                "codes": [
-                                                    "625"
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                }
-                            },
-                            "rid": {"uid": "filter_projects"}
-                        },
-                        {
-                            "name": "group",
-                            "parameters": {
-                                "by": [
-                                    "recipientcode", "donorcode", "projecttitle", "year", "agencyname", "parentsector_code", "purposecode"
-                                ],
-                                "aggregations": [
-                                    {
-                                        "columns": [
-                                            "value"
-                                        ],
-                                        "rule": "SUM"
-                                    },
-                                    {
-                                        "columns": [
-                                            "unitcode"
-                                        ],
-                                        "rule": "first"
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            "name": "order",
-                            "parameters": {
-                                "value": "DESC"
-                            }
-                        }
-                    ]*/
+                    ]
                 }
             ]
         }

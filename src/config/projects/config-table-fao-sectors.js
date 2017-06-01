@@ -62,13 +62,13 @@ define(['../config-base'], function(Config) {
                             "parameters": {
                                 "columns": [
                                     "recipientcode",
-                                    "oda",
                                     "donorcode",
                                     "projecttitle",
                                     "year",
                                     "parentsector_code",
                                     "purposecode",
-                                    "value",
+                                    "commitment_value",
+                                    "disbursement_value",
                                     "unitcode"
                                 ],
                                 "rows": {
@@ -125,9 +125,7 @@ define(['../config-base'], function(Config) {
                         {
                             "name": "order",
                             "parameters": {
-                                "oda": "ASC",
-                                "value": "DESC",
-                                "year": "DESC",
+                                "commitment_value": "DESC",
                                 "recipientcode": "DESC"
                             }
                         }
