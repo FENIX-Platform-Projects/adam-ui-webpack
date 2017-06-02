@@ -20,6 +20,8 @@ define(function () {
         "no_compare" : "Impossible to find the 'compare' dimension.",
         "at_least_one_more_dimension" : "Please specify values for at lease two dimensions.",
         "missing_mandatory_field" : "Please fill all the mandatory fields.",
-        "error_resource_416" : "the requested resource, with fewer elements."
+        "error_resource_416" : "the requested resource, with fewer elements.",
+        "bulk_download_container" : "You can download the whole data at ",
+        "bulk_download_link" : "this link"
     }
 });

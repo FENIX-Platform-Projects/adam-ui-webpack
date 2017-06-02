@@ -100,7 +100,10 @@ define(
         };
 
         ProjectsFilterView.prototype._riseErrors = function (obj) {
-            if (obj) this.filterValidator.displayErrorSection(i18nErrors[this.lang]['error_resource_416']);
+            if (obj) this.filterValidator.displayBulkDownload(
+                i18nErrors[this.lang]['error_resource_416'],
+                BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
+            );
         };
 
         /**
