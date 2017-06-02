@@ -19,15 +19,14 @@ define(['../config-base'], function(Config) {
                     type: 'custom',
                     config: {
                         "groupedRow":false,
-                        "aggregationFn":{"value":"sum"},
+                        "aggregationFn":{"commitment_value":"sum"},
                         "formatter":"localstring",
                         "decimals":2,
                         "pageSize": "150",
                         "showRowHeaders":true,
-                        "columns":["oda"],
-                        "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN" ],
+                        "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN", 'commitment_value', "disbursement_value" ],
                         "aggregations":[],
-                        "values":["value"],
+                        //"values":["value"],
 
                         config: {
                             pageSize: 150,
@@ -40,8 +39,8 @@ define(['../config-base'], function(Config) {
                                 {id: "year", width: 60,  align: 'center'},
                                 {id: "parentsector_code_EN", width: 100},
                                 {id: "purposecode_EN", width: 100},
-                                {id: "oda", width: 100, align: 'center',sortOrder: 'desc'},
-                                {id: "oda", width: 100, align: 'center'}
+                                {id: "commitment_value", width: 100, align: 'center', sortOrder: 'desc'},
+                                {id: "disbursement_value", width: 100, align: 'center'}
                             ]
                         }
                     },
