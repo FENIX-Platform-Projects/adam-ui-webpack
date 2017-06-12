@@ -4,6 +4,11 @@
     return {
         "priorities-table": "Prioridades acordadas por la FAO (Marco de programación por países) y por países (MANUD) en materia de agricultura y seguridad alimentaria",
         "venn-diagram": "Diagrama de Venn: Prioridades comunes entre los países, la FAO y los asociados que aportan recursos",
+        "venn-diagram-firstPart": "Diagrama de Venn: Prioridades comunes entre ",
+        "venn-diagram-oneCountry": "el paíse, la FAO y ",
+        "venn-diagram-allCountries": "los países, la FAO y ",
+        "venn-diagram-onePartner": "el asociado que aporta recursos",
+        "venn-diagram-allPartners": "los asociados que aportan recursos",
         "venn-diagram-info": "Haga clic en las intersecciones del diagrama de Venn para ver los gráficos de las prioridades y la asignación de fondos asociada",
         "prioritiesOnlyIn": "Prioridades solo en",
         "commonPrioritiesIn": "Prioridades comunes en",

@@ -196,6 +196,23 @@ define([
 
     TableVennDashboardView.prototype._renderDashboard = function (filter) {
 
+        var vennDiagramTitle = i18nDashboardLabels[this.lang]["venn-diagram-firstPart"];
+
+        if((filter!=null)&&(typeof filter!='undefined')&&(filter.labels!=null)&&(typeof filter.labels!='undefined')){
+            var recipientCodeLabel = i18nDashboardLabels[this.lang]["venn-diagram-oneCountry"];
+            var donorCodeLabel = i18nDashboardLabels[this.lang]["venn-diagram-onePartner"];
+
+            if((filter.labels.donorcode!=null)&&(typeof filter.labels.donorcode!='undefined')&&(filter.labels.donorcode.hasOwnProperty('all'))){
+                donorCodeLabel = i18nDashboardLabels[this.lang]["venn-diagram-allPartners"];
+            }
+
+            if((filter.labels.recipientcode!=null)&&(typeof filter.labels.recipientcode!='undefined')&&(filter.labels.recipientcode.hasOwnProperty('all'))){
+                recipientCodeLabel = i18nDashboardLabels[this.lang]["venn-diagram-allCountries"];
+            }
+        }
+
+        $('#vennDiagramTitle').html(vennDiagramTitle + recipientCodeLabel + donorCodeLabel);
+
         this.config.filter = filter;
 
         this.config.el = this.$el;
@@ -374,7 +391,6 @@ define([
 
                 count++;
             }
-
 
             $('#venn-diagram-title').html(title);
 
