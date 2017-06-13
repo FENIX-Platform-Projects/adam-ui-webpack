@@ -64,6 +64,9 @@ define(function () {
         "reload": "Reload",
 
         "btn_add_compare": "Add Chart / Compare",
-        "subtitle_chart_compare": "Hover for values and click and drag to zoom"
+        "subtitle_chart_compare": "Hover for values and click and drag to zoom",
+        "legend_title": "Click to hide/show",
+        "sourceOECD_CRS": "Source: OECD-CRS",
+        "displayHideValues": "Display/Hide values"
     }
 });

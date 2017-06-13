@@ -103,7 +103,6 @@ define([
     TableVennDashboardView.prototype._bindDownloadEventListeners = function () {
         var self = this;
 
-
         // initialize Download buttons
         $.each(this.config.items, function( index, item ) {
             var identifier = '#'+item.id;
@@ -142,6 +141,7 @@ define([
         var modelId = $(event.target).attr('data-model-id');
         var type = $(event.target).attr('data-type');
         var title = i18nDashboardLabels[this.lang][modelId];
+        title=title.replace(/,/g, "")
         var subtitle = "";
 
         this.downloader.onDownloadMenuClick(this.models[modelId], modelId, type, title, subtitle);
@@ -244,9 +244,6 @@ define([
 
 
     TableVennDashboardView.prototype._updateItems = function(props){
-
-
-
 
         var selectionsObj = _.find(props, function(obj){
             if(obj['selections'])

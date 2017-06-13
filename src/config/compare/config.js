@@ -243,6 +243,15 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                         }
 
                                         result = $.extend(true, {}, config, highchartsTemplate);
+                                        if((result.legend!=null)&&(typeof result.legend!="undefined")&&(result.legend.title!=null)&&(typeof result.legend.title!="undefined"))
+                                            result.legend.title.text = '<b>'+i18nLabels['legend_title']+'</b>';
+
+                                        if((result.credits!=null)&&(typeof result.credits!="undefined")&&(result.credits.text!=null)&&(typeof result.credits.text!="undefined"))
+                                            result.credits.text = i18nLabels['sourceOECD_CRS'];
+
+                                        if((result.exporting!=null)&&(typeof result.exporting!="undefined")&&(result.exporting.buttons!=null)&&(typeof result.exporting.buttons!="undefined")&&(result.exporting.buttons.toggleDataLabelsButton!=null)&&(typeof result.exporting.buttons.toggleDataLabelsButton!="undefined")&&(result.exporting.buttons.toggleDataLabelsButton.text!=null)&&(typeof result.exporting.buttons.toggleDataLabelsButton.text!="undefined"))
+                                            result.exporting.buttons.toggleDataLabelsButton.text = i18nLabels['displayHideValues'];
+
                                         result.subtitle = {
                                             text: '<b>'+i18nLabels['subtitle_chart_compare']+'</b>',
                                             align: 'left',

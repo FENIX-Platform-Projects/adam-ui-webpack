@@ -323,6 +323,8 @@ define([
         this.filter = new Filter(filterConfig);
 
         this.analysis = new Analysis(analysisConfig);
+        $('[data-action = "toolbar"]').attr('disabled','disabled');
+        $(".btn btn-floating fx-background-color-primary-color btn-fx-toolbar").css("border", "3px solid red");
 
     };
 

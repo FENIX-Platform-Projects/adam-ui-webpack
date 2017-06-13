@@ -64,6 +64,9 @@
         "reload": "Recargar",
 
         "btn_add_compare": "Añadir Gráfico / Comparar",
-        "subtitle_chart_compare": "Pasa el cursor por los valores y haga clic y arrastre para ampliar"
+        "subtitle_chart_compare": "Pasa el cursor por los valores y haga clic y arrastre para ampliar",
+        "legend_title": "Hacer clic para ocultar/mostrar",
+        "sourceOECD_CRS": "Fuente: OCDE-CRS",
+        "displayHideValues": "Mostrar/Ocultar valores"
     }
 });
