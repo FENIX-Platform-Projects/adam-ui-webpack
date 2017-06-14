@@ -96,6 +96,9 @@ define([
 
         this.analysis.on("ready", _.bind(this._onComponentReady, this));
 
+        //It's triggered when the Visualization Box is added
+         //this.analysis.on("add", _.bind(this._onComponentAdd, this));
+
         this.filter.on("ready", _.bind(this._onComponentReady, this));
     };
 
@@ -104,10 +107,19 @@ define([
         this.readyComponents++;
 
         if (this.readyComponents === 2) {
+            $("div.fx-box button.btn-fx-toolbar").css("border", "3px solid red");
+            $("button.btn-fx-toolbar").css("content", "ebgfwrcd");
             this.$addBnt.prop('disabled', false);
         }
     };
 
+    // CompareView.prototype._onComponentAdd = function () {
+    //     console.log($("div.fx-box button.btn-fx-toolbar").length);
+    //
+    //     $("div.fx-box button.btn-fx-toolbar").css("border", "3px solid red");
+    //     $("div.fx-box button.btn-fx-toolbar").css("content", "ebgfwrcd");
+    //     $("div.fx-box button.btn-fx-toolbar").prop('value', 'Save')
+    // };
 
     CompareView.prototype._onAddBtnClick = function () {
         var config = this._getBoxModelFromFilter();
@@ -324,7 +336,6 @@ define([
 
         this.analysis = new Analysis(analysisConfig);
         $('[data-action = "toolbar"]').attr('disabled','disabled');
-        $(".btn btn-floating fx-background-color-primary-color btn-fx-toolbar").css("border", "3px solid red");
 
     };
 

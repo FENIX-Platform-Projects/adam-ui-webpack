@@ -296,7 +296,7 @@ define(['../config-base'], function(Config) {
                                         "id": "fao_sector_val",
                                         "key": true,
                                         "title": {
-                                            "EN": "FAO sector %"
+                                            "EN": "ODA in FAO sector (MIL $)"
                                         },
                                         "subject": null
                                     },
@@ -311,7 +311,7 @@ define(['../config-base'], function(Config) {
                                         "id": "percentage_val",
                                         "key": true,
                                         "title": {
-                                            "EN": "ODA in FAO sector (MIL $)"
+                                            "EN": "FAO sector %"
                                         },
                                         "subject": null
                                     },

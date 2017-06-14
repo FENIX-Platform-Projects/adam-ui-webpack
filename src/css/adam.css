@@ -9091,8 +9091,12 @@ button_new_2:before {
     -ms-border-radius: 4px;
     border-radius: 4px;
     width: 100px; }
-    .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
-      content: 'Compare by'; }
+    html:lang(en) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
+      content: 'Compare by1'; }
+    html:lang(fr) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
+      content: 'Compare by2'; }
+    html:lang(es) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
+      content: 'Compare by3'; }
     .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"] span {
       display: none; }
   .fx-sandbox.fao-holder a {
