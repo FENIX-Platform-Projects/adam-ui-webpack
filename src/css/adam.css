@@ -9092,11 +9092,11 @@ button_new_2:before {
     border-radius: 4px;
     width: 100px; }
     html:lang(en) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
-      content: 'Compare by1'; }
+      content: 'Compare by'; }
     html:lang(fr) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
-      content: 'Compare by2'; }
+      content: 'Comparer en'; }
     html:lang(es) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
-      content: 'Compare by3'; }
+      content: 'Comparar por'; }
     .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"] span {
       display: none; }
   .fx-sandbox.fao-holder a {
