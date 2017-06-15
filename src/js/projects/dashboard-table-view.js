@@ -71,6 +71,7 @@ define([
         this.environment = params.environment || BaseConfig.ENVIRONMENT;
         this.model = params.model;
         this.config =  params.config;
+        this.subtitle = params.subtitle;
     };
 
 
@@ -138,7 +139,8 @@ define([
 
         console.log(dash);
 
-        this.downloader.onDownloadMenuClick(this.models[modelId], i18nDashboardLabels[this.lang]['projects'], "", dash.filter.values);
+        //this.downloader.onDownloadMenuClick(this.models[modelId], i18nDashboardLabels[this.lang]['projects'], "", dash.filter.values);
+        this.downloader.onDownloadMenuClick(this.models[modelId], i18nDashboardLabels[this.lang]['projects'], this.subtitle.getTitleAsLabel(), dash.filter.values);
 
     };
 

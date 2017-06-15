@@ -2700,6 +2700,10 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                             yAxis: {
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }
@@ -3244,6 +3248,10 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                             yAxis: {
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }
@@ -3758,6 +3766,10 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                             yAxis: {
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }

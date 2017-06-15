@@ -174,7 +174,8 @@ define([
             lang:  this.lang,
             model: this.tableModel,
             environment: this.environment,
-            config: this.tableConfig.dashboard
+            config: this.tableConfig.dashboard,
+            subtitle: this.subviews['title']
         });
 
         this.tableModel.addObserver(dashboardTableSubView);

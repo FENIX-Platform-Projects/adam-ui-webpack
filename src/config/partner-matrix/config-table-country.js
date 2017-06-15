@@ -18,7 +18,8 @@ define(['../config-base'], function(Config) {
                         "formatter": "localstring",
                         "showRowHeaders": true,
                         //"columns": ["total_oda_value", "fao_sector_val", "percentage_val"],
-                        "rows": ["recipientcode", "donorcode"],
+                         "rows": ["recipientcode", "donorcode"],
+                        //"rows": ["recipientcode", "donorcode", "total_oda_value", "fao_sector_val", "percentage_val"],
                         "values": ["total_oda_value", "fao_sector_val", "percentage_val"],//["value"],
                         "aggregations": [],
                         inputFormat: "fenixtool",
@@ -30,13 +31,13 @@ define(['../config-base'], function(Config) {
                             columns: [
                                     {id: "recipientcode", width: 150},
                                     {id: "donorcode", width: 150},
-                                    {id: "total_oda_value", width: 150, getSortValue : function(value , record){
+                                    {id: "total_oda_value", width: 150, title : "test1", getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "fao_sector_val", width: 150, getSortValue : function(value , record){
+                                    {id: "fao_sector_val", width: 150, title : "test2", getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "percentage_val", width: 150, getSortValue : function(value , record){
+                                    {id: "percentage_val", width: 150, title : "test3", getSortValue : function(value , record){
                                         return Number(value);
                                     }}
                             ]
@@ -296,7 +297,7 @@ define(['../config-base'], function(Config) {
                                         "id": "fao_sector_val",
                                         "key": true,
                                         "title": {
-                                            "EN": "ODA in FAO sector (MIL $)"
+                                            "EN": "ODA to FAO-related sectors ($)"
                                         },
                                         "subject": null
                                     },
@@ -311,7 +312,7 @@ define(['../config-base'], function(Config) {
                                         "id": "percentage_val",
                                         "key": true,
                                         "title": {
-                                            "EN": "FAO sector %"
+                                            "EN": "Share (%)"
                                         },
                                         "subject": null
                                     },

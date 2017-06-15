@@ -2140,6 +2140,10 @@ define(['../../../../config-base'],function (Config) {
                             yAxis: {
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }
@@ -2703,6 +2707,10 @@ define(['../../../../config-base'],function (Config) {
                             yAxis: {
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }
@@ -3266,6 +3274,10 @@ define(['../../../../config-base'],function (Config) {
                             yAxis: {
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }

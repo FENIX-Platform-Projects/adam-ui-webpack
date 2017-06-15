@@ -578,6 +578,10 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 gridLineColor: 'transparent',
                                 labels: {
                                     format: '{value:,.0f}'
+                                },
+                                title: {
+                                    text: 'USD Millions',
+                                    enabled: true
                                 }
                             }
                         }
