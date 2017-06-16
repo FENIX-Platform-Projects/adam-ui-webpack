@@ -16,28 +16,48 @@ define(['../config-base'], function(Config) {
                     config: {
                         "groupedRow": false,
                         "formatter": "localstring",
+                        "aggregationFn":{"value":"sum"},
                         "showRowHeaders": true,
                         //"columns": ["total_oda_value", "fao_sector_val", "percentage_val"],
-                         "rows": ["recipientcode", "donorcode"],
-                        //"rows": ["recipientcode", "donorcode", "total_oda_value", "fao_sector_val", "percentage_val"],
-                        "values": ["total_oda_value", "fao_sector_val", "percentage_val"],//["value"],
+                        // "rows": ["recipientcode_EN", "donorcode_EN"],
+                        "rows": ["recipientcode_EN", "donorcode_EN", "total_oda_value", "ODA", "SHARE"],
+                        //"values": ["total_oda_value", "ODA to FAO-related sectors ($)", "Share (%)"],//["value"],
                         "aggregations": [],
-                        inputFormat: "fenixtool",
+                        //inputFormat: "fenixtool",
 
                         // 878 total width
                         config: {
                             pageSize: 150,
                             autoSelectFirstRow: false,
+                            // customRowAttribute : function(record,rn,grid){
+                            //     grid.autoSelectFirstRow = false;
+                            //
+                            //
+                            //     if (record[4] >0){
+                            //         return 'style="background-color:#A4C368"'; // green
+                            //     }
+                            //
+                            // },
+                            // customColsAttribute : function(record,rn,grid){
+                            //     grid.autoSelectFirstRow = false;
+                            //
+                            //     alert("Enter")
+                            //     return 'style="background-color:#A4C368"'; // green
+                            //     // if (record[4] >0){
+                            //     //     return 'style="background-color:#A4C368"'; // green
+                            //     // }
+                            //
+                            // },
                             columns: [
-                                    {id: "recipientcode", width: 150},
-                                    {id: "donorcode", width: 150},
-                                    {id: "total_oda_value", width: 150, title : "test1", getSortValue : function(value , record){
+                                    {id: "recipientcode_EN", width: 150},
+                                    {id: "donorcode_EN", width: 150},
+                                    {id: "total_oda_value", width: 150, title: "tftasdvasud",getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "fao_sector_val", width: 150, title : "test2", getSortValue : function(value , record){
+                                    {id: "ODA", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }},
-                                    {id: "percentage_val", width: 150, title : "test3", getSortValue : function(value , record){
+                                    {id: "SHARE", width: 150, getSortValue : function(value , record){
                                         return Number(value);
                                     }}
                             ]
@@ -294,7 +314,7 @@ define(['../config-base'], function(Config) {
                                 "parameters": {
                                     "column": {
                                         "dataType": "number",
-                                        "id": "fao_sector_val",
+                                        "id": "ODA",
                                         "key": true,
                                         "title": {
                                             "EN": "ODA to FAO-related sectors ($)"
@@ -309,7 +329,7 @@ define(['../config-base'], function(Config) {
                                 "parameters": {
                                     "column": {
                                         "dataType": "number",
-                                        "id": "percentage_val",
+                                        "id": "SHARE",
                                         "key": true,
                                         "title": {
                                             "EN": "Share (%)"
@@ -326,8 +346,8 @@ define(['../config-base'], function(Config) {
                                         "recipientcode",
                                         "donorcode",
                                         "total_oda_value",
-                                        "fao_sector_val",
-                                        "percentage_val"
+                                        "ODA",
+                                        "SHARE"
                                     ],
                                     "rows": {}
                                 }
