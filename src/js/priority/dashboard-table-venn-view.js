@@ -229,7 +229,6 @@ define([
             }
         };
 
-        alert("Before new dashboard")
         // Build new dashboard
         this.config.uid = "adam_combined_priorities_table";
         this.dashboard = new Dashboard(

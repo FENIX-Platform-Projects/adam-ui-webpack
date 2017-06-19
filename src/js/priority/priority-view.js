@@ -361,7 +361,6 @@ define([
         var filterValues =  this.subviews['filters'].getFilterValues(), filterDerivedTopic;
         var extendedFilterValues = $.extend(true, filterValues, newValues);
 
-alert("Priority view")
         // Set DASHBOARD Charts Sub View
         var dashboardChartsSubView = new DashboardChartsSubView({
             el: this.$el.find(s.css_classes.DASHBOARD_CHARTS_HOLDER),

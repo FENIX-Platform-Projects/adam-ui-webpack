@@ -39,7 +39,6 @@ define([
      */
 
     function ChartsDashboardView(o) {
-        alert("ChartsDashboardView")
         // log.info("BrowseByView");
         //  log.info(o);
 
@@ -283,7 +282,6 @@ define([
 
     ChartsDashboardView.prototype.render = function (filter) {
 
-        alert("render")
         this.models = {};
 
         this._disposeDashboards();
@@ -311,7 +309,6 @@ define([
 
     ChartsDashboardView.prototype.setDashboardConfig = function (config) {
 
-        alert("setDashboardConfig")
         this.config = config;
 
         // Sets Highchart config for each chart
@@ -332,7 +329,6 @@ define([
     };
 
     ChartsDashboardView.updateDashboardItemConfiguration = function (itemid, property, values) {
-        alert("updateDashboardItemConfiguration")
         var item = _.filter(this.config.items, {id: itemid})[0];
 
         if (item) {
