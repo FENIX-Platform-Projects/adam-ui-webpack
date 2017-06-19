@@ -229,7 +229,9 @@ define([
             }
         };
 
+        alert("Before new dashboard")
         // Build new dashboard
+        this.config.uid = "adam_combined_priorities_table";
         this.dashboard = new Dashboard(
             this.config
         );
@@ -264,6 +266,13 @@ define([
 
 
                 this._updateDashboardItem(BasePriorityAnalysisConfig.items.VENN_DIAGRAM, item);
+                // var item =  _.find(this.config.items, function(o){
+                //     return o.id === BasePriorityAnalysisConfig.items.VENN_DIAGRAM;
+                // });
+                // var process = _.filter(item.postProcess, function(obj){
+                //     return obj.rid && obj.rid.uid === type;
+                // });
+                //process[7].parameters.rows.donorcode.codes.codes = [];
             }
 
             if(keys) {

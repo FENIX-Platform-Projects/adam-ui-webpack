@@ -67,6 +67,7 @@
         "subtitle_chart_compare": "Passez la souris sur les valeurs et cliquez et faites glisser pour zoomer",
         "legend_title": "Cliquer sur cacher/montrer",
         "sourceOECD_CRS": "Source OCDE-CRS",
-        "displayHideValues": "Afficher/cacher les valeurs"
+        "displayHideValues": "Afficher/cacher les valeurs",
+        "displayHideValuesTooltip": "Afficher/cacher les valeurs sur le tableau"
 }
 });

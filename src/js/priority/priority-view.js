@@ -139,6 +139,7 @@ define([
     * @private
     */
     PriorityAnalysisView.prototype._loadConfigurations = function () {
+        //this.topic = 'recipient-partner';
         var pth1 = s.paths.VENN_CONFIG + this.topic + '.js';
         require(['../../'+pth1], _.bind(this._initSubViews, this));
     };
@@ -360,7 +361,7 @@ define([
         var filterValues =  this.subviews['filters'].getFilterValues(), filterDerivedTopic;
         var extendedFilterValues = $.extend(true, filterValues, newValues);
 
-
+alert("Priority view")
         // Set DASHBOARD Charts Sub View
         var dashboardChartsSubView = new DashboardChartsSubView({
             el: this.$el.find(s.css_classes.DASHBOARD_CHARTS_HOLDER),

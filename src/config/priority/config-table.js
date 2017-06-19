@@ -8,6 +8,7 @@ define(function () {
         dashboard: {
             //default dataset id
             uid: "adam_cpf_undaf_priorities_table",
+            //uid: "adam_combined_priorities_table",//Venn Diagram Dataset
 
             items: [
                {
@@ -44,6 +45,7 @@ define(function () {
                             "sid": [
                                 {
                                     "uid": "adam_cpf_undaf_priorities_table"
+                                    //uid: "adam_combined_priorities_table" //Venn Diagram Dataset
                                 }
                             ],
                             "parameters": {

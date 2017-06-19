@@ -5,7 +5,8 @@ define(function ( ) {
 
     return {
         dashboard: {
-            DEFAULT_TOPIC : 'recipient' //recipient, partner or recipient-partner
+            DEFAULT_TOPIC : 'recipient-partner'
+           // DEFAULT_TOPIC : 'recipient' //recipient, partner or recipient-partner
         },
         topic: {
             SELECTED_TOPIC: 'selected_topic',

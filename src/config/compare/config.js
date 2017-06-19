@@ -251,6 +251,10 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
 
                                         if((result.exporting!=null)&&(typeof result.exporting!="undefined")&&(result.exporting.buttons!=null)&&(typeof result.exporting.buttons!="undefined")&&(result.exporting.buttons.toggleDataLabelsButton!=null)&&(typeof result.exporting.buttons.toggleDataLabelsButton!="undefined")&&(result.exporting.buttons.toggleDataLabelsButton.text!=null)&&(typeof result.exporting.buttons.toggleDataLabelsButton.text!="undefined"))
                                             result.exporting.buttons.toggleDataLabelsButton.text = i18nLabels['displayHideValues'];
+                                        if((result.lang!=null)&&(typeof result.lang!='undefined')&&(result.lang.toggleDataLabels!=null)&&(typeof result.lang.toggleDataLabels!='undefined'))
+                                        {
+                                            result.lang.toggleDataLabels = i18nLabels['displayHideValuesTooltip'];
+                                        }
 
                                         result.subtitle = {
                                             text: '<b>'+i18nLabels['subtitle_chart_compare']+'</b>',
