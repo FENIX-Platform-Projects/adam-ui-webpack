@@ -46,7 +46,7 @@ define(['../config-base'], function(Config) {
                     },
 
                     filterFor: {
-                        "filter_projects": ['recipientcode', 'donorcode', 'parentsector_code', 'purposecode', 'year', 'fao_region']
+                        "filter_projects": ['recipientcode', 'donorcode', 'parentsector_code', 'purposecode', 'year', 'fao_region', 'oda_grp']
                     },
 
                     postProcess: [
@@ -70,6 +70,13 @@ define(['../config-base'], function(Config) {
                                     "unitcode"
                                 ],
                                 "rows": {
+                                    "oda_grp": {
+                                        "codes": [{
+                                            "uid": "oda_grp",
+                                            "version": "2016",
+                                            "codes": ["deflated"]
+                                        }]
+                                    },
                                     "year": {
                                         "time": [
                                             {

@@ -15,6 +15,7 @@ define(function () {
         "filter_year-from": "From",
         "filter_year-to": "To",
         "filter_oda": "OECD CRS ODA",
+        "filter_oda_grp": "OECD ODA GROUP",
         "filter_country_groupedRow": "Table rows are grouped by Recipient Country (uncheck to enable sort on all columns)",
         "filter_donor_groupedRow": "Table rows are grouped by Resource Partner (uncheck to enable sort on all columns)",
         "filter_country-donor_groupedRow": "Table rows are grouped by Resource Partner (uncheck to enable sort on all columns)",

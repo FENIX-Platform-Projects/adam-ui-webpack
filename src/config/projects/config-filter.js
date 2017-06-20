@@ -284,6 +284,26 @@ define(['../config-base'], function(Config) {
                     hideSwitch: true,
                     hideRemoveButton: true
                 }
+            },
+            oda_grp: {
+                selector: {
+                    id: "dropdown",
+                    default: ['deflated'],
+                    config: { //Selectize configuration
+                        maxItems: 1
+                    }
+                },
+                classNames: "col-xs-5",
+                cl: {
+                    uid: "oda_grp",
+                    version: "2016"
+                },
+                template: {
+                    hideHeaderIcon: false,
+                    //headerIconClassName: 'glyphicon glyphicon-info-sign',
+                    hideSwitch: true,
+                    hideRemoveButton: true
+                }
             }
             /*
             recipientcode: {
