@@ -15,6 +15,7 @@
         "filter_year-from": "De",
         "filter_year-to": "À",
         "filter_oda": "OCDE CRS APD",
+        "filter_oda_grp": "OCDE ODA GROUPE",
         "filter_country_groupedRow": "Les colonnes du tableau sont regroupées par pays bénéficiaire (désélectionner pour activer le classement de toutes les colonnes)",
         "filter_donor_groupedRow": "Les colonnes du tableau sont regroupées par partenaire fournisseur de ressources (désélectionner pour activer le classement de toutes les colonnes)",
         "filter_country-donor_groupedRow": "Les colonnes du tableau sont regroupées par partenaire fournisseur de ressources (désélectionner pour activer le classement de toutes les colonnes)",

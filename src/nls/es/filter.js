@@ -15,6 +15,7 @@
         "filter_year-from": "De",
         "filter_year-to": "Para",
         "filter_oda": "AOD del SNPA de la OCDE",
+        "filter_oda_grp": "AOD GRUPO de la OCDE",
         "filter_country_groupedRow": "Las filas de las tablas están agrupadas por país beneficiario (anule la selección para poder organizar todas las columnas)",
         "filter_donor_groupedRow": "Las filas de las tablas están agrupadas por asociado que aporta recursos (anule la selección para poder organizar todas las columnas)",
         "filter_country-donor_groupedRow": "Las filas de las tablas están agrupadas por asociado que aporta recursos (anule la selección para poder organizar todas las columnas)",
