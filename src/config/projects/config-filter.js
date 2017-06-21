@@ -300,7 +300,7 @@ define(['../config-base'], function(Config) {
                 },
                 template: {
                     hideHeaderIcon: false,
-                    //headerIconClassName: 'glyphicon glyphicon-info-sign',
+                    headerIconClassName: 'glyphicon glyphicon-info-sign',
                     hideSwitch: true,
                     hideRemoveButton: true
                 }

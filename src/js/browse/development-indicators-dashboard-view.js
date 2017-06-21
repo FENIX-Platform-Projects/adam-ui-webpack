@@ -242,6 +242,13 @@ define([
 
             var id =  self.config.items[0].id;
 
+            console.log(item)
+            console.log(item.data)
+            console.log(id)
+            console.log(self.config.items[0])
+            console.log(item.data.size)
+            console.log(item.model)
+
             if (item.data.size > 0) {
                 self.models[id] = {};
                 self.models[id].data = item.model.data;
@@ -250,7 +257,9 @@ define([
                 self.models[id].metadata.uid = item.model.metadata.uid;
                 self.models[id].metadata.dsd = item.model.metadata.dsd;
 
-                $(this.el).show();
+                if((item.model!= null)&&(typeof item.model!= 'undefined')&&(item.model.data!= null)&&(typeof item.model.data!= 'undefined')&&(item.model.data.length > 0)) {
+                    $(this.el).show();
+                }
             }
 
         });

@@ -15,11 +15,12 @@ define(function () {
         "filter_year-from": "From",
         "filter_year-to": "To",
         "filter_oda": "OECD CRS ODA",
-        "filter_oda_grp": "OECD ODA GROUP",
+        "filter_oda_grp": "OECD CRS ODA",
         "filter_country_groupedRow": "Table rows are grouped by Recipient Country (uncheck to enable sort on all columns)",
         "filter_donor_groupedRow": "Table rows are grouped by Resource Partner (uncheck to enable sort on all columns)",
         "filter_country-donor_groupedRow": "Table rows are grouped by Resource Partner (uncheck to enable sort on all columns)",
         "filter_tooltip_oda": "The ODA data shown below is on resources that flow out of donor countries or resource partners, not necessarily the money that flows into recipient countries. The reason why these two data might not correspond is that ODA can also be spent in the donor country, for example towards debt relief and migrant crisis support. The ADAM is based on CRS dataset thus where not specifically indicated the data refers to CRS ODA.",
+        "filter_tooltip_oda_grp": "The ODA data shown below is on resources that flow out of donor countries or resource partners, not necessarily the money that flows into recipient countries. The reason why these two data might not correspond is that ODA can also be spent in the donor country, for example towards debt relief and migrant crisis support. The ADAM is based on CRS dataset thus where not specifically indicated the data refers to CRS ODA.",
         "please_make_selections": "Please make a valid selection for",
         "close": "Close",
         "and": "and"
