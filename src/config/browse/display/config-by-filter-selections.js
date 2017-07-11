@@ -27,7 +27,7 @@ define(function () {
                 {
                     value: "all",
                     config: { path: "config-all-sectors"},
-                    hide: ['tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-channels-others', 'top-recipients', 'top-partners', 'top-channels'],
+                    hide: ['tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-channels-others', 'top-recipients', 'top-partners', 'top-subsectors', 'top-channels'],
                     show: ['tot-oda', 'top-sectors', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors']
                 },
                 {

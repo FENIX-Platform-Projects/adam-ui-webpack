@@ -9091,12 +9091,8 @@ button_new_2:before {
     -ms-border-radius: 4px;
     border-radius: 4px;
     width: 100px; }
-    html:lang(en) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
+    .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
       content: 'Compare by'; }
-    html:lang(fr) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
-      content: 'Comparer en'; }
-    html:lang(es) .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"]:before {
-      content: 'Comparar por'; }
     .fx-sandbox.fao-holder #compare .front-content [data-action="toolbar"] span {
       display: none; }
   .fx-sandbox.fao-holder a {
@@ -9531,5 +9527,87 @@ div[data-item="venn-diagram"] {
 
 .gt-hd-tool {
   display: none; }
+
+.fx-sandbox .selector-footer ul div span[data-value] {
+  cursor: pointer; }
+
+.fx-sandbox [data-role="toolbar"] {
+  height: 424px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 1;
+  position: absolute;
+  background-color: transparent;
+  padding-top: 8px;
+  padding-left: 130px;
+  top: 0;
+  left: 0;
+  display: block; }
+
+/*
+.fx-sandbox [data-role="filter-btn"]{
+  left: 1200px;
+  opacity: 1;
+}
+
+.fx-sandbox.fao-holder .btn-floating {
+  display: inline-block;
+  color: black;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  width: 37px;
+  height: 37px;
+  line-height: 37px;
+  padding: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+  transition: none;
+  cursor: auto;
+  vertical-align: middle;
+  margin: 10px;
+}*/
+/*
+button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar,
+button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar:hover {
+  box-shadow: none;
+  color: black !important;
+  background-color: transparent;
+  cursor: auto;
+}
+*/
+.in-adam {
+  opacity: 1 !important;
+  pointer-events: auto !important; }
+
+.in-adam-toolbar {
+  height: 424px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  z-index: 1;
+  position: absolute;
+  background-color: transparent;
+  padding-top: 8px;
+  padding-left: 130px;
+  top: 0;
+  left: 0;
+  display: block; }
+
+button.btn.btn-floating.btn-fx-toolbar-confirm.in-adam {
+  background-color: transparent;
+  box-shadow: none;
+  left: 0 !important;
+  width: 100px !important; }
+
+button.btn.btn-floating.btn-fx-toolbar-confirm.in-adam span {
+  visibility: hidden; }
+
+button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar {
+  color: white !important;
+  background-color: #0d6cac !important;
+  cursor: auto;
+  opacity: 1 !important; }
 
 /*# sourceMappingURL=adam.css.map */

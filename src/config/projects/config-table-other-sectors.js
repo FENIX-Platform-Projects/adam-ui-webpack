@@ -16,7 +16,7 @@ define(['../config-base'], function(Config) {
             items: [
                 {
                     id: "projects",
-                    type: 'custom',
+                    type: 'table',
                     config: {
                         "groupedRow":false,
                         "aggregationFn":{"commitment_value":"sum"},
@@ -121,6 +121,22 @@ define(['../config-base'], function(Config) {
                                 }
                             },
                            "rid":{"uid":"filter_projects"}
+                        },
+                        {
+                            "name" : "select",
+                            "parameters" : {
+                                "values" : {
+                                    "recipientcode" : null,
+                                    "donorcode" : null,
+                                    "projecttitle" : null,
+                                    "year" : null,
+                                    "parentsector_code" : null,
+                                    "purposecode" : null,
+                                    "commitment_value" : "round(commitment_value::numeric,2)",
+                                    "disbursement_value" : "round(disbursement_value::numeric,2)",
+                                    "unitcode" : null
+                                }
+                            }
                         },
                         {
                             "name": "order",

@@ -236,6 +236,8 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                                 color = used[compareByValue];
                                             }
 
+                                            //This is the commented line to
+                                            //use the highcharts default colors
                                             s.color = color;
 
                                             config.series.push(s);
@@ -281,9 +283,15 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                         function createTitle(c, v) {
 
                                             var label = v.labels.compare[c];
+                                            var title = '';
+                                            if((label!=null)&&(typeof label!='undefined')){
+                                                title = i18nLabels['sel_heading_compare_by'] + label;
+                                            }
+                                            else {
+                                                title = i18nLabels['sel_heading_compare'];
+                                            }
 
-                                            return i18nLabels['sel_heading_compare_by'] + label;
-
+                                           return title;
                                         }
                                     }
                                 };

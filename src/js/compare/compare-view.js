@@ -87,6 +87,7 @@ define([
     CompareView.prototype._initVariables = function () {
         this.$addBnt = this.$el.find(s.ADD_BTN);
         this.readyComponents = 0;
+        this.currentBoxItem = -1;
 
     };
 
@@ -97,7 +98,9 @@ define([
         this.analysis.on("ready", _.bind(this._onComponentReady, this));
 
         //It's triggered when the Visualization Box is added
-         //this.analysis.on("add", _.bind(this._onComponentAdd, this));
+        this.analysis.on("add", _.bind(this._onComponentAdd, this));
+
+        this.analysis.on("noelem", _.bind(this._onComponentNoElement, this));
 
         this.filter.on("ready", _.bind(this._onComponentReady, this));
     };
@@ -113,13 +116,25 @@ define([
         }
     };
 
-    // CompareView.prototype._onComponentAdd = function () {
-    //     console.log($("div.fx-box button.btn-fx-toolbar").length);
-    //
-    //     $("div.fx-box button.btn-fx-toolbar").css("border", "3px solid red");
-    //     $("div.fx-box button.btn-fx-toolbar").css("content", "ebgfwrcd");
-    //     $("div.fx-box button.btn-fx-toolbar").prop('value', 'Save')
-    // };
+    CompareView.prototype._onComponentAdd = function () {
+
+        this.currentBoxItem++;
+        window.setTimeout(_.bind(function () {
+
+
+            $('button[data-action="toolbar"]').prop('disabled', true);
+            //$('button[data-role="filter-btn"]').remove('in');
+            $('button[data-role="filter-btn"]').addClass('in-adam');
+            $('[data-role="toolbar"]').addClass('in-adam-toolbar');
+        }, this), 2000);
+    };
+
+    CompareView.prototype._onComponentNoElement = function (param) {
+
+        param.instance.gridItems['fx-box-'+this.currentBoxItem].el.find('button[data-action="toolbar"]').hide();
+        param.instance.gridItems['fx-box-'+this.currentBoxItem].el.find('div[data-role="toolbar"]').hide();
+        param.instance.gridItems['fx-box-'+this.currentBoxItem].el.find('button[data-role="filter-btn"]').hide();
+    };
 
     CompareView.prototype._onAddBtnClick = function () {
         var config = this._getBoxModelFromFilter();
@@ -237,7 +252,6 @@ define([
                 config.process[0].parameters.rows.recipientcode.codes[0].uid = 'crs_recipients'
 
         }
-    
 
         return config;
 

@@ -353,6 +353,18 @@ define(['../config-base'], function(Config) {
                                 }
                             },
                             {
+                                "name" : "select",
+                                "parameters" : {
+                                    "values" : {
+                                        "recipientcode" : null,
+                                        "donorcode" : null,
+                                        "total_oda_value" : "round(total_oda_value::numeric,2)",
+                                        "ODA" : "round(ODA::numeric,2)",
+                                        "SHARE" : "round(SHARE::numeric,2)"
+                                    }
+                                }
+                            },
+                            {
                                 "name": "order",
                                 "parameters": {
                                     "donorcode_EN": "ASC"
