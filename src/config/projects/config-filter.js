@@ -285,17 +285,17 @@ define(['../config-base'], function(Config) {
                     hideRemoveButton: true
                 }
             },
-            oda_grp: {
+            oda: {
                 selector: {
                     id: "dropdown",
-                    default: ['deflated'],
+                    default: ['usd_commitment'],
                     config: { //Selectize configuration
                         maxItems: 1
                     }
                 },
                 classNames: "col-xs-5",
                 cl: {
-                    uid: "oda_grp",
+                    uid: "oda_crs",
                     version: "2016"
                 },
                 template: {

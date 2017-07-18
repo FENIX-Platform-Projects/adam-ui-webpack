@@ -48,7 +48,7 @@ define([
         paths: {
             OECD_DASHBOARD_FAO_SECTORS_CONFIG: 'config/browse/dashboards/oecd/fao_sectors/config-',
             OECD_DASHBOARD_OTHER_SECTORS_CONFIG: 'config/browse/dashboards/oecd/other_sectors/config-',
-            OECD_DASHBOARD_ALL_SECTORS_CONFIG: 'config/browse/dashboards/oecd/config-all-sectors',
+            OECD_DASHBOARD_ALL_SECTORS_CONFIG: 'config/browse/dashboards/oecd/config-all-sectors-',
             OECD_DASHBOARD: 'config/browse/dashboards/oecd/'
         }
     };
@@ -158,7 +158,8 @@ define([
     BrowseByView.prototype._loadDashboardConfigurations = function () {
         var pth1 = s.paths.OECD_DASHBOARD_OTHER_SECTORS_CONFIG+ this.browse_type + '.js';
         var pth2 = s.paths.OECD_DASHBOARD_FAO_SECTORS_CONFIG+ this.browse_type + '.js';
-        var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG + '.js';
+        //var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG + '.js';
+        var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG+ this.browse_type + '.js';
 
        require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
     };
@@ -191,7 +192,8 @@ define([
 
         //Set default dashboard configuration
         if (ConfigOtherSectors.id === BaseBrowseConfig.dashboard.DEFAULT_CONFIG) {
-            if((ConfigOtherSectors.type == BaseBrowseConfig.dashboard.DEFAULT_TYPE)||(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR)){
+            // if((ConfigOtherSectors.type == BaseBrowseConfig.dashboard.DEFAULT_TYPE)||(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR)){
+            if(ConfigOtherSectors.type == BaseBrowseConfig.dashboard.DEFAULT_TYPE){
                 this.defaultDashboardConfig = ConfigOtherSectors;
             }
             else {
@@ -226,7 +228,7 @@ define([
         // Set ODA DASHBOARD Model
         this.odaDashboardModel = new OecdModel();
         // Set DASHBOARD 1 Sub View: ODA
-        var dashboardOecdSubView = new OECDDashboardSubView({
+        var dashboardOecdSubView = new OECDDashboardSubView ({
             el: this.$el.find(s.css_classes.DASHBOARD_OECD_HOLDER),
             lang:  this.lang,
             topic: this.browse_type,
@@ -457,7 +459,8 @@ define([
             }
         }
 
-        if ((filterValues)&&(filterValues.labels)&&(this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)) {
+        // if ((filterValues)&&(filterValues.labels)&&(this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)) {
+        if ((filterValues)&&(filterValues.labels)) {
             if ((filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL))) {
                 allSectorSelection = true;
             }
@@ -548,7 +551,7 @@ define([
     */
     BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, allSectorSelection, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-        //console.log("================= _getDashboardConfiguration Start =============== ", dashboardConfPath);
+        console.log("================= _getDashboardConfiguration Start =============== ", dashboardConfPath, this.browse_type);
 
         if (dashboardConfPath !== undefined) {
             var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';

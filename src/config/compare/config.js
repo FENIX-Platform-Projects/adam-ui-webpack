@@ -26,6 +26,9 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                     nls: {
                         tooltip_toolbar_button: i18nLabels['sel_heading_compare_by'],
                     },
+                    filterSelection :{
+                        notes : 'Notes from the configuration!!!'
+                    },
                     menu: [
                         //Download
                         {

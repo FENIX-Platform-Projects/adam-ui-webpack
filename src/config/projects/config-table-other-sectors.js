@@ -11,7 +11,7 @@ define(['../config-base'], function(Config) {
             //default dataset id
             uid: "adam_project_analysis",
 
-            maxSize: 2000,
+            maxSize: 4000,
 
             items: [
                 {
@@ -24,7 +24,8 @@ define(['../config-base'], function(Config) {
                         "decimals":2,
                         "pageSize": "150",
                         "showRowHeaders":true,
-                        "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN", 'commitment_value', "disbursement_value" ],
+                        // "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN", 'commitment_value', "disbursement_value" ],
+                        "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN", 'value', "unitcode_EN" ],
                         "aggregations":[],
                         //"values":["value"],
 
@@ -39,14 +40,16 @@ define(['../config-base'], function(Config) {
                                 {id: "year", width: 60,  align: 'center'},
                                 {id: "parentsector_code_EN", width: 100},
                                 {id: "purposecode_EN", width: 100},
-                                {id: "commitment_value", width: 100, align: 'center', sortOrder: 'desc'},
-                                {id: "disbursement_value", width: 100, align: 'center'}
+                                {id: "value", width: 100, align: 'center', sortOrder: 'desc'},
+                                {id: "unitcode_EN", width: 100, align: 'center'}
+                                // {id: "commitment_value", width: 100, align: 'center', sortOrder: 'desc'},
+                                // {id: "disbursement_value", width: 100, align: 'center'}
                             ]
                         }
                     },
 
                     filterFor: {
-                        "filter_projects": ['recipientcode', 'donorcode', 'parentsector_code', 'purposecode', 'year', 'fao_region', 'oda_grp']
+                        "filter_projects": ['recipientcode', 'donorcode', 'parentsector_code', 'purposecode', 'year', 'fao_region', 'oda']
                     },
 
                     postProcess: [
@@ -60,21 +63,21 @@ define(['../config-base'], function(Config) {
                             "parameters": {
                                 "columns": [
                                     "recipientcode",
+                                    "oda",
                                     "donorcode",
                                     "projecttitle",
                                     "year",
                                     "parentsector_code",
                                     "purposecode",
-                                    "commitment_value",
-                                    "disbursement_value",
+                                    "value",
                                     "unitcode"
                                 ],
                                 "rows": {
-                                    "oda_grp": {
+                                    "oda": {
                                         "codes": [{
-                                            "uid": "oda_grp",
+                                            "uid": "oda_crs",
                                             "version": "2016",
-                                            "codes": ["deflated"]
+                                            "codes": ["usd_commitment"]
                                         }]
                                     },
                                     "year": {
@@ -82,6 +85,17 @@ define(['../config-base'], function(Config) {
                                             {
                                                 "from": Config.YEARSTART,
                                                 "to": Config.YEARFINISH
+                                            }
+                                        ]
+                                    },
+                                    "fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "RAP"
+                                                ]
                                             }
                                         ]
                                     },
@@ -106,17 +120,6 @@ define(['../config-base'], function(Config) {
                                                 ]
                                             }
                                         ]
-                                    },
-                                    "fao_region": {
-                                        "codes": [
-                                            {
-                                                "uid": "crs_fao_regions",
-                                                "version": "2016",
-                                                "codes": [
-                                                    "RAP"
-                                                ]
-                                            }
-                                        ]
                                     }
                                 }
                             },
@@ -132,8 +135,7 @@ define(['../config-base'], function(Config) {
                                     "year" : null,
                                     "parentsector_code" : null,
                                     "purposecode" : null,
-                                    "commitment_value" : "round(commitment_value::numeric,2)",
-                                    "disbursement_value" : "round(disbursement_value::numeric,2)",
+                                    "value" : "round(value::numeric,2)",
                                     "unitcode" : null
                                 }
                             }
@@ -141,8 +143,8 @@ define(['../config-base'], function(Config) {
                         {
                             "name": "order",
                             "parameters": {
-                                "commitment_value": "DESC",
-                                "recipientcode": "DESC"
+                                "year": "DESC",
+                                "value":"DESC"
                             }
                         }
                     ]

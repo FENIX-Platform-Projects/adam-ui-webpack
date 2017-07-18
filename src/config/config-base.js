@@ -22,7 +22,7 @@ define(function () {
         LANG: 'en',
         
         BROWSE_SECTIONS: ['country', 'country-donor', 'donor', 'sector'],
-        DEFAULT_BROWSE_SECTION: 'sector',
+        DEFAULT_BROWSE_SECTION: 'country',
         DASHBOARD_ITEMS: {
             MAP: 'map',
             CHART: 'chart'

@@ -145,6 +145,17 @@ define([
              perPage: 2001,
              maxSize: 2000
         };
+        console.log(this.$el.find(s.FILTER_SUMMARY))
+        console.log(this.$el.find(s.FILTER_SUMMARY).text())
+        this.analysis.boxConfig.filterSelection = {};
+        this.analysis.boxConfig.filterSelection.notes = this.$el.find(s.FILTER_SUMMARY).text();
+        console.log(this.analysis.boxConfig.filterSelection.notes.length)
+        this.analysis.boxConfig.filterSelection.notes = this.analysis.boxConfig.filterSelection.notes.trim();
+        console.log(this.analysis.boxConfig.filterSelection.notes.length)
+        console.log("hhhhhh"+this.analysis.boxConfig.filterSelection.notes+"hhhhhh")
+        // this.analysis.boxConfig.filterSelection.notes = this.analysis.boxConfig.filterSelection.notes.substring(0,10);
+        // console.log(this.analysis.boxConfig.filterSelection.notes.length)
+        // console.log("***"+this.analysis.boxConfig.filterSelection.notes+"***")
 
         this.analysis.add(config);
     };
@@ -326,6 +337,7 @@ define([
         var filterConfig = $.extend(true, {}, self.AC.filter, {
                 el: this.$el.find(s.FILTER),
                /// lang: fxLang,
+                lang: self.lang,
                 summaryEl: this.$el.find(s.FILTER_SUMMARY),
                 environment: GC.ENVIRONMENT,
                 cache: GC.cache
@@ -338,6 +350,7 @@ define([
                 cache: GC.cache
             });
 
+        var filterSelectionNotes = '';
         _.each(filterConfig.selectors, function (value, key) {
             if (!value.template) {
                 value.template = {};
@@ -346,6 +359,7 @@ define([
             value.template.headerIconTooltip = i18nFilter[self.lang]["filter_tooltip_" + key];
         });
 
+        console.log(filterSelectionNotes)
         this.filter = new Filter(filterConfig);
 
         this.analysis = new Analysis(analysisConfig);

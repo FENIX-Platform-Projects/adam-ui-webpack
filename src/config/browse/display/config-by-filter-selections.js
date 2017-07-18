@@ -26,9 +26,9 @@ define(function () {
                 },
                 {
                     value: "all",
-                    config: { path: "config-all-sectors"},
-                    hide: ['tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-channels-others', 'top-recipients', 'top-partners', 'top-subsectors', 'top-channels'],
-                    show: ['tot-oda', 'top-sectors', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors']
+                    config: { path: "config-all-sectors-sector"},
+                    hide: ['tot-oda-sector', 'top-partners-others', 'top-recipients-others', 'top-channels-others', 'top-recipients', 'top-partners', 'top-channels'],
+                    show: ['tot-oda', 'top-sectors', 'top-recipients-all-sectors', 'top-partners-all-sectors', 'top-channels-all-sectors', 'top-subsectors']
                 },
                 {
                     value: "9999",
@@ -72,8 +72,8 @@ define(function () {
                 },
                 {
                     value: "all",
-                    hide: ['tot-oda-sector', 'tot-oda-subsector', 'top-subsectors'],
-                    show: ['tot-oda', 'top-sectors', 'top-sectors-others']
+                    hide: ['tot-oda-sector', 'tot-oda-subsector'],
+                    show: ['tot-oda', 'top-sectors', 'top-sectors-others', 'top-subsectors']
                 },
                 {
                     value: "9999",
@@ -105,7 +105,7 @@ define(function () {
                 {
                     value: "all",
                     hide: ['tot-oda-sector', 'tot-oda-subsector', 'top-subsectors'],
-                    show: ['tot-oda', 'top-sectors', 'top-sectors-others']
+                    show: ['tot-oda', 'top-sectors', 'top-sectors-others', 'top-subsectors']
                 },
                 {
                     value: "9999",
@@ -149,8 +149,8 @@ define(function () {
                 },
                 {
                     value: "all",
-                    hide: ['tot-oda-sector', 'tot-oda-subsector', 'top-subsectors'],
-                    show: ['tot-oda', 'top-sectors', 'top-sectors-others']
+                    hide: ['tot-oda-sector', 'tot-oda-subsector'],
+                    show: ['tot-oda', 'top-sectors', 'top-sectors-others', 'top-subsectors']
                 },
                 {
                     value: "9999",
