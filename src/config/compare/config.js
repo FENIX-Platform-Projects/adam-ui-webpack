@@ -247,7 +247,43 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
 
                                         }
 
+
                                         result = $.extend(true, {}, config, highchartsTemplate);
+                                        //Adding the highcharts exporting
+                                        result.exporting.buttons.contextButton.enabled = true;
+                                        result.exporting.chartOptions.subtitle = null;
+                                        result.exporting.buttons.contextButton.menuItems= [];
+                                        var obj = {
+                                            textKey: 'downloadPNG',
+                                            onclick: function () {
+                                                // this.exportChart();
+                                                this.exportChart(null, {
+                                                    title: {
+                                                        text: ''
+                                                       // useHTML: true
+                                                    }
+                                                });
+                                            }
+                                        };
+                                        result.exporting.buttons.contextButton.menuItems.push(obj);
+
+                                        obj = {
+                                            textKey: 'downloadJPEG',
+                                            onclick: function () {
+                                                // this.exportChart();
+                                                this.exportChart(null, {
+                                                    type: 'image/jpeg',
+                                                    title: {
+                                                        text : ''
+                                                        //text: '<div style="text-align:center; font-weight:bold">2Occupational Employment and Wage Rates for Multiple Occupations in Texas in 2000</div></br><div style="text-align:left; font-size:14px">The graph below shows the annual occupational employment and annual wage data for Multiple Occupations in Texas in 2000.</div>',
+                                                       // useHTML: true
+                                                    }
+                                                });
+                                            }
+                                        };
+                                        result.exporting.buttons.contextButton.menuItems.push(obj);
+                                        // result.chart.events.beforePrint = null;
+                                        // result.chart.events.afterPrint = null;
                                         if((result.legend!=null)&&(typeof result.legend!="undefined")&&(result.legend.title!=null)&&(typeof result.legend.title!="undefined"))
                                             result.legend.title.text = '<b>'+i18nLabels['legend_title']+'</b>';
 

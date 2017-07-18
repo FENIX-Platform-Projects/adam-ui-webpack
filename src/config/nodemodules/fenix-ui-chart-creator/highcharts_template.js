@@ -155,7 +155,6 @@ define(['highcharts'], function (Highcharts) {
             text: 'Source: OECD-CRS',
             href: ''
         },
-
         exporting: {
            // sourceWidth: 700,
 

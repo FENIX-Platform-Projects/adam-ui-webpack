@@ -145,14 +145,15 @@ define([
              perPage: 2001,
              maxSize: 2000
         };
-        console.log(this.$el.find(s.FILTER_SUMMARY))
-        console.log(this.$el.find(s.FILTER_SUMMARY).text())
+        //console.log(this.$el.find(s.FILTER_SUMMARY))
+        //console.log(this.$el.find(s.FILTER_SUMMARY).text())
         this.analysis.boxConfig.filterSelection = {};
         this.analysis.boxConfig.filterSelection.notes = this.$el.find(s.FILTER_SUMMARY).text();
-        console.log(this.analysis.boxConfig.filterSelection.notes.length)
+        //console.log(this.analysis.boxConfig.filterSelection.notes.length)
         this.analysis.boxConfig.filterSelection.notes = this.analysis.boxConfig.filterSelection.notes.trim();
-        console.log(this.analysis.boxConfig.filterSelection.notes.length)
-        console.log("hhhhhh"+this.analysis.boxConfig.filterSelection.notes+"hhhhhh")
+        //this.analysis.boxConfig.tabConfig.chart.config.exporting.chartOptions.title.text = 'TEST!!!'
+        //console.log(this.analysis.boxConfig.filterSelection.notes.length)
+        //console.log("hhhhhh"+this.analysis.boxConfig.filterSelection.notes+"hhhhhh")
         // this.analysis.boxConfig.filterSelection.notes = this.analysis.boxConfig.filterSelection.notes.substring(0,10);
         // console.log(this.analysis.boxConfig.filterSelection.notes.length)
         // console.log("***"+this.analysis.boxConfig.filterSelection.notes+"***")

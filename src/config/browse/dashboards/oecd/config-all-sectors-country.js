@@ -1488,11 +1488,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "recipientcode": {
                                         "codes": [
                                             {
@@ -1722,11 +1717,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                     "625"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "value": {
@@ -2574,11 +2564,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "recipientcode": {
                                         "codes": [
                                             {
@@ -2809,11 +2794,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                     "625"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "year": {
@@ -3643,7 +3623,7 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_subsectors": ['fao_region', 'recipientcode', 'year', 'oda']
+                        "filter_subsectors": ['recipientcode', 'year', 'oda', "fao_region"]
                     },
 
                     postProcess: [
@@ -3656,6 +3636,17 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
+                                    "fao_region": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_fao_regions",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "RAP"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "recipientcode": {
                                         "codes": [
                                             {
@@ -3678,11 +3669,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "value": {
                                         "number": [
                                             {
@@ -3700,44 +3686,48 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                     }
                                 }
                             },
-                            "rid":{"uid":"filter_subsectors"}
+                            "rid": {
+                                "uid": "filter_subsectors"
+                            }
                         },
                         {
-                            "name":"group",
-                            "parameters":{
-                                "by":[
-                                    "purposecode","flowcategory"
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "purposecode",
+                                    "flowcategory"
                                 ],
-                                "aggregations":[
+                                "aggregations": [
                                     {
-                                        "columns":[
+                                        "columns": [
                                             "value"
                                         ],
-                                        "rule":"SUM"
+                                        "rule": "SUM"
                                     },
                                     {
-                                        "columns":[
+                                        "columns": [
                                             "unitcode"
                                         ],
-                                        "rule":"max"
+                                        "rule": "max"
                                     }
-
                                 ]
                             }
                         },
                         {
-                            "name":"order",
-                            "parameters":{
-                                "value":"DESC"
+                            "name": "order",
+                            "parameters": {
+                                "value": "DESC"
                             }
                         },
                         {
-                            "name":"page",
-                            "parameters":{
-                                "perPage":10,
-                                "page":1
+                            "name": "page",
+                            "parameters": {
+                                "perPage": 10,
+                                "page": 1
                             },
-                            "rid": {"uid":"top10Subs"}
+                            "rid": {
+                                "uid": "top10Subs"
+                            }
                         },
                         {
                             "name": "addcolumn",
@@ -3760,38 +3750,37 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             }
                         },
                         {
-                            "name":"filter",
-                            "parameters":{
-                                "rows":{},
-                                "columns":[
+                            "name": "filter",
+                            "parameters": {
+                                "rows": {},
+                                "columns": [
                                     "indicator_label",
                                     "value",
                                     "unitcode",
                                     "flowcategory"
                                 ]
                             },
-                            "rid":{
-                                "uid":"filter_top10_subsectors"
+                            "rid": {
+                                "uid": "filter_top10_subsectors"
                             }
                         },
-
-
-
                         {
-                            "name":"filter",
-                            "sid":[
-                                {"uid": "filter_subsectors"},
+                            "name": "filter",
+                            "sid": [
                                 {
-                                    "uid":"top10Subs"
+                                    "uid": "filter_subsectors"
+                                },
+                                {
+                                    "uid": "top10Subs"
                                 }
                             ],
-                            "parameters":{
-                                "rows":{
-                                    "!purposecode" : {
-                                        "tables":[
+                            "parameters": {
+                                "rows": {
+                                    "!purposecode": {
+                                        "tables": [
                                             {
-                                                "uid":"top10Subs",
-                                                "column":"purposecode"
+                                                "uid": "top10Subs",
+                                                "column": "purposecode"
                                             }
                                         ]
                                     }
@@ -3799,25 +3788,25 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             }
                         },
                         {
-                            "name":"group",
-                            "parameters":{
-                                "by":[
-                                    "unitcode", "flowcategory"
+                            "name": "group",
+                            "parameters": {
+                                "by": [
+                                    "unitcode",
+                                    "flowcategory"
                                 ],
-                                "aggregations":[
+                                "aggregations": [
                                     {
-                                        "columns":[
+                                        "columns": [
                                             "value"
                                         ],
-                                        "rule":"SUM"
+                                        "rule": "SUM"
                                     },
                                     {
-                                        "columns":[
+                                        "columns": [
                                             "unitcode"
                                         ],
-                                        "rule":"max"
+                                        "rule": "max"
                                     }
-
                                 ]
                             }
                         },
@@ -3842,18 +3831,18 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             }
                         },
                         {
-                            "name":"filter",
-                            "parameters":{
-                                "rows":{},
-                                "columns":[
+                            "name": "filter",
+                            "parameters": {
+                                "rows": {},
+                                "columns": [
                                     "indicator_label",
                                     "value",
                                     "unitcode",
                                     "flowcategory"
                                 ]
                             },
-                            "rid":{
-                                "uid":"filter_others_subsectors"
+                            "rid": {
+                                "uid": "filter_others_subsectors"
                             }
                         },
                         {
@@ -3867,16 +3856,17 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                 }
                             ],
                             "parameters": {},
-                            "rid":{
-                                "uid":"union_proc"
+                            "rid": {
+                                "uid": "union_proc"
                             }
-
                         },
                         {
                             "name": "addcolumn",
-                            "sid":[{
-                                "uid":"union_proc"
-                            }],
+                            "sid": [
+                                {
+                                    "uid": "union_proc"
+                                }
+                            ],
                             "parameters": {
                                 "column": {
                                     "dataType": "number",
@@ -3895,46 +3885,40 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                 }
                             }
                         },
-
                         {
-                            "name":"group",
-                            "parameters":{
-                                "by":[
+                            "name": "group",
+                            "parameters": {
+                                "by": [
                                     "indicator_label",
                                     "percent",
                                     "flowcategory"
-
                                 ],
-                                "aggregations":[
+                                "aggregations": [
                                     {
-                                        "columns":[
+                                        "columns": [
                                             "value"
                                         ],
-                                        "rule":"SUM"
+                                        "rule": "SUM"
                                     },
                                     {
-                                        "columns":[
+                                        "columns": [
                                             "unitcode"
                                         ],
-                                        "rule":"max"
+                                        "rule": "max"
                                     }
-
                                 ]
                             }
                         },
-
-
                         {
                             "name": "percentage",
-
                             "parameters": {
                                 "valueColumnId": "percent"
                             }
                         },
                         {
-                            "name":"order",
-                            "parameters":{
-                                "value":"DESC"
+                            "name": "order",
+                            "parameters": {
+                                "value": "DESC"
                             }
                         }
                     ]
@@ -4014,11 +3998,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                     "usd_commitment"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "fao_region": {
