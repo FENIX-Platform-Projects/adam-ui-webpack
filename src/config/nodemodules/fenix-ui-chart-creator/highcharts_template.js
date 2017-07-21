@@ -59,82 +59,82 @@ define(['highcharts'], function (Highcharts) {
                         this.redraw();
                     }
 
-                },
-                beforePrint: function (event) {
-                    var $chart = $(this.renderTo);
-                    var parent = $(this.renderTo).parent().prev();
-
-                    var title = parent.find("p").text();
-
-                    //Set chart title and set subtitle to empty string
-                     this.setTitle(
-                      {text: title, style: {
-                        fontSize: '12px'
-                      }}, {text: ""});
-
-                    //Only show in the legend the series that are visible
-                    $.each(this.series, function (i, serie) {
-                        if(!serie.visible){
-                            serie.update({
-                                showInLegend: false
-                            })
-                        }
-                    });
-
-
-                    if(this.options.chart.type === 'pie') {
-                      // Configure printing of pie charts
-                     /**   this.options.exporting = {
-                            chartOptions: {
-                                legend: {
-                                    title: '',
-                                        enabled: true,
-                                        align: 'center',
-                                        layout: 'vertical',
-                                        useHTML: true,
-                                        labelFormatter: function () {
-                                        var val = this.y;
-                                        if (val.toFixed(0) < 1) {
-                                            val = (val * 1000).toFixed(2) + ' K'
-                                        } else {
-                                            val = val.toFixed(2) + ' USD Mil'
-                                        }
-
-                                        return '<div style="width:200px"><span style="float:left;  font-size:9px">' + this.name.trim() + ': ' + this.percentage.toFixed(2) + '% (' + val + ')</span></div>';
-                                    }
-                                }
-                            }
-                        }**/
-                    }
-
-                    //Hide buttons and legend title
-                    $chart.find('.highcharts-button').hide();
-                    $chart.find('.highcharts-legend-title').hide();
-                },
-                afterPrint: function (event) {
-                    var $chart = $(this.renderTo);
-
-                    //Reset series availability in legend, if it was hidden
-                    $.each(this.series, function (i, serie) {
-                        if(!serie.visible){
-                            serie.update({
-                                showInLegend: true
-                            })
-                        }
-                    });
-
-                    //Reset title and subtitle
-                    this.setTitle(
-                        {text: ""}, {text: ""});
-
-
-                   // this.setTitle(
-                      //  {text: ""}, {text: "<b>Hover for values and click and drag to zoom</b>"});
-
-                    //Re-show buttons and legend title
-                    $chart.find('.highcharts-button').show();
-                    $chart.find('.highcharts-legend-title').show();
                 }
+                // beforePrint: function (event) {
+                //     var $chart = $(this.renderTo);
+                //     var parent = $(this.renderTo).parent().prev();
+                //
+                //     var title = parent.find("p").text();
+                //
+                //     //Set chart title and set subtitle to empty string
+                //      this.setTitle(
+                //       {text: title, style: {
+                //         fontSize: '12px'
+                //       }}, {text: ""});
+                //
+                //     //Only show in the legend the series that are visible
+                //     $.each(this.series, function (i, serie) {
+                //         if(!serie.visible){
+                //             serie.update({
+                //                 showInLegend: false
+                //             })
+                //         }
+                //     });
+                //
+                //
+                //     if(this.options.chart.type === 'pie') {
+                //       // Configure printing of pie charts
+                //      /**   this.options.exporting = {
+                //             chartOptions: {
+                //                 legend: {
+                //                     title: '',
+                //                         enabled: true,
+                //                         align: 'center',
+                //                         layout: 'vertical',
+                //                         useHTML: true,
+                //                         labelFormatter: function () {
+                //                         var val = this.y;
+                //                         if (val.toFixed(0) < 1) {
+                //                             val = (val * 1000).toFixed(2) + ' K'
+                //                         } else {
+                //                             val = val.toFixed(2) + ' USD Mil'
+                //                         }
+                //
+                //                         return '<div style="width:200px"><span style="float:left;  font-size:9px">' + this.name.trim() + ': ' + this.percentage.toFixed(2) + '% (' + val + ')</span></div>';
+                //                     }
+                //                 }
+                //             }
+                //         }**/
+                //     }
+                //
+                //     //Hide buttons and legend title
+                //     $chart.find('.highcharts-button').hide();
+                //     $chart.find('.highcharts-legend-title').hide();
+                // },
+                // afterPrint: function (event) {
+                //     var $chart = $(this.renderTo);
+                //
+                //     //Reset series availability in legend, if it was hidden
+                //     $.each(this.series, function (i, serie) {
+                //         if(!serie.visible){
+                //             serie.update({
+                //                 showInLegend: true
+                //             })
+                //         }
+                //     });
+                //
+                //     //Reset title and subtitle
+                //     this.setTitle(
+                //         {text: ""}, {text: ""});
+                //
+                //
+                //    // this.setTitle(
+                //       //  {text: ""}, {text: "<b>Hover for values and click and drag to zoom</b>"});
+                //
+                //     //Re-show buttons and legend title
+                //     $chart.find('.highcharts-button').show();
+                //     $chart.find('.highcharts-legend-title').show();
+                // }
 
             }
 

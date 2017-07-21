@@ -613,6 +613,7 @@ define([
         return _.find(config, function (item) {
             if(item.layout){
                 return item.layout === "default";
+                //return item.layout === "all";
             }
         });
     };
@@ -628,6 +629,27 @@ define([
 
     BrowseByView.prototype._getMergeConfig = function (filterValues, parentId, childId) {
          var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
+
+        if (filterValues.values[childId].length === 0) {
+            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);
+
+            if (filterValues.values[parentId].length > 0) {
+                var parentConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[parentId],
+                    filterValues.values[parentId][0]);
+
+                if (parentConfig) {
+                    mergeConfig = parentConfig;
+                }
+            }
+
+        }
+
+
+        return mergeConfig;
+    };
+
+    BrowseByView.prototype._getMergeConfig2 = function (filterValues, parentId, childId) {
+        var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
 
         if (filterValues.values[childId].length === 0) {
             mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);

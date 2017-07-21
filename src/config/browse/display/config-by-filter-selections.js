@@ -58,6 +58,11 @@ define(function () {
                     hide: ['top-sectors', 'top-sectors-others', 'top-subsectors', 'tot-oda-sector', 'tot-oda'],
                     show: ['tot-oda-subsector']
                 },
+                // {
+                //     value: "default",
+                //     hide: ['tot-oda-subsector', 'tot-oda'],
+                //     show: ['top-sectors', 'top-sectors-others', 'top-subsectors', 'tot-oda-sector']
+                // },
                 {
                     value: "all",
                     hide: ['tot-oda-subsector', 'tot-oda'],
@@ -70,6 +75,11 @@ define(function () {
                     hide: ['top-sectors', 'top-sectors-others', 'tot-oda-subsector', 'tot-oda'],
                     show: ['top-subsectors', 'tot-oda-sector']
                 },
+                // {
+                //     value: "default",
+                //     hide: ['tot-oda-sector', 'tot-oda-subsector'],
+                //     show: ['tot-oda', 'top-sectors', 'top-sectors-others', 'top-subsectors']
+                // },
                 {
                     value: "all",
                     hide: ['tot-oda-sector', 'tot-oda-subsector'],

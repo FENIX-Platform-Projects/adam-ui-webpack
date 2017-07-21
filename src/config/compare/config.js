@@ -205,6 +205,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                     type: "line",
                                     createConfiguration: function (model, config) {
 
+                                        var self = this;
                                         var compareBy = filterSelection.values.compare[0],
                                             index = order.indexOf(compareBy),
                                             colors = ["#F44336", "#00BCD4", "#4CAF50", "#E91E63", "#3F51B", "#2196F3", "#009688", "#CDDC39", "#FFC107", "#FF9800", "#E91E63"],
@@ -256,10 +257,11 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                         var obj = {
                                             textKey: 'downloadPNG',
                                             onclick: function () {
-                                                // this.exportChart();
+                                                //var title = createTitle(compareBy, filterSelection);
+                                                 //this.exportChart();
                                                 this.exportChart(null, {
                                                     title: {
-                                                        text: ''
+                                                        text: self.title
                                                        // useHTML: true
                                                     }
                                                 });
@@ -267,21 +269,23 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                         };
                                         result.exporting.buttons.contextButton.menuItems.push(obj);
 
-                                        obj = {
+                                        //var self = this;
+                                        var obj2 = {
                                             textKey: 'downloadJPEG',
                                             onclick: function () {
-                                                // this.exportChart();
+                                                //this.exportChart();
+                                                // var title = createTitle(compareBy, filterSelection);
                                                 this.exportChart(null, {
                                                     type: 'image/jpeg',
                                                     title: {
-                                                        text : ''
+                                                        text : self.title
                                                         //text: '<div style="text-align:center; font-weight:bold">2Occupational Employment and Wage Rates for Multiple Occupations in Texas in 2000</div></br><div style="text-align:left; font-size:14px">The graph below shows the annual occupational employment and annual wage data for Multiple Occupations in Texas in 2000.</div>',
                                                        // useHTML: true
                                                     }
                                                 });
                                             }
                                         };
-                                        result.exporting.buttons.contextButton.menuItems.push(obj);
+                                        result.exporting.buttons.contextButton.menuItems.push(obj2);
                                         // result.chart.events.beforePrint = null;
                                         // result.chart.events.afterPrint = null;
                                         if((result.legend!=null)&&(typeof result.legend!="undefined")&&(result.legend.title!=null)&&(typeof result.legend.title!="undefined"))
@@ -329,6 +333,7 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                             else {
                                                 title = i18nLabels['sel_heading_compare'];
                                             }
+                                            self.title = title;
 
                                            return title;
                                         }

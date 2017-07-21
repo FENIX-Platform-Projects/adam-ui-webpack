@@ -121,12 +121,11 @@ define([
         this.currentBoxItem++;
         window.setTimeout(_.bind(function () {
 
-
             $('button[data-action="toolbar"]').prop('disabled', true);
             //$('button[data-role="filter-btn"]').remove('in');
             $('button[data-role="filter-btn"]').addClass('in-adam');
             $('[data-role="toolbar"]').addClass('in-adam-toolbar');
-        }, this), 2000);
+        }, this), 3000);
     };
 
     CompareView.prototype._onComponentNoElement = function (param) {
