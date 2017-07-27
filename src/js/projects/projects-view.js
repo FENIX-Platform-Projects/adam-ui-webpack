@@ -205,6 +205,8 @@ define([
         // Update Dashboard Models (with labels - see _updateChartsDashboardModelValues)
         this._updateTableDashboardModelValues();
 
+        this.subviews['tableDashboard'].filterLoaded = true;
+        this.subviews['tableDashboard'].itemsToWait = 3;
         // Render each Dashboard
         this.subviews['tableDashboard'].rebuildDashboard();
 
@@ -219,6 +221,11 @@ define([
 
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
+        if((changedFilter!=null)&&(typeof changedFilter!='undefined')&&(changedFilter[0]!=null)&&(typeof changedFilter[0]!='undefined')){
+            if((changedFilter[0].id!=null)&&(typeof changedFilter[0].id!='undefined')&&(changedFilter[0].id== 'fao_region')){
+                this.subviews['tableDashboard'].itemsToWait = 2;
+            }
+        }
         this._updateView(changedFilter, allFilterValues);
      };
 
@@ -304,7 +311,7 @@ define([
         // console.log(ovalues);
 
         // Rebuild Dashboards
-        this.subviews['tableDashboard'].rebuildDashboard(filterValues);
+        this.subviews['tableDashboard'].rebuildDashboard(filterValues, this.subviews['tableDashboard'].itemsToWait);
     };
 
     /**

@@ -106,6 +106,13 @@ define(
             );
         };
 
+        ProjectsFilterView.prototype._riseEmtyResource = function (obj) {
+            if (obj) this.filterValidator.displayEmptyResourceBulkDownload(
+                i18nErrors[this.lang]['empty_resource_projectSession'],
+                BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
+            );
+        };
+
         /**
          * Updates filter configuration and renders the filter.
          * @private
@@ -260,6 +267,10 @@ define(
 
             amplify.subscribe(BaseEvents.HTTP_416, function (object) {
                 self._riseErrors(object);
+            });
+
+            amplify.subscribe(BaseEvents.HTTP_EMPTY_RESOURCE, function (object) {
+                self._riseEmtyResource(object);
             });
 
         };

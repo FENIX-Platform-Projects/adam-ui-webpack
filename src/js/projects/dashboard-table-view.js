@@ -137,8 +137,6 @@ define([
         var modelId = $(event.target).attr('data-model-id');
         var dash = this.getDashboardConfig();
 
-        console.log(dash);
-
         //this.downloader.onDownloadMenuClick(this.models[modelId], i18nDashboardLabels[this.lang]['projects'], "", dash.filter.values);
         this.downloader.onDownloadMenuClick(this.models[modelId], i18nDashboardLabels[this.lang]['projects'], this.subtitle.getTitleAsLabel(), dash.filter.values);
 
@@ -202,7 +200,7 @@ define([
             this.config
         );
 
-        this.dashboard.on('error.resource', function() {
+        this.dashboard.on('error.resource', function(obj) {
             amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
         });
 
@@ -236,12 +234,26 @@ define([
         this.progressBar.show();
 
         this.dashboard.on('ready', function () {
+            if((self.itemsToWait==0)&&(self.itemEmpty)&&(!self.filterLoaded)){
+                self.itemsToWait=0;
+                alert("LAST DASHBOARD READY")
+                amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[self.lang]['empty_resource_projectSession']);
+            }
+            //this.subviews['tableDashboard'].filterLoaded = false;
+            if((self.itemsToWait==0)&&(self.filterLoaded))
+            {
+                //After first loaded
+                self.filterLoaded = false;
+                if(self.itemEmpty){
+                    amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[self.lang]['empty_resource_projectSession']);
+                }
+            }
             self.progressBar.finish();
         });
 
     };
 
-    ProjectsTableView.prototype.rebuildDashboard = function (filter) {
+    ProjectsTableView.prototype.rebuildDashboard = function (filter, itemsToWait) {
 
         this.models = {};
 
@@ -281,6 +293,17 @@ define([
             self.models[item.id].metadata.rid = item.model.metadata.rid;
             self.models[item.id].metadata.uid = item.model.metadata.uid;
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
+
+            if((item!=null)&&(typeof item!='undefined')&&(item.model!=null)&&(typeof item.model!='undefined')&&(item.model.data!=null)&&(typeof item.model.data!='undefined')&&(item.model.data.length==0))
+            {
+                self.itemEmpty = true;
+            }
+            else{
+                self.itemEmpty = false;
+            }
+            if(self.itemsToWait>0){
+                self.itemsToWait--;
+            }
 
             increment = increment + percent;
             self.progressBar.update(increment);

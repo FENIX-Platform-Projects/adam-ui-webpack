@@ -144,38 +144,27 @@ define([
              perPage: 2001,
              maxSize: 2000
         };
-        //console.log(this.$el.find(s.FILTER_SUMMARY))
-        //console.log(this.$el.find(s.FILTER_SUMMARY).text())
         this.analysis.boxConfig.filterSelection = {};
         this.analysis.boxConfig.filterSelection.notes = this.$el.find(s.FILTER_SUMMARY).text();
-        //console.log(this.analysis.boxConfig.filterSelection.notes.length)
         this.analysis.boxConfig.filterSelection.notes = this.analysis.boxConfig.filterSelection.notes.trim();
-        //this.analysis.boxConfig.tabConfig.chart.config.exporting.chartOptions.title.text = 'TEST!!!'
-        //console.log(this.analysis.boxConfig.filterSelection.notes.length)
-        //console.log("hhhhhh"+this.analysis.boxConfig.filterSelection.notes+"hhhhhh")
-        // this.analysis.boxConfig.filterSelection.notes = this.analysis.boxConfig.filterSelection.notes.substring(0,10);
-        // console.log(this.analysis.boxConfig.filterSelection.notes.length)
-        // console.log("***"+this.analysis.boxConfig.filterSelection.notes+"***")
-
         this.analysis.add(config);
     };
 
     CompareView.prototype._getBoxModelFromFilter = function () {
 
         var config = {},
-            values = this.filter.getValues(),
-            from = FxUtils.getNestedProperty("values.year-from", values)[0],
-            to = FxUtils.getNestedProperty("values.year-to", values)[0],
-            faoSectorSelected = _.contains(FxUtils.getNestedProperty("values.parentsector_code", values), "9999"),
-            process = this.filter.getValues("fenix", ["recipientcode", "donorcode", "parentsector_code", "purposecode", "oda"]),
-            columns = ["year", "value", "unitcode"],
-            groupBy = ["year"];
-
+            values = this.filter.getValues();
+        var    from = FxUtils.getNestedProperty("values.year-from", values)[0];
+        var    to = FxUtils.getNestedProperty("values.year-to", values)[0];
+        var    faoSectorSelected = _.contains(FxUtils.getNestedProperty("values.parentsector_code", values), "9999");
+        var    process = this.filter.getValues("fenix", ["recipientcode", "donorcode", "parentsector_code", "purposecode", "oda"]);
+        //var    process = this.filter.getValues("plain", ["recipientcode", "donorcode", "parentsector_code", "purposecode", "oda"]);
+        var    columns = ["year", "value", "unitcode"];
+        var    groupBy = ["year"];
         addToProcess(values, "donorcode");
         addToProcess(values, "recipientcode");
         addToProcess(values, "parentsector_code");
         addToProcess(values, "purposecode");
-
         //parse oda selection
         var v = process.oda.enumeration[0]; //.substring(5);
         process.oda.enumeration = [v];
@@ -191,13 +180,11 @@ define([
             var codes =  process.parentsector_code.codes[0].codes;
             process.parentsector_code.codes[0].codes = _.without(codes, "9999");
         }
-
         //config.uid = "adam_usd_aggregation_table";
         //config.uid = "adam_usd_aggregated_table";
         config.uid = 'adam_compare_analysis';
 
         config.title = createTitle(values, this.lang);
-
         process["year"] = {
             time: [{
                 from: from,
@@ -241,18 +228,17 @@ define([
                 }
             }
         ];
-
         //(1: filter with fao_sector without parentsector_code)
         if( faoSectorSelected &&
             config.process[0].parameters.rows.parentsector_code &&
             config.process[0].parameters.rows.parentsector_code.codes.length > 0 &&
-            config.process[0].parameters.rows.parentsector_code.codes[0].codes && 
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes &&
             config.process[0].parameters.rows.parentsector_code.codes[0].codes.length==0)
         {
             delete config.process[0].parameters.rows.parentsector_code;
 
             if(_.indexOf(config.process[1].parameters.by,"parentsector_code"))
-                config.process[1].parameters.by = _.without(config.process[1].parameters.by,"parentsector_code"); 
+                config.process[1].parameters.by = _.without(config.process[1].parameters.by,"parentsector_code");
         }
 
         if (config.process[0].parameters.rows.recipientcode &&
@@ -263,11 +249,9 @@ define([
                 config.process[0].parameters.rows.recipientcode.codes[0].uid = 'crs_recipients'
 
         }
-
         return config;
 
         function addToProcess(values, dimension) {
-
             var includeIt = !!FxUtils.getNestedProperty("values." + dimension, values)[0];
 
             if (includeIt) {
@@ -285,10 +269,10 @@ define([
 
             if(values.labels['donorcode'] && values.values['donorcode'].length)
                 labels.push(i18nFilter[lang]["filter_donorcode"]);
-            
+
             if(values.labels['recipientcode'] && values.values['recipientcode'].length)
                 labels.push(i18nFilter[lang]["filter_recipientcode"]);
-            
+
             if(values.labels['parentsector_code'] && values.values['parentsector_code'].length)
                 labels.push(i18nFilter[lang]["filter_parentsector_code"]);
 
@@ -359,7 +343,6 @@ define([
             value.template.headerIconTooltip = i18nFilter[self.lang]["filter_tooltip_" + key];
         });
 
-        console.log(filterSelectionNotes)
         this.filter = new Filter(filterConfig);
 
         this.analysis = new Analysis(analysisConfig);

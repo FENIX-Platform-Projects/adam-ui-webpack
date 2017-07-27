@@ -64,6 +64,12 @@ define([
         this.$el.find(s.ERRORS + ' '+s.STRONG +' '+s.SPAN).html(message+htmlpart);
     };
 
+    FilterValidator.prototype.displayEmptyResourceBulkDownload = function (message, url) {
+        var htmlpart = "<br>"+i18nErrors[this.lang]['bulk_download_container']+"<a href='"+url+"'>"+i18nErrors[this.lang]['bulk_download_link']+"</a>";
+        this.$el.find(s.ERRORS).removeClass(s.COLLAPSE);
+        this.$el.find(s.ERRORS + ' '+s.STRONG +' '+s.SPAN).html(message+htmlpart);
+    };
+
 
     /**
      * Returns concatenated string of the missing items
