@@ -458,11 +458,11 @@ define([
                 dashboardConfPath = displayConfigBasedOnFilter.config.path;
             }
         }
-
         // if ((filterValues)&&(filterValues.labels)&&(this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)) {
         if ((filterValues)&&(filterValues.labels)) {
             if ((filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL))) {
                 allSectorSelection = true;
+                if (!filterValues.labels.recipientcode.hasOwnProperty(s.values.ALL)) allSectorSelection = false;
             }
         }
 
@@ -534,11 +534,9 @@ define([
 
     BrowseByView.prototype._checkConfigForValue = function (config, filterValue){
         return _.find(config, function (item) {
-
-            if(item.value){
-                return item.value === filterValue;
-            }
+            if(item.value) return item.value === filterValue;
         });
+
     };
 
 
@@ -551,11 +549,10 @@ define([
     */
     BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, allSectorSelection, filterValues, displayConfigForSelectedFilter) {
         var self = this;
-        console.log("================= _getDashboardConfiguration Start =============== ", dashboardConfPath, this.browse_type);
+        //console.log("================= _getDashboardConfiguration Start =============== ", dashboardConfPath, this.browse_type);
 
         if (dashboardConfPath !== undefined) {
             var pth1 = s.paths.OECD_DASHBOARD+ dashboardConfPath + '.js';
-
             require(['../../'+pth1], function (NewDashboardConfig) {
                self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, NewDashboardConfig.dashboard);
             });
@@ -563,9 +560,10 @@ define([
             var dashboardConfig = this.otherSectorsDashboardConfig;
             if(allSectorSelection){
                 dashboardConfig = this.allSectorDashboardConfig;
-            }
+                            }
             self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, dashboardConfig);
         }
+
     };
 
 
@@ -628,36 +626,15 @@ define([
     };
 
     BrowseByView.prototype._getMergeConfig = function (filterValues, parentId, childId) {
-         var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
 
-        if (filterValues.values[childId].length === 0) {
-            mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);
-
-            if (filterValues.values[parentId].length > 0) {
-                var parentConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[parentId],
-                    filterValues.values[parentId][0]);
-
-                if (parentConfig) {
-                    mergeConfig = parentConfig;
-                }
-            }
-
-        }
-
-
-        return mergeConfig;
-    };
-
-    BrowseByView.prototype._getMergeConfig2 = function (filterValues, parentId, childId) {
         var mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[childId]);
 
+
         if (filterValues.values[childId].length === 0) {
             mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);
-
             if (filterValues.values[parentId].length > 0) {
-                var parentConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[parentId],
-                    filterValues.values[parentId][0]);
-
+                var parentConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[parentId],filterValues.values[parentId][0]);
+                console.log('parent config is ' + JSON.stringify(parentConfig));
                 if (parentConfig) {
                     mergeConfig = parentConfig;
                 }
@@ -665,9 +642,9 @@ define([
 
         }
 
-
         return mergeConfig;
     };
+
 
     BrowseByView.prototype._mergePropArray = function (config, merge, prop){
 

@@ -18,6 +18,8 @@ define([
     function Browse() {
         console.clear();
 
+        log.setLevel('silent');
+
         this._importThirdPartyCss();
 
         this.start();

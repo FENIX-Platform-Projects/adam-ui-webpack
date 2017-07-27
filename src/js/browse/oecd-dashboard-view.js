@@ -374,7 +374,7 @@ define([
 
     DashboardView.prototype.updateDashboardTemplate = function (filterdisplayconfig) {
 
-        console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
+        //console.log("======================= updateDashboardTemplate: filterdisplayconfig ================ ", filterdisplayconfig);
 
         if (filterdisplayconfig) {
 
