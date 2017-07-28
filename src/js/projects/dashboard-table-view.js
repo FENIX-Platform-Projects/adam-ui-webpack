@@ -200,9 +200,9 @@ define([
             this.config
         );
 
-        this.dashboard.on('error.resource', function(obj) {
-            amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
-        });
+        // this.dashboard.on('error.resource', function(obj) {
+        //     amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
+        // });
 
     };
 
@@ -236,7 +236,6 @@ define([
         this.dashboard.on('ready', function () {
             if((self.itemsToWait==0)&&(self.itemEmpty)&&(!self.filterLoaded)){
                 self.itemsToWait=0;
-                alert("LAST DASHBOARD READY")
                 amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[self.lang]['empty_resource_projectSession']);
             }
             //this.subviews['tableDashboard'].filterLoaded = false;

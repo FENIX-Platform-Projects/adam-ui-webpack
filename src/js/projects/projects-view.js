@@ -206,7 +206,7 @@ define([
         this._updateTableDashboardModelValues();
 
         this.subviews['tableDashboard'].filterLoaded = true;
-        this.subviews['tableDashboard'].itemsToWait = 3;
+        this.subviews['tableDashboard'].itemsToWait = 4;
         // Render each Dashboard
         this.subviews['tableDashboard'].rebuildDashboard();
 

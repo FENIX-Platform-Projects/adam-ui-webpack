@@ -20,9 +20,10 @@
         "no_compare" : "Imposible encontrar la dimensión de 'comparación'.",
         "at_least_one_more_dimension" : "Especifique los valores de dos dimensiones como mínimo.",
         "missing_mandatory_field" : "Rellene todos los campos obligatorios.",
-        "error_resource_416" : "una selección diferente, con menos elementos.",
+        "error_resource_416" : "Primeros 500 resultados más grandes que muestran.",
         "bulk_download_container" : "Puede descargar todos los datos ",
-        "bulk_download_link" : "en este enlace"
+        "bulk_download_link" : "en este enlace",
+        "empty_resource_projectSession" : "El recurso está vacío"
 
     }
 });

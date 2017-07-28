@@ -84,7 +84,6 @@ define([
     DashboardView.prototype.modelChanged = function() {
      //   console.log("============= MODEL CHANGED ========");
        //  this.render();
-        //alert('model changed');
         this.modelUpdated = true;
     };
 

@@ -8,7 +8,7 @@ define([
 
     'use strict';
 
-    var s = {ERRORS: "#filter-errors",  COLLAPSE: "collapse", SPAN: "span", STRONG: "strong"};
+    var s = {ERRORS: "#filter-errors",  COLLAPSE: "collapse", SPAN: "span", STRONG: "strong", EMPTY: "#filter-errors-empty-resource", TOOLARGE: "#filter-errors-too-large-resource"};
 
     function FilterValidator(o) {
         $.extend(true, this, {initial: o});
@@ -47,6 +47,8 @@ define([
      */
     FilterValidator.prototype.hideErrorSection = function () {
         this.$el.find(s.ERRORS).addClass(s.COLLAPSE);
+        this.$el.find(s.EMPTY).addClass(s.COLLAPSE);
+        //this.$el.find(s.TOOLARGE).addClass(s.COLLAPSE);
     };
 
     /**
@@ -60,14 +62,13 @@ define([
 
     FilterValidator.prototype.displayBulkDownload = function (message, url) {
         var htmlpart = "<br>"+i18nErrors[this.lang]['bulk_download_container']+"<a href='"+url+"'>"+i18nErrors[this.lang]['bulk_download_link']+"</a>";
-        this.$el.find(s.ERRORS).removeClass(s.COLLAPSE);
-        this.$el.find(s.ERRORS + ' '+s.STRONG +' '+s.SPAN).html(message+htmlpart);
+        //this.$el.find(s.TOOLARGE).removeClass(s.COLLAPSE);
+        this.$el.find(s.TOOLARGE + ' '+s.STRONG +' '+s.SPAN).html(message+htmlpart);
     };
 
-    FilterValidator.prototype.displayEmptyResourceBulkDownload = function (message, url) {
-        var htmlpart = "<br>"+i18nErrors[this.lang]['bulk_download_container']+"<a href='"+url+"'>"+i18nErrors[this.lang]['bulk_download_link']+"</a>";
-        this.$el.find(s.ERRORS).removeClass(s.COLLAPSE);
-        this.$el.find(s.ERRORS + ' '+s.STRONG +' '+s.SPAN).html(message+htmlpart);
+    FilterValidator.prototype.displayEmptyResourceBulkDownload = function (message) {
+        this.$el.find(s.EMPTY).removeClass(s.COLLAPSE);
+        this.$el.find(s.EMPTY + ' '+s.STRONG +' '+s.SPAN).html(message);
     };
 
 

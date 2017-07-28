@@ -108,8 +108,7 @@ define(
 
         ProjectsFilterView.prototype._riseEmtyResource = function (obj) {
             if (obj) this.filterValidator.displayEmptyResourceBulkDownload(
-                i18nErrors[this.lang]['empty_resource_projectSession'],
-                BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
+                i18nErrors[this.lang]['empty_resource_projectSession']
             );
         };
 
@@ -169,6 +168,7 @@ define(
             // Filter on Ready: Set some base properties for Recipient and the ODA, then publish Filter Ready Event
             this.filter.on('ready', function (payload) {
                 amplify.publish(BaseEvents.FILTER_ON_READY, this._getFormattedFilterValues());
+                amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
             }, this);
 
 
