@@ -13,8 +13,9 @@ define([
     'partner-matrix/table-item',
     'config/partner-matrix/events',
     'partner-matrix/table-downloader',
-    'common/progress-bar'
-], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nCommonLabels, TableItem, BaseEvents, Downloader, ProgressBar) {
+    'common/progress-bar',
+    'amplify-pubsub'
+], function (log, $, _, template, Dashboard, Utils, BaseConfig, Errors, i18nDashboardLabels, i18nCommonLabels, TableItem, BaseEvents, Downloader, ProgressBar, amplify) {
 
     'use strict';
 
@@ -25,7 +26,8 @@ define([
             TABLE_ITEM: 'partner-matrix/table-item'
         },
         events: {
-            CHANGE: 'change'
+            CHANGE: 'change',
+            BOOTSTRAP_TABLE_READY : "bootstrap_table_ready"
         },
         itemTypes: {
             CHART: 'chart'
@@ -268,6 +270,8 @@ define([
     TableView.prototype._bindDashboardListeners = function () {
         var self = this,  increment = 0, percent = Math.round(100 / this.config.items.length);
 
+        amplify.subscribe(s.events.BOOTSTRAP_TABLE_READY, this, this._modelStore);
+
         this.dashboard.on('ready.item', function (item) {
             self.models[item.id] = {};
             self.models[item.id].data ={};
@@ -296,6 +300,18 @@ define([
 
             }
         });*/
+
+    };
+
+    TableView.prototype._modelStore = function (item) {
+
+        this.models[item.id] = {};
+        this.models[item.id].data ={};
+        this.models[item.id].data = item.model.data;
+        this.models[item.id].metadata = {};
+        this.models[item.id].metadata.rid = item.model.metadata.rid;
+        this.models[item.id].metadata.uid = item.model.metadata.uid;
+        this.models[item.id].metadata.dsd = item.model.metadata.dsd;
 
     };
 

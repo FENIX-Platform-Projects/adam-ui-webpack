@@ -14,7 +14,9 @@ define([
     'nls/table',
     'nls/filter',
     'fenix-ui-filter-utils',
-    'amplify-pubsub'
+    'amplify-pubsub',
+    'bootstrap-table',
+    'bootstrap-table-multiple-sort'
 ], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
 
     'use strict';
@@ -25,7 +27,8 @@ define([
         TABLE_INFO: "#table-info",
         TABLE_FILTER: "#table-filter",
         TABLE: "#table",
-        TABLE_SIZE: "#table-size"
+        TABLE_SIZE: "#table-size",
+        BOOTSTRAP_TABLE_READY : "bootstrap_table_ready"
     };
 
     var defaultOptions = {};
@@ -142,7 +145,6 @@ define([
 
     TableItem.prototype._render = function () {
 
-
        // this.controller._trigger('table_ready', {model: this.model, data: {size: this.model.size}});
 
         if (this.model.size > 0) {
@@ -165,15 +167,107 @@ define([
         this.config.id = this.id;
         this.config.lang = this.lang;
 
+        var configData = this.config.model.data;
+        amplify.publish( s.BOOTSTRAP_TABLE_READY, this.config );
+
+        var col1 = this.config.rows[0];
+        var col2 = this.config.rows[1];
+        var col3 = this.config.rows[2];
+        var col4 = this.config.rows[3];
+        var col5 = this.config.rows[4];
+
+        // var col1 = "recipientcode_EN";
+        // var col2 = "donorcode_EN";
+        // var col3 = "total_oda_value";
+        // var col4 = "ODA";
+        // var col5 = "SHARE";
+
+        var table = $(this.el).find(s.TABLE);
+        $(table).find("#col1").data('field', col1);
+        $(table).find("#col2").data('field', col2);
+        $(table).find("#col3").data('field', col3);
+        $(table).find("#col4").data('field', col4);
+        $(table).find("#col5").data('field', col5);
+
+        var columns = this.config.model.metadata.dsd.columns;
+        var columnsIndex = {};
+        for(var i = 0; i<this.config.model.metadata.dsd.columns.length; i++){
+            var columnId = this.config.model.metadata.dsd.columns[i].id;
+            var columnTitle = this.config.model.metadata.dsd.columns[i].title[this.config.lang.toUpperCase()];
+
+            switch(columnId){
+                case col1:
+                    $(table).find("#col1").html(columnTitle);
+                    columnsIndex["col1"] = i;
+                    break;
+                case col2:
+                    $(table).find("#col2").html(columnTitle);
+                    columnsIndex["col2"] = i;
+                    break;
+                case col3:
+                    $(table).find("#col3").html(columnTitle);
+                    columnsIndex["col3"] = i;
+                    break;
+                case col4:
+                    $(table).find("#col4").html(columnTitle);
+                    columnsIndex["col4"] = i;
+                    break;
+                case col5:
+                    $(table).find("#col5").html(columnTitle);
+                    columnsIndex["col5"] = i;
+                    break;
+            }
+        }
 
        // for (var d in this.config.derived) {
          //   this.config.aggregations.push(d);
         //}
 
-        this.olap = new OlapCreator(this.config);
+        //this.olap = new OlapCreator(this.config);
+
+        var data = [];
+        //this.config.rows
+        for(var i = 0; i<this.config.model.data.length; i++)
+        {
+            var elem = this.config.model.data[i];
+            var obj = {};
+            obj[col1] = elem[columnsIndex["col1"]];//5
+            obj[col2] = elem[columnsIndex["col2"]];//6
+            obj[col3] = elem[columnsIndex["col3"]];//2
+            obj[col4] = elem[columnsIndex["col4"]];//3
+            obj[col5] = elem[columnsIndex["col5"]];//4
+            data.push(obj);
+        }
+
+        // var data = [{
+        //     "name": "bootstrap-table",
+        //     "stargazers_count": "10",
+        //     "forks_count": "122",
+        //     "description": "An extended Bootstrap table"
+        // }, {
+        //     "name": "multiple-select",
+        //     "stargazers_count": "288",
+        //     "forks_count": "20",
+        //     "description": "A jQuery plugin to select multiple elements with checkboxes :)"
+        // }, {
+        //     "name": "bootstrap-table",
+        //     "stargazers_count": "32",
+        //     "forks_count": "11",
+        //     "description": "Show/hide password plugin for twitter bootstrap."
+        // }, {
+        //     "name": "bootstrap-table",
+        //     "stargazers_count": "1",
+        //     "forks_count": "4",
+        //     "description": "my blog"
+        // }, {
+        //     "name": "scutech-redmine 1",
+        //     "stargazers_count": "50",
+        //     "forks_count": "3",
+        //     "description": "Redmine notification tools for chrome extension."
+        // }];
+
+        $(s.TABLE).bootstrapTable({data: data});
     };
-
-
 
     TableItem.prototype._destroyCustomItem = function () {
         //TODO
@@ -183,10 +277,10 @@ define([
     TableItem.prototype._bindEventListeners = function () {
         var self = this;
 
-       this.olap.on('ready', function () {
-            var rowSize = this.olap.model.rows.length;
-            $(self.el).find(s.TABLE_SIZE).html(rowSize);
-       });
+       // this.olap.on('ready', function () {
+       //      var rowSize = this.olap.model.rows.length;
+       //      $(self.el).find(s.TABLE_SIZE).html(rowSize);
+       // });
     };
 
     TableItem.prototype._unbindEventListeners = function () {
