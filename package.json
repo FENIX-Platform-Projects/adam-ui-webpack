@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=develop webpack-dev-server --display-error-details --progress --color --content-base dev  --inline --hot",
-    "dev:browse": "cross-env SECTIONS=browse NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --port 8080 --hot --host 10.202.36.165",
+    "dev:browse": "cross-env SECTIONS=browse NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:compare": "cross-env SECTIONS=compare NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
-    "dev:priority": "cross-env SECTIONS=priority NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --port 8080 --hot --host 10.202.36.165",
+    "dev:priority": "cross-env SECTIONS=priority NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:partner-matrix": "cross-env SECTIONS=partner-matrix NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:comp-advantage": "cross-env SECTIONS=comp-advantage NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
     "dev:projects": "cross-env SECTIONS=projects NODE_ENV=develop webpack-dev-server --content-base dev --display-error-details --progress --color --inline --hot",
