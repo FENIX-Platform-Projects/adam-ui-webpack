@@ -462,7 +462,9 @@ define([
         if ((filterValues)&&(filterValues.labels)) {
             if ((filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL))) {
                 allSectorSelection = true;
-                if (!filterValues.labels.recipientcode.hasOwnProperty(s.values.ALL)) allSectorSelection = false;
+                if (filterValues.labels.recipientcode)
+                    if (!filterValues.labels.recipientcode.hasOwnProperty(s.values.ALL))
+                        allSectorSelection = false;
             }
         }
 
@@ -634,7 +636,7 @@ define([
             mergeConfig = this._getDefaultLayout(this.filterSelectionsTypeDisplayConfig[parentId]);
             if (filterValues.values[parentId].length > 0) {
                 var parentConfig = this._checkConfigForValue(this.filterSelectionsTypeDisplayConfig[parentId],filterValues.values[parentId][0]);
-                console.log('parent config is ' + JSON.stringify(parentConfig));
+                //console.log('parent config is ' + JSON.stringify(parentConfig));
                 if (parentConfig) {
                     mergeConfig = parentConfig;
                 }
