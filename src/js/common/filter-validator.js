@@ -56,6 +56,7 @@ define([
      * @private
      */
     FilterValidator.prototype.displayErrorSection = function (message) {
+        //alert("displayErrorSection")
         this.$el.find(s.ERRORS).removeClass(s.COLLAPSE);
         this.$el.find(s.ERRORS + ' '+s.STRONG +' '+s.SPAN).html(message);
     };

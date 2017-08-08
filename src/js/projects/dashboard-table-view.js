@@ -244,7 +244,7 @@ define([
                 //After first loaded
                 self.filterLoaded = false;
                 if(self.itemEmpty){
-                    amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[self.lang]['empty_resource_projectSession']);
+                   //amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[self.lang]['empty_resource_projectSession']);
                 }
             }
             self.progressBar.finish();

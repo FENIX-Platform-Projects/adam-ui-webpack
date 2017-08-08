@@ -5,13 +5,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
     'use strict';
 
     return {
-        id: 'FAO_SECTOR',
-        type: 'FAO',
+        id: 'OTHER_SECTORS',
+        type: 'OTHER',
         filter: {
             parentsector_code: {
                 selector: {
                     id: "dropdown",
-                    default: ["9999"],
+                    default: ["600"],
                     emptyOption : {
                         enabled: true,
                         text: "All",
@@ -46,65 +46,12 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-xs-4",
+                classNames: "col-xs-5",
                 cl: {
                     "uid": "crs_dac",
                     "version": "2016",
                     "levels": 3,
-                    "codes": [
-                        "12240",
-                        "14030",
-                        "14031",
-                        "15170",
-                        "16062",
-                        "23070",
-                        "31110",
-                        "31120",
-                        "31130",
-                        "31140",
-                        "31150",
-                        "31161",
-                        "31162",
-                        "31163",
-                        "31164",
-                        "31165",
-                        "31166",
-                        "31181",
-                        "31182",
-                        "31191",
-                        "31192",
-                        "31193",
-                        "31194",
-                        "31195",
-                        "31210",
-                        "31220",
-                        "31261",
-                        "31281",
-                        "31282",
-                        "31291",
-                        "31310",
-                        "31320",
-                        "31381",
-                        "31382",
-                        "31391",
-                        "32161",
-                        "32162",
-                        "32163",
-                        "32165",
-                        "32267",
-                        "41010",
-                        "41020",
-                        "41030",
-                        "41040",
-                        "41050",
-                        "41081",
-                        "41082",
-                        "43040",
-                        "43050",
-                        "52010",
-                        "72040",
-                        "74010"
-                    ]
+                    codes: ["60010", "60020", "60030", "60040", "60061", "60062", "60063"],
                 },
                 template: {
                     hideSwitch: true,
@@ -123,7 +70,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                 selector: {
                     id: "dropdown",
                     from: Config.YEARSTART,
-                    to: 2015,
+                    to: Config.YEARFINISH,
                     default: [Config.YEARSTART],
                     config: { //Selectize configuration
                         maxItems: 1
@@ -143,8 +90,8 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                 selector: {
                     id: "dropdown",
                     from: Config.YEARSTART,
-                    to: 2015,
-                    default: [2015],
+                    to: Config.YEARFINISH,
+                    default: [Config.YEARFINISH],
                     config: {
                         maxItems: 1
                     }
@@ -170,7 +117,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                         maxItems: 1
                     }
                 },
-                classNames: "col-xs-5",
+                classNames: "col-xs-4",
                 cl: {
                     uid: "oda_crs",
                     version: "2016"
@@ -192,7 +139,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     type: "chart", //chart || map || olap,
                     config: {
                         type: "line",
-                        x: ["year"], //x axis
+                        x: ["year"], //x axisa
                         series: ["indicator"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
@@ -322,7 +269,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_total_sector_oda": ['year', 'oda'],
+                        "filter_total_sector_oda": ['parentsector_code', 'year', 'oda'],
                         "filter_total_oda": ['year', 'oda']
                     },
 
@@ -370,9 +317,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -825,7 +778,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_total_sector_oda": ['year', 'oda'],
                         "filter_total_subsector_oda": ['purposecode', 'year', 'oda'],
                         "filter_total_oda": ['year', 'oda']
                     },
@@ -835,20 +787,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             "name": "union",
                             "sid": [
                                 {
-                                    "uid": "total_sector_oda"
-                                    // RESULT OF PART 1: TOTAL ODA for the selected Sector
-                                },
-                                {
                                     "uid": "total_subsector_oda"
-                                    // RESULT OF PART 2: TOTAL ODA for the selected Sub Sector
                                 },
                                 {
                                     "uid": "total_oda"
-                                    // RESULT OF PART 3: TOTAL ODA for ALL Sectors
                                 },
                                 {
-                                    "uid": "percentage_ODA"
-                                    // RESULT OF PART 4: PERCENTAGE CALCULATION (TOTAL ODA SUB SECTOR / TOTAL ODA for SECTOR x 100)
+                                    "uid":"percentage_ODA"
                                 }
                             ],
                             "parameters": {},
@@ -856,104 +801,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 "uid": "union_process"
                             }
                         },
-                        // PART 5: UNION is the FINAL PART IN THE PROCESS
-                        {
-                            "name": "filter",
-                            "sid": [
-                                {
-                                    "uid": "adam_browse_sector_oda"
-                                }
-                            ],
-                            "parameters": {
-                                "columns": [
-                                    "year",
-                                    "value",
-                                    "unitcode"
-                                ],
-                                "rows": {
-                                    "oda": {
-                                        "codes": [
-                                            {
-                                                "uid": "oda_crs",
-                                                "version": "2016",
-                                                "codes": [
-                                                    "usd_commitment"
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
-                                    "year": {
-                                        "time": [
-                                            {
-                                                "from": Config.YEARSTART,
-                                                "to": Config.YEARFINISH
-                                            }
-                                        ]
-                                    }
-                                }
-                            },
-                            rid: {
-                                uid: "filter_total_sector_oda"
-                            }
-                        },
-                        // PART 1: TOTAL ODA FOR SECTOR: (1i) Filter
-                        {
-                            "name": "group",
-                            "parameters": {
-                                "by": [
-                                    "year"
-                                ],
-                                "aggregations": [
-                                    {
-                                        "columns": [
-                                            "value"
-                                        ],
-                                        "rule": "SUM"
-                                    },
-                                    {
-                                        "columns": [
-                                            "unitcode"
-                                        ],
-                                        "rule": "max"
-                                    }
-                                ]
-                            }
-                        },
-                        // (1ii): TOTAL ODA FOR SECTOR: Group by
-                        {
-                            "name": "addcolumn",
-                            "parameters": {
-                                "column": {
-                                    "dataType": "text",
-                                    "id": "indicator",
-                                    "title": {
-                                        "EN": "Indicator"
-                                    },
-                                    "domain": {
-                                        "codes": [
-                                            {
-                                                "extendedName": {
-                                                    "EN": "Adam Processes"
-                                                },
-                                                "idCodeList": "adam_processes"
-                                            }
-                                        ]
-                                    },
-                                    "subject": null
-                                },
-                                "value": "ODA Sector"
-                                // PART 1 FINAL INDICATOR NAME
-                            },
-                            "rid": {
-                                "uid": "total_sector_oda"
-                            }
-                        },
-                        // (1iii): TOTAL ODA FOR SECTOR: Add Column
+
 
                         {
                             "name": "filter",
@@ -980,18 +828,14 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
+
                                     "purposecode": {
                                         "codes": [
                                             {
                                                 "uid": "crs_purposes",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "74010"
+                                                    "31164"
                                                 ]
                                             }
                                         ]
@@ -1006,11 +850,10 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     }
                                 }
                             },
-                            rid: {
-                                uid: "filter_total_subsector_oda"
+                            "rid": {
+                                "uid": "filter_total_subsector_oda"
                             }
                         },
-                        // PART 2: TOTAL ODA FOR SUB SECTOR: (1i) Filter
                         {
                             "name": "group",
                             "parameters": {
@@ -1033,7 +876,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 ]
                             }
                         },
-                        // (1ii): TOTAL ODA FOR SUB SECTOR: Group by
                         {
                             "name": "addcolumn",
                             "parameters": {
@@ -1056,13 +898,13 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     "subject": null
                                 },
                                 "value": "ODA Sub Sector"
-                                // PART 2 FINAL INDICATOR NAME
                             },
                             "rid": {
                                 "uid": "total_subsector_oda"
                             }
                         },
-                        // (2iii): TOTAL ODA FOR SUB SECTOR: Add Column
+
+
 
                         {
                             "name": "filter",
@@ -1136,7 +978,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 "uid": "filter_total_oda"
                             }
                         },
-                        //PART 3:  TOTAL ODA for ALL Sectors: (2i) Filter
                         {
                             "name": "group",
                             "parameters": {
@@ -1159,7 +1000,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                 ]
                             }
                         },
-                        //(3ii):  TOTAL ODA for ALL Sectors: Group by
                         {
                             "name": "addcolumn",
                             "parameters": {
@@ -1182,18 +1022,18 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     "subject": null
                                 },
                                 "value": "Total ODA"
-                                // PART 3 FINAL INDICATOR NAME
                             },
                             "rid": {
                                 "uid": "total_oda"
                             }
                         },
+
                         //(3iii):  TOTAL ODA for ALL Sectors: Add Column
                         {
                             "name": "join",
                             "sid": [
                                 {
-                                    "uid": "total_sector_oda"
+                                    "uid": "total_oda"
                                 },
                                 {
                                     "uid": "total_subsector_oda"
@@ -1242,7 +1082,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                         "1=1"
                                     ],
                                     "values": [
-                                        "@@direct (total_subsector_oda_value/total_sector_oda_value)*100"
+                                        "@@direct (total_subsector_oda_value/total_oda_value)*100"
                                     ]
                                 }
                             },
@@ -1310,14 +1150,14 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     },
                                     "subject": null
                                 },
-                                "value": "% Sub Sector/Sector"
+                                "value": "% Sub Sector/Total ODA"
                                 // PART 4 FINAL INDICATOR NAME
                             },
                             "rid": {
                                 "uid": "percentage_ODA"
                             }
                         }
-                        // (4vi) PERCENTAGE CALCULATION: Add Column
+
                     ]
                 },
                 {
@@ -1362,7 +1202,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_donors": ['year', 'oda', 'purposecode']
+                        "filter_donors": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -1374,9 +1214,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "value": {
@@ -1545,7 +1391,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_top_10_donors_sum": ['purposecode', 'year', 'oda']
+                        "filter_top_10_donors_sum": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
 
                     postProcess: [
@@ -1593,9 +1439,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "value": {
@@ -1893,7 +1745,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_recipients": ['year', 'oda', 'purposecode']
+                        "filter_recipients": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -1916,9 +1768,22 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -2079,7 +1944,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_top_10_recipients_sum": ['purposecode', 'year', 'oda']
+                        "filter_top_10_recipients_sum": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
 
                     postProcess: [
@@ -2134,9 +1999,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "value": {
@@ -2411,7 +2282,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_channels": ['year', 'oda', 'purposecode']
+                        "filter_channels": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -2423,9 +2294,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "value": {
@@ -2593,7 +2470,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_top_10_channels_sum": ['purposecode', 'year', 'oda']
+                        "filter_top_10_channels_sum": ['parentsector_code', 'purposecode', 'year', 'oda']
                     },
 
                     postProcess: [
@@ -2637,9 +2514,22 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "value": {
+                                        "number": [
+                                            {
+                                                "from": 0.00001
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -2939,7 +2829,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_subsectors": ['year', 'oda']
+                        "filter_subsectors": ['parentsector_code', 'year', 'oda']
                     },
                     postProcess: [
                         {
@@ -2951,9 +2841,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "value": {
@@ -3307,7 +3203,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     },
 
                     filterFor: {
-                        "filter_regions": ['year', 'oda', 'purposecode']
+                        "filter_regions": ['year', 'oda', 'parentsector_code', 'purposecode']
                     },
                     postProcess: [
                         {
@@ -3330,9 +3226,15 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
                                         ]
                                     },
                                     "year": {
@@ -3468,6 +3370,17 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "600"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "oda": {
                                         "codes": [
                                             {
@@ -3477,11 +3390,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                     "usd_commitment"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "year": {
@@ -3500,7 +3408,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             "name": "group",
                             "parameters": {
                                 "by": [
-                                   "gaul0"
+                                    "gaul0"
                                 ],
                                 "aggregations": [
                                     {

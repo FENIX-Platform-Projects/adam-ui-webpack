@@ -49,6 +49,7 @@ define([
             OECD_DASHBOARD_FAO_SECTORS_CONFIG: 'config/browse/dashboards/oecd/fao_sectors/config-',
             OECD_DASHBOARD_OTHER_SECTORS_CONFIG: 'config/browse/dashboards/oecd/other_sectors/config-',
             OECD_DASHBOARD_ALL_SECTORS_CONFIG: 'config/browse/dashboards/oecd/config-all-sectors-',
+            OECD_DASHBOARD_OTHER_SECTORS_NOTALLSUBSECTOR_CONFIG: 'config/browse/dashboards/oecd/other_sectors/config-notAllSubsector-',
             OECD_DASHBOARD: 'config/browse/dashboards/oecd/'
         }
     };
@@ -160,8 +161,14 @@ define([
         var pth2 = s.paths.OECD_DASHBOARD_FAO_SECTORS_CONFIG+ this.browse_type + '.js';
         //var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG + '.js';
         var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG+ this.browse_type + '.js';
+        var pth4 = s.paths.OECD_DASHBOARD_OTHER_SECTORS_NOTALLSUBSECTOR_CONFIG+ this.browse_type + '.js';
 
-       require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
+        if(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR){
+            require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
+        }
+        else{
+            require(['../../'+pth1, '../../'+pth2, '../../'+pth3, '../../'+pth4], _.bind(this._initSubViews, this));
+        }
     };
 
 
@@ -173,9 +180,9 @@ define([
     * @private
     */
 
-    BrowseByView.prototype._initSubViews = function (ConfigOtherSectors, ConfigFAOSectors, ConfigAllSectors) {
+    BrowseByView.prototype._initSubViews = function (ConfigOtherSectors, ConfigFAOSectors, ConfigAllSectors, ConfigNotAllSubSectors) {
 
-        if (!ConfigOtherSectors || !ConfigOtherSectors.dashboard || !ConfigOtherSectors.filter) {
+        if (!ConfigOtherSectors || !ConfigOtherSectors.dashboard || !ConfigOtherSectors.filter ) {
             alert("Impossible to find default ODA dashboard/filter configuration for the topic: " + this.browse_type);
             return;
         }
@@ -188,6 +195,9 @@ define([
         this.otherSectorsDashboardConfig = ConfigOtherSectors.dashboard;
         this.faoSectorDashboardConfig = ConfigFAOSectors.dashboard;
         this.allSectorDashboardConfig = ConfigAllSectors.dashboard;
+        if(this.browse_type == BaseBrowseConfig.topic.BY_SECTOR){
+            this.otherWithallSubSectorDashboardConfig = ConfigNotAllSubSectors.dashboard;
+        }
 
 
         //Set default dashboard configuration
@@ -439,7 +449,7 @@ define([
     BrowseByView.prototype._processSelection = function (changedFilter, filterValues){
         //console.log("================== _processSelection  ===========  ");
 
-        var dashboardConfPath, displayConfigBasedOnFilter, allSectorSelection = false, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id];
+        var dashboardConfPath, displayConfigBasedOnFilter, allSectorSelection = false, displayConfig = this.filterSelectionsTypeDisplayConfig[changedFilter.id], notAllSectorAndallSubSectorDashboardConfig = false;
 
 
         // Update filter with region code
@@ -458,6 +468,7 @@ define([
                 dashboardConfPath = displayConfigBasedOnFilter.config.path;
             }
         }
+        notAllSectorAndallSubSectorDashboardConfig = false;
         // if ((filterValues)&&(filterValues.labels)&&(this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)) {
         if ((filterValues)&&(filterValues.labels)) {
             if ((filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL))) {
@@ -466,13 +477,16 @@ define([
                     if (!filterValues.labels.recipientcode.hasOwnProperty(s.values.ALL))
                         allSectorSelection = false;
             }
+            else if((this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)&&(filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(!(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL)))) {
+                notAllSectorAndallSubSectorDashboardConfig = true;
+            }
         }
 
         // Update dashboard properties
         if (changedFilter['props']) {
             this.subviews['oecdDashboard'].setProperties(changedFilter['props']);
         }
-        this._getDashboardConfiguration(dashboardConfPath, allSectorSelection, filterValues, displayConfigBasedOnFilter);
+        this._getDashboardConfiguration(dashboardConfPath, allSectorSelection, notAllSectorAndallSubSectorDashboardConfig, filterValues, displayConfigBasedOnFilter);
 
     };
 
@@ -549,7 +563,7 @@ define([
     * @param displayConfigForSelectedFilter
     * @private
     */
-    BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, allSectorSelection, filterValues, displayConfigForSelectedFilter) {
+    BrowseByView.prototype._getDashboardConfiguration = function (dashboardConfPath, allSectorSelection, notAllSectorAndallSubSectorDashboardConfig, filterValues, displayConfigForSelectedFilter) {
         var self = this;
         //console.log("================= _getDashboardConfiguration Start =============== ", dashboardConfPath, this.browse_type);
 
@@ -563,6 +577,9 @@ define([
             if(allSectorSelection){
                 dashboardConfig = this.allSectorDashboardConfig;
                             }
+            if(notAllSectorAndallSubSectorDashboardConfig){
+                dashboardConfig = this.otherWithallSubSectorDashboardConfig;
+            }
             self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, dashboardConfig);
         }
 

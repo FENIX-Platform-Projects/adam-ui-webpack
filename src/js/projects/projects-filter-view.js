@@ -99,6 +99,14 @@ define(
             this.alls = [];
         };
 
+        // ProjectsFilterView.prototype._riseErrors = function (obj) {
+        //     alert("416")
+        //     if (obj) this.filterValidator.displayErrorSection(
+        //         i18nErrors[this.lang]['error_resource_416'],
+        //         BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
+        //     );
+        // };
+
         ProjectsFilterView.prototype._riseErrors = function (obj) {
             if (obj) this.filterValidator.displayBulkDownload(
                 i18nErrors[this.lang]['error_resource_416'],
@@ -169,6 +177,7 @@ define(
             this.filter.on('ready', function (payload) {
                 amplify.publish(BaseEvents.FILTER_ON_READY, this._getFormattedFilterValues());
                 amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
+                //amplify.publish(BaseEvents.TOO_LARGE, i18nErrors[self.lang]['error_resource_416']);
             }, this);
 
 

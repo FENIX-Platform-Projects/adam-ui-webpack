@@ -139,7 +139,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     type: "chart", //chart || map || olap,
                     config: {
                         type: "line",
-                        x: ["year"], //x axis
+                        x: ["year"], //x axisa
                         series: ["indicator"], // series
                         y: ["value"],//Y dimension
                         aggregationFn: {"value": "sum"},
@@ -3346,7 +3346,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "uid": "crs_fao_regions",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "NA","ZZZZZ"
+                                                    "NA","ZZZZZ","UNSP"
                                                 ]
                                             }
                                         ]

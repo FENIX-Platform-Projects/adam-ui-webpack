@@ -223,6 +223,7 @@ define([
 
         if((changedFilter!=null)&&(typeof changedFilter!='undefined')&&(changedFilter[0]!=null)&&(typeof changedFilter[0]!='undefined')){
             if((changedFilter[0].id!=null)&&(typeof changedFilter[0].id!='undefined')&&(changedFilter[0].id== 'fao_region')){
+                // this.subviews['tableDashboard'].itemsToWait = 2;
                 this.subviews['tableDashboard'].itemsToWait = 2;
             }
         }
