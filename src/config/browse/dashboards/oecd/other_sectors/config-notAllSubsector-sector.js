@@ -664,7 +664,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                         });
 
                                         var isVisible = $.each(_that.series, function (i, serie) {
-                                            if(serie.name == '% Sub Sector/Sector'){
+                                            if(serie.name == '% Sub Sector/Total ODA'){
                                                 serie.update({
                                                     yAxis: 'sector-axis',
                                                     dashStyle: 'shortdot',

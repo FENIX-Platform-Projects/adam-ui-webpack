@@ -4700,7 +4700,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "uid": "crs_fao_regions",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "NA","ZZZZZ"
+                                                    "NA","ZZZZZ","UNSP"
                                                 ]
                                             }
                                         ]

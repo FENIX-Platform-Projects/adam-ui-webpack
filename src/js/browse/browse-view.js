@@ -163,12 +163,14 @@ define([
         var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG+ this.browse_type + '.js';
         var pth4 = s.paths.OECD_DASHBOARD_OTHER_SECTORS_NOTALLSUBSECTOR_CONFIG+ this.browse_type + '.js';
 
-        if(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR){
-            require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
-        }
-        else{
-            require(['../../'+pth1, '../../'+pth2, '../../'+pth3, '../../'+pth4], _.bind(this._initSubViews, this));
-        }
+        alert(pth4)
+        // if(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR){
+        //     require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
+        // }
+        // else{
+        //     require(['../../'+pth1, '../../'+pth2, '../../'+pth3, '../../'+pth4], _.bind(this._initSubViews, this));
+        // }
+        require(['../../'+pth1, '../../'+pth2, '../../'+pth3, '../../'+pth4], _.bind(this._initSubViews, this));
     };
 
 
@@ -195,9 +197,10 @@ define([
         this.otherSectorsDashboardConfig = ConfigOtherSectors.dashboard;
         this.faoSectorDashboardConfig = ConfigFAOSectors.dashboard;
         this.allSectorDashboardConfig = ConfigAllSectors.dashboard;
-        if(this.browse_type == BaseBrowseConfig.topic.BY_SECTOR){
-            this.otherWithallSubSectorDashboardConfig = ConfigNotAllSubSectors.dashboard;
-        }
+        this.otherWithallSubSectorDashboardConfig = ConfigNotAllSubSectors.dashboard;
+        // if(this.browse_type == BaseBrowseConfig.topic.BY_SECTOR){
+        //     this.otherWithallSubSectorDashboardConfig = ConfigNotAllSubSectors.dashboard;
+        // }
 
 
         //Set default dashboard configuration
@@ -477,7 +480,8 @@ define([
                     if (!filterValues.labels.recipientcode.hasOwnProperty(s.values.ALL))
                         allSectorSelection = false;
             }
-            else if((this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)&&(filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(!(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL)))) {
+            // else if((this.browse_type === BaseBrowseConfig.topic.BY_SECTOR)&&(filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(!(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL)))) {
+            else if((filterValues.labels.parentsector_code.hasOwnProperty(s.values.ALL))&&(!(filterValues.labels.purposecode.hasOwnProperty(s.values.ALL)))) {
                 notAllSectorAndallSubSectorDashboardConfig = true;
             }
         }
@@ -580,6 +584,7 @@ define([
             if(notAllSectorAndallSubSectorDashboardConfig){
                 dashboardConfig = this.otherWithallSubSectorDashboardConfig;
             }
+
             self._rebuildDashboard(filterValues, displayConfigForSelectedFilter, dashboardConfig);
         }
 

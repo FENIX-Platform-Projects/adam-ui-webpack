@@ -20,7 +20,8 @@
         "no_compare" : "Impossible de trouver la dimension 'comparer'.",
         "at_least_one_more_dimension" : "Veuillez spécifier les valeurs d’au moins deux dimensions.",
         "missing_mandatory_field" : "Veuillez remplir tous les champs obligatoires.",
-        "error_resource_416" : "Les premiers 500 résultats les plus importants montrent.",
+        "error_resource_416" : "La sélection est trop grande. Veuillez affiner votre sélection.",
+        "error_resource_tooLarge" : "Les premiers 500 résultats les plus importants montrent.",
         "bulk_download_container" : "Vous pouvez télécharger toutes les données sur ",
         "bulk_download_link" : "ce lien",
         "empty_resource_projectSession" : "La ressource est vide"

@@ -99,17 +99,25 @@ define(
             this.alls = [];
         };
 
-        // ProjectsFilterView.prototype._riseErrors = function (obj) {
-        //     alert("416")
-        //     if (obj) this.filterValidator.displayErrorSection(
-        //         i18nErrors[this.lang]['error_resource_416'],
-        //         BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
-        //     );
-        // };
-
         ProjectsFilterView.prototype._riseErrors = function (obj) {
-            if (obj) this.filterValidator.displayBulkDownload(
+            if (obj) this.filterValidator.displayErrorSection(
                 i18nErrors[this.lang]['error_resource_416'],
+                BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
+            );
+        };
+
+        //
+
+        ProjectsFilterView.prototype._rise416Error = function (obj) {
+            if (obj) this.filterValidator.displayError416Section(
+                i18nErrors[this.lang]['error_resource_416'],
+                BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
+            );
+        };
+
+        ProjectsFilterView.prototype._displayBulkDownload = function (obj) {
+            if (obj) this.filterValidator.displayBulkDownload(
+                i18nErrors[this.lang]['error_resource_tooLarge'],
                 BaseConfig.BULK_DOWNLOAD.PROJECT_ANALYSIS
             );
         };
@@ -176,7 +184,7 @@ define(
             // Filter on Ready: Set some base properties for Recipient and the ODA, then publish Filter Ready Event
             this.filter.on('ready', function (payload) {
                 amplify.publish(BaseEvents.FILTER_ON_READY, this._getFormattedFilterValues());
-                amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
+                amplify.publish(BaseEvents.TOO_LARGE_RESOURCE, i18nErrors[self.lang]['error_resource_tooLarge']);
                 //amplify.publish(BaseEvents.TOO_LARGE, i18nErrors[self.lang]['error_resource_416']);
             }, this);
 
@@ -274,12 +282,16 @@ define(
 
             var self = this;
 
-            amplify.subscribe(BaseEvents.HTTP_416, function (object) {
-                self._riseErrors(object);
+            amplify.subscribe(BaseEvents.TOO_LARGE_RESOURCE, function (object) {
+                self._displayBulkDownload(object);
             });
 
             amplify.subscribe(BaseEvents.HTTP_EMPTY_RESOURCE, function (object) {
                 self._riseEmtyResource(object);
+            });
+
+            amplify.subscribe(BaseEvents.HTTP_416, function (object) {
+                self._rise416Error(object);
             });
 
         };

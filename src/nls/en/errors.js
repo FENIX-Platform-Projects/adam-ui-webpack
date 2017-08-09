@@ -20,7 +20,8 @@ define(function () {
         "no_compare" : "Impossible to find the 'compare' dimension.",
         "at_least_one_more_dimension" : "Please specify values for at lease two dimensions.",
         "missing_mandatory_field" : "Please fill all the mandatory fields.",
-        "error_resource_416" : "First 500 largest results showing.",
+        "error_resource_416" : "The selection is too large. Please, refine your selection.",
+        "error_resource_tooLarge" : "First 500 largest results showing.",
         "bulk_download_container" : "You can download the whole data at ",
         "bulk_download_link" : "this link",
         "empty_resource_projectSession" : "Resource is empty"

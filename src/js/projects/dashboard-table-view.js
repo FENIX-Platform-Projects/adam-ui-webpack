@@ -200,9 +200,10 @@ define([
             this.config
         );
 
-        // this.dashboard.on('error.resource', function(obj) {
-        //     amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
-        // });
+        this.dashboard.on('error.resource', function(obj) {
+            if(!self.filterLoaded)
+                amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
+        });
 
     };
 

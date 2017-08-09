@@ -7,6 +7,7 @@ define(function ( ) {
         FILTER_ON_READY : "fx.filter.onready",
         FILTER_ON_CHANGE : "fx.filter.onchange",
         HTTP_416 : 'fx.bridge.resource.error',
-        HTTP_EMPTY_RESOURCE : 'adam.projects.empty.resource'
+        HTTP_EMPTY_RESOURCE : 'adam.projects.empty.resource',
+        TOO_LARGE_RESOURCE: 'adam.projects.tooLarge.resource'
     };
 });

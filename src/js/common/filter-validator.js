@@ -8,7 +8,7 @@ define([
 
     'use strict';
 
-    var s = {ERRORS: "#filter-errors",  COLLAPSE: "collapse", SPAN: "span", STRONG: "strong", EMPTY: "#filter-errors-empty-resource", TOOLARGE: "#filter-errors-too-large-resource"};
+    var s = {ERRORS: "#filter-errors",  COLLAPSE: "collapse", SPAN: "span", STRONG: "strong", EMPTY: "#filter-errors-empty-resource", TOOLARGE: "#filter-errors-too-large-resource", ERROR416: "#filter-errors-416"};
 
     function FilterValidator(o) {
         $.extend(true, this, {initial: o});
@@ -48,6 +48,7 @@ define([
     FilterValidator.prototype.hideErrorSection = function () {
         this.$el.find(s.ERRORS).addClass(s.COLLAPSE);
         this.$el.find(s.EMPTY).addClass(s.COLLAPSE);
+        this.$el.find(s.ERROR416).addClass(s.COLLAPSE);
         //this.$el.find(s.TOOLARGE).addClass(s.COLLAPSE);
     };
 
@@ -56,9 +57,13 @@ define([
      * @private
      */
     FilterValidator.prototype.displayErrorSection = function (message) {
-        //alert("displayErrorSection")
         this.$el.find(s.ERRORS).removeClass(s.COLLAPSE);
         this.$el.find(s.ERRORS + ' '+s.STRONG +' '+s.SPAN).html(message);
+    };
+    //ERROR416
+    FilterValidator.prototype.displayError416Section = function (message) {
+        this.$el.find(s.ERROR416).removeClass(s.COLLAPSE);
+        this.$el.find(s.ERROR416 + ' '+s.STRONG +' '+s.SPAN).html(message);
     };
 
     FilterValidator.prototype.displayBulkDownload = function (message, url) {
