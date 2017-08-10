@@ -24,10 +24,12 @@ define([
         item_container_id: '-container',
         PROGRESS_BAR_CONTAINER: '#progress-bar-holder',
         paths: {
-            TABLE_ITEM: 'comp-advantage/table-item'
+            // TABLE_ITEM: 'comp-advantage/table-item'
+            TABLE_ITEM: 'projects/table-item'
         },
         events: {
-            CHANGE: 'change'
+            CHANGE: 'change',
+            BOOTSTRAP_TABLE_READY : "bootstrap_table_ready"
         },
         itemTypes: {
             CHART: 'chart'
@@ -191,7 +193,7 @@ define([
         this.config.itemsRegistry = {
             custom: {
                 item: TableItem,
-                path: s.TABLE_ITEM
+                path: s.paths.TABLE_ITEM
             }
         };
 
@@ -285,6 +287,8 @@ define([
     ProjectsTableView.prototype._bindDashboardListeners = function () {
         var self = this,  increment = 0, percent = Math.round(100 / this.config.items.length);
 
+        amplify.subscribe(s.events.BOOTSTRAP_TABLE_READY, this, this._modelStore);
+
         this.dashboard.on('ready.item', function (item) {
             self.models[item.id] = {};
             self.models[item.id].data ={};
@@ -324,6 +328,18 @@ define([
 
             }
         });*/
+
+    };
+
+    ProjectsTableView.prototype._modelStore = function (item) {
+
+        this.models[item.id] = {};
+        this.models[item.id].data ={};
+        this.models[item.id].data = item.model.data;
+        this.models[item.id].metadata = {};
+        this.models[item.id].metadata.rid = item.model.metadata.rid;
+        this.models[item.id].metadata.uid = item.model.metadata.uid;
+        this.models[item.id].metadata.dsd = item.model.metadata.dsd;
 
     };
 

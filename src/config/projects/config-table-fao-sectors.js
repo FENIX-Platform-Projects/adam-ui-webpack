@@ -16,7 +16,8 @@ define(['../config-base'], function(Config) {
             items: [
                 {
                     id: "projects",
-                    type: 'table',
+                    // type: 'table',
+                    type: 'custom',
                     config: {
                         "groupedRow":false,
                         "aggregationFn":{"commitment_value":"sum"},

@@ -1142,7 +1142,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                             chart: {
                                 events: {
                                     load: function(event) {
-                                        alert("skvnsdknv")
                                         var _that = this;
                                         var hasSubSector = false;
 

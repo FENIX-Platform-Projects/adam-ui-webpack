@@ -7,8 +7,20 @@
         <div id="table-info" class="collapse">
            <p><b><span>{{rowsFound}}:</span> <span id="table-size"></span></b></p>
         </div>
-
-        <div id="table"></div>
+        <table id="table" data-search="true" data-pagination="true" >
+                <thead>
+                    <tr>
+                        <th id="col1" data-field="recipient_country" data-sortable="true">Stars</th>
+                        <th id="col2" data-field="resource_partner" data-sortable="true" width="200">Name</th>
+                        <th id="col3" data-field="project_title" data-sortable="true">Forks</th>
+                        <th id="col4" data-field="year" data-sortable="true">Description</th>
+                        <th id="col5" data-field="parent_sector" data-sortable="true">Description</th>
+                        <th id="col6" data-field="sub_sector" data-sortable="true">Description</th>
+                        <th id="col7" data-field="value" data-sortable="true">Description</th>
+                        <th id="col8" data-field="measurement_unit" data-sortable="true">Description</th>
+                    </tr>
+                </thead>
+        </table>
 
     </div>
 </div>

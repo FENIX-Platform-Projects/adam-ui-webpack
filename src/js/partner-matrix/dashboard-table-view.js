@@ -165,7 +165,7 @@ define([
             errors.push({code: Errors.MISSING_CONFIGURATION});
             log.warn("Impossible to find dashboard config");
         }
-
+sub_sector
         if (!this.topic) {
             errors.push({code: Errors.MISSING_CONTEXT});
             log.warn("Undefined topic");
@@ -197,7 +197,7 @@ define([
         this.config.itemsRegistry = {
             custom: {
                 item: TableItem,
-                path: s.TABLE_ITEM
+                path: s.paths.TABLE_ITEM
             }
         };
 
