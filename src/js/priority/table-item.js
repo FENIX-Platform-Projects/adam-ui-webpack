@@ -15,7 +15,9 @@ define([
     'nls/table',
     'nls/filter',
     'fenix-ui-filter-utils',
-    'amplify-pubsub'
+    'amplify-pubsub',
+    'bootstrap-table',
+    'bootstrap-table-multiple-sort'
 ], function ($, log, _, ConfigBase, ERR, EVT,/* C,*/ Template, OlapCreator, Filter, /*FenixTool,*/ FilterUtils, Utils, i18nTableLabels, i18nLabels, FxUtils, amplify) {
 
     'use strict';
@@ -33,7 +35,8 @@ define([
         },
         LINKS_BASE_URL: ConfigBase.ADAM_RESOURCES_CPF_UNDAF_PATH, //  "http://fenix.fao.org/demo/adam-docs/cpf-undaf/",
         CPF: "CPF",
-        UNDAF: "UNDAF"
+        UNDAF: "UNDAF",
+        BOOTSTRAP_TABLE_READY : "bootstrap_table_ready"
    };
 
     var defaultOptions = {};
@@ -179,32 +182,94 @@ define([
     };
 
 
-    TableItem.prototype._processPayload = function () {
+    // TableItem.prototype._processPayload = function () {
+    //
+    //
+    //     this.config.model = this.model;
+    //     this.config.el = s.ids.TABLE;
+    //
+    //     var self = this;
+    //
+    //     for (var d in this.config.derived) {
+    //         this.config.aggregations.push(d);
+    //     }
+    //
+    //     this.olap = new OlapCreator(this.config);
+    //
+    //     this.olap.on('ready', function () {
+    //         var rowSize = self.olap.model.rows.length;
+    //         $(self.el).find(s.ids.TABLE_SIZE).html(rowSize);
+    //     });
+    //
+    //     //console.log("============ ROWS =============");
+    //     //console.log(this.olap);
+    //
+    //     //for(var key in this.olap){
+    //       //  console.log(key);
+    //    // }
+    //
+    // };
 
+    TableItem.prototype._processPayload = function () {
 
         this.config.model = this.model;
         this.config.el = s.ids.TABLE;
+        this.config.id = this.id;
+        this.config.lang = this.lang;
 
-        var self = this;
+        var configData = this.config.model.data;
+        amplify.publish( s.BOOTSTRAP_TABLE_READY, this.config );
 
-        for (var d in this.config.derived) {
-            this.config.aggregations.push(d);
+        var col1 = this.config.rows[0];
+        var col2 = this.config.rows[1];
+        var col3 = this.config.rows[2];
+        var col4 = this.config.rows[3];
+
+        var table = $(this.el).find(s.ids.TABLE);
+        $(table).find("#col1").data('field', col1);
+        $(table).find("#col2").data('field', col2);
+        $(table).find("#col3").data('field', col3);
+        $(table).find("#col4").data('field', col4);
+
+        var columns = this.config.model.metadata.dsd.columns;
+        var columnsIndex = {};
+        for(var i = 0; i<this.config.model.metadata.dsd.columns.length; i++){
+            var columnId = this.config.model.metadata.dsd.columns[i].id;
+            var columnTitle = this.config.model.metadata.dsd.columns[i].title[this.config.lang.toUpperCase()];
+
+            switch(columnId){
+                case col1:
+                    $(table).find("#col1").html(columnTitle);
+                    columnsIndex["col1"] = i;
+                    break;
+                case col2:
+                    $(table).find("#col2").html(columnTitle);
+                    columnsIndex["col2"] = i;
+                    break;
+                case col3:
+                    $(table).find("#col3").html(columnTitle);
+                    columnsIndex["col3"] = i;
+                    break;
+                case col4:
+                    $(table).find("#col4").html(columnTitle);
+                    columnsIndex["col4"] = i;
+                    break;
+            }
         }
 
-        this.olap = new OlapCreator(this.config);
+        var data = [];
+        for(var i = 0; i<this.config.model.data.length; i++)
+        {
+            var elem = this.config.model.data[i];
+            var obj = {};
+            obj[col1] = elem[columnsIndex["col1"]];//5
+            obj[col2] = elem[columnsIndex["col2"]];//6
+            obj[col3] = elem[columnsIndex["col3"]];//2
+            obj[col4] = elem[columnsIndex["col4"]];//3
+            data.push(obj);
+        }
 
-        this.olap.on('ready', function () {
-            var rowSize = self.olap.model.rows.length;
-            $(self.el).find(s.ids.TABLE_SIZE).html(rowSize);
-        });
-
-        //console.log("============ ROWS =============");
-        //console.log(this.olap);
-
-        //for(var key in this.olap){
-          //  console.log(key);
-       // }
-
+        $(s.ids.TABLE).bootstrapTable({pagination: true, pageSize: 10, perPage: 4, data: data});
     };
 
     TableItem.prototype._processSource = function () {

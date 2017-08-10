@@ -163,7 +163,6 @@ define([
         var pth3 = s.paths.OECD_DASHBOARD_ALL_SECTORS_CONFIG+ this.browse_type + '.js';
         var pth4 = s.paths.OECD_DASHBOARD_OTHER_SECTORS_NOTALLSUBSECTOR_CONFIG+ this.browse_type + '.js';
 
-        alert(pth4)
         // if(this.browse_type != BaseBrowseConfig.topic.BY_SECTOR){
         //     require(['../../'+pth1, '../../'+pth2, '../../'+pth3], _.bind(this._initSubViews, this));
         // }

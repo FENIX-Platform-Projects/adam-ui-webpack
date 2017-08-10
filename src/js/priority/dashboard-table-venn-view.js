@@ -28,7 +28,11 @@ define([
         },
         itemTypes: {
             CHART: 'chart'
-        }
+        },
+        events: {
+            BOOTSTRAP_TABLE_READY : "bootstrap_table_ready"
+        },
+        increment: 0
     };
 
     /**
@@ -317,7 +321,12 @@ define([
     };
 
     TableVennDashboardView.prototype._bindDashboardListeners = function () {
-        var self = this,  increment = 0, percent = Math.round(100 / this.config.items.length);
+        var percent = Math.round(100 / this.config.items.length);
+        s.percent = percent;
+        var self = this,  increment = 0;
+        s.increment = increment;
+
+        amplify.subscribe(s.events.BOOTSTRAP_TABLE_READY, this, this._modelStore);
 
         this.dashboard.on('ready.item', function (item) {
             self.models[item.id] = {};
@@ -329,14 +338,14 @@ define([
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
             self.titles[item.id] = "";
 
-            increment = increment + percent;
+            increment = s.increment + s.percent;
+            s.increment = increment;
             self.progressBar.update(increment);
         });
 
         this.dashboard.on('table_ready', function (item) {
 
             var id =  self.config.items[0].id;
-
             if (item.data.size > 0) {
                 self.models[id] = {};
                 self.models[id].data = {};
@@ -447,6 +456,27 @@ define([
             }
 
         });
+    };
+
+    TableVennDashboardView.prototype._modelStore = function (item) {
+
+        this.models[item.id] = {};
+        this.models[item.id].data ={};
+        this.models[item.id].data = item.model.data;
+        this.models[item.id].metadata = {};
+        this.models[item.id].metadata.rid = item.model.metadata.rid;
+        this.models[item.id].metadata.uid = item.model.metadata.uid;
+        this.models[item.id].metadata.dsd = item.model.metadata.dsd;
+
+        this.titles[item.id] = i18nDashboardLabels[this.lang]["priorities-table"];
+
+        var increment = s.increment + s.percent;
+        s.increment = increment;
+        this.progressBar.update(increment);
+        if(increment==s.percent){
+            this.progressBar.finish();
+        }
+
     };
 
     TableVennDashboardView.prototype._loadProgressBar = function () {
