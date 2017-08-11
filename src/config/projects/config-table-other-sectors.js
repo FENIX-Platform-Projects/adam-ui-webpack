@@ -11,8 +11,6 @@ define(['../config-base'], function(Config) {
             //default dataset id
             uid: "adam_project_analysis",
 
-            maxSize: 500,
-
             items: [
                 {
                     id: "projects",
@@ -144,8 +142,14 @@ define(['../config-base'], function(Config) {
                         {
                             "name": "order",
                             "parameters": {
-                                "year": "DESC",
                                 "value":"DESC"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "parameters": {
+                                "perPage": 500,
+                                "page": 1
                             }
                         }
                     ]
