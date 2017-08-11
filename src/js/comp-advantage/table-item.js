@@ -201,7 +201,7 @@ define([
         table.data("row-style", function (row, index) {
             if(row['ratio']== "YES"){
                 return {
-                    css: {"background-color": "green"}
+                    css: {"background-color": "rgba(0, 128, 0, 0.40)"}
                 };
             }
             else {
@@ -272,7 +272,11 @@ define([
             data.push(obj);
         }
 
-        $(s.TABLE).bootstrapTable({data: data});
+        $(s.TABLE).bootstrapTable({
+            data: data,
+            sortName: 'ratio',
+            sortOrder: "desc"
+        });
     };
 
     TableItem.prototype._destroyCustomItem = function () {
