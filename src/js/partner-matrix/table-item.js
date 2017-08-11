@@ -266,7 +266,11 @@ define([
         //     "description": "Redmine notification tools for chrome extension."
         // }];
 
-        $(s.TABLE).bootstrapTable({data: data});
+        $(s.TABLE).bootstrapTable({
+            data: data,
+            sortName: 'donorcode_EN',
+            sortOrder: "asc"
+        });
     };
 
     TableItem.prototype._destroyCustomItem = function () {

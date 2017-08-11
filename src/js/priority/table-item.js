@@ -269,7 +269,13 @@ define([
             data.push(obj);
         }
 
-        $(s.ids.TABLE).bootstrapTable({pagination: true, pageSize: 10, data: data});
+        $(s.ids.TABLE).bootstrapTable({
+            pagination: true,
+            pageSize: 10,
+            data: data,
+            sortName: 'donorcode_EN',
+            sortOrder: "asc"
+        });
     };
 
     TableItem.prototype._processSource = function () {
