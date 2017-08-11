@@ -287,7 +287,9 @@ define([
     ProjectsTableView.prototype._bindDashboardListeners = function () {
         var self = this,  increment = 0, percent = Math.round(100 / this.config.items.length);
 
-        amplify.subscribe(s.events.BOOTSTRAP_TABLE_READY, this, this._modelStore);
+        //amplify.subscribe(s.events.BOOTSTRAP_TABLE_READY, this, this._modelStore);
+
+        //amplify.subscribe('checkresource', this, this._checkresource);
 
         this.dashboard.on('ready.item', function (item) {
             self.models[item.id] = {};
@@ -313,7 +315,7 @@ define([
             self.progressBar.update(increment);
         });
 
-        /*this.dashboard.on('table_ready', function (item) {
+        this.dashboard.on('table_ready', function (item) {
 
             var id =  self.config.items[0].id;
 
@@ -327,21 +329,68 @@ define([
                 self.models[id].metadata.dsd = item.model.metadata.dsd;
 
             }
-        });*/
+        });
 
     };
 
-    ProjectsTableView.prototype._modelStore = function (item) {
+    // ProjectsTableView.prototype._checkresource = function (item) {
+    //
+    //     if((item!=null)&&(typeof item!='undefined')&&(item=="Resource is empty"))
+    //     {
+    //         this.itemEmpty = true;
+    //     }
+    //     else{
+    //         this.itemEmpty = false;
+    //     }
+    //     // if(this.itemsToWait>0){
+    //     //     this.itemsToWait--;
+    //     // }
+    //
+    //     if((this.itemsToWait==0)&&(this.itemEmpty)&&(!this.filterLoaded)){
+    //         this.itemsToWait=0;
+    //         amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[this.lang]['empty_resource_projectSession']);
+    //     }
+    // }
 
-        this.models[item.id] = {};
-        this.models[item.id].data ={};
-        this.models[item.id].data = item.model.data;
-        this.models[item.id].metadata = {};
-        this.models[item.id].metadata.rid = item.model.metadata.rid;
-        this.models[item.id].metadata.uid = item.model.metadata.uid;
-        this.models[item.id].metadata.dsd = item.model.metadata.dsd;
-
-    };
+    // ProjectsTableView.prototype._modelStore = function (item) {
+    //
+    //     this.models[item.id] = {};
+    //     this.models[item.id].data ={};
+    //     this.models[item.id].data = item.model.data;
+    //     this.models[item.id].data = item.model.data;
+    //     this.models[item.id].metadata = {};
+    //     this.models[item.id].metadata.rid = item.model.metadata.rid;
+    //     this.models[item.id].metadata.uid = item.model.metadata.uid;
+    //     this.models[item.id].metadata.dsd = item.model.metadata.dsd;
+    //
+    //     // if((item!=null)&&(typeof item!='undefined')&&(item.model!=null)&&(typeof item.model!='undefined')&&(item.model.data!=null)&&(typeof item.model.data!='undefined')&&(item.model.data.length==0))
+    //     // {
+    //     //     this.itemEmpty = true;
+    //     // }
+    //     // else{
+    //     //     this.itemEmpty = false;
+    //     // }
+    //     // if(this.itemsToWait>0){
+    //     //     this.itemsToWait--;
+    //     // }
+    //
+    //     // if((this.itemsToWait==0)&&(this.itemEmpty)&&(!this.filterLoaded)){
+    //     //     this.itemsToWait=0;
+    //     //     amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[this.lang]['empty_resource_projectSession']);
+    //     // }
+    //     // //this.subviews['tableDashboard'].filterLoaded = false;
+    //     // if((this.itemsToWait==0)&&(this.filterLoaded))
+    //     // {
+    //     //     //After first loaded
+    //     //     this.filterLoaded = false;
+    //     //     if(this.itemEmpty){
+    //     //         //amplify.publish(BaseEvents.HTTP_EMPTY_RESOURCE, i18nErrors[self.lang]['empty_resource_projectSession']);
+    //     //     }
+    //     // }
+    //
+    //    // this.filterLoaded = false;
+    //
+    // };
 
     ProjectsTableView.prototype.getDashboardConfig = function () {
         return this.config;

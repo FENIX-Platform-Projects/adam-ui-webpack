@@ -13,10 +13,12 @@ define([
     'utils/utils',
     'nls/table',
     'fenix-ui-filter-utils',
+    'config/projects/events',
+    'nls/errors',
     'amplify-pubsub',
     'bootstrap-table',
     'bootstrap-table-multiple-sort'
-], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, FxUtils, amplify) {
+], function ($, log, _, ERR, EVT, Template, OlapCreator, Filter,  FilterUtils, Utils, i18nTableLabels, FxUtils, BaseEvents, i18nErrors, amplify) {
 
     'use strict';
 
@@ -154,25 +156,12 @@ define([
         } else {
             $(this.el).find(s.TABLE_INFO).removeClass("collapse");
             $(this.el).find(s.TABLE_SIZE).html(0);
+            //amplify.publish('checkresource', i18nErrors[this.lang]['empty_resource_projectSession']);
+
         }
 
     };
 
-
-    // TableItem.prototype._processPayload = function () {
-    //
-    //     this.config.model = this.model;
-    //     this.config.el = s.TABLE;
-    //     this.config.id = this.id;
-    //     this.config.lang = this.lang;
-    //
-    //
-    //    // for (var d in this.config.derived) {
-    //      //   this.config.aggregations.push(d);
-    //     //}
-    //
-    //     this.olap = new OlapCreator(this.config);
-    // };
 
     TableItem.prototype._processPayload = function () {
 
@@ -182,89 +171,104 @@ define([
         this.config.lang = this.lang;
 
 
-        var configData = this.config.model.data;
-        amplify.publish( s.BOOTSTRAP_TABLE_READY, this.config );
+       // for (var d in this.config.derived) {
+         //   this.config.aggregations.push(d);
+        //}
 
-        var col1 = this.config.rows[0];
-        var col2 = this.config.rows[1];
-        var col3 = this.config.rows[2];
-        var col4 = this.config.rows[3];
-        var col5 = this.config.rows[4];
-        var col6 = this.config.rows[5];
-        var col7 = this.config.rows[6];
-        var col8 = this.config.rows[7];
-
-        var table = $(this.el).find(s.TABLE);
-        $(table).find("#col1").data('field', col1);
-        $(table).find("#col2").data('field', col2);
-        $(table).find("#col3").data('field', col3);
-        $(table).find("#col4").data('field', col4);
-        $(table).find("#col5").data('field', col5);
-        $(table).find("#col6").data('field', col6);
-        $(table).find("#col7").data('field', col7);
-        $(table).find("#col8").data('field', col8);
-
-        var columns = this.config.model.metadata.dsd.columns;
-        var columnsIndex = {};
-        for(var i = 0; i<this.config.model.metadata.dsd.columns.length; i++){
-            var columnId = this.config.model.metadata.dsd.columns[i].id;
-            var columnTitle = this.config.model.metadata.dsd.columns[i].title[this.config.lang.toUpperCase()];
-
-            switch(columnId){
-                case col1:
-                    $(table).find("#col1").html(columnTitle);
-                    columnsIndex["col1"] = i;
-                    break;
-                case col2:
-                    $(table).find("#col2").html(columnTitle);
-                    columnsIndex["col2"] = i;
-                    break;
-                case col3:
-                    $(table).find("#col3").html(columnTitle);
-                    columnsIndex["col3"] = i;
-                    break;
-                case col4:
-                    $(table).find("#col4").html(columnTitle);
-                    columnsIndex["col4"] = i;
-                    break;
-                case col5:
-                    $(table).find("#col5").html(columnTitle);
-                    columnsIndex["col5"] = i;
-                    break;
-                case col6:
-                    $(table).find("#col6").html(columnTitle);
-                    columnsIndex["col6"] = i;
-                    break;
-                case col7:
-                    $(table).find("#col7").html(columnTitle);
-                    columnsIndex["col7"] = i;
-                    break;
-                case col8:
-                    $(table).find("#col8").html(columnTitle);
-                    columnsIndex["col8"] = i;
-                    break;
-            }
-        }
-
-        var data = [];
-        //this.config.rows
-        for(var i = 0; i<this.config.model.data.length; i++)
-        {
-            var elem = this.config.model.data[i];
-            var obj = {};
-            obj[col1] = elem[columnsIndex["col1"]];//5
-            obj[col2] = elem[columnsIndex["col2"]];//6
-            obj[col3] = elem[columnsIndex["col3"]];//2
-            obj[col4] = elem[columnsIndex["col4"]];//3
-            obj[col5] = elem[columnsIndex["col5"]];//4
-            obj[col6] = elem[columnsIndex["col6"]];//4
-            obj[col7] = elem[columnsIndex["col7"]];//4
-            obj[col8] = elem[columnsIndex["col8"]];//4
-            data.push(obj);
-        }
-
-        $(s.TABLE).bootstrapTable({data: data});
+        this.olap = new OlapCreator(this.config);
     };
+
+    // TableItem.prototype._processPayload = function () {
+    //
+    //     this.config.model = this.model;
+    //     this.config.el = s.TABLE;
+    //     this.config.id = this.id;
+    //     this.config.lang = this.lang;
+    //
+    //
+    //     var configData = this.config.model.data;
+    //     amplify.publish( s.BOOTSTRAP_TABLE_READY, this.config );
+    //
+    //     var col1 = this.config.rows[0];
+    //     var col2 = this.config.rows[1];
+    //     var col3 = this.config.rows[2];
+    //     var col4 = this.config.rows[3];
+    //     var col5 = this.config.rows[4];
+    //     var col6 = this.config.rows[5];
+    //     var col7 = this.config.rows[6];
+    //     var col8 = this.config.rows[7];
+    //
+    //     var table = $(this.el).find(s.TABLE);
+    //     $(table).find("#col1").data('field', col1);
+    //     $(table).find("#col2").data('field', col2);
+    //     $(table).find("#col3").data('field', col3);
+    //     $(table).find("#col4").data('field', col4);
+    //     $(table).find("#col5").data('field', col5);
+    //     $(table).find("#col6").data('field', col6);
+    //     $(table).find("#col7").data('field', col7);
+    //     $(table).find("#col8").data('field', col8);
+    //
+    //     var columns = this.config.model.metadata.dsd.columns;
+    //     var columnsIndex = {};
+    //     for(var i = 0; i<this.config.model.metadata.dsd.columns.length; i++){
+    //         var columnId = this.config.model.metadata.dsd.columns[i].id;
+    //         var columnTitle = this.config.model.metadata.dsd.columns[i].title[this.config.lang.toUpperCase()];
+    //
+    //         switch(columnId){
+    //             case col1:
+    //                 $(table).find("#col1").html(columnTitle);
+    //                 columnsIndex["col1"] = i;
+    //                 break;
+    //             case col2:
+    //                 $(table).find("#col2").html(columnTitle);
+    //                 columnsIndex["col2"] = i;
+    //                 break;
+    //             case col3:
+    //                 $(table).find("#col3").html(columnTitle);
+    //                 columnsIndex["col3"] = i;
+    //                 break;
+    //             case col4:
+    //                 $(table).find("#col4").html(columnTitle);
+    //                 columnsIndex["col4"] = i;
+    //                 break;
+    //             case col5:
+    //                 $(table).find("#col5").html(columnTitle);
+    //                 columnsIndex["col5"] = i;
+    //                 break;
+    //             case col6:
+    //                 $(table).find("#col6").html(columnTitle);
+    //                 columnsIndex["col6"] = i;
+    //                 break;
+    //             case col7:
+    //                 $(table).find("#col7").html(columnTitle);
+    //                 columnsIndex["col7"] = i;
+    //                 break;
+    //             case col8:
+    //                 $(table).find("#col8").html(columnTitle);
+    //                 columnsIndex["col8"] = i;
+    //                 break;
+    //         }
+    //     }
+    //
+    //     var data = [];
+    //     //this.config.rows
+    //     for(var i = 0; i<this.config.model.data.length; i++)
+    //     {
+    //         var elem = this.config.model.data[i];
+    //         var obj = {};
+    //         obj[col1] = elem[columnsIndex["col1"]];//5
+    //         obj[col2] = elem[columnsIndex["col2"]];//6
+    //         obj[col3] = elem[columnsIndex["col3"]];//2
+    //         obj[col4] = elem[columnsIndex["col4"]];//3
+    //         obj[col5] = elem[columnsIndex["col5"]];//4
+    //         obj[col6] = elem[columnsIndex["col6"]];//4
+    //         obj[col7] = elem[columnsIndex["col7"]];//4
+    //         obj[col8] = elem[columnsIndex["col8"]];//4
+    //         data.push(obj);
+    //     }
+    //
+    //     $(s.TABLE).bootstrapTable({data: data});
+    // };
 
 
 

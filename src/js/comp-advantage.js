@@ -55,7 +55,10 @@ define([
         require("css/sandboxed-bootstrap.css");
 
         //dropdown selector
-         require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
+        require("node_modules/selectize/dist/css/selectize.bootstrap3.css");
+
+        // bootstrap-table
+        require("node_modules/bootstrap-table/dist/bootstrap-table.css");
 
         // fenix-ui-filter
         require("node_modules/fenix-ui-filter/dist/fenix-ui-filter.min.css");

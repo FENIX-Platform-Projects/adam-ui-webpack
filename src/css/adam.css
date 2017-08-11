@@ -9610,4 +9610,7 @@ button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar {
   cursor: auto;
   opacity: 1 !important; }
 
+div.bootstrap-table div.th-inner {
+  white-space: normal; }
+
 /*# sourceMappingURL=adam.css.map */
