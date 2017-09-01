@@ -207,7 +207,6 @@ define([
 
         this.subviews['tableDashboard'].filterLoaded = true;
         this.subviews['tableDashboard'].itemsToWait = 4;
-        //this.subviews['tableDashboard'].itemsToWait = 2;
         // Render each Dashboard
         this.subviews['tableDashboard'].rebuildDashboard();
 
@@ -220,12 +219,13 @@ define([
      */
     ProjectsView.prototype._filtersChanged = function (changedFilter) {
 
+        if (this.subviews['tableDashboard'].filterLoaded === undefined) return ;
+
         var allFilterValues = this.subviews['filters'].getFilterValues();
 
         if((changedFilter!=null)&&(typeof changedFilter!='undefined')&&(changedFilter[0]!=null)&&(typeof changedFilter[0]!='undefined')){
             if((changedFilter[0].id!=null)&&(typeof changedFilter[0].id!='undefined')&&(changedFilter[0].id== 'fao_region')){
-                // this.subviews['tableDashboard'].itemsToWait = 2;
-                this.subviews['tableDashboard'].itemsToWait = 2;
+                this.subviews['tableDashboard'].itemsToWait = 4;
             }
         }
         this._updateView(changedFilter, allFilterValues);
@@ -247,7 +247,7 @@ define([
 
             if($.isArray(changedFilterItems)){
 
-                 this._setItemTitle(changedFilterItems, filterValues.labels);
+                this._setItemTitle(changedFilterItems, filterValues.labels);
 
 
                 var dashboardConfig = this.subviews['tableDashboard'].getDashboardConfig();
@@ -273,7 +273,10 @@ define([
                 }
 
 
-                // console.log("============== CONFIG ", dashboardConfig.items[0]);
+                console.log("============== CONFIG ", dashboardConfig.items[0]);
+
+                //console.log('%c _updateView ', 'color: green');
+                //console.log(changedFilterItems);
 
                 this._getDashboardConfiguration(filterValues, dashboardConfig);
             }
@@ -289,6 +292,7 @@ define([
      * @private
      */
     ProjectsView.prototype._getDashboardConfiguration = function (filterValues, tableConfig) {
+
         this._rebuildDashboards(filterValues, tableConfig);
     };
 

@@ -16,35 +16,15 @@ define(['../config-base'], function(Config) {
                     id: "projects",
                     type: 'table',
                     //type: 'custom',
-                    config: {
-                        "groupedRow":false,
-                        "aggregationFn":{"commitment_value":"sum"},
-                        "formatter":"localstring",
-                        "decimals":2,
-                        "pageSize": "150",
-                        "showRowHeaders":true,
-                        // "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN", 'commitment_value', "disbursement_value" ],
-                        "rows":["recipientcode_EN", "donorcode_EN", "projecttitle", "year", "parentsector_code_EN", "purposecode_EN", 'value', "unitcode_EN" ],
-                        "aggregations":[],
-                        //"values":["value"],
 
+                    config: {
+                        type: 'bootstrap-table',
                         config: {
-                            pageSize: 150,
-                            height: 700,
-                            autoSelectFirstRow: false,
-                            columns: [
-                                {id: "recipientcode_EN", width: 110},
-                                {id: "donorcode_EN", width: 120},
-                                {id: "projecttitle", width: 160},
-                                {id: "year", width: 60,  align: 'center'},
-                                {id: "parentsector_code_EN", width: 100},
-                                {id: "purposecode_EN", width: 100},
-                                {id: "value", width: 100, align: 'center', sortOrder: 'desc'},
-                                {id: "unitcode_EN", width: 100, align: 'center'}
-                                // {id: "commitment_value", width: 100, align: 'center', sortOrder: 'desc'},
-                                // {id: "disbursement_value", width: 100, align: 'center'}
-                            ]
+                            showMultiSort : false,
+                            sortName: 'value',
+                            sortOrder: "desc"
                         }
+
                     },
 
 

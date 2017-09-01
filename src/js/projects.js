@@ -15,7 +15,10 @@ define([
 
 
     function ProjectAnalysis() {
+
         console.clear();
+
+        log.setLevel('silent');
 
         this._importThirdPartyCss();
 

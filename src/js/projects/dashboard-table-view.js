@@ -178,6 +178,8 @@ define([
 
     ProjectsTableView.prototype._renderDashboard = function (filter) {
 
+
+
         var self = this;
 
         this.config.filter = filter;
@@ -256,6 +258,8 @@ define([
     };
 
     ProjectsTableView.prototype.rebuildDashboard = function (filter, itemsToWait) {
+
+        if (filter === undefined || itemsToWait === undefined) return;
 
         this.models = {};
 

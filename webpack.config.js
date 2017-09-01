@@ -17,7 +17,7 @@ module.exports = sections.map(function (section) {
 
         debug: isProduction(false, true),
 
-        devtool: isProduction('source-map', 'eval'),
+        devtool: isProduction('cheap-module-source-map', 'eval'),
 
         entry: entry,
 
@@ -59,8 +59,6 @@ module.exports = sections.map(function (section) {
                 //'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js'),
                 //'fenix-ui-visualization-box': Path.join(__dirname, 'node_modules/fenix-ui-visualization-box/src/js/index.js'),
                 'jvenn': Path.join(__dirname, 'node_modules/jvenn/src/jvenn.min.js')
-                //'fenix-ui-table-creator': Path.join(__dirname, 'node_modules/fenix-ui-table-creator/src/js/index.js')
-                //'fenix-ui-chart-creator': Path.join(__dirname, 'node_modules/fenix-ui-chart-creator/src/js/index.js')
               }
         },
 
