@@ -2,7 +2,7 @@ define([
     'jquery',
     'loglevel',
     'underscore',
-    'highcharts'
+    'highcharts/highstock'
 ], function ($, log, _, Highcharts) {
 
     'use strict';
