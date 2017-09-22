@@ -3198,7 +3198,8 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                     return '<b>' + this.series.name + ':' + '</b><br/>' + ' <b>' + percent + '% </b>' +
                                         ' (' + Highcharts.numberFormat(this.y, 2, '.', ',') + ' USD Mil)'
                                 }
-                            }
+                            },
+                            colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F7AE3C"]
                         }
                     },
 
@@ -3221,7 +3222,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "uid": "crs_fao_regions",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "NA","ZZZZZ","UNSP"
+                                                    "NA","ZZZZZ"
                                                 ]
                                             }
                                         ]

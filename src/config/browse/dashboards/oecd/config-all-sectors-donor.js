@@ -594,12 +594,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
-
                                     "donorcode": {
                                         "codes": [
                                             {
@@ -928,11 +922,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                             "t"
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "year": {
                                         "time": [
                                             {
@@ -998,11 +987,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                     "dac_member": {
                                         "enumeration": [
                                             "t"
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "year": {
@@ -1347,12 +1331,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
-
                                     "donorcode": {
                                         "codes": [
                                             {
@@ -1452,11 +1430,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                     "usd_commitment"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "purposecode": {
@@ -1694,11 +1667,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                             "t"
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "purposecode": {
                                         "codes": [
                                             {
@@ -1775,11 +1743,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                     "dac_member": {
                                         "enumeration": [
                                             "t"
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "year": {
@@ -2977,11 +2940,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "purposecode": {
                                         "codes": [{
                                             "uid": "crs_purposes",
@@ -3267,11 +3225,7 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
+
                                     "donorcode": {
                                         "codes": [
                                             {
@@ -3476,6 +3430,7 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                     "unitcode"
                                 ],
                                 "rows": {
+
                                     "oda": {
                                         "codes": [
                                             {
@@ -3786,11 +3741,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                             ],
                             "parameters": {
                                 "rows": {
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "donorcode": {
                                         "codes": [
                                             {
@@ -4012,11 +3962,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                     "1"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "year": {
@@ -4676,7 +4621,8 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                     return '<b>' + this.series.name + ':' + '</b><br/>' + ' <b>' + percent + '% </b>' +
                                         ' (' + Highcharts.numberFormat(this.y, 2, '.', ',') + ' USD Mil)'
                                 }
-                            }
+                            },
+                            colors: ["#56adc3", "#5691c3", "#5663c3", "#0F52BA", "#DF3328", "#F7AE3C"]
                         }
                     },
 
@@ -4702,14 +4648,9 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                 "uid": "crs_fao_regions",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "NA","ZZZZZ","UNSP"
+                                                    "NA","ZZZZZ"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "donorcode": {
@@ -4842,11 +4783,6 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                                                     "usd_commitment"
                                                 ]
                                             }
-                                        ]
-                                    },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
                                         ]
                                     },
                                     "donorcode": {

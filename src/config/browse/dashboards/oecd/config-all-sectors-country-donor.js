@@ -4178,6 +4178,7 @@ define(['highcharts','../../../config-base'],function (Highcharts, Config) {
                         }
                     ]
                 }
+
             ]
         }
     }

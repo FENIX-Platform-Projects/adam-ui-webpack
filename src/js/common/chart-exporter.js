@@ -9,7 +9,7 @@ define([
 
     function ChartExporter() {
         // Load Exporting Module after Highcharts loaded
-        require('highcharts/modules/exporting')(Highcharts);
+        //require('highcharts/modules/exporting')(Highcharts);
 
        return this;
     }

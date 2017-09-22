@@ -276,6 +276,17 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                             }
                                         ]
                                     },
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "NA"
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     "donorcode": {
                                         "codes": [
                                             {
@@ -2141,6 +2152,17 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "parentsector_code": {
+                                        "codes": [
+                                            {
+                                                "uid": "crs_dac",
+                                                "version": "2016",
+                                                "codes": [
+                                                    "NA"
                                                 ]
                                             }
                                         ]
@@ -4700,7 +4722,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "uid": "crs_fao_regions",
                                                 "version": "2016",
                                                 "codes": [
-                                                    "NA","ZZZZZ","UNSP"
+                                                    "NA","ZZZZZ"
                                                 ]
                                             }
                                         ]
