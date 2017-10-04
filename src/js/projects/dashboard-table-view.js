@@ -178,7 +178,7 @@ define([
 
     ProjectsTableView.prototype._renderDashboard = function (filter) {
 
-
+        this._disposeDashboards();
 
         var self = this;
 
@@ -205,8 +205,7 @@ define([
         );
 
         this.dashboard.on('error.resource', function(obj) {
-            if(!self.filterLoaded)
-                amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
+            if(!self.filterLoaded) amplify.publish(BaseEvents.HTTP_416, i18nErrors[self.lang]['error_resource_416']);
         });
 
     };
@@ -268,11 +267,11 @@ define([
         this._unbindDownloadEventListeners();
 
         // Re-Render the source template
-       // if (topic) {
+        // if (topic) {
           //  this.topic = topic;
            // this.modelUpdated = false;
             //this._attach();
-       // }
+        // }
 
         this.modelUpdated = false;
         this._attach();
@@ -303,6 +302,8 @@ define([
             self.models[item.id].metadata.rid = item.model.metadata.rid;
             self.models[item.id].metadata.uid = item.model.metadata.uid;
             self.models[item.id].metadata.dsd = item.model.metadata.dsd;
+
+            if (item.model.data.length === 500) amplify.publish(BaseEvents.TOO_LARGE_RESOURCE, i18nErrors[self.lang]['error_resource_tooLarge']);
 
             if((item!=null)&&(typeof item!='undefined')&&(item.model!=null)&&(typeof item.model!='undefined')&&(item.model.data!=null)&&(typeof item.model.data!='undefined')&&(item.model.data.length==0))
             {

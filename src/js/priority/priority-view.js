@@ -114,10 +114,10 @@ define([
     };
 
     PriorityAnalysisView.prototype._bindEventListeners = function () {
-       amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_READY, this, this._filtersLoaded);
+        amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_READY, this, this._filtersLoaded);
         amplify.subscribe(BasePriorityAnalysisEvents.FILTER_ON_CHANGE, this, this._filtersChanged);
         amplify.subscribe(BasePriorityAnalysisEvents.VENN_ON_CHANGE, this, this._renderChartsDashboards);
-       amplify.subscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this, this._clearChartsDashboard);
+        amplify.subscribe(BasePriorityAnalysisEvents.VENN_NO_VALUES, this, this._clearChartsDashboard);
     };
 
     PriorityAnalysisView.prototype._unbindEventListeners = function () {
@@ -229,8 +229,7 @@ define([
         });
 
         this.tableModel.addObserver(dashboardTableVennSubView);
-
-       // dashboardTableVennSubView.setDashboardConfig(this.prioritiesConfig.dashboard);
+        // dashboardTableVennSubView.setDashboardConfig(this.prioritiesConfig.dashboard);
         this.subviews['tableVennDashboard'] = dashboardTableVennSubView;
 
     };
@@ -268,7 +267,7 @@ define([
         this._setTableDashboardModelValues();
 
         // Render each Dashboard
-      //this.subviews['tableVennDashboard'].renderDashboard();
+        //this.subviews['tableVennDashboard'].renderDashboard();
 
     };
 

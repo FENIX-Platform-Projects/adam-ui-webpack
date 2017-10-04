@@ -273,7 +273,7 @@ define([
                 }
 
 
-                console.log("============== CONFIG ", dashboardConfig.items[0]);
+                //console.log("============== CONFIG ", dashboardConfig.items[0]);
 
                 //console.log('%c _updateView ', 'color: green');
                 //console.log(changedFilterItems);

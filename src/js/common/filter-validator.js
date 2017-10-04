@@ -49,7 +49,7 @@ define([
         this.$el.find(s.ERRORS).addClass(s.COLLAPSE);
         this.$el.find(s.EMPTY).addClass(s.COLLAPSE);
         this.$el.find(s.ERROR416).addClass(s.COLLAPSE);
-        //this.$el.find(s.TOOLARGE).addClass(s.COLLAPSE);
+        this.$el.find(s.TOOLARGE).addClass(s.COLLAPSE);
     };
 
     /**
@@ -68,7 +68,7 @@ define([
 
     FilterValidator.prototype.displayBulkDownload = function (message, url) {
         var htmlpart = "<br>"+i18nErrors[this.lang]['bulk_download_container']+"<a href='"+url+"'>"+i18nErrors[this.lang]['bulk_download_link']+"</a>";
-        //this.$el.find(s.TOOLARGE).removeClass(s.COLLAPSE);
+        this.$el.find(s.TOOLARGE).removeClass(s.COLLAPSE);
         this.$el.find(s.TOOLARGE + ' '+s.STRONG +' '+s.SPAN).html(message+htmlpart);
     };
 

@@ -20,7 +20,7 @@
         "no_compare" : "Imposible encontrar la dimensión de 'comparación'.",
         "at_least_one_more_dimension" : "Especifique los valores de dos dimensiones como mínimo.",
         "missing_mandatory_field" : "Rellene todos los campos obligatorios.",
-        "error_resource_416" : "La selección es demasiado grande. Por favor, perfeccione su selección.",
+        "error_resource_416" : "El servidor está temporalmente ocupado. Por favor, vuelve a intentarlo.",
         "error_resource_tooLarge" : "Primeros 500 resultados más grandes que muestran.",
         "bulk_download_container" : "Puede descargar todos los datos ",
         "bulk_download_link" : "en este enlace",

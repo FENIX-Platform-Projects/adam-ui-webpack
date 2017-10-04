@@ -128,7 +128,7 @@ define(
             );
         };
 
-        /**
+                /**
          * Updates filter configuration and renders the filter.
          * @private
          */
@@ -184,22 +184,25 @@ define(
             // Filter on Ready: Set some base properties for Recipient and the ODA, then publish Filter Ready Event
             this.filter.on('ready', function (payload) {
                 amplify.publish(BaseEvents.FILTER_ON_READY, this._getFormattedFilterValues());
-                amplify.publish(BaseEvents.TOO_LARGE_RESOURCE, i18nErrors[self.lang]['error_resource_tooLarge']);
+                //amplify.publish(BaseEvents.TOO_LARGE_RESOURCE, i18nErrors[self.lang]['error_resource_tooLarge']);
                 //amplify.publish(BaseEvents.TOO_LARGE, i18nErrors[self.lang]['error_resource_416']);
             }, this);
-
 
             // Filter on Change: Set some base properties for Recipient and the ODA, then publish Filter On Change Event
             this.filter.on('select', function (payload) {
 
+                // Let's avoid empty checks.
+                if (payload.values.length === 0)  return;
+
                 // validate filter
                 var valid = this.filterValidator.validateValues(this._getSelectedValues(), this.lang);
 
-                this.alls[payload.id] = false;
+                //this.alls[payload.id] = false;
 
                 if (valid === true && this._getFirstPayloadValue(payload)) {
                     this.filterValidator.hideErrorSection();
 
+                    /*
                     if (payload.values == "all" ) this.alls[payload.id] = true;
 
                     if (this.alls[BaseConfig.SELECTORS.SUB_SECTOR]&&
@@ -212,6 +215,7 @@ define(
                         this.filterValidator.displayErrorSection(' all selectors ');
                         return;
                     }
+                    */
 
                     var fc = this.filterUtils.getFilterConfigById(this.config, payload.id),
                         payloadId = payload.id,
@@ -280,8 +284,7 @@ define(
 
             }, this);
 
-            var self = this;
-
+            // External Listener
             amplify.subscribe(BaseEvents.TOO_LARGE_RESOURCE, function (object) {
                 self._displayBulkDownload(object);
             });
@@ -293,6 +296,9 @@ define(
             amplify.subscribe(BaseEvents.HTTP_416, function (object) {
                 self._rise416Error(object);
             });
+
+            var self = this;
+
 
         };
 

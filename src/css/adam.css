@@ -9613,4 +9613,8 @@ button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar {
 div.bootstrap-table div.th-inner {
   white-space: normal; }
 
+div[data-item=projects] {
+  height: 540px;
+  overflow: hidden; }
+
 /*# sourceMappingURL=adam.css.map */
