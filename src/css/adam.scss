@@ -488,8 +488,7 @@ button.btn.btn-floating.btn-fx-toolbar-confirm.in-adam span {
 
 //.fx-sandbox .btn.disabled, .fx-sandbox .btn[disabled], fieldset[disabled] .fx-sandbox .btn
 
-button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar
-{
+button.btn.btn-floating.fx-background-color-primary-color.btn-fx-toolbar {
   color: white !important;
   background-color: #0d6cac !important;
   cursor: auto;
@@ -500,9 +499,18 @@ div.bootstrap-table div.th-inner {
   white-space: normal;
 }
 
-
 // Mario
 div[data-item=projects] {
   height: 540px;
   overflow: hidden;
 }
+
+.fx-sandbox [data-role="toolbar"] {
+  height: 47px !important;
+  overflow: visible;
+  width: 75%;
+}
+
+div[data-size='full'] div[data-role="toolbar"] { width: 50% }
+
+div[data-size='half'] .highcharts-subtitle { font-size: smaller; }

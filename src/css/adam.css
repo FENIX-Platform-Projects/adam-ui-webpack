@@ -9617,4 +9617,15 @@ div[data-item=projects] {
   height: 540px;
   overflow: hidden; }
 
+.fx-sandbox [data-role="toolbar"] {
+  height: 47px !important;
+  overflow: visible;
+  width: 75%; }
+
+div[data-size='full'] div[data-role="toolbar"] {
+  width: 50%; }
+
+div[data-size='half'] .highcharts-subtitle {
+  font-size: smaller; }
+
 /*# sourceMappingURL=adam.css.map */

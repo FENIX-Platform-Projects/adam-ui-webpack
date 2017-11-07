@@ -252,6 +252,7 @@ define(['../../../../config-base'],function (Config) {
             uid: "adam_usd_aggregated_table",
 
             items: [
+
                 {
                     id: "tot-oda", //ref [data-item=':id']
                     type: "chart", //chart || map || olap,
@@ -2110,6 +2111,7 @@ define(['../../../../config-base'],function (Config) {
                         } // (4x): OECD DONORS (DAC MEMBERS) AVERAGE ODA: Add Column
                     ]
                 },
+
                 {
                     id: 'top-recipients', // TOP RECIPIENTS
                     type: 'chart',
@@ -2269,6 +2271,7 @@ define(['../../../../config-base'],function (Config) {
 
                     ]
                 },
+
                 {
                     id: 'top-recipients-others', // TOP RECIPIENTS Vs OTHER RECIPIENTS
                     type: 'chart',
@@ -4197,6 +4200,7 @@ define(['../../../../config-base'],function (Config) {
                         }
                     ]
                 }
+
             ]
         }
     }

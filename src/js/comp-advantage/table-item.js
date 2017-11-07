@@ -262,6 +262,7 @@ define([
         {
             var elem = this.config.model.data[i];
             var obj = {};
+
             obj[col1] = elem[columnsIndex["col1"]];//5
             obj[col2] = elem[columnsIndex["col2"]];//6
             obj[col3] = elem[columnsIndex["col3"]];//2
@@ -269,13 +270,31 @@ define([
             obj[col5] = elem[columnsIndex["col5"]];//4
             obj[col6] = elem[columnsIndex["col6"]];//4
             obj[col7] = elem[columnsIndex["col7"]];//4
+
             data.push(obj);
+        }
+
+        function tableFormatter(value) {
+            if (typeof value == "number") {
+                return  Number(value.toFixed(2))
+            } else {
+                return null;
+            }
         }
 
         $(s.TABLE).bootstrapTable({
             data: data,
             sortName: 'ratio',
-            sortOrder: "desc"
+            sortOrder: "desc",
+            columns: [
+                {},
+                {},
+                { formatter: tableFormatter },
+                { formatter: tableFormatter },
+                { formatter: tableFormatter },
+                { formatter: tableFormatter },
+                {}
+                ]
         });
     };
 

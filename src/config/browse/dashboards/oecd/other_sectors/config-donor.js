@@ -2103,7 +2103,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                     filterFor: {
                         "filter_total_ODA": ['donorcode', 'year', 'oda'],
                         "filter_gni_donor_oda": ['donorcode', 'year'],
-
                         "all_subsectors_sum": ['year', 'oda'],
                         "filter_GNI_sum": ['year']
                     },
@@ -2152,17 +2151,6 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                                                 "version": "2016",
                                                 "codes": [
                                                     "usd_commitment"
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    "parentsector_code": {
-                                        "codes": [
-                                            {
-                                                "uid": "crs_dac",
-                                                "version": "2016",
-                                                "codes": [
-                                                    "NA"
                                                 ]
                                             }
                                         ]

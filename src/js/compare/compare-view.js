@@ -97,6 +97,15 @@ define([
 
         this.analysis.on("ready", _.bind(this._onComponentReady, this));
 
+        this.analysis.on("initialized", function (payload) {
+            window.setTimeout(_.bind(function () {
+                $('button[data-action="toolbar"]').prop('disabled', true);
+                //$('button[data-role="filter-btn"]').remove('in');
+                $('button[data-role="filter-btn"]').addClass('in-adam');
+                $('[data-role="toolbar"]').addClass('in-adam-toolbar');
+            }, this), 300);
+        });
+
         //It's triggered when the Visualization Box is added
         this.analysis.on("add", _.bind(this._onComponentAdd, this));
 
@@ -119,13 +128,9 @@ define([
     CompareView.prototype._onComponentAdd = function () {
 
         this.currentBoxItem++;
-        window.setTimeout(_.bind(function () {
 
-            $('button[data-action="toolbar"]').prop('disabled', true);
-            //$('button[data-role="filter-btn"]').remove('in');
-            $('button[data-role="filter-btn"]').addClass('in-adam');
-            $('[data-role="toolbar"]').addClass('in-adam-toolbar');
-        }, this), 3000);
+
+
     };
 
     CompareView.prototype._onComponentNoElement = function (param) {
@@ -175,6 +180,7 @@ define([
             "number": [ { "from": 0.00001 } ]
         };
 
+
         //parse parent sector code
         if (faoSectorSelected) {
             var codes =  process.parentsector_code.codes[0].codes;
@@ -195,6 +201,7 @@ define([
         config.process = [
             {
                 name: "filter",
+                sid:[{"uid":"adam_compare_analysis"}],
                 parameters: {
                     rows: $.extend(faoSectorSelected ? {
                             "fao_sector": {
@@ -228,6 +235,83 @@ define([
                 }
             }
         ];
+
+        /*
+        if (faoSectorSelected &&
+            config.process[0].parameters.rows.parentsector_code &&
+            config.process[0].parameters.rows.parentsector_code.codes.length > 0 &&
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes &&
+            config.process[0].parameters.rows.parentsector_code.codes[0].codes.length > 0
+            ) {
+
+                var processWithout = $.extend(true, {}, process);
+                delete processWithout.parentsector_code;
+
+
+                config.process[0] = {
+                    name: "filter",
+                    rid: {"uid":"filter_parent"},
+                    sid:[{"uid":"adam_compare_analysis"}],
+                    parameters: {
+                        rows: process,
+                        columns: columns
+                    }
+                };
+                config.process[1] = {
+                    name: "filter",
+                    rid :{"uid":"filter_faosector"},
+                    sid: [{"uid":"adam_compare_analysis"}],
+                    parameters: {
+                        rows: $.extend(faoSectorSelected ? {
+                                "fao_sector": {
+                                    "enumeration": [
+                                        "1"
+                                    ]
+                                }
+                            } : null, processWithout
+                        ),
+                        columns: columns
+                    }
+
+                };
+                config.process[2] = {
+                "name": "union",
+                "sid": [
+                    {
+                        "uid": "filter_parent"
+                    },
+                    {
+                        "uid": "filter_faosector"
+                    }
+                ],
+                "parameters": {},
+                "rid": {
+                    "uid": "union_process"
+                }
+            };
+                config.process[3] = {
+                    "name": "group",
+                    "parameters": {
+                        "by": groupBy,
+                        "aggregations": [
+                            {
+                                "columns": [
+                                    "value"
+                                ],
+                                "rule": "SUM"
+                            },
+                            {
+                                "columns": [
+                                    "unitcode"
+                                ],
+                                "rule": "MAX"
+                            }
+                        ]
+                    }
+                };
+            }
+        */
+
         //(1: filter with fao_sector without parentsector_code)
         if( faoSectorSelected &&
             config.process[0].parameters.rows.parentsector_code &&

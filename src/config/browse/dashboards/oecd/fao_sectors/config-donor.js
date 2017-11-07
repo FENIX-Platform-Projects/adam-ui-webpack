@@ -2152,11 +2152,6 @@ define(['highcharts','../../../../config-base'], function (Highcharts, Config) {
                                             }
                                         ]
                                     },
-                                    "fao_sector": {
-                                        "enumeration": [
-                                            "1"
-                                        ]
-                                    },
                                     "donorcode": {
                                         "codes": [
                                             {
