@@ -152,7 +152,7 @@ define(['highcharts'], function (Highcharts) {
                 align: 'left',
                 x: 5
             },
-            text: 'Source: OECD-CRS',
+            text: 'Source: AIDmonitor',
             href: ''
         },
         exporting: {

@@ -120,7 +120,7 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
 
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS',
+                                text: 'Source: AIDmonitor',
                                 align: 'center'
 
                             },
@@ -475,7 +475,7 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 text: 'Top Recipients - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS'
+                                text: 'Source: AIDmonitor'
                             },
                             colors: ['#5DA58D'],
                             legend: {
@@ -849,7 +849,7 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 text: 'Top Sectors - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS'
+                                text: 'Source: AIDmonitor'
                             },
                             legend: {
                                 enabled: false
@@ -1140,7 +1140,7 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 text: 'Total ODA in FAO-Related Sectors - Commitment Current Prices (USD Mil)'
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS'
+                                text: 'Source: AIDmonitor'
                             },
                             legend: {
                                 enabled: false
@@ -1396,7 +1396,7 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 text: 'Top FAO-Related Sub-Sectors - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS'
+                                text: 'Source: AIDmonitor'
                             },
                             tooltip: {
                                 style: {width: '200px', whiteSpace: 'normal'},
@@ -1772,7 +1772,7 @@ define(['highcharts', '../config-base'],function (Highcharts, Config) {
                                 text: 'Top Channels of Delivery - Total ODA / Commitment Current Prices (USD Mil) / '+Config.YEARSTART+'-'+Config.YEARFINISH
                             },
                             subtitle: {
-                                text: 'Source: OECD-CRS'
+                                text: 'Source: AIDmonitor'
                             },
                             legend: {
                                 enabled:false
