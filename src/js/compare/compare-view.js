@@ -236,7 +236,7 @@ define([
             }
         ];
 
-        /*
+
         if (faoSectorSelected &&
             config.process[0].parameters.rows.parentsector_code &&
             config.process[0].parameters.rows.parentsector_code.codes.length > 0 &&
@@ -310,7 +310,7 @@ define([
                     }
                 };
             }
-        */
+
 
         //(1: filter with fao_sector without parentsector_code)
         if( faoSectorSelected &&
