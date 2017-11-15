@@ -9,7 +9,7 @@
     }
 
     .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
-      color: white;
+      color: white !important;
       background-color: $fx-cool-blue;
       border-color: $fx-cool-blue;
     }

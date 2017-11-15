@@ -513,4 +513,11 @@ div[data-item=projects] {
 
 div[data-size='full'] div[data-role="toolbar"] { width: 50% }
 
-div[data-size='half'] .highcharts-subtitle { font-size: smaller; }
+div[data-size='half'] .highcharts-subtitle {
+  font-size: smaller !important;
+  left: 0px !important;
+  white-space: normal !important;
+  word-wrap: break-word;
+  display: block;
+  width: 180px;
+}

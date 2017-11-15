@@ -53,7 +53,7 @@ module.exports = sections.map(function (section) {
                 //'fenix-ui-converter': Path.join(__dirname, 'node_modules/fenix-ui-converter/src/js/index.js'),
                 //'fenix-ui-analysis': Path.join(__dirname, 'node_modules/fenix-ui-analysis/src/js/index.js'),
                 //'fenix-ui-table-creator': Path.join(__dirname, 'node_modules/fenix-ui-table-creator/src/js/index.js'),
-                //'fenix-ui-map-creator': Path.join(__dirname, 'node_modules/fenix-ui-map-creator/src/js/index.js'),
+                'fenix-ui-map-creator': Path.join(__dirname, 'node_modules/fenix-ui-map-creator/src/js/index.js'),
                 //'fenix-ui-pivotator-utils':  Path.join(__dirname, 'node_modules/fenix-ui-pivotator-utils/src/js/index.js')
                 //'fenix-ui-pivotator':  Path.join(__dirname, 'node_modules/fenix-ui-pivotator/src/js/index.js'),
                 //'fenix-ui-dashboard': Path.join(__dirname, 'node_modules/fenix-ui-dashboard/src/js/index.js'),

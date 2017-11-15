@@ -287,13 +287,13 @@ define([
             sortName: 'ratio',
             sortOrder: "desc",
             columns: [
-                {},
-                {},
-                { formatter: tableFormatter },
-                { formatter: tableFormatter },
-                { formatter: tableFormatter },
-                { formatter: tableFormatter },
-                {}
+                { titleTooltip: this.config.config.columns[0].title },
+                { titleTooltip: this.config.config.columns[1].title },
+                { titleTooltip: this.config.config.columns[2].title, formatter: tableFormatter },
+                { titleTooltip: this.config.config.columns[3].title, formatter: tableFormatter },
+                { titleTooltip: this.config.config.columns[4].title, formatter: tableFormatter },
+                { titleTooltip: this.config.config.columns[5].title, formatter: tableFormatter },
+                { titleTooltip: this.config.config.columns[6].title }
                 ]
         });
     };

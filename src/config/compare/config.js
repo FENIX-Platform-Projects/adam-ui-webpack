@@ -304,7 +304,9 @@ function ($, Utils, highchartsTemplate, i18nLabels, Config) {
                                         result.subtitle = {
                                             text: '<b>'+i18nLabels['subtitle_chart_compare']+'</b>',
                                             align: 'left',
-                                            x: 10
+                                            x: 10,
+                                            useHTML: true,
+                                            style: { "white-space": "normal" }
                                         };
 
                                         result.renderer = {
