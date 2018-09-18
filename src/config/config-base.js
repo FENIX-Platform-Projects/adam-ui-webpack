@@ -13,7 +13,7 @@ define(function () {
 
 
         YEARSTART : 2000,
-        YEARFINISH: 2015,
+        YEARFINISH: 2016,
 
         BULK_DOWNLOAD: {
           PROJECT_ANALYSIS :  "http://fenixrepo.fao.org/cdn/data/adam/project_analysis/project_analysis.zip"

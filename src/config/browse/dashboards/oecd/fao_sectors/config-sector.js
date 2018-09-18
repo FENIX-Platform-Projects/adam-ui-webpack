@@ -123,7 +123,7 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                 selector: {
                     id: "dropdown",
                     from: Config.YEARSTART,
-                    to: 2015,
+                    to: Config.YEARFINISH,
                     default: [Config.YEARSTART],
                     config: { //Selectize configuration
                         maxItems: 1
@@ -143,8 +143,8 @@ define(['highcharts','../../../../config-base'],function (Highcharts, Config) {
                 selector: {
                     id: "dropdown",
                     from: Config.YEARSTART,
-                    to: 2015,
-                    default: [2015],
+                    to: Config.YEARFINISH,
+                    default: [Config.YEARFINISH],
                     config: {
                         maxItems: 1
                     }

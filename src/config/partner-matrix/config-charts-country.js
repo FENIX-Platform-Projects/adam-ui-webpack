@@ -1096,8 +1096,8 @@ define(['../config-base'], function(Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1173,8 +1173,8 @@ define(['../config-base'], function(Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1273,8 +1273,8 @@ define(['../config-base'], function(Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },
@@ -1355,8 +1355,8 @@ define(['../config-base'], function(Config) {
                                     "year": {
                                         "time": [
                                             {
-                                                "from": 2000,
-                                                "to": 2014
+                                                "from": Config.YEARSTART,
+                                                "to": Config.YEARFINISH
                                             }
                                         ]
                                     },

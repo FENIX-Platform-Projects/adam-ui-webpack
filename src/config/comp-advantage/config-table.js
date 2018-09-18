@@ -119,7 +119,7 @@ define(['../config-base'], function(Config) {
                                         "year": {
                                             "time": [
                                                 {
-                                                    "from": 2000,
+                                                    "from": Config.YEARFINISH,
                                                     "to": 2014
                                                 }
                                             ]
